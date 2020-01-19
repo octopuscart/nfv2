@@ -1,0 +1,79 @@
+.customformv1 .summaryelement{
+       padding: 5px 6px;
+    line-height: 14px;
+    font-size: 13px;
+}
+
+
+.customformv1 .summaryelement span{
+   
+        color:black;
+        font-size: 12px;
+}
+
+
+.customformv1 .customesummerybody{
+    padding: 0px;
+    height: 650px;
+    overflow-y: auto;
+}
+
+.custmo_form_setup .thumbnail {
+    transition: opacity 0.5s;
+    width: 100%;
+}
+
+
+.col-md-padding5 {
+    padding: 5px;
+}
+
+.bodymax500{
+       height: 500px;
+    overflow-y: auto;
+}
+
+.bodymax400{
+       /*height: 250px;*/
+    overflow-y: auto;
+     transition: height 0.5s;
+}
+
+.bodymax400:hover{
+    /*height: 500px;*/
+}
+
+.hideelement{
+    display: none;
+}
+
+.selectedfabricscustom{
+  
+    margin-top: 10px;
+    box-shadow: 0px -15px 10px -8px #000;
+    background: white;
+}
+
+.selectedfabricscustomup{
+          
+}
+
+
+.bigbuttonspadding{
+    margin-bottom: 10px;
+}
+.fabriciconfront{
+    margin:5px ;
+    display: inline-block!important;
+}
+
+.measurementprocess{
+        text-align: center;
+    background: #EEEEEE;
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+.fabriciconfront div.selected{
+    background: green;
+}

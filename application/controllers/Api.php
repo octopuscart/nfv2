@@ -564,7 +564,7 @@ class Api extends REST_Controller {
         if ($this->checklogin) {
             $productadd["user_id"] = $this->user_id;
             if (isset($cartdata[$cartids])) {
-                $message = array("status" => 2, "msg" => "Already Cart", "type" => "warning", "product" => $productadd);
+                $message = array("status" => 2, "msg" => "Already In Cart", "type" => "warning", "product" => $productadd);
             } else {
                 $message = array("status" => 2, "msg" => "Added To Cart", "type" => "success", "product" => $productadd);
                 $this->db->insert('nfw_product_cart', $productadd);

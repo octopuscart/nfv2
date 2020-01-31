@@ -102,7 +102,7 @@ class Account extends CI_Controller {
                 $this->db->order_by('id desc');
                 $query = $this->db->get('auth_event');
                 $lastlogin = $query->row();
-                $userdata['lastlogin'] = $lastlogi->time_stamp;
+                $userdata['lastlogin'] = $lastlogin->time_stamp;
 
 
                 $user_id = $userdata['id'];

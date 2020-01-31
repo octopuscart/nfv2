@@ -294,7 +294,7 @@ $this->load->view('layout/header');
                                 </td>
 
                                 <td data-title="Action" class="fw_ex_bold color_dark" style="width:20px">
-                                    <button class="color_grey_light_2 color_dark_hover tr_all" name="deleteCart" value="2189 ">
+                                    <button class="color_grey_light_2 color_dark_hover tr_all" ng-click="removeCartData2(citem)">
                                         <i class="icon-cancel-circled-1 fs_medium"></i>
                                     </button>
 

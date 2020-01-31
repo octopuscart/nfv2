@@ -60,6 +60,15 @@ nitaFasions.controller('shopAllCartCustom', function ($scope, $http, $filter, $t
         });
     }
 
+    $scope.removeCartData2 = function (cartd) {
+        var form = new FormData()
+        form.append('cart_id', cartd.id);
+        $http.post(urllink + "/removeCart", form).then(function (rdata) {
+            $scope.getCustomData();
+        });
+
+    }
+
 
 
 })

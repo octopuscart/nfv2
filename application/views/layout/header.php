@@ -31,15 +31,15 @@
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/style.css"/>
         <!--head libs-->
         <script src="<?php echo base_url(); ?>assets/theme/js/angular.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/theme/js/angular-sanitize.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.queryloader2.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/modernizr.js"></script>
+        <script src="<?php echo base_url(); ?>assets/theme/angular/moment.min.js"></script>
 
         <!--vertical tabs-->
-        <link href="./custom_form_view/static/verticaltab/bootstrap.vertical-tabs.css" rel="stylesheet"/>
         <!--custom form support css and js-->
-        <link href="./custom_form_view/static/custmo_js_css/customform.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/theme/sweetalert2-master/dist/sweetalert2.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/theme/sweetalert2/sweetalert2.min.css"/>
         <link href="<?php echo base_url(); ?>assets/theme/css/customstyle.css" rel="stylesheet"/>
         <script>
             var urllink = "<?php echo site_url("Api"); ?>";
@@ -69,8 +69,8 @@
                 color: #353231;
                 text-indent: -9999px;
                 top: 0px;
-
             }
+            
             .v2 #loading { display: none; }
 
 
@@ -258,14 +258,14 @@
 
                                     <div id="AjaxCart"  class="f_right clearfix f_xs_none d_xs_inline_b t_xs_align_l m_xs_bottom_15" style="margin-right: -4%;">
 
-{{initApp.maincart}}
+
 
                                         <div class="relative m_right_10 f_right dropdown_2_container shoppingcart " >
                                             <button class="icon_wrap_size_2 color_grey_light circle tr_all  animated">
                                                 <i class="icon-basket color_grey_light_2 tr_inherit"></i>
                                             </button>
-                                            <span id="" class="animated notification_budget cart_budget " ng-model="initApp.maincart.total_quantity">
-                                                {{cart_total_quantity}}
+                                            <span id="" class="animated notification_budget cart_budget " >
+                                                {{initApp.maincart.total_quantity}}
                                             </span>
 
                                             <div class="dropdown_2 bg_light shadow_1 tr_all p_top_0 dropdownheader2" style="">
@@ -290,9 +290,9 @@
 
 
                                                 <div class="col-md-6 pull-right" style="padding: 0px">
-                                                    <div ng-if="cart_data.length">
-                                                        <span ng-if="cart_data.length" class="pull-right" style="color:navy;font-size:10px;margin-top: -24px">Recently added item(s)</span><br/>
-                                                        <a href="./shopAllCart.php" class="pull-right" style="margin-top: -24px" ng-if="cart_data.length">
+                                                    <div ng-if="initApp.maincart.products.length">
+                                                        <span ng-if="initApp.maincart.products.length" class="pull-right" style="color:navy;font-size:10px;margin-top: -24px">Recently added item(s)</span><br/>
+                                                        <a href="<?php echo site_url('Product/shopAllCart');?>" class="pull-right" style="margin-top: -24px" ng-if="initApp.maincart.products.length">
                                                             <span style="font-size: 13px;border-radius:3px;background-color: #F1F1F1; font-weight: 500;padding: 0px 10px;">
                                                                 Go for Customization &rarr;
                                                             </span>
@@ -305,12 +305,12 @@
                                                     overflow-y: auto;
                                                     padding-right: 10px;
                                                     text-align: center;padding-bottom: 13px;"
-                                                    ng-if="cart_data.length"
+                                                    ng-if="initApp.maincart.products.length"
                                                     > 
 
-                                                    <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in cart_data" ng-model="cartd.animate" ng-init="cartd.animate = ''">
+                                                    <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
                                                         <a href="shop_product.php?product_id={{cartd.id}}&item_type={{cartd.tag_id}}" class="d_block f_left m_right_10">
-                                                            <img src="{{cartd.image}}" alt="" class="imageData" style="height:66px;width: 66px">
+                                                            <img src="{{cartd.item_image}}" alt="" class="imageData" style="height:66px;width: 66px">
                                                             <div class="f_left  lh_ex_small" style="text-align: left;">
                                                                 <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">
                                                                     <span style="float: left">{{cartd.title}}</span>
@@ -318,7 +318,7 @@
                                                                     <span class="color_grey" style="float: right"><span class="quantityData">{{cartd.quantity}} x {{cartd.price| currency }}</span></span>
                                                                 </a>
                                                                 <p class="fs_small"><span class="skuData"></span></p>
-                                                                <p class="fs_small">Item: <span class="customData" style="color:black">{{cartd.tag_name}}</span></p>
+                                                                <p class="fs_small">Item: <span class="customData" style="color:black">{{cartd.tag_title}}</span></p>
                                                                 <a href="#" class="fs_small" style="font-size: 11px;">{{cartd.product_speciality|limitTo:30}} {{cartd.product_speciality.length>30?'. . .':''}}</a>
                                                             </div>
                                                             <!--<button ng-click="removeCartData(cartd)">X</button>-->
@@ -329,18 +329,18 @@
 
                                                 </ul>
 
-                                                <ul class="added_items_list productCartinfo" ng-if="cart_data.length == 0" style="max-height: 500px;
+                                                <ul class="added_items_list productCartinfo" ng-if="initApp.maincart.products.length == 0" style="max-height: 500px;
                                                     overflow-y: auto;
                                                     width: 100%;
                                                     text-align: center;padding-bottom: 13px;">
                                                     <i class="icon-frown"></i>  YOUR SHOPPING CART IS EMPTY</ul>
 
-                                                <div class="total_price bg_light_2 t_align_r fs_medium m_bottom_15"   ng-if="cart_data.length">
+                                                <div class="total_price bg_light_2 t_align_r fs_medium m_bottom_15"   ng-if="initApp.maincart.products.length">
                                                     <ul>
                                                         <li class="color_dark" style="font-weight: 400; "> 
                                                             <span class="">Total:</span> 
-                                                            <span class=" d_inline_b m_left_15 price t_align_l color_pink ">  {{ cart_total_price | currency}}   <small style="    font-size: 11px;
-                                                                                                                                                                        line-height: 21px;">(Quantity:{{cart_total_quantity}})</small></span>
+                                                            <span class=" d_inline_b m_left_15 price t_align_l color_pink ">  {{ initApp.maincart.total_price | currency}}   <small style="    font-size: 11px;
+                                                                                                                                                                        line-height: 21px;">(Quantity:{{initApp.maincart.total_quantity}})</small></span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -603,7 +603,7 @@
                                 foreach ($menuArrayMain as $mkey => $mvalue) {
                                     ?>
                                     <li class="container3d relative "  >
-                                        <a href="# " class="menu-link d_block color_dark relative main-menu-link"><?php echo $mvalue['title']; ?></a>
+                                        <a href="<?php echo $mvalue['link']; ?>" class="menu-link d_block color_dark relative main-menu-link"><?php echo $mvalue['title']; ?></a>
                                         <?php
                                         if (count($mvalue['submenu'])) {
                                             ?>
@@ -612,7 +612,7 @@
                                                 foreach ($mvalue['submenu'] as $mskey => $msvalue) {
                                                     ?>
                                                     <li class="container3d relative ">
-                                                        <a href="product_list.php?item_type=1 " class="menu-link d_block color_dark relative main-menu-link"> <?php echo $msvalue['title']; ?> </a>
+                                                        <a href="<?php echo $msvalue['link']; ?>" class="menu-link d_block color_dark relative main-menu-link"> <?php echo $msvalue['title']; ?> </a>
                                                         <?php
                                                         if ($msvalue['submenu']) {
                                                             ?>
@@ -622,7 +622,7 @@
                                                                 foreach ($msvalue['submenu'] as $msskey => $mssvalue) {
                                                                     ?>
                                                                     <li class="container3d relative ">
-                                                                        <a href="product_list.php?item_type=7 " class="menu-link d_block color_dark relative main-menu-link">  <?php echo $mssvalue['title']; ?>  </a>
+                                                                        <a href="<?php echo $mssvalue['link']; ?>" class="menu-link d_block color_dark relative main-menu-link">  <?php echo $mssvalue['title']; ?>  </a>
                                                                     </li>
                                                                     <?php
                                                                 }
@@ -664,7 +664,7 @@
                 </script>
             </header>
 
-            <script src="<?php echo base_url(); ?>assets/theme/sweetalert2-master/dist/sweetalert2.min.js"></script>
+            <script src="<?php echo base_url(); ?>assets/theme/sweetalert2/sweetalert2.min.js"></script>
 
 
             <!--wave js-->

@@ -1,14 +1,14 @@
 .customformv1 .summaryelement{
-       padding: 5px 6px;
+    padding: 5px 6px;
     line-height: 14px;
     font-size: 13px;
 }
 
 
 .customformv1 .summaryelement span{
-   
-        color:black;
-        font-size: 12px;
+
+    color:black;
+    font-size: 12px;
 }
 
 
@@ -29,14 +29,19 @@
 }
 
 .bodymax500{
-       height: 500px;
+    height: 500px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .bodymax400{
-       /*height: 250px;*/
+    /*height: 250px;*/
     overflow-y: auto;
-     transition: height 0.5s;
+    transition: height 0.5s;
+}
+
+.bodytransection{
+    transition: height 0.5s;
 }
 
 .bodymax400:hover{
@@ -48,14 +53,14 @@
 }
 
 .selectedfabricscustom{
-  
+
     margin-top: 10px;
     box-shadow: 0px -15px 10px -8px #000;
     background: white;
 }
 
 .selectedfabricscustomup{
-          
+
 }
 
 
@@ -68,7 +73,7 @@
 }
 
 .measurementprocess{
-        text-align: center;
+    text-align: center;
     background: #EEEEEE;
     padding: 10px;
     margin: 10px 0px;
@@ -76,4 +81,105 @@
 
 .fabriciconfront div.selected{
     background: green;
+}
+
+.customtagvalue{
+    width: 40%;
+    float: left;
+}
+
+.customtagname{
+    width: 60%;
+    float: left;
+}
+
+.customtabblock a{
+    padding: 5px!important;
+    border-bottom: 1px solid #000;
+    border: none!important;
+    border-radius: 0px!important;
+    padding: 5px!important;
+}
+
+.customtabblock a:hover{
+    background: #C3C3C3!important;
+}
+
+.customtabblock a span{
+    font-size: 13px;
+}
+
+.customtabblock {
+    display: grid!important;
+    padding: 0px!important;
+    border-bottom: 1px solid #000!important;
+
+    margin-bottom: 0px!important;
+
+}
+
+.fabriciconfront div.selected{
+    background: green;
+}
+
+.shopAllCart .fabricBlock{
+    float: left;
+    width: 240px;
+}
+
+.customoselectbutton{
+    background: red;
+    border-color: red;
+    color: white;
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+.measurementblock h2{
+    font-size: 35px;
+    text-align: right;
+}
+
+.measurementblock h2.mesvalue {
+    text-align: left;
+    float: left;
+}
+
+.measurementblock .frcvalue{
+  font-size: 25px;
+    text-align: right;
+        font-size: 23px;
+    text-align: right;
+    margin-top: -10px;
+    float: left;
+
+}
+
+.row.measurementblock {
+    margin: 20px 0px;
+    padding: 10px 0px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.number_slider_div {
+    margin: 10px 0px 30px;
+    border-bottom: 1px solid;
+    padding-bottom: 30px;
+}
+
+.measurementtable{
+        font-size: 20px;
+}
+
+.number_slider_div2{
+    
+}
+
+.number_slider_div2 {
+    margin-top: 20px;
+}
+
+span.smalltext {
+    font-size: 15px;
 }

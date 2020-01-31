@@ -161,7 +161,7 @@ class Api extends REST_Controller {
         $countpr = 0;
         $pricequery = "";
         $psearch = "";
-        if (isset($attrdatak["search"])) {
+        if (($attrdatak["search"])) {
             $searchdata = $attrdatak["search"];
             unset($attrdatak["search"]);
             if ($searchdata) {
@@ -169,7 +169,7 @@ class Api extends REST_Controller {
             }
         }
 
-        if (isset($attrdatak["minprice"])) {
+        if (($attrdatak["minprice"])) {
             $mnpricr = $attrdatak["minprice"] - 1;
             $mxpricr = $attrdatak["maxprice"] + 1;
             unset($attrdatak["minprice"]);
@@ -493,67 +493,883 @@ class Api extends REST_Controller {
         $this->response($session_cart['products'][$product_id]);
     }
 
+    function removeCart_post() {
+        $product_id = $this->post('product_id');
+        $query = "delete from nfw_product_cart where product_id = '$product_id' and user_id = '$this->user_id' and customization_id = '0' and !order_id;";
+        $query = $this->db->query($query);
+    }
+
     function addToCart_post() {
+        $cartdataobj = $this->Product_model->getCartData();
+        $cartdata = $cartdataobj['cartdata'];
         $product_id = $this->post('product_id');
         $item_id = $this->post('item_id');
         $productinfo = $this->Product_model->productItemInformation($product_id, $item_id);
-        $cartdata = $this->Product_model->getCartData();
-        $cartidt = $product_id . "_" . $item_id;
-        if (isset($cartdata[$cartidt])) {
-            $message = array("status" => 0, "msg" => "Already Cart", "type" => "warning", "product" => $cartdata[$cartidt]);
-//            $cartobj = $cartdata[$cartidt];
-//            $cartid = $cartobj['id'];
-//            $quantity = $cartobj['quantity'];
-//            $price = $cartobj['price'];
-//            $extra_price = $cartobj['extra_price'];
-//            $total_quantity = $quantity + 1;
-//           echo $total_price = ($price + $extra_price) * $total_quantity;
-//            $this->db->set('quantity', $total_quantity);
-//            $this->db->set('total_price', $total_price);
-//            $this->db->where('id', $cartid); //set column_name and value in which row need to update
-//            $this->db->update('nfw_product_cart');
+        $cartids = $product_id . '_' . $item_id;
+        $productadd = array(
+            "product_id" => $product_id,
+            "op_date" => date('Y-m-d'),
+            "op_time" => date('H:i:s'),
+            "user_id" => "",
+            "quantity" => 1,
+            "extra_price" => '0',
+            "total_price" => $productinfo['price'],
+            "product_speciality" => $productinfo['product_speciality'],
+            "title" => $productinfo['title'],
+            "sku" => $productinfo['title'],
+            "item_code" => $productinfo['title'],
+            "item_image" => $productinfo['images'][0]['image'],
+            "price" => $productinfo['price'],
+            "tag_title" => $productinfo['item_name'],
+            "customization_id" => '0',
+            "customization_data" => '',
+            "customization_data_price" => '',
+            "customize_table" => 'No',
+            "measurement_id" => '',
+            "measurement_data" => '',
+            "posture_data" => '',
+            "user_images" => '',
+            "order_id" => '0',
+            "tag_id" => $item_id
+        );
+        if ($this->checklogin) {
+            $productadd["user_id"] = $this->user_id;
+            if (isset($cartdata[$cartids])) {
+                $message = array("status" => 2, "msg" => "Already Cart", "type" => "warning", "product" => $productadd);
+            } else {
+                $message = array("status" => 2, "msg" => "Added To Cart", "type" => "success", "product" => $productadd);
+                $this->db->insert('nfw_product_cart', $productadd);
+            }
         } else {
-            $productadd = array(
-                "product_id" => $product_id,
-                "user_id" => $this->user_id,
-                "op_date" => date('Y-m-d'),
-                "op_time" => date('H:i:s'),
-                "quantity" => 1,
-                "extra_price" => '0',
-                "total_price" => $productinfo['price'],
-                "product_speciality" => $productinfo['product_speciality'],
-                "title" => $productinfo['title'],
-                "sku" => $productinfo['title'],
-                "item_code" => $productinfo['title'],
-                "item_image" => $productinfo['images'][0]['image'],
-                "price" => $productinfo['price'],
-                "tag_title" => $productinfo['item_name'],
-                "customization_id" => '0',
-                "customization_data" => '',
-                "customization_data_price" => '',
-                "customize_table" => 'No',
-                "measurement_id" => '',
-                "measurement_data" => '',
-                "posture_data" => '',
-                "user_images" => '',
-                "order_id" => '0',
-                "tag_id" => $item_id
-            );
-            $message = array("status" => 2, "msg" => "Added To Cart", "type" => "success", "product" => $productadd);
-            $this->db->insert('nfw_product_cart', $productadd);
+            $session_cart = $this->session->userdata('session_cart');
+            if (isset($session_cart['products'])) {
+                array_push($session_cart['products'], $productadd);
+            } else {
+                $session_cart = array('products' => araay());
+                array_push($session_cart['products'], $productadd);
+                $message = array("status" => 2, "msg" => "Added To Cart", "type" => "success", "product" => $productadd);
+            }
+
+            $this->session->set_userdata('session_cart', $session_cart);
         }
         $this->response($message);
     }
 
     function getCartData_get() {
         $cartdata = $this->Product_model->getCartData();
+        $cartdatacustom = $this->Product_model->getCartDataCustom();
         $cartdataall = array("products" => [], "total_quantity" => 0, "total_price" => 0);
-        foreach ($cartdata as $key => $value) {
+        $carttemplist = [];
+        $carttemparray = array();
+        $carttitleids = $cartdata['cartitemids'];
+        foreach ($cartdata['cartdata'] as $key => $value) {
             $cartdataall['total_quantity'] += $value['quantity'];
             $cartdataall['total_price'] += $value['total_price'];
             array_push($cartdataall['products'], $value);
         }
-        $this->response($cartdataall);
+        $this->response(array(
+            "cartdata" => $cartdataall,
+            "cartcustom" => $carttitleids,
+        ));
+    }
+
+    function get_permutations($inputcolor, $count1) {
+
+        function string_getpermutations($prefix, $characters, &$permutations) {
+            if (count($characters) == 1) {
+
+
+                $permutations[] = $prefix . ',' . array_pop($characters);
+            } else {
+                for ($i = 0; $i < count($characters); $i++) {
+                    $tmp = $characters;
+                    unset($tmp[$i]);
+                    string_getpermutations($prefix . "," . $characters[$i], array_values($tmp), $permutations);
+                }
+            }
+        }
+
+        $characters = array();
+        for ($i = 0; $i < count($inputcolor); $i++)
+            $characters[] = $inputcolor[$i];
+        $permutations = array();
+
+        string_getpermutations("", $characters, $permutations);
+
+        $temp = array();
+        foreach ($permutations as $key => $value) {
+
+            array_push($temp, substr($value, 1));
+        }
+
+        $temp1 = array_unique($temp);
+        $queryarray = [];
+
+        for ($i = $count1; $i > 1; $i--) {
+
+            foreach ($temp1 as $key => $value) {
+                $acval = explode(',', $value);
+                $acval = implode(",", array_slice($acval, 0, $i));
+                array_push($queryarray, $acval);
+            }
+        }
+        $queryarray = array_merge($queryarray, $inputcolor);
+        $colorpermutations = "'" . implode("','", $queryarray) . "'";
+        return $colorpermutations;
+    }
+
+    function parents($parentId, $arrayChild) {
+        $query = "select id from nfw_category where parent = $parentId";
+        $res = $this->Product_model->resultAssociate($query);
+        for ($i = 0; $i < count($res); $i++) {
+            $id = $res[$i]['id'];
+
+            array_push($arrayChild, $id);
+            $this->parents($res[$i]['id'], $arrayChild);
+        }
+        return $arrayChild;
+    }
+
+    function productList_get() {
+        $category = "";
+        $category_id = $this->get('category');
+        if (($this->get('category')) && $this->get('category') != 0) {
+
+            $dataId = $this->parents($category_id, array());
+            $dataId[] = $category_id;
+            $query_data = array();
+            $categoryString = implode(',', $dataId);
+            $category = " and np.product_category in (" . $categoryString . ") ";
+        }
+
+        $item_type = $this->get('item_type');
+
+        $colorlistf = $this->get('colors');
+        $color_id = [];
+        $colorlist = [];
+        if ($colorlistf) {
+            $color_id = implode(",", $colorlistf);
+            $colorlist = explode(",", $color_id);
+        }
+        $colorcount = count($colorlistf);
+        $colorjoin = "";
+
+        $colorquerycc = "";
+        $orderquerycolor = "";
+
+        $selectedColors = array();
+
+        $colorquery = implode(",", $colorlist);
+
+
+        if ($colorcount > 0) {
+            $orderquerycolor = " , FIELD(nc.id, $colorquery )";
+            $colorquerycc = " and nc.id in ($colorquery)";
+            $selectcolorquery = "select * from nfw_color where id in ($colorquery)";
+            $selectedColors = $this->Product_model->resultAssociate($selectcolorquery);
+        }
+        $fromprice = $this->get('from_price');
+
+        $toprice = $this->get('to_price');
+
+
+
+        if (isset($fromprice)) {
+            $price = "and if(ntc.sale_price, ntc.sale_price, ntc.price) between '" . $fromprice . "' and '" . $toprice . "'";
+        } else {
+            $price = '';
+        }
+
+        $fabtype = "";
+        $color = "";
+        $prequery = "";
+        $pricesort = " sort_type desc";
+        $preselectq = "";
+        $sorting = $this->get('sorting');
+        $sortquery = "'' as sort_type";
+        $sortt = "";
+
+        //        profession sorting
+        if (($this->get('profession_check'))) {
+            $sorting = str_replace("Fabric 4 ", "", $sorting);
+            $profq = $this->Product_model->resultAssociate("select id from nfw_profession where title = '$sorting'");
+            if (count($profq)) {
+                $sorting = "Profession";
+                $profession_id = $profq[0]['id'];
+            }
+        };
+//        end of profession sorting
+
+
+        if (isset($sorting)) {
+
+            switch ($sorting) {
+                case 'Price-Desc':
+                    $sort = " order by ntc.price desc";
+                    $pricesort = " price_r desc";
+                    $sortquery = " '' as sort_type ";
+                    break;
+
+                case 'Price-Asc':
+                    $sort = " order by ntc.price asc";
+                    $pricesort = " price_r asc";
+                    $sortquery = "'' as sort_type ";
+                    break;
+
+                case 'Most Popular':
+                    $sortt = " and np.id in (SELECT product_id FROM `nfw_most_populat_product`)   ";
+                    $sortquery = " 'MP' as sort_type  ";
+                    break;
+
+                case 'On Sale':
+                    $sortt = " and np.id in (SELECT product_id FROM `nfw_on_sale`) and np.publishing = 1  ";
+                    $sortquery = "'Sale' as sort_type";
+                    break;
+
+                case 'Profession':
+                    $sortt = " and np.id in (SELECT nfw_product_id FROM nfw_product_profession where nfw_profession_id = '$profession_id') and np.publishing = 1  ";
+                    $sortquery = "'Profession' as sort_type";
+                    break;
+
+                case 'New Arrival':
+                    $sortt = " and np.id in (SELECT product_id FROM `nfw_new_arrival`) and np.publishing = 1  ";
+                    $sortquery = "'New' as sort_type ";
+                    break;
+
+                case 'Sale/Most Popular':
+
+                    $sortt = " and np.id in (SELECT npps.product_id FROM nfw_most_populat_product as npps
+                                    join nfw_on_sale as nss on nss.product_id = npps.product_id)     ";
+
+                    $sortquery = "'MP_SALE' as sort_type";
+                    break;
+
+                case 'Offers':
+
+                    $sortt = " and np.id in (SELECT npps.product_id FROM nfw_offer_product as npps
+                                    join nfw_on_sale as nss on nss.product_id = npps.product_id)     ";
+
+                    $sortquery = "'Sale' as sort_type";
+                    break;
+
+                default:
+                    $prequery = $preselectq . ", '' as sort_type FROM  nfw_product as np $colorjoin  $category $price $color $fabtype";
+                    $sort = '';
+            }
+        } else {
+            $sort = '';
+            $prequery = $preselectq . ", '' as sort_type FROM  nfw_product as np $colorjoin  $category $price $color $fabtype";
+        }
+
+
+
+
+
+        $query = "SELECT 
+                   np.id as id,
+                   nc.id  as colorid,
+                   np.product_category as category_id,
+                   np.title as title,
+                   np.product_speciality as product_speciality,
+                   publishing, 
+            
+                  ntc.price as price, ntc.sale_price, if(ntc.sale_price, ntc.sale_price, ntc.price) as price_r, 
+                   nfimg.image as image, 
+                   $sortquery
+                   FROM nfw_product as np 
+                   left join nfw_product_images as nfimg on nfimg.nfw_product_id = np.id 
+                   join nfw_product_tag_connection as ntc on ntc.product_id = np.id 
+                   join nfw_product_color as npc on np.id =  npc.nfw_product_id
+                   
+
+                   
+
+                    join nfw_color as nc on npc.nfw_color_id = nc.id
+                    where ntc.tag_id = $item_type and publishing = 1 $sortt $colorquerycc $category $price group by np.id order by np.id $orderquerycolor ";
+
+
+
+
+
+        $result = $this->Product_model->resultAssociate($query);
+
+
+
+        $pricelist = [];
+        for ($i = 0; $i < count($result); $i++) {
+            array_push($pricelist, $result[$i]['price_r']);
+        }
+
+        $pricelist = array_unique($pricelist);
+        sort($pricelist);
+        $productIDS = [];
+        $productidstr = implode(",", $productIDS);
+        $color_list4 = implode(",", $productIDS);
+        $wherequery = "";
+        if ($productidstr) {
+            $wherequery = "where npc.nfw_product_id in ($productidstr)";
+        }
+        if (1) {
+            $query = "
+                                        SELECT nc.id,nc.color_code, nc.title FROM nfw_color as nc
+                                          join nfw_product_color as npc on npc.nfw_color_id = nc.id
+                                          $wherequery
+                                         group by nc.id order by nc.display_index asc
+                                            ";
+            //  echo $query;
+            $colorArray = $this->Product_model->resultAssociate($query);
+        } else {
+            $colorArray = array();
+        }
+
+
+        $finalResult = array();
+        $count = count($result);
+
+        if (count($result)) {
+
+            $fresult = [];
+            $fresultindex = [];
+
+            $productliststr = array();
+            foreach ($result as $ry => $rv) {
+                $productliststr[$rv['id']] = $rv;
+            }
+            $productkey = array_keys($productliststr);
+            $productquery = implode(",", $productkey);
+
+//echo "----------";
+
+            function intersectdata($dataarray) {
+                $temp = [];
+                $count = count($dataarray);
+                for ($i = 0; $i < ($count - 1); $i++) {
+                    print_r($dataarray[$i]);
+                    print_r($dataarray[$i + 1]);
+                    $temp2 = array_intersect($dataarray[$i], $dataarray[$i + 1]);
+
+                    array_push($temp, $temp2);
+                }
+                return $temp;
+            }
+
+            $checkcolorsort = "";
+            if (count($colorlist)) {
+                $checkcolorsort = ", color ";
+            }
+            $colorproductmainlist = [];
+
+
+
+
+
+            if ($colorcount > 0) {
+                if ($colorcount > 0) {
+
+                    $temp41a = array();
+                    $colortemparray = array_values($colorlist);
+                    $colorsorting = $this->get_permutations($colortemparray, $colorcount);
+
+                    $queryc1a = "(select nfw_product_id, colorbunch from(
+SELECT nfw_product_id, nfw_color_id, 
+(select group_concat(nc.nfw_color_id ) colorbrc from nfw_product_color as nc where nc.nfw_product_id = npc.nfw_product_id group by npc.nfw_product_id ) as colorbunch
+ FROM nfw_product_color as npc 
+where nfw_color_id in ($colorquery) and nfw_product_id in  (" . $productquery . ") 
+group by nfw_product_id
+) as a
+where colorbunch in ($colorsorting) 
+order by FIELD(colorbunch, $colorsorting) )";
+
+                    $temps1 = [];
+                    $clllist = $this->Product_model->resultAssociate($queryc1a);
+
+                    foreach ($clllist as $key11 => $value11) {
+                        array_push($temps1, $value11['nfw_product_id']);
+                    }
+                    $temp41a = array_merge($temps1, $temp41a);
+
+                    $temp41a = ($temp41a);
+                    $temp41 = $temp41a;
+                } else {
+                    $queryc1 = "SELECT (select title from nfw_product where id = nfw_product_id) as title, nfw_product_id, nfw_color_id, (select group_concat(nfw_color_id) from nfw_product_color  as nc where nc.nfw_product_id = npc.nfw_product_id group by npc.nfw_product_id) as colorbunch FROM nfw_product_color as npc where nfw_product_id in  (" . $productquery . ") 
+    group by nfw_product_id 
+    having  nfw_color_id in (" . $colorquery . ") 
+order by count(nfw_color_id) asc, colorbunch";
+
+                    $colorproductmainlist1 = $this->Product_model->resultAssociate($queryc1);
+                    $temp41 = [];
+                    foreach ($colorproductmainlist1 as $key11 => $value11) {
+                        array_push($temp41, $value11['nfw_product_id']);
+                    }
+                }
+
+                $temp6 = array_values(array());
+                $temp7 = array_unique(array_merge($temp41, $productkey));
+                $resultf = [];
+                foreach ($temp7 as $key1 => $value1) {
+                    foreach ($result as $key2 => $value2) {
+                        if ($value2['id'] == $value1) {
+// echo $value2['id'], '-';
+                            if ($value1 != '') {
+                                $resultf[$key1] = $value2;
+                            }
+                        }
+                    }
+                }
+            } else {
+                $resultf = $result;
+            }
+            if (($this->get('paginate'))) {
+                $pg = $this->get('paginate');
+                $pg1 = $pg[0] - 1;
+                $pg2 = $this->get('perpage');
+
+                $finalResult = array_slice($resultf, $pg1, $pg2);
+            } else {
+                $finalResult = $resultf;
+            }
+        } else {
+
+            $finalResult = array_slice($result, 0, 16);
+        }
+
+
+//        $pg = $this->get('paginate');
+//                $pg1 = $pg[0] - 1;
+//                $pg2 = $this->get('perpage');
+//                $finalResult =  array_slice($result, $pg1, $pg2);
+        $productlists = array();
+        foreach ($finalResult as $key => $value) {
+            $productid = $value['id'];
+            $tempquery = "   SELECT group_concat(snc.id, snc.color_code) as color FROM nfw_color as snc  
+         left join nfw_product_color as snpc on snpc.nfw_color_id = snc.id
+         where snpc.nfw_product_id = $productid order by snc.id asc";
+            $resulttempuery = $this->Product_model->resultAssociate($tempquery);
+            $value['color'] = $colorsbunch = end($resulttempuery)['color'];
+
+//            print_r($value);
+            array_push($productlists, $value);
+        }
+        $selectedColors = array_reverse($selectedColors);
+        $this->response(array('count' => $count, 'productdata' => $productlists, 'colors' => $colorArray, 'selected_colors' => $selectedColors, 'pricelist' => $pricelist));
+    }
+
+    function shirtCustomization_get() {
+
+        $watchoption_style = array(
+            'nowatch' => 'No',
+            'leftwatch' => 'Right Wrist',
+            'rightwatch' => 'Left Wrist'
+        );
+
+        $watchoption_container = array();
+        foreach ($watchoption_style as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/watch/" . $key . ".jpg",
+                "default" => $value == 'No' ? '1' : '',
+                "lable" => $value,
+                "parent" => "Long Sleeve",
+                "parenttitle" => "Sleeve Style",
+            );
+            array_push($watchoption_container, $tempcontain);
+        }
+
+        $cuff_style = array(
+            '1' => 'Single Cuff Rounded',
+            '2' => 'Single Cuff Squared',
+            '3' => 'Single Cuff Cutaway',
+            '4' => 'French Cuff  Rounded',
+            '5' => 'French Cuff Squared',
+            '6' => 'French Cuff Cutaway',
+            '7' => 'Convertible  Cuff Rounded',
+            '8' => 'Convertible Cuff Square',
+            '9' => 'Convertible Cuff Cutaway',
+            '10' => '2 Buttons Rounded',
+            '11' => '2 Buttons Squared',
+            '12' => '2 Buttons Cutaway',
+            '13' => 'Milanese Cuff',
+        );
+
+        $cuff_style_container = array();
+        foreach ($cuff_style as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/cuff_shirt/" . $key . ".jpg",
+                "default" => $value == 'Single Cuff Rounded' ? '1' : '',
+                "lable" => $value,
+                "parent" => "Long Sleeve",
+                "parenttitle" => "Sleeve Style",
+                "child" => array("Wrist Watch" => "No")
+            );
+            array_push($cuff_style_container, $tempcontain);
+        }
+
+        $shortsleevestyle = [
+            array(
+                "title" => "Short Sleeve Without Cuff",
+                "image" => "./custom_form_view/shirt/cuff_shirt/withoutcuff_sort.jpg",
+                "default" => "1",
+                "lable" => "Short Sleeve Without Cuff",
+                "parenttitle" => "Sleeve Style",
+                "parent" => "Short Sleeve",
+            ),
+            array(
+                "title" => "Short Sleeve With Cuff",
+                "image" => "./custom_form_view/shirt/cuff_shirt/withcuff_sort.jpg",
+                "default" => "",
+                "lable" => "Short Sleeve With Cuff",
+                "parenttitle" => "Sleeve Style",
+                "parent" => "Short Sleeve",
+            ),
+        ];
+        foreach ($shortsleevestyle as $key => $value) {
+            array_push($cuff_style_container, $value);
+        }
+
+
+
+
+        $sleevestyle = [
+            array(
+                "title" => "Long Sleeve",
+                "image" => "https://nitafashions.com/nfw/small/custom_57657134840.jpeg",
+                "default" => "1",
+                "lable" => "Long Sleeve",
+                "parent" => "",
+                "child" => "Cuff Style",
+                "child" => array("Cuff Style" => "Single Cuff Rounded", "Wrist Watch" => "No")
+            ),
+            array(
+                "title" => "Short Sleeve",
+                "image" => "./custom_form_view/shirt/cuff_shirt/withoutcuff_sort.jpg",
+                "default" => "",
+                "lable" => "Short Sleeve",
+                "parent" => "",
+                "child" => array("Cuff Style" => "Short Sleeve Without Cuff", "Wrist Watch" => "No")
+            ),
+        ];
+
+
+
+        $printed = array(
+            '1.jpg' => 'P 44 ',
+            '2.jpg' => 'P 45 ',
+            '3.jpg' => 'P 49 ',
+            '4.jpg' => 'P 50 ',
+            '5.jpg' => 'P 51 ',
+            '6.jpg' => 'P 58 ',
+            '7.jpg' => 'P 61 ',
+            '8.jpg' => 'P 63 ',
+            '9.jpg' => 'P 65 ',
+            '19.jpg' => 'P 67 ',
+            '20.jpg' => 'P 78 ',
+            '21.jpg' => 'P 96 ',
+            '22.jpg' => 'P 98 ',
+            '23.jpg' => 'P 99 ',
+            '24.jpg' => 'P 100 ',
+            '25.jpg' => 'P 102 ',
+            '26.jpg' => 'P 104 ',
+            '27.jpg' => 'P 105 ',
+            '28.jpg' => 'P 106 ',
+            '29.jpg' => 'P 107 ',
+            '30.jpg' => 'P 109 ',
+            '31.jpg' => 'P 110 ',
+            '32.jpg' => 'P 112 ',
+            '33.jpg' => 'P 113 ',
+            '34.jpg' => 'P 115 ',
+            '35.jpg' => 'P 135 ',
+            '10.jpg' => 'P 126 ',
+            '11.jpg' => 'P 127 ',
+            '12.jpg' => 'P 128 ',
+            '13.jpg' => 'P 129 ',
+            '14.jpg' => 'P 130 ',
+            '15.jpg' => 'P 131 ',
+            '16.jpg' => 'P 144 ',
+            '17.jpg' => 'P 145 ',
+            '18.jpg' => 'P 148 ',
+        );
+        $solid = array(
+            '8.jpg' => 'B 153 ',
+            '9.jpg' => 'B 155 ',
+            '10.jpg' => 'B 159 ',
+            '11.jpg' => 'B 162 ',
+            '12.jpg' => 'B 165 ',
+            '13.jpg' => 'B 166 ',
+            '14.jpg' => 'B 167 ',
+            '15.jpg' => 'B 171 ',
+            '16.jpg' => 'B 174 ',
+            '17.jpg' => 'B 176 ',
+            '18.jpg' => 'B 177 ',
+            '1.jpg' => 'D 692 ',
+            '2.jpg' => 'D 694 ',
+            '3.jpg' => 'D 698 ',
+            '4.jpg' => 'D 700 ',
+            '5.jpg' => 'D 701 ',
+            '6.jpg' => 'D 703 ',
+            '7.jpg' => 'D 704 ',
+        );
+
+
+
+        $ccinsert = array("Printed" => [], "Solid" => []);
+        foreach ($solid as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/fabric/solid_collar/" . $key,
+                "default" => $value == 'No' ? '1' : '',
+                "lable" => $value,
+                "parent" => "",
+                "parenttitle" => "",
+            );
+            array_push($ccinsert['Solid'], $tempcontain);
+        }
+
+        foreach ($printed as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/fabric/printed_collar/" . $key,
+                "default" => $value == 'No' ? '1' : '',
+                "lable" => $value,
+                "parent" => "",
+                "parenttitle" => "",
+            );
+            array_push($ccinsert['Printed'], $tempcontain);
+        }
+
+
+
+        $buttonarray = array(
+            'standard' => 'Standard',
+            'matching' => 'Matching',
+            '1' => 'Thick Mop',
+            '2' => 'Thin Mop',
+            '3' => 'Black Lipshell'
+        );
+        $buttoncontainer = [];
+        foreach ($buttonarray as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/button_shirt/" . $key . ".png",
+                "default" => $value == 'No' ? '1' : '',
+                "lable" => $value,
+                "parent" => "",
+                "parenttitle" => "",
+            );
+            array_push($buttoncontainer, $tempcontain);
+        }
+
+        $monogram = array(
+            '1' => '1',
+            '3' => '3',
+            '8' => '8',
+            '10' => '10',
+            '13' => '13',
+            '14' => '14',
+            '15' => '15',
+            '16' => '16',
+            '17' => '17',
+            '18' => '18',
+            '19' => '19',
+            '20' => '20',
+            '21' => '21',
+            '22' => '22',
+            '23' => '23',
+            '24' => '24',
+            '27' => '27',
+            '28' => '28',
+            '30' => '30',
+            '31' => '31',
+            '34' => '34',
+            '36' => '36'
+        );
+
+
+        $monogramontainer = [];
+        foreach ($monogram as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/monogram_shirt/" . $key . ".jpg",
+                "default" => $value == '1' ? '1' : '',
+                "lable" => $value,
+                "parent" => "",
+                "parenttitle" => "",
+            );
+            array_push($monogramontainer, $tempcontain);
+        }
+
+        $monogram_placement = array(
+            'no_monogram' => 'No Monogram',
+            'left_cuff' => 'Left Cuff',
+            'left_chest_pocket' => 'Left Chest Pocket',
+            'left_sleeve_plocket' => 'Left Sleeve Placket',
+            'left_abdomen' => 'Left Abdomen',
+            'inside_coller_band' => 'Inside Collar Band',
+            'shirt_tail' => 'Shirt Tail',
+        );
+
+        $monogram_placementcontainer = [];
+        foreach ($monogram_placement as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/monogram_placement/" . $key . ".jpg",
+                "default" => $value == 'No Monogram' ? '1' : '',
+                "lable" => $value,
+                "parent" => "",
+                "parenttitle" => "",
+            );
+            array_push($monogram_placementcontainer, $tempcontain);
+        }
+
+
+        $monogram_color = array(
+            'Contrast_Thread' => 'Contrast Thread',
+            'Matching_Thread' => 'Matching Thread',
+        );
+
+
+        $monogram_colorcontainer = [];
+        foreach ($monogram_color as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => "./custom_form_view/shirt/monogram_color/" . $key . ".jpg",
+                "default" => $value == 'No Monogram' ? '1' : '',
+                "lable" => $value,
+                "parent" => "",
+                "parenttitle" => "",
+            );
+            array_push($monogram_colorcontainer, $tempcontain);
+        }
+
+
+
+
+        $shirtCustomization = array(
+            'Body Fit' => getChildren(10),
+            'Collar Style' => getChildren(11),
+            'Add 2 Buttons On The Collar Band' => getChildren('13'),
+            'Collar & Cuff Stiffness' => getChildren('14'),
+            'Collar Stays' => getChildren('15'),
+            'Sleeve Style' => $sleevestyle,
+            'Cuff Style' => $cuff_style_container,
+            'Wrist Watch' => $watchoption_container,
+            'Front Style' => getChildren('16'),
+            'Back Style' => getChildren('17'),
+            'Darts' => getChildren('18'),
+            'Pocket Style' => getChildren('19'),
+            'Bottom Style' => getChildren('20'),
+            'Collar & Cuff Feature' => getChildren('21'),
+            'Inner Collar Insert' => $ccinsert,
+            'Inner Cuff Insert' => $ccinsert,
+            'Inner Front Placket Insert' => $ccinsert,
+            'Label' => getChildren('24'),
+            'Button' => $buttoncontainer,
+            'Monogram Placement' => $monogram_placementcontainer,
+            'Monogram Style' => $monogramontainer,
+            'Monogram Initial' => array(),
+            'Monogram Color' => $monogram_colorcontainer,
+        );
+
+
+        $selectelements = array(
+            'Body Fit' => "Loose Fit",
+            'Collar Style' => 'Medium Spread (1 5/8" x 3 ")',
+            'Add 2 Buttons On The Collar Band' => "No",
+            'Collar & Cuff Stiffness' => "Standard",
+            'Collar Stays' => "Permanent",
+            'Sleeve Style' => "Long Sleeve",
+            'Cuff Style' => "Single Cuff Rounded",
+            'Wrist Watch' => "No",
+            'Front Style' => "Plain Front",
+            'Back Style' => "Plain",
+            'Darts' => "No Darts",
+            'Pocket Style' => "No Pocket",
+            'Bottom Style' => "Shirt Tail",
+            'Collar & Cuff Feature' => "No",
+            'Inner Collar Insert' => "-",
+            'Inner Cuff Insert' => "-",
+            'Inner Front Placket Insert' => "-",
+            'Label' => "Nita Fashions",
+            'Button' => "Standard",
+            'Monogram Placement' => "No Monogram",
+            'Monogram Style' => "-",
+            'Monogram Initial' => "-",
+            'Monogram Color' => "-",
+        );
+
+
+
+        $mainnavigation = array(
+            "Body Fit" => array(
+                "icon" => "body_fit",
+                "child" => ['Body Fit' => array("col" => "4"),],
+            ),
+            "Collar" => array(
+                "icon" => "body_fit",
+                "child" => [
+                    'Collar Style' => array("col" => "4", "lablestyle" => "height:60px", "maxsize" => "bodymax400"),
+                    'Add 2 Buttons On The Collar Band' => array("col" => "3"),
+                    'Collar & Cuff Stiffness' => array("col" => "3"),
+                    'Collar Stays' => array("col" => "3"),
+                ]
+            ),
+            "Sleeve & Cuff Style" => array(
+                "icon" => "body_fit",
+                "child" => [
+                    'Sleeve Style' => array("col" => "4", "lablestyle" => "",),
+                    'Cuff Style' => array("col" => "4", "lablestyle" => "", "maxsize" => "bodymax400", "depandent" => "Sleeve Style"),
+                    'Wrist Watch' => array("col" => "4", "lablestyle" => "", "depandent" => "Sleeve Style")
+                ],
+            ),
+            "Front & Back" => array(
+                "icon" => "body_fit",
+                "child" => [
+                    'Front Style' => array("col" => "3", "lablestyle" => "",),
+                    'Back Style' => array("col" => "4", "lablestyle" => "",),
+                    'Darts' => array("col" => "4", "lablestyle" => "",),
+                ]
+            ),
+            "Pocket" => array(
+                "icon" => "body_fit",
+                "child" => ['Pocket Style' => array("col" => "4", "lablestyle" => "height:60px",),],
+            ),
+            "Bottom" => array(
+                "icon" => "body_fit",
+                "child" => ['Bottom Style' => array("col" => "4", "lablestyle" => "height:60px",),],
+            ),
+            "Collar & Cuff Feature" => array(
+                "icon" => "body_fit",
+                "child" => [
+                    'Collar & Cuff Feature' => array("col" => "4", "lablestyle" => "",),
+                    'Inner Collar Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi"),
+                    'Inner Cuff Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi"),
+                    'Inner Front Placket Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi"),
+                ],
+            ),
+            "Button & Lable" => array(
+                "icon" => "body_fit",
+                "child" => ['Label' => array("col" => "4", "lablestyle" => "",),
+                    'Button' => array("col" => "4", "lablestyle" => "",)],
+            ),
+            "Monogram" => array(
+                "icon" => "body_fit",
+                "child" => [
+                    'Monogram Placement' => array("col" => "4", "lablestyle" => "",),
+                    'Monogram Style' => array("col" => "4", "lablestyle" => "",),
+                    'Monogram Initial' => array("col" => "4", "lablestyle" => "", "view" => "text"),
+                    'Monogram Color' => array("col" => "4", "lablestyle" => "",),
+                ],
+            ),
+        );
+
+        $return_data = array(
+            "formItems" => $shirtCustomization,
+            "navigation" => $mainnavigation,
+            "title" => "Shirt Customization",
+            "item" => "Shirt",
+            "selection" => $selectelements,
+        );
+        $this->response($return_data);
     }
 
 }

@@ -27,7 +27,7 @@ class CustomApi extends REST_Controller {
                 $stylecontainer[$checkstyle[1]] = $value;
             }
         }
-        $last_id = 0;
+        $last_id = $styletype;
         if ($styletype == 'custom') {
             $profileInsert = array(
                 "style_profile" => $styleid,
@@ -93,11 +93,11 @@ class CustomApi extends REST_Controller {
         }
 
         $querycustomprofile = "SELECT * FROM `nfw_custom_form_data` where tag_id=$item_id and user_id=" . $this->user_id . " and custom_form_data='' group by style_profile";
-        $query = $this->db->query($query);
+        $query = $this->db->query($querycustomprofile);
         $customprofiles = $query->result_array();
         $customProfileArray = array();
         foreach ($customprofiles as $key => $value) {
-            $this->db->where("id", $value['id']);
+            $this->db->where("style_profile", $value['id']);
             $customattr = $this->db->get("nfw_custom_form_data_attr");
             $customattrdata = $customattr->result_array();
             $customProfileArray[$value["id"]] = array("profile" => $value['style_profile'], "style" => $customattrdata, "id" => $value["id"]);

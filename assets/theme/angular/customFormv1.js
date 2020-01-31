@@ -85,7 +85,81 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $scope.customFabricArraySelect = [];
         $scope.initAnimate.startcustom = 0;
         $(".customblockstart").hide();
+        swal({
+            title: 'Saving Style...',
+            onOpen: function () {
+                swal.showLoading()
+            }
+        });
+        var form = new FormData()
+        for (kv in $scope.insertDataArray) {
+            form.append(kv, $scope.insertDataArray[kv]);
+        }
+        form.append("tag_id", itemidgbl);
+        form.append("styletype", "custom");
+        $http.post(urldatastorestyle, form).then(function () {
+            swal({
+                title: "Style Saved",
+                type: "sucess",
+                html: "",
+                timer: 1500,
+                showConfirmButton: false,
+                animation: true
 
+            })
+
+        });
+
+    }
+
+
+
+
+    $scope.applyPreStyle = function (prestyle) {
+        swal({
+            title: 'Saving Style...',
+            onOpen: function () {
+                swal.showLoading()
+            }
+        });
+        var cartidslist = [];
+        var form = new FormData();
+        var styledict = {};
+        for (st in prestyle.style) {
+            var stobj = prestyle.style[st];
+            styledict[stobj.style_key] = stobj.style_value;
+        }
+
+        for (item in $scope.customFabrics) {
+            var itemobj = $scope.customFabrics[item];
+            $scope.customFabricsArrayDone.push(item);
+            cartidslist.push(itemobj.item.id);
+            $scope.customFabricsDone[item] = {"style": styledict, "Style Profile": prestyle.profile, "item": itemobj.item, "Measurement Profile": {}};
+        }
+        $scope.customFabrics = {};
+        $scope.customFabrics = {};
+        $scope.customFabricArraySelect = [];
+        $scope.initAnimate.startcustom = 0;
+        $scope.initAnimate.startcustom = 0;
+        form.append("cart_id", cartidslist.join(","));
+        form.append("tag_id", itemidgbl);
+        form.append("profile", prestyle.profile);
+
+        form.append("styletype", prestyle.id);
+        $http.post(urldatastorestyle, form).then(function () {
+            $http.post(urldatastorestyle, form).then(function () {
+                swal({
+                    title: "Style Saved",
+                    type: "sucess",
+                    html: "",
+                    timer: 1500,
+                    showConfirmButton: false,
+                    animation: true
+
+                })
+
+            })
+        })
     }
 
     $scope.shopStored = function () {
@@ -140,7 +214,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $scope.mesurementdata.selection = angular.copy(mesdata.data.standerd);
         $scope.mesurementSelecttion = angular.copy(mesdata.data.standerd);
         $scope.mesurementdata.posture = angular.copy(mesdata.data.posturedata);
-        $scope.customProfileArray =  angular.copy(mesdata.data.customProfileArray);
+        $scope.customProfileArray = angular.copy(mesdata.data.customProfileArray);
         for (post in $scope.mesurementdata.posture) {
             $scope.mesurementdata.posture_selection[post] = "-";
         }
@@ -250,32 +324,11 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
 
     $scope.startMeasurements = function () {
 
-        swal({
-            title: 'Saving Style...',
-            onOpen: function () {
-                swal.showLoading()
-            }
-        });
-        var form = new FormData()
-        for (kv in $scope.insertDataArray) {
-            form.append(kv, $scope.insertDataArray[kv]);
-        }
-        form.append("tag_id", itemidgbl);
-        form.append("styletype", "custom");
-        $http.post(urldatastorestyle, form).then(function () {
-            swal({
-                title: "Style Saved",
-                type: "sucess",
-                html: "",
-                timer: 1500,
-                showConfirmButton: false,
-                animation: true
 
-            })
-            $(".measurementblockstart").show();
-            $(".customblockstart").hide();
-            $scope.initAnimate.startcustom = 1;
-        })
+
+        $(".measurementblockstart").show();
+        $(".customblockstart").hide();
+        $scope.initAnimate.startcustom = 1;
     }
 
 

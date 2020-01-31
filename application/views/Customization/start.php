@@ -145,27 +145,28 @@ $this->load->view('layout/header');
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Apply From Previous Styles</h4>
+                        <h4 class="modal-title" id="myModalLabel">Choose From Previous Styles</h4>
                     </div>
                     <div class="modal-body">
                         Select Style from previous online purchase.
-                        Please Note: You must select which style you wish to select for each fabric by choosing left side fabric icon.
+                        Please Note: You must select which style you wish to select for each fabric by choosing fabric icon.
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-default" ng-repeat="preprofile in customProfileArray">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{preprofile.id}}" style="color:white;font-size: 12px; ">
+                                <div class="panel-heading" style="height: 50px;">
+                                    <h4 class="panel-title" style="    line-height: 32px;">
+                                        <a data-toggle="collapse" data-parent="#accordion{{preprofile.id}}" href="#collapse{{preprofile.id}}" style="color:white;font-size: 12px; ">
                                             Style No. {{preprofile.profile}}
+                                            <button class="btn btn-success btn-sm pull-right" ng-click="applyPreStyle(preprofile)">Choose Style</button>
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapseOne" class="panel-collapse collapse in">
+                                <div id="collapse{{preprofile.id}}" class="panel-collapse collapse ">
                                     <div class="panel-body">
                                         <ul class="" role="tablist" style=" height:700px ">
-                                            <li role="presentation"  customtabblock" ng-repeat="style in preprofile.style">
+                                            <li role="presentation  customtabblock" ng-repeat="style in preprofile.style">
                                                 <a class="" href="#custom{{$index}}" aria-controls="custom{{$index}}" role="tab" data-toggle="tab" style="font-size: 12px;">
-                                                    <span class="customtagname"> {{tagname}}  </span>
-                                                    <span class="customtagvalue"> {{tagkey}} </span>
+                                                    <span class="customtagname"> {{style.style_key}}  </span>
+                                                    <span class="customtagvalue"> {{style.style_value}} </span>
 
                                                 </a>
                                             </li>

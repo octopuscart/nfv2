@@ -92,7 +92,7 @@
                                         <div class="">
                                             <div class="input-group input-group-lg" style="width: 100%;">
                                                 <span class="input-group-addon" id="sizing-addon1">Write Profile Name</span>
-                                                <input type="text" class="form-control" placeholder="Profile Name" aria-describedby="sizing-addon1">
+                                                <input type="text" class="form-control" placeholder="Profile Name" aria-describedby="sizing-addon1" ng-model="mesurementSelecttion['Profile']">
                                             </div>
                                         </div>
                                     </td>

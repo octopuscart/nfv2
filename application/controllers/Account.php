@@ -11,7 +11,7 @@ class Account extends CI_Controller {
         $this->load->model('User_model');
         $this->load->model('Product_model');
         $session_user = $this->session->userdata('logged_in');
-        if ($session_user) {
+        if (isset($session_user['login_id'])) {
             $this->user_id = $session_user['login_id'];
         } else {
             $this->user_id = 0;

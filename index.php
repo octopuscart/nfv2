@@ -55,16 +55,10 @@
  */
 //define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-
-
-
-switch ($_SERVER['SERVER_NAME']) {
-    case '192.168.1.3':
-        define('ENVIRONMENT', 'development');
-//    case 'localhost':
-//        define('ENVIRONMENT', 'development');
-    default:
-        define('ENVIRONMENT', 'production');
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
+    define('ENVIRONMENT', 'development');
+} else {
+    define('ENVIRONMENT', 'production');
 }
 
 

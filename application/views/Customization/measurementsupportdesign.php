@@ -26,7 +26,6 @@
                     <p>
                         If you have purchased from us before, we have stored your most recent measurement on record.
 
-
                     </p>
                     <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" name="shopStoredMeasurements"  >Confirm Order With Most Recent Offline Purchase
                     </button>
@@ -50,7 +49,7 @@
 
 
                 </p>
-                <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization2" data-toggle="modal" data-target="#styleModal2" >Select size from Previous Measurement →
+                <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization2" data-toggle="modal" data-target="#measurementModal" >Select size from Previous Measurement →
                 </button>
             </div>
 

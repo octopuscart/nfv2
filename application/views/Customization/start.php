@@ -91,7 +91,11 @@ $this->load->view('layout/header');
 
 
                     </center>
-
+                    <div class="measurementprocess col-md-12" ng-if="customFabricsArrayDone.length" style="    margin: 10px 15px 0px 20px;">
+                        <p>You can proceed for measurement now or choose more fabrics.</p>
+                        <button class="btn btn-danger button_wave waves-effect waves-button waves-float" ng-click="startMeasurements()" id="start_customization"  style="background:red;border-color: red;color:white">Proceed For Measurements →
+                        </button>
+                    </div>
 
 
 
@@ -101,10 +105,7 @@ $this->load->view('layout/header');
                          background-size: contain;    background-repeat: no-repeat;" ng-if="customFabricsArrayDone.length == 0">
 
                     </div>
-                    <div class="measurementprocess" ng-if="customFabricsArrayDone.length">
-                        <button class="btn btn-danger button_wave waves-effect waves-button waves-float" ng-click="startMeasurements()" id="start_customization"  style="background:red;border-color: red;color:white">Proceed For Measurements →
-                        </button>
-                    </div>
+
 
                     <?php
                     $this->load->view('Customization/customSummery');
@@ -143,7 +144,7 @@ $this->load->view('layout/header');
                                 </div>
                                 <div id="collapse{{preprofile.id}}" class="panel-collapse collapse ">
                                     <div class="panel-body">
-                                        <ul class="" role="tablist" style=" height:700px ">
+                                        <ul class="" role="tablist" >
                                             <li role="presentation  customtabblock" ng-repeat="style in preprofile.style">
                                                 <a class="" href="#custom{{$index}}" aria-controls="custom{{$index}}" role="tab" data-toggle="tab" style="font-size: 12px;">
                                                     <span class="customtagname"> {{style.style_key}}  </span>
@@ -161,7 +162,52 @@ $this->load->view('layout/header');
 
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        </div>
+        <!-- /.modal -->
+        
+        
+         <!-- Modal -->
+        <div class="modal fade" id="measurementModal" tabindex="-1" role="dialog" aria-labelledby="measurementModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Select size from Previous Measurement</h4>
+                    </div>
+                    <div class="modal-body">
+                        Select measurement from previous online purchase, it will apply on all chosen fabric.
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default" ng-repeat="preprofile in mesurementdata.measurementProfile">
+                                <div class="panel-heading" style="height: 50px;">
+                                    <h4 class="panel-title" style="    line-height: 32px;">
+                                        <a data-toggle="collapse" data-parent="#accordionsmes{{preprofile.id}}" href="#collapsemes{{preprofile.id}}" style="color:white;font-size: 12px; ">
+                                            Style No. {{preprofile.profile}}
+                                            <button class="btn btn-success btn-sm pull-right" ng-click="applyPreStyle(preprofile)">Choose Style</button>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapsemes{{preprofile.id}}" class="panel-collapse collapse ">
+                                    <div class="panel-body">
+                                        <ul class="" role="tablist" >
+                                            <li role="presentation  customtabblock" ng-repeat="style in preprofile.measurement">
+                                                <a class="" href="#custom{{$index}}" aria-controls="custom{{$index}}" role="tab" data-toggle="tab" style="font-size: 12px;">
+                                                    <span class="customtagname"> {{style.measurement_key}}  </span>
+                                                    <span class="customtagvalue"> {{style.measurement_value}} </span>
+
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
 
 
     </div>

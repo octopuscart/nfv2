@@ -89,7 +89,6 @@ class CustomApi extends REST_Controller {
             $posqry = $this->db->get("nfw_custom_element");
             $posrow = $posqry->row();
             $posturedata[$posrow->title . " Posture"] = $posdata;
-            $standerd[$posrow->title . " Posture"] = "-";
         }
 
         $querycustomprofile = "SELECT * FROM `nfw_custom_form_data` where tag_id=$item_id and user_id=" . $this->user_id . " and custom_form_data='' group by style_profile";
@@ -100,11 +99,29 @@ class CustomApi extends REST_Controller {
             $this->db->where("style_profile", $value['id']);
             $customattr = $this->db->get("nfw_custom_form_data_attr");
             $customattrdata = $customattr->result_array();
-            $customProfileArray[$value["id"]] = array("profile" => $value['style_profile'], "style" => $customattrdata, "id" => $value["id"]);
+            if ($customattrdata) {
+                $customProfileArray[$value["id"]] = array("profile" => $value['style_profile'], "style" => $customattrdata, "id" => $value["id"]);
+            }
         }
 
 
+        $querycustomprofile = "SELECT * FROM `nfw_measurement_data` where tag_id=$item_id and user_id=" . $this->user_id . " and measurement_data='' group by measurement_profile";
+        $query = $this->db->query($querycustomprofile);
+        $customprofiles = $query->result_array();
+        
+        $measurementProfileArray = array();
+        foreach ($customprofiles as $key => $value) {
+       
+            $this->db->where("profile_id", $value['id']);
+            $messataattr = $this->db->get("nfw_measurement_attr");
+            $messataattrdata = $messataattr->result_array();
+            if ($messataattrdata) {
+                $measurementProfileArray[$value["id"]] = array("profile" => $value['measurement_profile'], "measurement" => $messataattrdata, "id" => $value["id"]);
+            }
+        }
 
+
+        $return_data['measurementProfileArray'] = $measurementProfileArray;
         $return_data['customProfileArray'] = $customProfileArray;
         $return_data['posturedata'] = $posturedata;
         $return_data['standerd'] = $standerd;

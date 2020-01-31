@@ -99,7 +99,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $http.post(urldatastorestyle, form).then(function () {
             swal({
                 title: "Style Saved",
-                type: "sucess",
+                type: "success",
                 html: "",
                 timer: 1500,
                 showConfirmButton: false,
@@ -149,13 +149,17 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
             $http.post(urldatastorestyle, form).then(function () {
                 swal({
                     title: "Style Saved",
-                    type: "sucess",
+                    type: "success",
                     html: "",
                     timer: 1500,
                     showConfirmButton: false,
                     animation: true
 
-                })
+                });
+                $timeout(function () {
+                    $("#styleModal").modal("hide");
+                }, 2500)
+
 
             })
         })
@@ -189,7 +193,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
             $http.post(urldatastorestyle, form).then(function () {
                 swal({
                     title: "Style Saved",
-                    type: "sucess",
+                    type: "success",
                     html: "",
                     timer: 1500,
                     showConfirmButton: false,
@@ -205,7 +209,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
 
 
     $scope.measurementimagedata = {"Front": {}, "Back": {}, "Left Side": {}, "Right Side": {}};
-    $scope.mesurementdata = {"setting": {}, "selection": {}, "posture": {}, "posture_selection": {}, "user_images": []};
+    $scope.mesurementdata = {"setting": {}, "selection": {}, "posture": {}, "posture_selection": {}, "user_images": [], "measurementProfile": {}};
 
     $http.get(customlink + "/customMeausrementApiByItem/" + itemidgbl).then(function (mesdata) {
         console.log(mesdata.data)
@@ -214,8 +218,13 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $scope.mesurementSelecttion = angular.copy(mesdata.data.standerd);
         $scope.mesurementdata.posture = angular.copy(mesdata.data.posturedata);
         $scope.customProfileArray = angular.copy(mesdata.data.customProfileArray);
+        $scope.mesurementdata.measurementProfile = angular.copy(mesdata.data.measurementProfileArray);
+
+
         for (post in $scope.mesurementdata.posture) {
+            console.log(post)
             $scope.mesurementdata.posture_selection[post] = "-";
+            
         }
         for (mes in $scope.mesurementSelecttion) {
             $scope.mesurementSelecttionFrc[mes] = [$scope.mesurementSelecttion[mes], 0];
@@ -326,6 +335,13 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $(".customblockstart").hide();
         $scope.initAnimate.startcustom = 2;
     }
+
+    $scope.$watch("customFabricsArrayDone", function (n, o) {
+        console.log(n.length, $scope.cartDataArray.length)
+        if (n.length == $scope.cartDataArray.length) {
+//             $scope.startMeasurements();
+        }
+    })
 
     $scope.startMeasurementsCustom = function () {
         $(".measurementblockstart").show();

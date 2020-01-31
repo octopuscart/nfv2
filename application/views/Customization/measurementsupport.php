@@ -23,68 +23,71 @@
         <div class="col-sm-4 mainelementtab">
             <form action="#" method="post">
                 <div class="" style="display: none">
-
+                    <input name="measurementkey[]" value="{{itemk}}" ng-repeat="(itemk, cart) in mesurementSelecttion" type="hidden" />
+                    <input name="measurementvalue[]" value="{{cart}}" ng-repeat="(itemk, cart) in mesurementSelecttion" type="hidden" />
+                    <input name="posturekey[]" value="{{itemk}}" ng-repeat="(itemk, cart) in mesurementdata.posture_selection" type="hidden" />
+                    <input name="posturevalue[]" value="{{cart}}" ng-repeat="(itemk, cart) in mesurementdata.posture_selection" type="hidden" />
                     <input name="profile_name" type="hidden" value="{{mesurementSelecttion['Profile']}}">
                     <input name="cart_id[]" value="{{cart.item.id}}" ng-repeat="(itemk, cart) in customFabricsDone" type="hidden" />
 
                 </div>  
                 <button class="btn btn-success btn-lg bigbuttonspadding" name="confirm_measurements"  style="    width: 100%;">Confirm Measurements </button>
-
-                <ul class="nav nav-tabs tabs-left vertialTab bodymax500" role="tablist" style=" height:700px ">
-                    <li role="presentation" class="active customtabblock" >
-                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                            <span class="customtagname">Profile </span>
-                            <span class="customtagvalue">{{mesurementSelecttion['Profile']}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" class=" customtabblock" >
-                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                            <span class="customtagname">Height </span>
-                            <span class="customtagvalue">{{mesurementSelecttion['Height']}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" class=" customtabblock" >
-                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                            <span class="customtagname">Weight </span>
-                            <span class="customtagvalue">{{mesurementSelecttion['Weight']}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" class=" customtabblock" >
-                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                            <span class="customtagname">Age </span>
-                            <span class="customtagvalue">{{mesurementSelecttion['Age']}}</span>
-                        </a>
-                    </li>
-
-                    <?php
-                    foreach ($measurements as $key => $value) {
-                        ?>
-                        <li role="presentation" class="customtabblock" >
-                            <a class="" href="#measurement<?php echo $key; ?>" aria-controls="measurement<?php echo $key; ?>" role="tab" data-toggle="tab">
-                                <span class="customtagname"> <?php echo $value['title']; ?> </span>
-                                <span class="customtagvalue">{{mesurementSelecttion['<?php echo $value['title']; ?>']}}"</span>
-
-                            </a>
-                        </li>
-                        <?php
-                    }
-                    ?>
-
-
-                    <li role="presentation" class=" customtabblock" ng-repeat="(mskp, msvp) in  mesurementdata.posture_selection">
-                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                            <span class="customtagname">{{mskp}} </span>
-                            <span class="customtagvalue">{{msvp}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" class=" customtabblock">
-                        <a class="" href="#measurement_images" aria-controls="measurement_images" role="tab" data-toggle="tab">
-                            <span class="customtagname">Your Images </span>
-                            <span class="customtagvalue">-</span>
-                        </a>
-                    </li>
-                </ul>
             </form>
+            <ul class="nav nav-tabs tabs-left vertialTab bodymax500" role="tablist" style=" height:700px ">
+                <li role="presentation" class="active customtabblock" >
+                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                        <span class="customtagname">Profile </span>
+                        <span class="customtagvalue">{{mesurementSelecttion['Profile']}}</span>
+                    </a>
+                </li>
+                <li role="presentation" class=" customtabblock" >
+                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                        <span class="customtagname">Height </span>
+                        <span class="customtagvalue">{{mesurementSelecttion['Height']}}</span>
+                    </a>
+                </li>
+                <li role="presentation" class=" customtabblock" >
+                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                        <span class="customtagname">Weight </span>
+                        <span class="customtagvalue">{{mesurementSelecttion['Weight']}}</span>
+                    </a>
+                </li>
+                <li role="presentation" class=" customtabblock" >
+                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                        <span class="customtagname">Age </span>
+                        <span class="customtagvalue">{{mesurementSelecttion['Age']}}</span>
+                    </a>
+                </li>
+
+                <?php
+                foreach ($measurements as $key => $value) {
+                    ?>
+                    <li role="presentation" class="customtabblock" >
+                        <a class="" href="#measurement<?php echo $key; ?>" aria-controls="measurement<?php echo $key; ?>" role="tab" data-toggle="tab">
+                            <span class="customtagname"> <?php echo $value['title']; ?> </span>
+                            <span class="customtagvalue">{{mesurementSelecttion['<?php echo $value['title']; ?>']}}"</span>
+
+                        </a>
+                    </li>
+                    <?php
+                }
+                ?>
+
+
+                <li role="presentation" class=" customtabblock" ng-repeat="(mskp, msvp) in  mesurementdata.posture_selection">
+                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                        <span class="customtagname">{{mskp}} </span>
+                        <span class="customtagvalue">{{msvp}}</span>
+                    </a>
+                </li>
+                <li role="presentation" class=" customtabblock">
+                    <a class="" href="#measurement_images" aria-controls="measurement_images" role="tab" data-toggle="tab">
+                        <span class="customtagname">Your Images </span>
+                        <span class="customtagvalue">-</span>
+                    </a>
+                </li>
+            </ul>
+
         </div>
         <div class="col-md-8">
             <div class="tab-content" >
@@ -149,7 +152,6 @@
 
                                 </tr>
                             </table>
-
 
                             <div class="panel panel-default bodytransection" ng-repeat="(kmes, vmes) in mesurementdata.posture">
                                 <div class="panel-heading">{{kmes}}</div>

@@ -58,6 +58,12 @@ $this->load->view('layout/header');
         vertical-align: top;
 
     }
+    td.measurement_style {
+    padding: 0px 5px;
+    width: 50%;
+}
+
+
 </style>
 <style>
     .cartTitle{
@@ -197,13 +203,13 @@ $this->load->view('layout/header');
 
                         <tbody><tr>
                                 <th style="width: 25%;"><span style="margin: 0px 0px 0px 13px;">Product</span></th>
-                                <th style="width: 7%;">SKU</th>
+                                <th style="width: 25%;">Style Id / Measurement Profile	</th>
                                 <th style="width: 7%;">Item</th>
-                                <th style="width: 12%;">Qty.</th>
+                                <th style="width: 100px;">Qty.</th>
                                 <th style="width: 9%;">Price</th>
                                 <th style="width: 12%;">Extra Price</th>
                                 <th style="width: 9%;">Total</th>
-                                <th style="width: 9%;"></th>
+                                <th style="width: 10px;"></th>
 
                             </tr>
 
@@ -216,18 +222,24 @@ $this->load->view('layout/header');
                                 <td>
                                     <div class="col-md-4" style="">
                                         <a href="#" class="r_corners d_inline_b wrapper">
-                                            <img src="{{citem.item_image}}" alt="" style="height:74px;width:74px;">
+                                            <img src="{{citem.item_image}}" alt="" style="    height: 70px;    width: 70px;;">
                                         </a>
                                     </div>
                                     <div class="col-md-8 hideonmobile" style="padding: 0px">
-                                        <p class="m_bottom_5"><a href="#" class="color_dark tr_all">{{citem.title}}</a></p>
-                                        <p class="" style="margin-top: -8px;font-size: 13px" data-toggle="tooltip" data-placement="left" title="Sand ">
+                                        <p class=""><a href="#" class="color_dark tr_all">{{citem.title}}</a></p>
+                                        <p class="textoverflow" style="font-size: 12px" data-toggle="tooltip" data-placement="left" title="Sand ">
                                             {{citem.product_speciality}}  
                                         </p>
-                                        <span data-toggle="" data-placement="left" title="View Summary"><a href="#" style="padding: 0px;height: 22px;width: 28px;margin-left:1px" class="btn btn-default btn-xm" data-toggle="modal" data-target="#myModal{{citem.customization_id}}"><i class="icon-eye"></i></a></span>
+<!--                                        <p class="textoverflow" style="font-size: 12px" data-toggle="tooltip" data-placement="left" title="Sand ">
+                                            Style: {{citem.customization_data}}  
+                                        </p>
+                                        <p class="textoverflow" style="font-size: 12px" data-toggle="tooltip" data-placement="left" title="Sand ">
+                                            Measurement: {{citem.measurement_data}}  
+                                        </p>-->
+<!--                                        <span data-toggle="" data-placement="left" title="View Summary"><a href="#" style="padding: 0px;height: 22px;width: 28px;margin-left:1px" class="btn btn-default btn-xm" data-toggle="modal" data-target="#myModal{{citem.customization_id}}"><i class="icon-eye"></i></a></span>
                                         <span data-toggle="" data-placement="left" title="Save PDF"><a href="#" style="padding: 0px 20px 14px 5px;height: 22px;width: 26px;" class="btn btn-default"><i class="icon-download"></i></a></span>
                                         <span data-toggle="" data-placement="left" title="Send Mail"> <a href="#" style="padding: 0px 20px 14px 5px;height: 22px;width:0px" class="btn btn-default btn-xm"><i class="icon-mail"></i></a></span>
-                                        <!-- Summary -->
+                                         Summary -->
                                         <div class="modal fade ui-draggable" id="myModal{{citem.customization_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -240,8 +252,8 @@ $this->load->view('layout/header');
                                                                 Style Id -{{citem.customization_data}}                                                                      </p>
                                                         </div>
                                                         <div class="modal-body">
-                                                        
-                                                            <table class="table" id="table3" style="border:1px solid #B8B8B8">
+
+                                                            <table class="table" id="table3" style="border:1px solid #B8B8B8;" >
                                                                 <tbody>
                                                                     <tr style="font-size: 14px;padding-bottom: 0px;padding-top: 0px;border-bottom: 1px solid #B8B8B8;" ng-repeat="(stylek, stylev) in citem.style.style">
                                                                         <td class="tds">{{stylek}}</td>
@@ -264,7 +276,23 @@ $this->load->view('layout/header');
                                         <!-- End -->
                                     </div>
                                 </td>
-                                <td data-title="SKU" class="fw_light">{{citem.sku}}  </td>
+                                <td data-title="SKU" class="fw_light">
+
+                                    <table class="addr measurement_style" style="width: 100%;margin-top: 11px;">
+                                        <tbody><tr style="font-size: 13px">
+                                                <td class="measurement_style" >Style Id</td>
+                                           
+                                                <td class="measurement_style">{{citem.customization_data}}</td>
+                                            </tr>
+                                            <tr style="font-size: 13px">
+                                                <td class="measurement_style">Measurement Profile</td>
+                                             
+                                                <td class="measurement_style">{{citem.measurement_data}}</td>
+                                            </tr>
+                                        </tbody></table>
+
+
+                                </td>
                                 <td>
 
                                     <p>{{citem.tag_title}}  </p>
@@ -281,10 +309,10 @@ $this->load->view('layout/header');
                                             <i class="icon-plus"></i>
                                         </button>
                                     </div>
-                                   
 
 
-                       
+
+
                                 </td>
 
                                 <td data-title="Price">{{citem.price|currency}}  </td>
@@ -310,7 +338,7 @@ $this->load->view('layout/header');
                         <input type="hidden" id="no_of_product" value="3">
 
                         <tr class="bg_light_2">
-                            <td colspan="5" rowspan="6">
+                            <td colspan="4" rowspan="6">
                                 <div class="test1" style="padding: 34px;">
                                     <!-- ################# -->
                                     <div class="d_table w_full" style="margin-bottom: 5px;">
@@ -360,7 +388,7 @@ $this->load->view('layout/header');
 
                             </td>
 
-                            <td><span class="spna">Sub Total</span>:</td>
+                            <td colspan="2"><span class="spna">Sub Total</span>:</td>
                             <td>
                                 <p style="" id="sub_total">
                                     {{shopCart.cartdata.total_price|currency}} 
@@ -374,14 +402,14 @@ $this->load->view('layout/header');
                         </tr>-->
                         <tr class="bg_light_2">
 
-                            <td><span class="spna">Coupon Discount</span>:</td>
+                            <td colspan="2"><span class="spna">Coupon Discount</span>:</td>
                             <td>                                             <p id="discount_coupon" style="">$00.00</p>  
 
                             </td>
                         </tr>
                         <tr class="bg_light_2">
 
-                            <td><span class="spna">Shipping Price</span>:</td>
+                            <td colspan="2"><span class="spna">Shipping Price</span>:</td>
                             <td> <p style="" id="shipping_amount">
                                     {{shopCart.cartdata.shipping_price|currency}}  
 
@@ -389,7 +417,7 @@ $this->load->view('layout/header');
                         </tr>
                         <tr class="bg_light_2">
 
-                            <td><span class="spna">My Wallet</span>:</td>
+                            <td colspan="2"><span class="spna">My Wallet</span>:</td>
                             <td>
                                 <p style="" id="wallet_amount1">
                                     $00.00
@@ -401,7 +429,7 @@ $this->load->view('layout/header');
                         </tr>
                         <tr class="bg_light_2">
 
-                            <td><span class="spna" style="color:black;font-size: 16px"><b>Grand Total</b></span>:</td>
+                            <td colspan="2"><span class="spna" style="color:black;font-size: 16px"><b>Grand Total</b></span>:</td>
                             <td><span style="" id="tPrice"> {{shopCart.cartdata.grand_total|currency}} </span></td>
                         </tr>
 

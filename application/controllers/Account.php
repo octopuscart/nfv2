@@ -112,9 +112,7 @@ class Account extends CI_Controller {
 
                 $this->session->set_userdata('logged_in', $userdata);
 
-                if ($link == 'checkoutInit') {
-                    // redirect('Shop/index');
-                }
+               
 
                  redirect('Shop/index');
             } else {

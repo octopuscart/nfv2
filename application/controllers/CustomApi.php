@@ -30,7 +30,7 @@ class CustomApi extends REST_Controller {
         $last_id = $styletype;
         if ($styletype == 'custom') {
             $profileInsert = array(
-                "style_profile" => $styleid,
+                "style_profile" => $this->input->post('old_password'),
                 "custom_form_data" => "",
                 "user_id" => $this->user_id,
                 "tag_id" => $tag_id,

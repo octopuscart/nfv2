@@ -29,7 +29,7 @@ class Customization extends CI_Controller {
             "8" => "tuxedoPantCustomization"
         );
 
-        
+
         $this->db->where('id', $item_id);
         $query = $this->db->get('nfw_product_tag');
         $itemdata = $query->row();
@@ -39,14 +39,43 @@ class Customization extends CI_Controller {
         $query = $this->db->query($query);
         $measurementdata = $query->result_array();
         $data['measurements'] = $measurementdata;
-      
+
         $data['customlink'] = $customdatalink[$item_id];
-        
-        
-        
-        
-        
-        
+
+
+        if (isset($_POST['confirm_measurements'])) {
+            $profile = $this->input->post('profile_name');
+            $profileInsert = array(
+                "measurement_profile" => $this->input->post('profile_name'),
+                "measurement_data" => "",
+                "posture_data" => "",
+                "user_id" => $this->user_id,
+                "user_images" => "",
+                "tag_id" => $item_id,
+                "default" => "0",
+                "is_active" => "1",
+                "datetime" => date('Y-m-d H:i:s'),
+                "update_datetime" => "",
+            );
+
+            $this->db->insert("nfw_measurement_data", $profileInsert);
+            $last_id = $this->db->insert_id();
+
+            $cartids = $this->input->post('cart_id');
+            print_r($cartids);
+            foreach ($cartids as $key => $value) {
+                if ($value) {
+                    $this->db->set('measurement_id', $last_id);
+                    $this->db->set('measurement_data', $profile);
+                    $this->db->where('id', $value); //set column_name and value in which row need to update
+                    $this->db->update('nfw_product_cart');
+                }
+            }
+            redirect("Shop/cart");
+        }
+
+
+
         $this->load->view('Customization/start', $data);
     }
 

@@ -11,7 +11,7 @@
                 <div class="caption ">
                     <h3  ng-bind-html="cart.item.title"></h3>
                 </div>
-             
+
                 <img class="pant_controlZoom " src="{{cart.item.item_image}}" alt="" style="    height: auto;">
             </div>
         </div>
@@ -85,7 +85,7 @@
                     <div class="panel panel-default bodytransection">
                         <div class="panel-heading">Create Profile</div>
                         <div class="panel-body ">
-                           
+
                             <table class="table table-bordered measurementtable">
                                 <tr>
                                     <td colspan="3">
@@ -281,8 +281,15 @@
                         </div>
 
                         <div class="panel-footer">
-                            <button class="btn btn-success btn-lg bigbuttonspadding" ng-click="finishMeausrements()" style="    width: 100%;">Confirm Measurements </button>
-
+                            <form action="#" method="post">
+                                <div class="" style="display: none">
+                              
+                                    <input name="profile_name" type="hidden" value="{{mesurementSelecttion['Profile']}}">
+                                    <input name="cart_id[]" value="{{cart.item.id}}" ng-repeat="(itemk, cart) in customFabricsDone" type="hidden" />
+           
+                                </div>  
+                                <button class="btn btn-success btn-lg bigbuttonspadding" name="confirm_measurements"  style="    width: 100%;">Confirm Measurements </button>
+                            </form>
                         </div>
                     </div>
                 </div>

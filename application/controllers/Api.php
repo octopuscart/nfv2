@@ -494,9 +494,38 @@ class Api extends REST_Controller {
     }
 
     function removeCart_post() {
-        $product_id = $this->post('product_id');
-        $query = "delete from nfw_product_cart where product_id = '$product_id' and user_id = '$this->user_id' and customization_id = '0' and !order_id;";
+        $product_id = $this->post('cart_id');
+        $query = "delete from nfw_product_cart where id = '$product_id' and user_id = '$this->user_id' and order_id='0';";
         $query = $this->db->query($query);
+    }
+
+    function changesCart_post() {
+        $product_id = $this->post('cart_id');
+        $operation = $this->post('oparation');
+
+        $this->db->where('id', $product_id);
+        $query = $this->db->get('nfw_product_cart');
+        $itemdata = $query->row();
+
+        $quantity = $itemdata->quantity;
+        $price = $itemdata->price;
+        if ($operation == 'add') {
+            $quantity += 1;
+        }
+
+        if ($operation == 'sub') {
+            if ($quantity > 1) {
+                $quantity -= 1;
+            }
+        }
+      
+
+        $totalprice = $price * $quantity;
+
+        $this->db->set('quantity', $quantity);
+        $this->db->set('total_price', $totalprice);
+        $this->db->where('id', $product_id); //set column_name and value in which row need to update
+        $this->db->update('nfw_product_cart');
     }
 
     function addToCart_post() {
@@ -570,6 +599,29 @@ class Api extends REST_Controller {
         $this->response(array(
             "cartdata" => $cartdataall,
             "cartcustom" => $carttitleids,
+        ));
+    }
+
+    function getCustomCartData_get() {
+        $query = "  SELECT * FROM `nfw_product_cart` where user_id='$this->user_id' and order_id='0' and customization_data !='' and measurement_data !='';";
+        $query = $this->db->query($query);
+        $cartdata = $query->result_array();
+        $cartdataall = array("products" => [], "total_quantity" => 0, "total_price" => 0);
+        foreach ($cartdata as $key => $value) {
+            $cartdataall['total_quantity'] += $value['quantity'];
+            $cartdataall['total_price'] += $value['total_price'];
+            array_push($cartdataall['products'], $value);
+        }
+        $cartdataall['shipping_price'] = 30;
+        if ($cartdataall['total_price'] > 250) {
+            $cartdataall['shipping_price'] = 0;
+        }
+
+        $cartdataall['grand_total'] = $cartdataall['total_price'] + $cartdataall['shipping_price'];
+
+
+        $this->response(array(
+            "cartdata" => $cartdataall,
         ));
     }
 

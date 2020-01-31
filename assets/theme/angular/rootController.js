@@ -14,8 +14,8 @@ nitaFasions.directive('fileModel', ['$parse', function ($parse) {
                 element.bind('change', function () {
                     scope.$apply(function () {
                         function imageIsLoaded(e) {
-                     
-                           $(element[0]).parents(".thumbnail").find("img").attr('src', e.target.result);
+
+                            $(element[0]).parents(".thumbnail").find("img").attr('src', e.target.result);
                         }
                         var reader = new FileReader();
                         reader.onload = imageIsLoaded;
@@ -29,7 +29,7 @@ nitaFasions.directive('fileModel', ['$parse', function ($parse) {
 
 
 nitaFasions.controller('rootController', function ($scope, $http, $filter, $timeout, $q) {
-    $scope.initApp = {"maincart": {}};
+    $scope.initApp = {"maincart": {}, "customcart": {}};
     $scope.getCartData = function () {
         var deferred = $q.defer();
         $http.get(urllink + "/getCartData").then(function (rdata) {
@@ -39,6 +39,21 @@ nitaFasions.controller('rootController', function ($scope, $http, $filter, $time
         })
         return deferred.promise;
     }
+    $scope.getCartDataCustom = function () {
+        var deferred = $q.defer();
+        $http.get(urllink + "/getCustomCartData").then(function (rdata) {
+            deferred.resolve(rdata.data)
+        }, function () {
+            deferred.resolve([]);
+        })
+        return deferred.promise;
+    }
+
+    $scope.getCartDataCustom().then(function (resdata) {
+        console.log(resdata.cartdata);
+        $scope.initApp.customcart = resdata.cartdata;
+    });
+
 
     $scope.cartDataGbl = function () {
         $scope.getCartData().then(function (resdata) {
@@ -51,9 +66,23 @@ nitaFasions.controller('rootController', function ($scope, $http, $filter, $time
 
     $scope.removeCartData = function (cartd) {
         var form = new FormData()
-        form.append('product_id', cartd.product_id);
+        form.append('cart_id', cartd.id);
         $http.post(urllink + "/removeCart", form).then(function (rdata) {});
         $scope.cartDataGbl();
+    }
+
+
+    $scope.changeCartData = function (cartd, oparation) {
+        var deferred = $q.defer();
+        var form = new FormData()
+        form.append('cart_id', cartd.id);
+        form.append('oparation', oparation);
+        $http.post(urllink + "/changesCart", form).then(function (rdata) {
+            deferred.resolve(1)
+        }, function () {
+            deferred.resolve(1)
+        });
+        return deferred.promise;
     }
 
 

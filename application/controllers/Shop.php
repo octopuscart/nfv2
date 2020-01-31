@@ -22,6 +22,10 @@ class Shop extends CI_Controller {
         $this->load->view('home', $data);
     }
 
+    public function cart() {
+        $this->load->view('Product/shopCart');
+    }
+
     public function contactus() {
         if (isset($_POST['sendmessage'])) {
             $web_enquiry = array(

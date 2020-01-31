@@ -39,7 +39,11 @@ $this->load->view('layout/header');
                 ?>
             </div>
 
-
+            <div class="row" ng-if="initAnimate.startcustom == 2">
+                <?php
+                $this->load->view('Customization/measurementsupportdesign');
+                ?>
+            </div>
 
             <!--model ask-->
             <div class="row" ng-if="initAnimate.startcustom == 0">
@@ -93,41 +97,18 @@ $this->load->view('layout/header');
 
                 </div>
                 <div class="col-md-5">
-                    <div class="" style="min-height:450px;height:100%;background: url(custom_form_view/background_new_custom/1.jpg);   background-position-y: center;
+                    <div class="" style="min-height:450px;height:100%;background: url(<?php echo base_url(); ?>assets/custom_form_view/background_new_custom/1.jpg);   background-position-y: center;
                          background-size: contain;    background-repeat: no-repeat;" ng-if="customFabricsArrayDone.length == 0">
 
                     </div>
-                    <div class="" ng-if="customFabricsArrayDone.length">
-                        <div class="col-md-12">
-
-                            <div class="measurementprocess">
-                                <button class="btn btn-danger button_wave waves-effect waves-button waves-float" ng-click="startMeasurements()" id="start_customization"  style="background:red;border-color: red;color:white">Proceed For Measurements →
-                                </button>
-                            </div>
-                            <ul class="nav nav-tabs " role="tablist" style="    border-bottom: 0px solid #ddd;">
-                                <li role="presentation" class="{{$index==0?'active':''}} " ng-repeat="(cartk, cart) in customFabricsDone">
-                                    <a class="" href="#customdone{{$index}}" aria-controls="customdone{{$index}}" role="tab" data-toggle="tab">{{cartk}} </a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div role="tabpanel" class="custom_form_tables tab-pane {{$index==0?'active':''}} " id="customdone{{$index}}" ng-repeat="(cartk, cart) in customFabricsDone">
-
-                                    <ul class="list-group">
-                                        <li class="list-group-item summaryelement">
-                                            <h3>{{cart['Style Profile']}}</h3>
-                                        </li>
-                                        <li class="list-group-item summaryelement" ng-repeat="(elementk, elementv) in cart.style">
-                                            {{elementk}}<br/>
-                                            <span>{{elementv}}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-
-                        </div>
-
+                    <div class="measurementprocess" ng-if="customFabricsArrayDone.length">
+                        <button class="btn btn-danger button_wave waves-effect waves-button waves-float" ng-click="startMeasurements()" id="start_customization"  style="background:red;border-color: red;color:white">Proceed For Measurements →
+                        </button>
                     </div>
+
+                    <?php
+                    $this->load->view('Customization/customSummery');
+                    ?>
                 </div>
             </div>
 

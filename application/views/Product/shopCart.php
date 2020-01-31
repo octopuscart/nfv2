@@ -161,8 +161,8 @@ $this->load->view('layout/header');
 
 
 
-<div class=" counter" style="" >
-    <div class="container shopAllCart" style="margin-bottom: 20px" ng-controller="shopAllCartCustom">
+<div class=" counter" style=""  ng-controller="shopAllCartCustom">
+    <div class="container shopAllCart" style="margin-bottom: 20px"   ng-if="shopCart.cartdata.total_quantity">
         <div class=" tab-content" style="">
             <ul class="nav nav-tabs shippingcartul" role="tablist" style="font-size: 20px">
 
@@ -240,10 +240,12 @@ $this->load->view('layout/header');
                                                                 Style Id -{{citem.customization_data}}                                                                      </p>
                                                         </div>
                                                         <div class="modal-body">
+                                                        
                                                             <table class="table" id="table3" style="border:1px solid #B8B8B8">
-                                                                <tbody><tr style="font-size: 14px;padding-bottom: 0px;padding-top: 0px;border-bottom: 1px solid #B8B8B8;">
-                                                                        <td class="tds">Body Fit</td>
-                                                                        <td class="tds" style="line-height: 13px !important;max-width: 230px;overflow-y: scroll;">Medium Fit</td>
+                                                                <tbody>
+                                                                    <tr style="font-size: 14px;padding-bottom: 0px;padding-top: 0px;border-bottom: 1px solid #B8B8B8;" ng-repeat="(stylek, stylev) in citem.style.style">
+                                                                        <td class="tds">{{stylek}}</td>
+                                                                        <td class="tds" style="line-height: 13px !important;max-width: 230px;overflow-y: scroll;">{{stylev}}</td>
                                                                     </tr> 
                                                                 </tbody>
                                                             </table>

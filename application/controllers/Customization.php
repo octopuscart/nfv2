@@ -43,6 +43,19 @@ class Customization extends CI_Controller {
         $data['customlink'] = $customdatalink[$item_id];
 
 
+        if (isset($_POST['shopStoredMeasurements'])) {
+            $cartids = $this->input->post('cart_id');
+            foreach ($cartids as $key => $value) {
+                if ($value) {
+                    $this->db->set('measurement_id', "0");
+                    $this->db->set('measurement_data', "Shop Stored");
+                    $this->db->where('id', $value); //set column_name and value in which row need to update
+                    $this->db->update('nfw_product_cart');
+                }
+            }
+            redirect("Shop/cart");
+        }
+
         if (isset($_POST['confirm_measurements'])) {
             $profile = $this->input->post('profile_name');
             $profileInsert = array(
@@ -57,12 +70,9 @@ class Customization extends CI_Controller {
                 "datetime" => date('Y-m-d H:i:s'),
                 "update_datetime" => "",
             );
-
             $this->db->insert("nfw_measurement_data", $profileInsert);
             $last_id = $this->db->insert_id();
-
             $cartids = $this->input->post('cart_id');
-            print_r($cartids);
             foreach ($cartids as $key => $value) {
                 if ($value) {
                     $this->db->set('measurement_id', $last_id);

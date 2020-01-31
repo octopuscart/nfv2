@@ -21,62 +21,70 @@
 <div class="col-md-10">
     <div class=" tab-content row" style="">
         <div class="col-sm-4 mainelementtab">
-            <button class="btn btn-success btn-lg bigbuttonspadding" ng-click="finishMeausrements()" style="    width: 100%;">Confirm Measurements </button>
+            <form action="#" method="post">
+                <div class="" style="display: none">
 
-            <ul class="nav nav-tabs tabs-left vertialTab bodymax500" role="tablist" style=" height:700px ">
-                <li role="presentation" class="active customtabblock" >
-                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                        <span class="customtagname">Profile </span>
-                        <span class="customtagvalue">{{mesurementSelecttion['Profile']}}</span>
-                    </a>
-                </li>
-                <li role="presentation" class=" customtabblock" >
-                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                        <span class="customtagname">Height </span>
-                        <span class="customtagvalue">{{mesurementSelecttion['Height']}}</span>
-                    </a>
-                </li>
-                <li role="presentation" class=" customtabblock" >
-                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                        <span class="customtagname">Weight </span>
-                        <span class="customtagvalue">{{mesurementSelecttion['Weight']}}</span>
-                    </a>
-                </li>
-                <li role="presentation" class=" customtabblock" >
-                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                        <span class="customtagname">Age </span>
-                        <span class="customtagvalue">{{mesurementSelecttion['Age']}}</span>
-                    </a>
-                </li>
+                    <input name="profile_name" type="hidden" value="{{mesurementSelecttion['Profile']}}">
+                    <input name="cart_id[]" value="{{cart.item.id}}" ng-repeat="(itemk, cart) in customFabricsDone" type="hidden" />
 
-                <?php
-                foreach ($measurements as $key => $value) {
-                    ?>
-                    <li role="presentation" class="customtabblock" >
-                        <a class="" href="#measurement<?php echo $key; ?>" aria-controls="measurement<?php echo $key; ?>" role="tab" data-toggle="tab">
-                            <span class="customtagname"> <?php echo $value['title']; ?> </span>
-                            <span class="customtagvalue">{{mesurementSelecttion['<?php echo $value['title']; ?>']}}"</span>
+                </div>  
+                <button class="btn btn-success btn-lg bigbuttonspadding" name="confirm_measurements"  style="    width: 100%;">Confirm Measurements </button>
 
+                <ul class="nav nav-tabs tabs-left vertialTab bodymax500" role="tablist" style=" height:700px ">
+                    <li role="presentation" class="active customtabblock" >
+                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                            <span class="customtagname">Profile </span>
+                            <span class="customtagvalue">{{mesurementSelecttion['Profile']}}</span>
                         </a>
                     </li>
+                    <li role="presentation" class=" customtabblock" >
+                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                            <span class="customtagname">Height </span>
+                            <span class="customtagvalue">{{mesurementSelecttion['Height']}}</span>
+                        </a>
+                    </li>
+                    <li role="presentation" class=" customtabblock" >
+                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                            <span class="customtagname">Weight </span>
+                            <span class="customtagvalue">{{mesurementSelecttion['Weight']}}</span>
+                        </a>
+                    </li>
+                    <li role="presentation" class=" customtabblock" >
+                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                            <span class="customtagname">Age </span>
+                            <span class="customtagvalue">{{mesurementSelecttion['Age']}}</span>
+                        </a>
+                    </li>
+
                     <?php
-                }
-                ?>
+                    foreach ($measurements as $key => $value) {
+                        ?>
+                        <li role="presentation" class="customtabblock" >
+                            <a class="" href="#measurement<?php echo $key; ?>" aria-controls="measurement<?php echo $key; ?>" role="tab" data-toggle="tab">
+                                <span class="customtagname"> <?php echo $value['title']; ?> </span>
+                                <span class="customtagvalue">{{mesurementSelecttion['<?php echo $value['title']; ?>']}}"</span>
+
+                            </a>
+                        </li>
+                        <?php
+                    }
+                    ?>
 
 
-                <li role="presentation" class=" customtabblock" ng-repeat="(mskp, msvp) in  mesurementdata.posture_selection">
-                    <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
-                        <span class="customtagname">{{mskp}} </span>
-                        <span class="customtagvalue">{{msvp}}</span>
-                    </a>
-                </li>
-                <li role="presentation" class=" customtabblock">
-                    <a class="" href="#measurement_images" aria-controls="measurement_images" role="tab" data-toggle="tab">
-                        <span class="customtagname">Your Images </span>
-                        <span class="customtagvalue">-</span>
-                    </a>
-                </li>
-            </ul>
+                    <li role="presentation" class=" customtabblock" ng-repeat="(mskp, msvp) in  mesurementdata.posture_selection">
+                        <a class="" href="#measurement_profile" aria-controls="measurement_profile" role="tab" data-toggle="tab">
+                            <span class="customtagname">{{mskp}} </span>
+                            <span class="customtagvalue">{{msvp}}</span>
+                        </a>
+                    </li>
+                    <li role="presentation" class=" customtabblock">
+                        <a class="" href="#measurement_images" aria-controls="measurement_images" role="tab" data-toggle="tab">
+                            <span class="customtagname">Your Images </span>
+                            <span class="customtagvalue">-</span>
+                        </a>
+                    </li>
+                </ul>
+            </form>
         </div>
         <div class="col-md-8">
             <div class="tab-content" >
@@ -283,10 +291,10 @@
                         <div class="panel-footer">
                             <form action="#" method="post">
                                 <div class="" style="display: none">
-                              
+
                                     <input name="profile_name" type="hidden" value="{{mesurementSelecttion['Profile']}}">
                                     <input name="cart_id[]" value="{{cart.item.id}}" ng-repeat="(itemk, cart) in customFabricsDone" type="hidden" />
-           
+
                                 </div>  
                                 <button class="btn btn-success btn-lg bigbuttonspadding" name="confirm_measurements"  style="    width: 100%;">Confirm Measurements </button>
                             </form>

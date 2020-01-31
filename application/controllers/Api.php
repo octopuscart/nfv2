@@ -518,7 +518,7 @@ class Api extends REST_Controller {
                 $quantity -= 1;
             }
         }
-      
+
 
         $totalprice = $price * $quantity;
 
@@ -610,6 +610,9 @@ class Api extends REST_Controller {
         foreach ($cartdata as $key => $value) {
             $cartdataall['total_quantity'] += $value['quantity'];
             $cartdataall['total_price'] += $value['total_price'];
+            $custom_id = $value['customization_id'];
+            $customdata = $this->Product_model->getCustomizationDataById($custom_id);
+            $value['style'] = $customdata;
             array_push($cartdataall['products'], $value);
         }
         $cartdataall['shipping_price'] = 30;

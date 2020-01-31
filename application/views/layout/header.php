@@ -278,7 +278,7 @@
 
                                                 <div class="col-md-6" style="padding: 0px">
                                                     <span class="pull-left" ng-if="initApp.customcart.total_quantity" style="color:navy;font-size:10px">Total {{initApp.customcart.total_quantity}} items waiting for checkout</span><br/>
-                                                    <a href="<?php echo site_url("Shop/cart")?>" class="pull-left">
+                                                    <a href="<?php echo site_url("Shop/cart")?>" class="pull-left" ng-if="initApp.customcart.total_quantity">
                                                         <span style="font-size: 13px;border-radius:3px;background-color: #F1F1F1; font-weight: 500;padding: 0px 10px;">
                                                             Proceed to Checkout
                                                         </span>

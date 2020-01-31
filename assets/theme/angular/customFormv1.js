@@ -55,7 +55,6 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
                 frcvalue = frcval[1];
             }
             $scope.mesurementSelecttionFrc[title] = [mainvalue, frcvalue];
-
         }, 100)
     }
 
@@ -323,9 +322,12 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     }
 
     $scope.startMeasurements = function () {
+//        $(".measurementblockstart").show();
+        $(".customblockstart").hide();
+        $scope.initAnimate.startcustom = 2;
+    }
 
-
-
+    $scope.startMeasurementsCustom = function () {
         $(".measurementblockstart").show();
         $(".customblockstart").hide();
         $scope.initAnimate.startcustom = 1;

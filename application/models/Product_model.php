@@ -135,15 +135,17 @@ class Product_model extends CI_Model {
         $this->db->where('id', $custom_id);
         $query = $this->db->get('nfw_custom_form_data');
         $customdata = $query->row();
-        $tempcustom = array();
+        
+        $tempcustom = array("Style Profile" => "", "style" => array(), "extra_price" => array());
+
         if ($customdata) {
             $customDataArray = array();
-            $customid = $customdata->id;
+
             $this->db->where('style_profile', $custom_id);
             $query = $this->db->get('nfw_custom_form_data_attr');
             $customdataattr = $query->result_array();
-            $tempcustom = array("Style Profile" => $customdata->style_profile, "style" => array(), "extra_price" => array());
-            foreach ($customDataArray as $key1 => $value1) {
+            $tempcustom["Style Profile"] = $customdata->style_profile;
+            foreach ($customdataattr as $key1 => $value1) {
                 $tempcustom['style'][$value1['style_key']] = $value1['style_value'];
                 $tempcustom['extra_price'][$value1['extra_price']] = $value1['extra_price'];
             }

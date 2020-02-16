@@ -52,7 +52,7 @@ $this->load->view('layout/header');
                             <div class="thumbnail style_selection  waves-effect ZoomIn " style="opacity: 1" ng-class="cart.item.title == customFabrics[cart.item.title].item.title ? 'selected' : 'deselect'">
                                 <img src="{{cart.item.item_image}}" alt="">
                                 <div class="caption">
-                                    <h5 style="margin:0;font-size: 15px;    text-align: center;" data-title="SKU" class="ng-binding">{{cark}} {{cart.item.id}}</h5>
+                                    <h5 style="margin:0;font-size: 15px;    text-align: center;" data-title="SKU" class="ng-binding">{{cark}} </h5>
 
                                 </div>
                             </div>

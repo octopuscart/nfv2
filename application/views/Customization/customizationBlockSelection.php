@@ -138,7 +138,8 @@
             <div class="col-md-12 col-md-padding5 ">
                 <div class=" style_selection  waves-effect ZoomIn  "    >
                     <div class=" ">
-                        <select ng-model="customizationElement.formItems[subelek].title" style="height: 34px;padding: 0px 6px;border: 1px solid #000;"  ng-change="selectStyle(subelek, (customizationElement.formItems[subelek].title | removeExtraSpace), ele,  <?php echo $mutliview == 1?'item':0;?>)">
+                    
+                        <select ng-model="customizationElement.formItems[subelek].title" style="height: 34px;padding: 0px 6px;border: 1px solid #000;"  ng-change="selectStyle(subelek, (customizationElement.formItems[subelek].title | removeExtraSpace), {},  <?php echo $mutliview == 1?'item':0;?>)">
                             <option ng-repeat="(cck, ccv) in customizationElement.formItems[subelek].child" {{$index==0?"selected":""}} value="{{ccv}}">{{cck}}</option>
                         </select>                                     
                     </div>

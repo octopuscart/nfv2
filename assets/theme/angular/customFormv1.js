@@ -18,12 +18,13 @@ nitaFasions.filter('removeSpace', function () {
 nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $timeout) {
     var urldata = customlink + "/" + customlinkitem;
     console.log(urldata);
-    var urldatastorestyle = customlink + "/customProfileAttributeInsert";
+    var urldatastorestyle = customlink + "/customProfileAttributeInsert2";
     $scope.customizationElement = {};
     $scope.cartData = {};
     $scope.cartDataArray = [];
     $scope.defaultvalues = {};
     $scope.cartTitleIds = {};
+    $scope.extraPriceSelection = {};
 
     $scope.initAnimate = {
         "sumtop": 0,
@@ -41,6 +42,19 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
 
     $(".customblockstart").hide();
     $(".measurementblockstart").hide();
+
+    //spacilaselection option
+    $scope.spacialSelection = {"itemstyle": {}, "itemextraprice": {}, "style": {}, "itemid": {}, "activestyle": {"skye": "", "svalue": ""}, "defaultstyle": {}};
+    $scope.changeSpacialSelection = function (itemname) {
+        $scope.spacialSelection.itemstyle[itemname];
+        var activestyle = $scope.spacialSelection.activestyle.skye;
+        var activestylevalue = $scope.spacialSelection.activestyle.svalue;
+        $scope.spacialSelection.itemstyle[itemname][activestyle] = activestylevalue;
+        $scope.spacialSelection.style[activestyle][itemname] = activestylevalue;
+
+    }
+//end of spaicalselection
+
 
     $scope.insertDataArray = {};
 
@@ -64,21 +78,53 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     }
 
     $scope.finishCustomisation = function () {
-        var styleno = $scope.customizationElement.item + "/" + moment().format('YYYY/MM/DD/HMS');
+        var styleno = $scope.customizationElement.item + "/" + moment().format('YYYY/MM/DD/');
         $scope.insertDataArray['profile'] = styleno;
         var cartidslist = [];
+
         for (item in $scope.customFabrics) {
             console.log(item)
             var itemobj = $scope.customFabrics[item];
             cartidslist.push(itemobj.item.id);
             $scope.customFabricsArrayDone.push(item);
-            $scope.customFabricsDone[item] = {"style": {}, "Style Profile": styleno, "item": itemobj.item};
+            //summary Perpose
+            $scope.customFabricsDone[item] = {"style": {}, "Style Profile": styleno + itemobj.item.id, "item": itemobj.item, "extra_price": {}};
             $scope.customFabricsDone[item].style = angular.copy($scope.customizationElement.selection);
+            $scope.customFabricsDone[item].extra_price = angular.copy($scope.extraPriceSelection);
+            //
+
+            //use for database insertion
+
+
+            var extraitem = $scope.spacialSelection.itemstyle[item];
+            for (exk in extraitem) {
+                var exv = extraitem[exk];
+                $scope.customFabricsDone[item].style[exk] = exv;
+
+                var exppriceobj = $scope.spacialSelection.itemextraprice[item][exk];
+                $scope.customFabricsDone[item].extra_price[exk] = exppriceobj;
+            }
         }
+
+        var insertObjectArray = {};
+        for (sitem in $scope.customFabricsDone) {
+            var itemobj = $scope.customFabricsDone[sitem];
+            var item_id = itemobj.item.id;
+            for (stk  in itemobj.style) {
+                var strstk = stk;
+                var strstv = itemobj.style[stk];
+                var extra_price = itemobj.extra_price[stk];
+                insertObjectArray[item_id + "___" + strstk] = strstv + "___" + (extra_price ? extra_price : 0);
+
+            }
+
+        }
+
         $scope.insertDataArray['cart_id'] = cartidslist.join(",");
         for (kv in $scope.customizationElement.selection) {
             var stylev = $scope.customizationElement.selection[kv];
-            $scope.insertDataArray['stylekey_' + kv] = stylev;
+            var eprice = $scope.extraPriceSelection[kv] ? $scope.extraPriceSelection[kv] : '';
+            $scope.insertDataArray['stylekey_' + kv] = stylev + "EXP" + eprice;
         }
         $scope.customFabrics = {};
         $scope.customFabricArraySelect = [];
@@ -90,12 +136,15 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
                 swal.showLoading()
             }
         });
+        insertObjectArray['tag_id'] = itemidgbl;
+        insertObjectArray['styletype'] = "custom";
+        insertObjectArray['profile'] = styleno;
+
         var form = new FormData()
-        for (kv in $scope.insertDataArray) {
-            form.append(kv, $scope.insertDataArray[kv]);
+        for (kv in insertObjectArray) {
+            form.append(kv, insertObjectArray[kv]);
         }
-        form.append("tag_id", itemidgbl);
-        form.append("styletype", "custom");
+
         $http.post(urldatastorestyle, form).then(function () {
             swal({
                 title: "Style Saved",
@@ -135,6 +184,8 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
             cartidslist.push(itemobj.item.id);
             $scope.customFabricsDone[item] = {"style": styledict, "Style Profile": prestyle.profile, "item": itemobj.item, "Measurement Profile": {}};
         }
+
+
         $scope.customFabrics = {};
         $scope.customFabrics = {};
         $scope.customFabricArraySelect = [];
@@ -219,12 +270,9 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $scope.mesurementdata.posture = angular.copy(mesdata.data.posturedata);
         $scope.customProfileArray = angular.copy(mesdata.data.customProfileArray);
         $scope.mesurementdata.measurementProfile = angular.copy(mesdata.data.measurementProfileArray);
-
-
         for (post in $scope.mesurementdata.posture) {
             console.log(post)
             $scope.mesurementdata.posture_selection[post] = "-";
-            
         }
         for (mes in $scope.mesurementSelecttion) {
             $scope.mesurementSelecttionFrc[mes] = [$scope.mesurementSelecttion[mes], 0];
@@ -233,17 +281,21 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     })
 
 
-
-
     $scope.getStyle = function () {
         $http.get(urldata).then(function (rdata) {
             $scope.customizationElement = rdata.data;
-
             $scope.defaultvalues = angular.copy(rdata.data.selection);
+            var styleobjdata = rdata.data.navigation
+            for (stylep in styleobjdata) {
+                var styleobj = styleobjdata[stylep];
+                if (styleobj.choice == 'multi') {
+                    $scope.spacialSelection.defaultstyle[stylep] = $scope.defaultvalues[stylep]
+
+                }
+            }
         })
     }
     $scope.getStyle();
-
 
 
     $(document).on('click', '.prevtrigger', function () {
@@ -254,9 +306,8 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     });
 
 
-
-    jQuery('body').on('click', '.next-tab', function () {
-        var next = jQuery('.nav-tabs > .active').next('li');
+    jQuery('body').on('click', '.singletag .next-tab', function () {
+        var next = jQuery('.singletag.nav-tabs > .active').next('li');
         if (next.length) {
             $scope.initAnimate.sumtop += 50;
             next.find('a').trigger('click');
@@ -265,8 +316,8 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         }
     });
 
-    jQuery('body').on('click', '.previous-tab', function () {
-        var prev = jQuery('.nav-tabs > .active').prev('li')
+    jQuery('body').on('click', '.singletag .previous-tab', function () {
+        var prev = jQuery('.singletag.nav-tabs > .active').prev('li')
         if (prev.length) {
             $scope.initAnimate.sumtop -= 50;
             prev.find('a').trigger('click');
@@ -275,14 +326,17 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         }
     });
 
-
-
-
-    $scope.selectStyle = function (stylep, stylec, style) {
+    $scope.selectStyle = function (stylep, stylec, style, itemname) {
         $scope.customizationElement.selection[stylep] = stylec;
-        var next = jQuery('.mainelementtab .nav-tabs > .active').next('li');
-        next.find('a').trigger('click');
+        console.log($scope.customizationElement);
+        $scope.extraPriceSelection[stylep] = Number(style['extra_price']) ? style.extra_price : '';
+        if (itemname) {
+            $scope.spacialSelection.itemstyle[itemname][stylep] = stylec;
+            $scope.spacialSelection.itemextraprice[itemname][stylep] = Number(style['extra_price']) ? style.extra_price : '';
+        }
 
+        var next = jQuery('.mainelementtab .nav-tabs > .active').next('li');
+//        next.find('a').trigger('click');
     }
 
 
@@ -291,11 +345,14 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     }
 
     $scope.selectFabric = function (item) {
-        console.log(item.title)
         if ($scope.customFabrics[item.title]) {
             delete  $scope.customFabrics[item.title];
+            delete $scope.spacialSelection.itemstyle[item.title];
+            delete $scope.spacialSelection.itemextraprice[item.title];
         } else {
-            $scope.customFabrics[item.title] = {"item": item, "style": $scope.customizationElement.selection};
+            $scope.spacialSelection.itemextraprice[item.title] = {};
+            $scope.spacialSelection.itemstyle[item.title] = angular.copy($scope.spacialSelection.defaultstyle);
+            $scope.customFabrics[item.title] = {"item": item, "style": $scope.customizationElement.selection, "extra_price": {}};
         }
         $scope.customFabricArraySelect = Object.keys($scope.customFabrics);
     }
@@ -309,7 +366,6 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $(".customblockstart").show();
         $timeout(function () {
             var owl = $(".owlslider");
-
             owl.owlCarousel({
                 pagination: false,
                 items: 3, //10 items above 1000px browser width
@@ -318,9 +374,6 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
                 itemsTablet: [600, 2], //2 items between 600 and 0
                 itemsMobile: false // itemsMobile disabled - inherit from itemsTablet option
             });
-
-
-
         })
     }
 
@@ -350,7 +403,6 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     }
 
 
-
     $scope.getCartData().then(function (resdata) {
         var cdata = resdata.cartcustom2;
         $scope.cartTitleIds = resdata.cartcustom[itemidgbl];
@@ -360,7 +412,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         for (cd in $scope.cartTitleIds) {
             var cobj = $scope.cartTitleIds[cd];
             $scope.cartDataArray.push(cobj);
-            $scope.cartData[cobj.title] = {"item": cobj, "style": ""};
+            $scope.cartData[cobj.title] = {"item": cobj, "style": "", "extra_price": {}};
         }
 
     })

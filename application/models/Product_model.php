@@ -135,7 +135,7 @@ class Product_model extends CI_Model {
         $this->db->where('id', $custom_id);
         $query = $this->db->get('nfw_custom_form_data');
         $customdata = $query->row();
-        
+
         $tempcustom = array("Style Profile" => "", "style" => array(), "extra_price" => array());
 
         if ($customdata) {
@@ -147,7 +147,9 @@ class Product_model extends CI_Model {
             $tempcustom["Style Profile"] = $customdata->style_profile;
             foreach ($customdataattr as $key1 => $value1) {
                 $tempcustom['style'][$value1['style_key']] = $value1['style_value'];
-                $tempcustom['extra_price'][$value1['extra_price']] = $value1['extra_price'];
+                if ($value1['extra_price']) {
+                    $tempcustom['extra_price'][$value1['style_key']] = $value1['extra_price'];
+                }
             }
         }
         return $tempcustom;
@@ -339,6 +341,7 @@ class Product_model extends CI_Model {
                 "default" => $value == 'No' ? '1' : '',
                 "lable" => $value,
                 "parent" => "",
+                "extra_price" => "10",
                 "parenttitle" => "",
             );
             array_push($ccinsert['Solid'], $tempcontain);
@@ -352,26 +355,28 @@ class Product_model extends CI_Model {
                 "lable" => $value,
                 "parent" => "",
                 "parenttitle" => "",
+                "extra_price" => "10"
             );
             array_push($ccinsert['Printed'], $tempcontain);
         }
         $returnData['ccinsert'] = $ccinsert;
 
         $buttonarray = array(
-            'standard' => 'Standard',
-            'matching' => 'Matching',
-            '1' => 'Thick Mop',
-            '2' => 'Thin Mop',
-            '3' => 'Black Lipshell'
+            'standard' => ['Standard', ''],
+            'matching' => ['Matching', ''],
+            '1' => ['Thick Mop', '10'],
+            '2' => ['Thin Mop', '10'],
+            '3' => ['Black Lipshell', '10'],
         );
         $buttoncontainer = [];
         foreach ($buttonarray as $key => $value) {
             $tempcontain = array(
-                "title" => $value,
+                "title" => $value[0],
                 "image" => base_url() . "assets/custom_form_view/shirt/button_shirt/" . $key . ".png",
-                "default" => $value == 'No' ? '1' : '',
-                "lable" => $value,
+                "default" => $value[0] == 'No' ? '1' : '',
+                "lable" => $value[0],
                 "parent" => "",
+                "extra_price" => $value[1],
                 "parenttitle" => "",
             );
             array_push($buttoncontainer, $tempcontain);
@@ -392,6 +397,7 @@ class Product_model extends CI_Model {
                 "lable" => $value,
                 "parent" => "",
                 "parenttitle" => "",
+                "extra_price" => "10"
             );
             array_push($monogramontainer, $tempcontain);
         }

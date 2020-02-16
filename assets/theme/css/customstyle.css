@@ -579,3 +579,23 @@ main .shell { padding: 25px 0 90px 43px; width: 917px;}
     float: right;
     z-index: 99999;
 }
+
+.custome_summary_popup td{
+    font-size: 12px;
+    width:50%;
+    text-align: left;
+    padding: 5px;
+}
+
+.custome_summary_popup th{
+    font-size: 12px;
+    width:50%;
+    text-align: left;
+      padding: 5px;
+}
+
+.custome_summary_popup table{
+    width: 100%;
+    border:1px solid #bdc3c7
+}
+

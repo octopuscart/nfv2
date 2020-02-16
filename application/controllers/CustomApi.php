@@ -13,7 +13,117 @@ class CustomApi extends REST_Controller {
         $this->user_id = $this->session->userdata('logged_in')['id'];
     }
 
+    function testInsert_get() {
+        $tag_id = $this->post("tag_id");
+        $itemInsertArray = array();
+        $styleid = $this->post("profile");
+        foreach ($insertArray as $key => $value) {
+            $keyarray = explode("___", $key);
+            $valuearray = explode("___", $value);
+            if (count($keyarray) == 2) {
+                $itemid = $keyarray[0];
+                $itemstylekey = $keyarray[1];
+
+                $itemstylevalue = $valuearray[0];
+                $extraprice = $valuearray[1];
+                $tmpinsert = array(
+                    "style_key" => $itemstylekey,
+                    "style_value" => $itemstylevalue,
+                    "extra_price" => $extraprice,
+                    "style_profile" => "",
+                    "datetime" => date('Y-m-d H:i:s')
+                );
+                if (isset($itemInsertArray[$itemid])) {
+                    array_push($itemInsertArray[$itemid], $tmpinsert);
+                } else {
+                    $profileInsert = array(
+                        "style_profile" => $styleid . $itemid,
+                        "custom_form_data" => "",
+                        "user_id" => $this->user_id,
+                        "tag_id" => $tag_id,
+                        "default" => "0",
+                        "is_active" => "1",
+                        "datetime" => date('Y-m-d H:i:s'),
+                        "update_datetime" => "",
+                    );
+                    $itemInsertArray[$itemid] = array("style" => [$tmpinsert], "profile" => $profileInsert);
+                }
+            }
+        }
+        echo "<pre>";
+        print_r($itemInsertArray);
+    }
+
+    function customProfileAttributeInsert2_post() {
+        $tag_id = $this->post("tag_id");
+        $itemInsertArray = array();
+        $styleid = $this->post("profile");
+        $insertArray = $this->post();
+        foreach ($insertArray as $key => $value) {
+            $keyarray = explode("___", $key);
+            $valuearray = explode("___", $value);
+            if (count($keyarray) == 2) {
+                $itemid = $keyarray[0];
+                $itemstylekey = $keyarray[1];
+
+                $itemstylevalue = $valuearray[0];
+                $extraprice = $valuearray[1];
+                $tmpinsert = array(
+                    "style_key" => $itemstylekey,
+                    "style_value" => $itemstylevalue,
+                    "extra_price" => $extraprice,
+                    "style_profile" => "",
+                    "datetime" => date('Y-m-d H:i:s')
+                );
+                if (isset($itemInsertArray[$itemid])) {
+                    array_push($itemInsertArray[$itemid]["style"], $tmpinsert);
+                    $itemInsertArray[$itemid]["extra_price"] += $extraprice;
+                } else {
+                    $profileInsert = array(
+                        "style_profile" => $styleid . $itemid,
+                        "custom_form_data" => "",
+                        "user_id" => $this->user_id,
+                        "tag_id" => $tag_id,
+                        "default" => "0",
+                        "is_active" => "1",
+                        "datetime" => date('Y-m-d H:i:s'),
+                        "update_datetime" => "",
+                    );
+                    $itemInsertArray[$itemid] = array("style" => [$tmpinsert], "profile" => $profileInsert, "extra_price" => 0);
+                }
+            }
+        }
+        foreach ($itemInsertArray as $key => $value) {
+            $itemid = $key;
+            $profilestyle = $value['profile'];
+            $extra_price = $value['extra_price'];
+            $this->db->insert("nfw_custom_form_data", $profilestyle);
+            $styleid_id = $this->db->insert_id();
+            $stylearray = $value['style'];
+            foreach ($stylearray as $stk => $stv) {
+                $stv["style_profile"] = $styleid_id;
+                $this->db->insert("nfw_custom_form_data_attr", $stv);
+            }
+            $this->db->where('id', $itemid); //set column_name and value in which row need to update
+            $cquery = $this->db->get('nfw_product_cart');
+            $cobj = $cquery->row();
+            $cartprice = $cobj->price;
+
+            $totalprice = $extra_price + $cartprice;
+            $this->db->set('customization_id', $styleid_id);
+            $this->db->set("extra_price", $extra_price);
+            $this->db->set("total_price", $totalprice);
+            $this->db->set("price", $totalprice);
+            $this->db->set('customization_data', $profilestyle["style_profile"]);
+            $this->db->where('id', $itemid); //set column_name and value in which row need to update
+            $this->db->update('nfw_product_cart');
+        }
+    }
+
     function customProfileAttributeInsert_post() {
+        $insertarray = $_POST;
+        print_r($insertarray);
+
         $styletype = $this->post("styletype");
         $styleid = $this->post("profile");
         $cart_id = $this->post("cart_id");
@@ -23,14 +133,16 @@ class CustomApi extends REST_Controller {
         $stylecontainer = array();
         foreach ($stylelist as $key => $value) {
             $checkstyle = explode("stylekey_", $key);
+
             if (count($checkstyle) > 1) {
                 $stylecontainer[$checkstyle[1]] = $value;
             }
         }
         $last_id = $styletype;
+        $countextraprice = 0;
         if ($styletype == 'custom') {
             $profileInsert = array(
-                "style_profile" => $this->input->post('old_password'),
+                "style_profile" => $styleid,
                 "custom_form_data" => "",
                 "user_id" => $this->user_id,
                 "tag_id" => $tag_id,
@@ -42,11 +154,16 @@ class CustomApi extends REST_Controller {
 
             $this->db->insert("nfw_custom_form_data", $profileInsert);
             $last_id = $this->db->insert_id();
+
             foreach ($stylecontainer as $key => $value) {
+                $valuestyleobj = explode("EXP", $value);
+                $valuestyle = $valuestyleobj[0];
+                $extraprice = $valuestyleobj[1];
+                $countextraprice += $extraprice;
                 $syleprofileattr = array(
                     "style_key" => $key,
-                    "style_value" => $value,
-                    "extra_price" => "",
+                    "style_value" => $valuestyle,
+                    "extra_price" => $extraprice,
                     "style_profile" => $last_id,
                     "datetime" => date('Y-m-d H:i:s')
                 );
@@ -55,7 +172,17 @@ class CustomApi extends REST_Controller {
         }
 
         foreach ($cartarray as $key => $value) {
+
+            $this->db->where('id', $value); //set column_name and value in which row need to update
+            $cquery = $this->db->get('nfw_product_cart');
+            $cobj = $cquery->row();
+            $cartprice = $cobj->price;
+
+            $totalprice = $countextraprice + $cartprice;
             $this->db->set('customization_id', $last_id);
+            $this->db->set("extra_price", $countextraprice);
+            $this->db->set("total_price", $totalprice);
+            $this->db->set("price", $totalprice);
             $this->db->set('customization_data', $styleid);
             $this->db->where('id', $value); //set column_name and value in which row need to update
             $this->db->update('nfw_product_cart');
@@ -108,10 +235,10 @@ class CustomApi extends REST_Controller {
         $querycustomprofile = "SELECT * FROM `nfw_measurement_data` where tag_id=$item_id and user_id=" . $this->user_id . " and measurement_data='' group by measurement_profile";
         $query = $this->db->query($querycustomprofile);
         $customprofiles = $query->result_array();
-        
+
         $measurementProfileArray = array();
         foreach ($customprofiles as $key => $value) {
-       
+
             $this->db->where("profile_id", $value['id']);
             $messataattr = $this->db->get("nfw_measurement_attr");
             $messataattrdata = $messataattr->result_array();
@@ -180,28 +307,28 @@ class CustomApi extends REST_Controller {
             'Monogram Color' => "-",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Collar Style' => array("col" => "4", "lablestyle" => "height:60px", "maxsize" => "bodymax400", "prenext" => 1),
-            'Add 2 Buttons On The Collar Band' => array("col" => "3", "prenext" => 1),
-            'Collar & Cuff Stiffness' => array("col" => "3", "prenext" => 1,),
-            'Collar Stays' => array("col" => "3", "prenext" => 1),
-            'Sleeve And Cuff Style' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Wrist Watch' => array("col" => "4", "lablestyle" => "", "depandent" => "Sleeve Style", "prenext" => 1),
-            'Front Style' => array("col" => "3", "lablestyle" => "", "prenext" => 1),
-            'Back Style' => array("col" => "4", "lablestyle" => "", "prenext" => 1),
-            'Darts' => array("col" => "4", "lablestyle" => "", "prenext" => 1),
-            'Pocket Style' => array("col" => "4", "lablestyle" => "height:60px", "prenext" => 1),
-            'Bottom Style' => array("col" => "4", "lablestyle" => "height:60px", "prenext" => 1),
-            'Collar & Cuff Feature' => array("col" => "4", "lablestyle" => "", "prenext" => 1),
-            'Inner Collar Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            'Inner Cuff Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            'Inner Front Placket Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            'Label' => array("col" => "4", "lablestyle" => "", "prenext" => 1),
-            'Button' => array("col" => "4", "lablestyle" => "", "prenext" => 1),
-            'Monogram Placement' => array("col" => "4", "lablestyle" => "", "prenext" => 1),
-            'Monogram Style' => array("col" => "2", "lablestyle" => "", "prenext" => 1),
-            'Monogram Color' => array("col" => "4", "lablestyle" => "", "prenext" => 1),
-            'Monogram Initial' => array("col" => "4", "lablestyle" => "", "view" => "text", "prenext" => 2),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Collar Style' => array("choice" => "", "col" => "4", "lablestyle" => "height:60px", "maxsize" => "bodymax400", "prenext" => 1),
+            'Add 2 Buttons On The Collar Band' => array("choice" => "", "col" => "3", "prenext" => 1),
+            'Collar & Cuff Stiffness' => array("choice" => "", "col" => "3", "prenext" => 1,),
+            'Collar Stays' => array("choice" => "", "col" => "3", "prenext" => 1),
+            'Sleeve And Cuff Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Wrist Watch' => array("choice" => "", "col" => "4", "lablestyle" => "", "depandent" => "Sleeve Style", "prenext" => 1),
+            'Front Style' => array("choice" => "", "col" => "3", "lablestyle" => "", "prenext" => 1),
+            'Back Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Darts' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Pocket Style' => array("choice" => "", "col" => "4", "lablestyle" => "height:60px", "prenext" => 1),
+            'Bottom Style' => array("choice" => "", "col" => "4", "lablestyle" => "height:60px", "prenext" => 1),
+            'Collar & Cuff Feature' => array("choice" => "multi", "col" => "4", "lablestyle" => "", "prenext" => 1,),
+            'Inner Collar Insert' => array("choice" => "multi", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            'Inner Cuff Insert' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            'Inner Front Placket Insert' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            'Label' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Button' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Monogram Placement' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Monogram Style' => array("choice" => "", "col" => "2", "lablestyle" => "", "prenext" => 1),
+            'Monogram Color' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Monogram Initial' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "text", "prenext" => 2),
         );
         $return_data = array(
             "formItems" => $shirtCustomization,
@@ -252,22 +379,22 @@ class CustomApi extends REST_Controller {
             "Contrast First Sleeve Button Hole" => "-",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Lapel Style & Width' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Lapel Button Hole' => array("col" => "4", "prenext" => 0),
-            'Handstitching' => array("col" => "4", "prenext" => 0),
-            'Front Style' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Sleeve Buttons' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Shoulder Padding' => array("col" => "4", "prenext" => 0),
-            'Breast Pocket' => array("col" => "4", "prenext" => 0),
-            'Lower Pocket' => array("col" => "4", "prenext" => 0),
-            'Ticket Pocket' => array("col" => "4", "prenext" => 0),
-            'Lining Type' => array("col" => "4", "prenext" => 0),
-            "Lining Style" => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Button" => array("col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
-            "Contrast Button Thread" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast Button Hole On Lapel" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast First Sleeve Button Hole" => array("col" => "4", "prenext" => 0, "view" => "selection",),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Lapel Button Hole' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Handstitching' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Sleeve Buttons' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Shoulder Padding' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lining Type' => array("choice" => "", "col" => "4", "prenext" => 0),
+            "Lining Style" => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            "Button" => array("choice" => "", "col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
+            "Contrast Button Thread" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast Button Hole On Lapel" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast First Sleeve Button Hole" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
         );
 
         $return_data = array(
@@ -320,22 +447,22 @@ class CustomApi extends REST_Controller {
             "Contrast First Sleeve Button Hole" => "-",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Category' => array("col" => "4", "prenext" => 0),
-            'Lapel Style & Width' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Lapel Button Hole' => array("col" => "4", "prenext" => 0),
-            'Front Style' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Sleeve Buttons' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Shoulder Epaulettes' => array("col" => "4", "prenext" => 0),
-            'Sleeve Epaulettes' => array("col" => "4", "prenext" => 0),
-            'Breast Pocket' => array("col" => "4", "prenext" => 0),
-            'Lower Pocket' => array("col" => "4", "prenext" => 0),
-            'Inside Zipper Pocket' => array("col" => "4", "prenext" => 0),
-            'Lining Type' => array("col" => "4", "prenext" => 0),
-            "Lining Style" => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Contrast Button Thread" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast Button Hole On Lapel" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast First Sleeve Button Hole" => array("col" => "4", "prenext" => 0, "view" => "selection",),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Category' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Lapel Button Hole' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Sleeve Buttons' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Shoulder Epaulettes' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Sleeve Epaulettes' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Inside Zipper Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lining Type' => array("choice" => "", "col" => "4", "prenext" => 0),
+            "Lining Style" => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            "Contrast Button Thread" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast Button Hole On Lapel" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast First Sleeve Button Hole" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
         );
 
         $return_data = array(
@@ -371,14 +498,14 @@ class CustomApi extends REST_Controller {
             'Number of Back Pocke' => "2 Pockets with Buttons (Standard)",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Number of Pleat' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Waistband' => array("col" => "4", "prenext" => 0),
-            'Suspender Buttons on Inner waistband' => array("col" => "4", "prenext" => 0),
-            'Cuff' => array("col" => "4", "prenext" => 0),
-            'Zipper - Front Fly' => array("col" => "4", "prenext" => 0),
-            'Front Pocket Style' => array("col" => "4", "prenext" => 0),
-            'Number of Back Pocke' => array("col" => "4", "prenext" => 0),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Pleat' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Suspender Buttons on Inner waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Cuff' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Zipper - Front Fly' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Pocket Style' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Back Pocke' => array("choice" => "", "col" => "4", "prenext" => 0),
         );
 
         $return_data = array(
@@ -444,29 +571,29 @@ class CustomApi extends REST_Controller {
             'Number of Back Pocke' => "2 Pockets with Buttons (Standard)",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Lapel Style & Width' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Lapel Button Hole' => array("col" => "4", "prenext" => 0),
-            'Handstitching' => array("col" => "4", "prenext" => 0),
-            'Front Style' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Sleeve Buttons' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Shoulder Padding' => array("col" => "4", "prenext" => 0),
-            'Breast Pocket' => array("col" => "4", "prenext" => 0),
-            'Lower Pocket' => array("col" => "4", "prenext" => 0),
-            'Ticket Pocket' => array("col" => "4", "prenext" => 0),
-            'Lining Type' => array("col" => "4", "prenext" => 0),
-            "Lining Style" => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Button" => array("col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
-            "Contrast Button Thread" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast Button Hole On Lapel" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast First Sleeve Button Hole" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            'Number of Pleat' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Waistband' => array("col" => "4", "prenext" => 0),
-            'Suspender Buttons on Inner waistband' => array("col" => "4", "prenext" => 0),
-            'Cuff' => array("col" => "4", "prenext" => 0),
-            'Zipper - Front Fly' => array("col" => "4", "prenext" => 0),
-            'Front Pocket Style' => array("col" => "4", "prenext" => 0),
-            'Number of Back Pocke' => array("col" => "4", "prenext" => 0),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Lapel Button Hole' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Handstitching' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Sleeve Buttons' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Shoulder Padding' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lining Type' => array("choice" => "", "col" => "4", "prenext" => 0),
+            "Lining Style" => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            "Button" => array("choice" => "", "col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
+            "Contrast Button Thread" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast Button Hole On Lapel" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast First Sleeve Button Hole" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            'Number of Pleat' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Suspender Buttons on Inner waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Cuff' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Zipper - Front Fly' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Pocket Style' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Back Pocke' => array("choice" => "", "col" => "4", "prenext" => 0),
         );
 
         $return_data = array(
@@ -506,16 +633,16 @@ class CustomApi extends REST_Controller {
             'Lower Pocket' => "Welt Pocket",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Lapel Style & Width' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Lapel Button Hole' => array("col" => "4", "prenext" => 0),
-            'Handstitching' => array("col" => "4", "prenext" => 0),
-            'Front Style' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Front Edge' => array("col" => "4", "prenext" => 0),
-            'Back Fabric' => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            'Back Style' => array("col" => "4", "prenext" => 0),
-            'Breast Pocket' => array("col" => "4", "prenext" => 0),
-            'Lower Pocket' => array("col" => "4", "prenext" => 0),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Lapel Button Hole' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Handstitching' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Front Edge' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Back Fabric' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            'Back Style' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
         );
 
         $return_data = array(
@@ -600,38 +727,38 @@ class CustomApi extends REST_Controller {
             'Number of Back Pocke' => "2 Pockets with Buttons (Standard)",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Lapel Style & Width' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Lapel Button Hole' => array("col" => "4", "prenext" => 0),
-            'Handstitching' => array("col" => "4", "prenext" => 0),
-            'Front Style' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Sleeve Buttons' => array("col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
-            'Shoulder Padding' => array("col" => "4", "prenext" => 0),
-            'Breast Pocket' => array("col" => "4", "prenext" => 0),
-            'Lower Pocket' => array("col" => "4", "prenext" => 0),
-            'Ticket Pocket' => array("col" => "4", "prenext" => 0),
-            'Lining Type' => array("col" => "4", "prenext" => 0),
-            "Lining Style" => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Button" => array("col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
-            "Contrast Button Thread" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast Button Hole On Lapel" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            "Contrast First Sleeve Button Hole" => array("col" => "4", "prenext" => 0, "view" => "selection",),
-            'Waistcoat Lapel Style & Width' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Waistcoat Lapel Button Hole' => array("col" => "4", "prenext" => 0),
-            'Waistcoat Handstitching' => array("col" => "4", "prenext" => 0),
-            'Waistcoat Front Style' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Waistcoat Front Edge' => array("col" => "4", "prenext" => 0),
-            'Waistcoat Back Fabric' => array("col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            'Waistcoat Back Style' => array("col" => "4", "prenext" => 0),
-            'Waistcoat Breast Pocket' => array("col" => "4", "prenext" => 0),
-            'Waistcoat Lower Pocket' => array("col" => "4", "prenext" => 0),
-            'Number of Pleat' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Waistband' => array("col" => "4", "prenext" => 0),
-            'Suspender Buttons on Inner waistband' => array("col" => "4", "prenext" => 0),
-            'Cuff' => array("col" => "4", "prenext" => 0),
-            'Zipper - Front Fly' => array("col" => "4", "prenext" => 0),
-            'Front Pocket Style' => array("col" => "4", "prenext" => 0),
-            'Number of Back Pocke' => array("col" => "4", "prenext" => 0),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Lapel Button Hole' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Handstitching' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Sleeve Buttons' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Shoulder Padding' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lining Type' => array("choice" => "", "col" => "4", "prenext" => 0),
+            "Lining Style" => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            "Button" => array("choice" => "", "col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
+            "Contrast Button Thread" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast Button Hole On Lapel" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            "Contrast First Sleeve Button Hole" => array("choice" => "", "col" => "4", "prenext" => 0, "view" => "selection",),
+            'Waistcoat Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Waistcoat Lapel Button Hole' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Waistcoat Handstitching' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Waistcoat Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Waistcoat Front Edge' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Waistcoat Back Fabric' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            'Waistcoat Back Style' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Waistcoat Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Waistcoat Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Pleat' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Suspender Buttons on Inner waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Cuff' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Zipper - Front Fly' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Pocket Style' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Back Pocke' => array("choice" => "", "col" => "4", "prenext" => 0),
         );
 
         $return_data = array(
@@ -669,15 +796,15 @@ class CustomApi extends REST_Controller {
             'Number of Back Pocke' => "2 Pockets with Buttons (Standard)",
         );
         $mainnavigation = array(
-            'Body Fit' => array("col" => "4", "prenext" => 0),
-            'Number of Pleat' => array("col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
-            'Ribbon on Side Seam' => array("col" => "4", "prenext" => 0),
-            'Waistband' => array("col" => "4", "prenext" => 0),
-            'Suspender Buttons on Inner waistband' => array("col" => "4", "prenext" => 0),
-            'Cuff' => array("col" => "4", "prenext" => 0),
-            'Zipper - Front Fly' => array("col" => "4", "prenext" => 0),
-            'Front Pocket Style' => array("col" => "4", "prenext" => 0),
-            'Number of Back Pocke' => array("col" => "4", "prenext" => 0),
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Pleat' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Ribbon on Side Seam' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Suspender Buttons on Inner waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Cuff' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Zipper - Front Fly' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Pocket Style' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Back Pocke' => array("choice" => "", "col" => "4", "prenext" => 0),
         );
 
         $return_data = array(

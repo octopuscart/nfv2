@@ -59,9 +59,9 @@ $this->load->view('layout/header');
 
     }
     td.measurement_style {
-    padding: 0px 5px;
-    width: 50%;
-}
+        padding: 0px 5px;
+        width: 50%;
+    }
 
 
 </style>
@@ -230,50 +230,8 @@ $this->load->view('layout/header');
                                         <p class="textoverflow" style="font-size: 12px" data-toggle="tooltip" data-placement="left" title="Sand ">
                                             {{citem.product_speciality}}  
                                         </p>
-<!--                                        <p class="textoverflow" style="font-size: 12px" data-toggle="tooltip" data-placement="left" title="Sand ">
-                                            Style: {{citem.customization_data}}  
-                                        </p>
-                                        <p class="textoverflow" style="font-size: 12px" data-toggle="tooltip" data-placement="left" title="Sand ">
-                                            Measurement: {{citem.measurement_data}}  
-                                        </p>-->
-<!--                                        <span data-toggle="" data-placement="left" title="View Summary"><a href="#" style="padding: 0px;height: 22px;width: 28px;margin-left:1px" class="btn btn-default btn-xm" data-toggle="modal" data-target="#myModal{{citem.customization_id}}"><i class="icon-eye"></i></a></span>
-                                        <span data-toggle="" data-placement="left" title="Save PDF"><a href="#" style="padding: 0px 20px 14px 5px;height: 22px;width: 26px;" class="btn btn-default"><i class="icon-download"></i></a></span>
-                                        <span data-toggle="" data-placement="left" title="Send Mail"> <a href="#" style="padding: 0px 20px 14px 5px;height: 22px;width:0px" class="btn btn-default btn-xm"><i class="icon-mail"></i></a></span>
-                                         Summary -->
-                                        <div class="modal fade ui-draggable" id="myModal{{citem.customization_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form method="post" action="#" class="ng-pristine ng-valid">
-                                                        <div class="modal-header" style="color: white">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:white">
-                                                                ×
-                                                            </button>
-                                                            <p class="modal-title" id="myModalLabel">
-                                                                Style Id -{{citem.customization_data}}                                                                      </p>
-                                                        </div>
-                                                        <div class="modal-body">
+                                        <button class="btn btn-xs btn-default" ng-if="citem.customization_id > 0" ng-click="viewStyle(citem.style)">View</button>
 
-                                                            <table class="table" id="table3" style="border:1px solid #B8B8B8;" >
-                                                                <tbody>
-                                                                    <tr style="font-size: 14px;padding-bottom: 0px;padding-top: 0px;border-bottom: 1px solid #B8B8B8;" ng-repeat="(stylek, stylev) in citem.style.style">
-                                                                        <td class="tds">{{stylek}}</td>
-                                                                        <td class="tds" style="line-height: 13px !important;max-width: 230px;overflow-y: scroll;">{{stylev}}</td>
-                                                                    </tr> 
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                                            </button>
-
-                                                        </div>
-                                                    </form>
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
-                                        </div><!-- /.modal -->
-
-                                        <!-- End -->
                                     </div>
                                 </td>
                                 <td data-title="SKU" class="fw_light">
@@ -281,12 +239,12 @@ $this->load->view('layout/header');
                                     <table class="addr measurement_style" style="width: 100%;margin-top: 11px;">
                                         <tbody><tr style="font-size: 13px">
                                                 <td class="measurement_style" >Style Id</td>
-                                           
+
                                                 <td class="measurement_style">{{citem.customization_data}}</td>
                                             </tr>
                                             <tr style="font-size: 13px">
                                                 <td class="measurement_style">Measurement Profile</td>
-                                             
+
                                                 <td class="measurement_style">{{citem.measurement_data}}</td>
                                             </tr>
                                         </tbody></table>
@@ -315,12 +273,14 @@ $this->load->view('layout/header');
 
                                 </td>
 
-                                <td data-title="Price">{{citem.price|currency}}  </td>
+                                <td data-title="Price">{{(citem.price - citem.extra_price)|currency}}  </td>
                                 <td data-title="Extra Price">
-                                    $00.00
+                                    {{citem.extra_price|currency}}<br/>
+                                    <button class="btn btn-xs btn-default" ng-if="citem.extra_price > 0" ng-click="viewExtraPrice(citem.style)">View</button>
                                 </td>
                                 <td data-title="Total" class="fw_ex_bold color_dark" style="">
-                                    {{citem.total_price|currency}}                                        
+                                    {{citem.total_price|currency}}     
+
                                 </td>
 
                                 <td data-title="Action" class="fw_ex_bold color_dark" style="width:20px">

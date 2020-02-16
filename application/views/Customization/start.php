@@ -2,71 +2,51 @@
 $this->load->view('layout/header');
 ?>
 <link href="<?php echo base_url(); ?>assets/bootstrap.vertical-tabs.css" rel="stylesheet"/>
-<link href="<?php echo base_url(); ?>assets/theme/angular/customform.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>assets/theme/angular/customstyle.css" rel="stylesheet">
-
-<link href="<?php echo base_url(); ?>assets/theme/noslider/nouislider.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/theme/angular/customform.css" rel="stylesheet"/>
+<link href="<?php echo base_url(); ?>assets/theme/angular/customstyle.css" rel="stylesheet"/>
+<link href="<?php echo base_url(); ?>assets/theme/noslider/nouislider.min.css" rel="stylesheet"/>
 <script src="<?php echo base_url(); ?>assets/theme/noslider/nouislider.min.js"></script>
 
 <div ng-controller="customizationPage" id="customizationPage">
 
     <section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="padding:15px ">
         <div class="container">
-            <h5 style="    font-weight: 300;    margin-bottom: 10px;      font-size: 46px;"> <i class="icon-basket color_grey_light_2 tr_inherit"></i>  {{customizationElement.title}}</h5>
+            <h5 style="    font-weight: 300;margin-bottom: 10px;font-size: 46px;"> <i class="icon-basket color_grey_light_2 tr_inherit"></i>  {{customizationElement.title}}</h5>
             <!--breadcrumbs-->
-            <small style="font-size: 20px;
-                   color: red;">Your shopping cart contains <span id="total_cart_quantitys">{{ cartDataArray.length}} {{customizationElement.item}}(s)</span> </small>
+            <small style="font-size: 20px;color: red;">Your shopping cart contains <span id="total_cart_quantitys">{{ cartDataArray.length}} {{customizationElement.item}}(s)</span> </small>
         </div>
     </section>
 
     <div class=" counter custmo_form_setup custom_form_style" style="" >
-        <div class="container customformv1" style="margin-bottom: 20px;    width: 100%;" >
-
-
-
+        <div class="container customformv1" style="margin-bottom: 20px;width: 100%;" >
             <div class="row customblockstart">
-
                 <?php
                 $this->load->view('Customization/custome_support');
                 ?>
-
             </div>
-
-
             <div class="row measurementblockstart">
                 <?php
                 $this->load->view('Customization/measurementsupport');
                 ?>
             </div>
-
             <div class="row" ng-if="initAnimate.startcustom == 2">
                 <?php
                 $this->load->view('Customization/measurementsupportdesign');
                 ?>
             </div>
-
             <!--model ask-->
             <div class="row" ng-if="initAnimate.startcustom == 0">
-
-
                 <div class="col-md-7">
-
                     <h3 style="
                         font-weight: 300;
                         margin-bottom: 20px;
-
                         font-size:50px;
                         text-align: center;
-
                         ">Design  Your {{customizationElement.item}}<br>
-
-
                     </h3>
                     <p style="text-align: center">Click the fabric image and select</p><br/>
 
                     <div class="row" style="text-align: center; ">
-
-
                         <!-- ngRepeat: product in productStyleArrayNg -->
                         <div class="fabriciconfront" style="display:inline-block" ng-repeat="(cark, cart) in cartData" ng-click="selectFabric(cart.item)" ng-if="!customFabricsDone[cart.item.title]">
                             <div class="thumbnail style_selection  waves-effect ZoomIn " style="opacity: 1" ng-class="cart.item.title == customFabrics[cart.item.title].item.title ? 'selected' : 'deselect'">
@@ -77,7 +57,6 @@ $this->load->view('layout/header');
                                 </div>
                             </div>
                         </div><!-- end ngRepeat: product in productStyleArrayNg -->
-
                     </div>
                     <center  ng-if="customFabricArraySelect.length" >
                         <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" ng-click="startCustom()" >Create New Style →
@@ -88,36 +67,22 @@ $this->load->view('layout/header');
                         <br/>
                         <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" data-toggle="modal" data-target="#styleModal" >Select From Previous Style →
                         </button>
-
-
                     </center>
                     <div class="measurementprocess col-md-12" ng-if="customFabricsArrayDone.length" style="    margin: 10px 15px 0px 20px;">
                         <p>You can proceed for measurement now or choose more fabrics.</p>
                         <button class="btn btn-danger button_wave waves-effect waves-button waves-float" ng-click="startMeasurements()" id="start_customization"  style="background:red;border-color: red;color:white">Proceed For Measurements →
                         </button>
                     </div>
-
-
-
                 </div>
                 <div class="col-md-5">
                     <div class="" style="min-height:450px;height:100%;background: url(<?php echo base_url(); ?>assets/custom_form_view/background_new_custom/1.jpg);   background-position-y: center;
                          background-size: contain;    background-repeat: no-repeat;" ng-if="customFabricsArrayDone.length == 0">
-
                     </div>
-
-
                     <?php
                     $this->load->view('Customization/customSummery');
                     ?>
                 </div>
             </div>
-
-
-
-
-
-
         </div>
 
 
@@ -164,9 +129,9 @@ $this->load->view('layout/header');
             </div><!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-        
-        
-         <!-- Modal -->
+
+
+        <!-- Modal -->
         <div class="modal fade" id="measurementModal" tabindex="-1" role="dialog" aria-labelledby="measurementModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

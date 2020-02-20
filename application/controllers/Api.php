@@ -574,7 +574,7 @@ class Api extends REST_Controller {
             if (isset($session_cart['products'])) {
                 array_push($session_cart['products'], $productadd);
             } else {
-                $session_cart = array('products' => araay());
+                $session_cart = array('products' => array());
                 array_push($session_cart['products'], $productadd);
                 $message = array("status" => 2, "msg" => "Added To Cart", "type" => "success", "product" => $productadd);
             }
@@ -1081,13 +1081,17 @@ order by count(nfw_color_id) asc, colorbunch";
         $this->response(array("address" => $result, "user" => $this->checklogin));
     }
 
+    function setDefaultShippingAddress_get($addressid){
+        
+    }
+    
     function getOrderProducts_get($order_id) {
         $result = $this->Product_model->getCartDataCustomOrder($order_id);
         $this->response($result);
     }
 
     function getCustomCartDataOrder_get($order_id) {
-        $query = "  SELECT * FROM `nfw_product_cart` where order_id='$order_id' ;";
+        $query = "  SELECT * FROM `nfw_product_cart` where order_id='$order_id' and measurement_id!='';";
         $query = $this->db->query($query);
         $cartdata = $query->result_array();
         $cartdataall = array("products" => [], "total_quantity" => 0, "total_price" => 0);

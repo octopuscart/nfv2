@@ -4,7 +4,7 @@
     <ul class="categories_list" id="nav" style="margin-top: 10px">
 
         <li>
-            <a href="userProfile.php" class="color_dark tr_all d_block test">
+            <a href="<?php echo site_url('Account/profile'); ?>" class="color_dark tr_all d_block test">
                 <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
                     <i class="icon-angle-right"></i>
                 </span>
@@ -13,7 +13,7 @@
 
         </li>
         <li>
-            <a href="userAddress.php" class="color_dark tr_all d_block test">
+            <a href="<?php echo site_url('Account/address'); ?>" class="color_dark tr_all d_block test">
                 <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
                     <i class="icon-angle-right"></i>
                 </span>
@@ -40,7 +40,7 @@
                                     </a>
                                 </li>-->
                 <li>
-                    <a href="storCredit.php" class="color_dark tr_all d_block test">
+                    <a href="<?php echo site_url('Account/storCredit'); ?>" class="color_dark tr_all d_block test">
                         <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
                             <i class="icon-angle-right"></i>
                         </span>
@@ -59,7 +59,7 @@
             </a>
             <ul class="fw_light d_none">
                 <li>
-                    <a href="orderSummary.php" class="color_dark tr_all d_block test">
+                    <a href="<?php echo site_url('Account/orderList'); ?>" class="color_dark tr_all d_block test">
                         <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
                             <i class="icon-angle-right"></i>
                         </span>
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="orderTracking.php" class="color_dark tr_all d_block test">
+                    <a href="<?php echo site_url('Account/orderTracking');?>" class="color_dark tr_all d_block test">
                         <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
                             <i class="icon-angle-right"></i>
                         </span>
@@ -78,7 +78,7 @@
         </li>
 
         <li>
-            <a href="allInvoices.php" class="color_dark tr_all d_block test">
+            <a href="<?php echo site_url('Account/invoices');?>" class="color_dark tr_all d_block test">
                 <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
                     <i class="icon-angle-right"></i>
                 </span>

@@ -2,205 +2,208 @@
 $this->load->view('layout/header');
 ?>
 
-
 <style>
-    .cartbutton{
-        width: 100%;
-        padding: 6px;
-        color: #fff!important;
+    .datatable th{
+        border: none;
     }
-    .noti-check1{
-        background: #f5f5f5;
-        padding: 25px 30px;
-       
-        font-weight: 600;
-        margin-bottom: 30px;
+    .datatable td{
+        border: none;
     }
-
-    .noti-check1 span{
-        color: red;
-        color: red;
-        width: 111px;
-        float: left;
-        text-align: right;
-        padding-right: 13px;
+    .addr td{
+        border: none;
     }
-
-    .noti-check1 h6{
-        font-size: 15px;
-        font-weight: 600;
+    .updateAddress td{
+        border: none;
     }
-
-    .address_block{
-        background: #fff;
-        border: 3px solid #d30603;
-        padding: 5px 10px;
-        margin-bottom: 20px;
-
-    }
-    .checkcart {
-        border-radius: 50%;
+    input[type="checkbox"] + label:before {
+        content: '';
+        font-family: "fontello";
+        display: block;
         position: absolute;
-        top: -28px;
-        left: -8px;
-        padding: 4px;
-        background: #fff;
-        border: 2px solid green;
-    }
-
-
-    .default{
-        border: 2px solid green;
-    }
-
-    .default{
-        border: 2px solid green;
-    }
-
-    .checkcart i{
-        color: green;
-    }
-
-    
-
-    .cartdetail_small {
-        float: left;
-        width: 203px;
+        background: #F00;
+        top: -8px;
+        left: 0px;
+        width: 22px;
+        height: 23px;
+        border: 2px solid #cc0000;
     }
 
 </style>
-<section class="sub-bnr" data-stellar-background-ratio="0.5" style="margin-bottom: 10px;">
-    <div class="position-center-center">
-        <div class="container">
-            <h4>My Profile</h4>
-
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Account</li>
-            </ol>
-        </div>
+<section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="  padding-top: 15px;padding-bottom: 0px; box-shadow: 0px 3px 7px -1px #DBDADA;">
+    <div class="container">
+        <h3 style="color: #000 !important; font-weight: 300;text-transform: capitalize;">Welcome <?php echo $userInfo['first_name']; ?></h3>
+        <p style="color:black;margin-top: 10px;">Address Information</p>
+        <div style="margin-top: 10px;"> </div>
     </div>
 </section>
 
+<div class="section_offset counter" ng-controller="AddressConroller">
+    <div class="container">
+        <div class="row">  
+            <aside class="col-lg-3 col-md-3 col-sm-12 m_bottom_50 m_xs_bottom_30 " style=" " >	
 
-<!-- Content -->
-<div id="content"  class="my-account-page-area"> 
+                <?php
+                $this->load->view('Account/sidebar');
+                ?>
 
-    <!-- Blog -->
-    <section class="new-main blog-posts ">
-        <div class="container"> 
+            </aside>
 
-            <!-- News Post -->
-            <div class="news-post">
-                <div class="row"> 
-
-                    <?php
-                    $this->load->view('Account/sidebar');
-                    ?>
-
-
-                    <div class="col-md-9" style="margin-top:20px">
-                        <!-- Address Details -->
-                        <div class="col-md-12">
-                            <div class="">
-                                <h6>Addresses
-                                    <!--<button class="btn btn-small" data-toggle="modal" data-target="#changeAddress" style="margin-left: 20px;padding: 5px 11px;color:white;"><i class="fa fa-plus"></i> Add New</button>-->
-                                </h6>
-                            </div>
-                            <div class="noti-check1" style="#f5f5f5">  
-                                <div class="row">
-                                    <?php
-                                    if (count($user_address_details)) {
-                                        ?>
-                                        <?php
-                                        foreach ($user_address_details as $key => $value) {
-                                            ?>
-                                            <div class="col-md-12">
-                                                <?php if ($value['status'] == 'default') { ?> 
-                                                    <div class="checkcart <?php echo $value['status']; ?> ">
-                                                        <i class="fa fa-check fa-2x"></i>
-                                                    </div>
-                                                <?php } ?> 
-                                                <div class=" address_block <?php echo $value['status']; ?> ">
-                                                    <p>
-                                                        <?php echo $value['address']; ?>,<br/>
-                                                        <?php echo $value['city']; ?>, <?php echo $value['state']; ?> <?php echo $value['pincode']; ?>
-                                                    </p>
-                                                    <?php if ($value['status'] != 'default') { ?> 
-                                                        <a href="<?php echo site_url("Account/address/?setAddress=" . $value['id']); ?>" class="btn btn-default btn-xs address_button">Set As Default</a>
-                                                    <?php } ?> 
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                    } else {
-                                        ?>
-                                        <h4><i class="fa fa-warning"></i> Please Add Shipping Address</h4>
-
-                                        <?php
-                                    }
-                                    ?>
-                                </div>                            
-
-                            </div>
-                        </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 m_bottom_70 m_xs_bottom_30 mobilenopadding" style="">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"> <i class="icon-user"></i> Client Code : <?php echo $userInfo['registration_id'] ?> </h3>
                     </div>
+                    <div class="panel-body">
+                        <div class="col-md-12" style="margin: 0px 0px 10px -10px;">
+                            <h4 style="font-size:20px;color:black;">If you want to set other address for shipping, please select an address
+                                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#addressModal">
+                                    Add New
+                                </button>
+                            </h4>
+
+                        </div>
+                        <div style="clear: both"></div>
 
 
 
-                </div>
-                </section>
-            </div>
-            <!-- End Content --> 
+
+                        <div class="row" style="margin-top: 20px;">
+
+                            <div class="col-md-6 " ng-repeat="address in userAddress.list">
+                                <div class="addressblock {{address.id == userAddress.selected.id?'active':''}}">
+                                    <address>
+                                        {{address.address1}}<br>
+                                        {{address.address2}}<br>
+                                        {{address.city}}, {{address.state}}<br>
+                                        {{address.country}}, {{address.zip}}<br>
+                                    </address>
+                                    <div ng-if="address.id == userAddress.selected.id" class="addressbarbottom">
+                                        <i class="selectedaddress fa fa-check"></i>
+                                    </div>
+
+                                    <div ng-if="address.id != userAddress.selected.id" class="addressbarbottom">
+                                        <form action="#" method="post">
+                                            <button type="submit" value="{{address.id}}" name="setDefault" class="btn btn-default buttonaddressselect" >Select</button>
+                                            <button type="submit" value="{{address.id}}" name="deleteAddress" class="btn btn-danger buttonaddressselect deleteaddress" >Delete</button>
+                                        </form>
+                                    </div>
 
 
-            <!-- Modal -->
-            <div class="modal  fade" id="changeAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="    z-index: 20000000;">
-                <div class="modal-dialog modal-sm woocommerce" role="document">
-                    <form action="#" method="post">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel" style="font-size: 15px">Add Address</h4>
-                            </div>
-                            <div class="modal-body checkout-form">
-
-                                <label class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
-                                    Address
-                                    <input type="text" name="address"  value="" class="woocommerce-Input woocommerce-Input--text input-text">
-                                </label>
-
-                                <label class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
-                                    City
-                                    <input type="text" name="city"  value="" class="woocommerce-Input woocommerce-Input--text input-text">
-                                </label>
-                                <br/>
-                                <label class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
-                                    State
-                                    <input type="text" name="state"  value="" class="woocommerce-Input woocommerce-Input--text input-text">
-                                </label >
-                                <label class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
-                                    Pincode
-                                    <input type="text" name="pincode"  value="" class="woocommerce-Input woocommerce-Input--text input-text">
-                                </label>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" name="add_address" class="btn btn-primary btn-small" style="color: white">Add Address</button>
+                                </div>
                             </div>
                         </div>
-                    </form>
+
+
+
+
+
+
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModel" aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 79%;margin: 0px 0px 0px 61px;">
+                <div class="modal-header" style="color: white">
+                    <button type="button" class="close" 
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <p class="modal-title" id="myModalLabel">
+                        <i class="icon-edit"></i> Fill Address Detail
+                    </p>
+                </div>
+                <form method ="post" action="#">
+                    <div class="modal-body">
 
-           
+                        <table class="addr">
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name" class=""><b>Address (Line 1)</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required name="address1" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
 
-            <?php
-            $this->load->view('layout/footer');
-            ?>
- <script>
-            $(function(){
-                $(".woocommerce-MyAccount-navigation-link--dashboard").removeClass("active");
-                $(".address_page").addClass("active");
-            })
-            </script>
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name" class=""><b>Address (Line 2)</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required required name="address2" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name" class=""><b>Town/City</b></span>
+
+                                </td>
+                                <td>
+                                    <input type="text" required required name="city" class="form-control" value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name"><b>State</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required required name="state" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name"><b>Zip/Postal</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required  name="zip" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name"><b>Country</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required required name="country" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="checkbox" id="checkboxs_2" name="ship" class="d_none product_checkBox" value="1">
+                                    <label for="checkboxs_2" class="d_inline_m m_right_10" style="line-height: 18px;">Use as shipping address</label>
+                                </td>
+                            </tr>
+    <!--                        <tr>
+                                <td></td>
+                                <td>
+                                    <input type="checkbox" id="checkboxs_1" name="bill" class="d_none product_checkBox" value="1">
+                                    <label for="checkboxs_1" class="d_inline_m m_right_10" style="line-height: 18px;">Use as billing address</label>
+                                </td>
+                            </tr>-->
+
+
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success " name="submitAddress" value="cc" style="margin: ">
+                            <i class="icon-check"></i> Submit 
+                        </button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--banners-->
+</div>
+<script src="<?php echo base_url(); ?>assets/theme/angular/account.js"></script>
+
+<?php
+$this->load->view('layout/footer');
+?>

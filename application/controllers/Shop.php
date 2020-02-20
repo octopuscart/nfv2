@@ -145,6 +145,7 @@ class Shop extends CI_Controller {
 
             $this->db->set('order_id', $last_id);
             $this->db->where('order_id', "0");
+            $this->db->where("measurement_id != ''");
             $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
             $this->db->update("nfw_product_cart");
             

@@ -11,8 +11,8 @@ class Account extends CI_Controller {
         $this->load->model('User_model');
         $this->load->model('Product_model');
         $session_user = $this->session->userdata('logged_in');
-        if (isset($session_user['login_id'])) {
-            $this->user_id = $session_user['login_id'];
+        if (isset($session_user['id'])) {
+            $this->user_id = $session_user['id'];
         } else {
             $this->user_id = 0;
         }
@@ -163,6 +163,123 @@ class Account extends CI_Controller {
         $this->session->sess_destroy();
 
         redirect('Shop/index');
+    }
+
+    function profile() {
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+        $this->load->view('Account/profile', $data);
+    }
+
+    function address() {
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+
+        if (isset($_POST['deleteAddress'])) {
+            echo $addrid = $this->input->post("deleteAddress");
+            $this->db->where('id', $addrid);
+            $query = $this->db->delete('nfw_billing_shipping_address');
+            redirect("Account/address");
+        }
+        if (isset($_POST['submitAddress'])) {
+            $addressinsert = array(
+                'address1' => $this->input->post('address1'),
+                'address2' => $this->input->post('address2'),
+                'city' => $this->input->post('city'),
+                'state' => $this->input->post('state'),
+                'country' => $this->input->post('country'),
+                'zip' => $this->input->post('zip'),
+                'contact_no' => "",
+                'user_id' => $this->user_id,
+                "shipping_address" => "",
+                "default_shipping_address" => "yes",
+                "default_billing_address" => "",
+            );
+            $this->db->insert('nfw_billing_shipping_address', $addressinsert);
+            redirect("Account/address");
+        }
+
+        if (isset($_POST['setDefault'])) {
+            $adid = $this->input->post("setDefault");
+
+            $this->db->set('default_shipping_address', '');
+            $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
+            $this->db->update("nfw_billing_shipping_address");
+
+            $this->db->set('default_shipping_address', 'yes');
+            $this->db->where('id', $adid); //set column_name and value in which row need to update
+            $this->db->update("nfw_billing_shipping_address");
+        }
+
+
+        $this->load->view('Account/address', $data);
+    }
+
+    function storCredit() {
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+        $this->load->view('Account/storeCredit', $data);
+    }
+
+    function orderList() {
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+
+        $query = " SELECT npo.id,npo.op_date,npo.op_time,npo.order_no,
+                   npo.total_price,tag.title FROM `nfw_product_order` as npo 
+                   join nfw_order_status as nos on npo.id = nos.order_id
+                   join nfw_order_status_tag as tag on nos.status = tag.id
+                   where npo.user_id =  $userid  order by op_date desc,npo.order_no desc";
+        $data['order_data'] = $this->Product_model->resultAssociate($query);
+
+        $this->load->view('Account/orderList', $data);
+    }
+
+    function orderTracking() {
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+        $query = "SELECT nos.* FROM `nfw_order_shipping` as nos join nfw_product_order as no
+                      on nos.order_id = no.id where no.user_id = $userid order by no.op_date desc, nos.order_no desc";
+
+        $data['data'] = $this->Product_model->resultAssociate($query);
+        $data['productmodel'] = $this->Product_model;
+        $this->load->view('Account/orderTracking', $data);
+    }
+
+    function invoices() {
+//        orderSortDetail()
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+        $query = "SELECT * FROM nfw_product_order as no
+                     where no.user_id = $userid order by no.op_date desc";
+        $orderdata = $this->Product_model->resultAssociate($query);
+        $orderarray = array();
+        foreach ($orderdata as $key => $value) {
+            $orderid = $value['id'];
+            $order = $this->Product_model->orderSortDetail($orderid);
+            array_push($orderarray, $order);
+        }
+        $data['invoicedata'] = $orderarray;
+        
+        $this->load->view('Account/orderInvoice', $data);
     }
 
 }

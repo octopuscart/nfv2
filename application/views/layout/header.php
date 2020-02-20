@@ -418,11 +418,11 @@
                                                                             </a>
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <form action="userProfile.php" method="post" action="#">
-                                                                                <button name="profile" type="submit" class="btn btn-default btn-xs pull-right" style="">
+                                                                            
+                                                                            <a name="profile" href="<?php echo site_url("Account/profile");?>" type="submit" class="btn btn-default btn-xs pull-right" style="">
                                                                                     <i class="icon-list"></i> View Account
-                                                                                </button>
-                                                                            </form>
+                                                                                </a>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                     <!--</div>-->

@@ -28,7 +28,7 @@ define('custome_image_server', $configuration['product_images_url']);
 
 
 //Email Settings//
-define('email_sender', $configuration['email_sender']);
+define('email_sender', "sales@nitafashions.com");
 define('email_sender_name', $configuration['email_sender_name']);
 define('email_bcc', $configuration['email_bcc']);
 

@@ -259,6 +259,38 @@ class Product_model extends CI_Model {
         return $container;
     }
 
+    //support function
+
+    function statusTag($ids) {
+        //echo $ids;
+        $query = "SELECT title FROM `nfw_order_status_tag` where id = $ids ";
+        $result = $this->resultAssociate($query);
+        return $result;
+    }
+
+    function orderSortDetail($order_id) {
+        $query = "  SELECT * FROM `nfw_product_cart` where order_id='$order_id' ;";
+        $query = $this->db->query($query);
+        $cartdata = $query->result_array();
+
+        $this->db->where('id', $order_id);
+        $query = $this->db->get('nfw_product_order');
+        $orderDetails = $query->row_array();
+        $orderDetails['products'] = $cartdata;
+          $orderDetails['subtotal'] = 0;
+        foreach ($cartdata as $key => $value) {
+            $custom_id = $value['customization_id'];
+            $customdata = $this->getCustomizationDataById($custom_id);
+            $orderDetails['subtotal'] += $value['total_price'];
+//            $value['style'] = $customdata;
+//            array_push($orderDetails['products'], $value);
+        }
+        return $orderDetails;
+    }
+
+    //end of support
+
+
     function shirtCustomElement() {
         $returnData = array();
         $watchoption_style = array(

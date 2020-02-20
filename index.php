@@ -55,14 +55,14 @@
  */
 //define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-//if ($_SERVER['SERVER_NAME'] == 'localhost') {
-//    define('ENVIRONMENT', 'development');
-//} else {
-//    define('ENVIRONMENT', 'production');
-//}
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
+    define('ENVIRONMENT', 'development');
+} else {
+    define('ENVIRONMENT', 'production');
+}
 
 
- define('ENVIRONMENT', 'development');
+// define('ENVIRONMENT', 'development');
 /*
  * ---------------------------------------------------------------
  * ERROR REPORTING

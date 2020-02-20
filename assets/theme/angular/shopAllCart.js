@@ -24,6 +24,43 @@ nitaFasions.controller('shopAllCart', function ($scope, $http, $filter, $timeout
         }
     });
 
+    $scope.viewStyle = function (objarray) {
+        var customhtmlarray = [];
+        var objarrayprice = objarray.style;
+        for (i in objarrayprice) {
+            var ks = i;
+            var kv = objarrayprice[i];
+            if (kv) {
+                var summaryhtml = "<tr><th>" + ks + "</th><td>" + kv + "</td></tr>";
+                customhtmlarray.push(summaryhtml);
+            }
+        }
+        customhtmlarray = customhtmlarray.join("");
+        var customdiv = "<div class='custome_summary_popup'><table>" + customhtmlarray + "</table></div>";
+        swal({
+            title: objarray['Style Profile'],
+            html: customdiv,
+        })
+    }
+
+    $scope.viewExtraPrice = function (objarray) {
+        var customhtmlarray = [];
+        var objarrayprice = objarray.extra_price;
+        for (i in objarrayprice) {
+            var ks = i;
+            var kv = objarrayprice[i];
+            if (kv) {
+                var summaryhtml = "<tr><th>" + ks + "</th><td>" + currencyfilter(kv) + "</td></tr>";
+                customhtmlarray.push(summaryhtml);
+            }
+        }
+        customhtmlarray = customhtmlarray.join("");
+        var customdiv = "<div class='custome_summary_popup'><table>" + customhtmlarray + "</table></div>";
+        swal({
+            title: objarray['Style Profile'],
+            html: customdiv,
+        })
+    }
 
 
 
@@ -146,5 +183,54 @@ nitaFasions.controller('shopAllCartCustom', function ($scope, $http, $filter, $t
         })
     }
 
+
+})
+
+
+nitaFasions.controller('OrderDetailsController', function ($scope, $http, $timeout, $interval) {
+    $scope.shopCart = {};
+    
+    $http.get(urllink + "/getCustomCartDataOrder/"+order_idgbl).then(function (rdata) {
+       $scope.shopCart = rdata.data;
+    }, function () {
+        $scope.userAddress.loader = "0";
+    });
+  $scope.viewStyle = function (objarray) {
+        var customhtmlarray = [];
+        var objarrayprice = objarray.style;
+        for (i in objarrayprice) {
+            var ks = i;
+            var kv = objarrayprice[i];
+            if (kv) {
+                var summaryhtml = "<tr><th>" + ks + "</th><td>" + kv + "</td></tr>";
+                customhtmlarray.push(summaryhtml);
+            }
+        }
+        customhtmlarray = customhtmlarray.join("");
+        var customdiv = "<div class='custome_summary_popup'><table>" + customhtmlarray + "</table></div>";
+        swal({
+            title: objarray['Style Profile'],
+            html: customdiv,
+        })
+    }
+
+    $scope.viewExtraPrice = function (objarray) {
+        var customhtmlarray = [];
+        var objarrayprice = objarray.extra_price;
+        for (i in objarrayprice) {
+            var ks = i;
+            var kv = objarrayprice[i];
+            if (kv) {
+                var summaryhtml = "<tr><th>" + ks + "</th><td>" + currencyfilter(kv) + "</td></tr>";
+                customhtmlarray.push(summaryhtml);
+            }
+        }
+        customhtmlarray = customhtmlarray.join("");
+        var customdiv = "<div class='custome_summary_popup'><table>" + customhtmlarray + "</table></div>";
+        swal({
+            title: objarray['Style Profile'],
+            html: customdiv,
+        })
+    }
 
 })

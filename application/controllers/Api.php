@@ -1078,7 +1078,38 @@ order by count(nfw_color_id) asc, colorbunch";
     function getUserShippingAddress_get() {
         $query = "SELECT * from `nfw_billing_shipping_address` where  user_id = '$this->user_id'  ";
         $result = $this->Product_model->resultAssociate($query);
-        $this->response(array("address"=>$result, "user"=>$this->checklogin));
+        $this->response(array("address" => $result, "user" => $this->checklogin));
+    }
+
+    function getOrderProducts_get($order_id) {
+        $result = $this->Product_model->getCartDataCustomOrder($order_id);
+        $this->response($result);
+    }
+
+    function getCustomCartDataOrder_get($order_id) {
+        $query = "  SELECT * FROM `nfw_product_cart` where order_id='$order_id' ;";
+        $query = $this->db->query($query);
+        $cartdata = $query->result_array();
+        $cartdataall = array("products" => [], "total_quantity" => 0, "total_price" => 0);
+        foreach ($cartdata as $key => $value) {
+            $cartdataall['total_quantity'] += $value['quantity'];
+            $cartdataall['total_price'] += $value['total_price'];
+            $custom_id = $value['customization_id'];
+            $customdata = $this->Product_model->getCustomizationDataById($custom_id);
+            $value['style'] = $customdata;
+            array_push($cartdataall['products'], $value);
+        }
+        $cartdataall['shipping_price'] = 30;
+        if ($cartdataall['total_price'] > 250) {
+            $cartdataall['shipping_price'] = 0;
+        }
+
+        $cartdataall['grand_total'] = $cartdataall['total_price'] + $cartdataall['shipping_price'];
+
+
+        $this->response(array(
+            "cartdata" => $cartdataall,
+        ));
     }
 
 }

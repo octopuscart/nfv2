@@ -1,529 +1,406 @@
 <?php
 $this->load->view('layout/header');
-$paymentstatus = "";
 ?>
-
-
-<style>
-    .measurement_right_text{
-        float: right;
-    }
-    .measurement_text{
-        float: left;
-    }
-    .fr_value{
-        font-size: 12px;
-        margin-top: -7px;
-        float: left;
-    }
-    .productStatusBlock{
-        padding:10px;
-        border: 1px solid #000;
-        float: left;
-        margin: 5px;
-    }
-
-    .payment_block{
-        padding: 10px;
-        padding-top: 30px;
-        margin: 0px;
-        margin-top: 30px;
-        background: #ddd;
-        border: 6px solid #ff3b3b;
-    }
-    .icon-circle {
-        font-size: 19px;
-        height: 31px;
-        width: 31px;
-        background-color: #b28c06;
-        float: left;
-        border-radius: 50%;
-        color: #fff;
-        line-height: 28px;
-        text-align: center;
-    }
-    .headerorder{
-        padding: 2px 10px;
-        /*text-align: center;*/
-
-        margin-bottom: 10px;
-        font-weight: 600;
-        font-size: 18px;
-    }
-</style>
-
-
-<!-- Inner Page Banner Area Start Here -->
-<section class="sub-bnr" data-stellar-background-ratio="0.5" style="margin-bottom: 10px;">
-    <div class="position-center-center">
-        <div class="container">
-            <h4>Order Details</h4>
-
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li>Order No. #<?php echo $order_data->order_no; ?></li>
-            </ol>
-        </div>
-    </div>
-</section>
-
-
 
 <!-- Content -->
 <div id="content" ng-controller="OrderDetailsController"> 
 
-    <!--======= PAGES INNER =========-->
-    <section class="order-details-page-area">
+
+
+    <style>
+        .close{
+            opacity: 1;
+        }
+        .modal-header{
+            padding: 3px 19px;
+            background: black;
+        }
+        .tds{
+            padding: 8px;
+            line-height: 0.42857143 !important;
+            vertical-align: top;
+            border-bottom: 1px solid;
+
+
+        }
+        .table_type_2 td:not([colspan]){
+            padding: 6px;
+        }
+
+
+    </style>
+    <style>
+        .addr tr{
+            border: none;
+        }
+        .addr td{
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 0px;
+            border: none;
+            padding-right: 4px !important;
+        }
+        .hr{
+            height: 0px;
+        }
+        .tb tr{
+            padding-top: 1px;
+            padding-bottom: 1px;
+            padding-left: 0px;
+            border: none;
+        }
+        .tb td{
+            padding-top: 1px;
+            padding-bottom: 1px;
+            padding-left:0px;
+            border: none;
+            padding-right: 4px !important;
+        }
+    </style>
+    <section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="  padding-top: 15px; padding-bottom: 0px; box-shadow: 0px 3px 7px -1px #DBDADA;">
         <div class="container">
-            <div class="row  "> 
-
-                <div class="col-md-3" style="    border: 1px solid #000;
-                     padding: 6px;
-                     border-radius: 5px;">
-                    <h3 class="headerorder">Order Status</h3>
-
-                    <?php
-                    $count = 0;
-                    $countord = count($order_status);
-                    foreach ($order_status as $oskey => $osvalue) {
-                        ?>
-                        <div class="media" style="border-bottom: 1px solid #000;
-                             margin-bottom: 10px;
-                             padding-bottom: 10px;">
-                            <div class="media-left">
-                                <a href="#">
-                                    <i class='icon-circle'><?php
-                                        echo $countord - $count;
-                                        ?></i>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading" style="font-size: 15px">  <?php
-                                    echo $osvalue->status;
-                                    ?></h4>
-                                <small style="font-weight:300;font-size:13px">
-                                    <?php
-                                    if ($osvalue->status == "Shipped") {
-                                        echo $osvalue->description;
-                                    } else {
-                                        echo $osvalue->remark;
-                                    }
-                                    ?>
-
-                                </small>
-                                <br/>
-                                <span style="font-size: 10px;">
-                                    <i class="fa fa-calendar"></i> 
-                                    <?php
-                                    echo $osvalue->c_date . " " . $osvalue->c_time;
-                                    ?>
-                                </span>
-                            </div>
-                        </div>
-                        <?php
-                        $count++;
-                        ?>
-
-                        <?php
-                    }
-                    ?>
-
-                    <button class="btn btn-inverse btn-block" ng-click="sendOrderMail('<?php echo $order_data->order_no; ?>')">
-                        <i class="fa fa-envelope"></i> Request Order Copy On Mail
-                    </button>
-
-
-
-
-                </div>
-                <div class="col-md-9">
-                    <div class="pricing">
-                        <div class="col-md-4">
-
-                            <article class="order_box">
-                                <h3 class="headerorder"><i class="fa fa-user"></i> Customer Information</h3>
-                                <li><i class="fa fa-user"></i> <?php echo $order_data->name; ?> </li>
-                                <li><i class="fa fa-phone"></i> <?php echo $order_data->contact_no; ?></li> 
-                                <li><i class="fa fa-envelope"></i> <?php echo $order_data->email; ?> </li>
-                            </article>
-                        </div>
-
-                        <div class="col-md-4">
-                            <article class="order_box">
-                                <h3 class="headerorder"><i class="fa fa-map"></i> Shipping Address</h3>
-
-                                <li>  <?php echo $order_data->address1; ?><br/><?php echo $order_data->address2; ?><br/>
-                                    <?php echo $order_data->state; ?>  <?php echo $order_data->city; ?> <?php echo $order_data->country; ?>, <?php echo $order_data->zipcode; ?></li>
-                            </article>
-                        </div>
-
-                        <div class="col-md-4">
-                            <article class="order_box">
-                                <h3 class="headerorder"><i class="fa fa-list"></i> Order Information</h3>
-                                <li> <i class=" fa fa-chevron-circle-right"></i> <?php echo $order_data->order_no; ?></li>
-                                <li> <i class="fa fa-calendar"></i> <?php echo $order_data->order_date; ?> </li>
-                                <li> <i class="fa fa-clock-o"></i>  <?php echo $order_data->order_time; ?> </li>
-
-                            </article>
-                        </div>
-
-                        <div class="col-md-12">
-                            <?php
-//                        print_r($order_status);
-                            foreach ($order_status as $key => $value) {
-                                if ($value->status == 'Payment Pending') {
-                                    $paymentstatus = "yes";
-                                } else {
-                                    $paymentstatus = "no";
-                                }
-                            }
-                            if ($paymentstatus == 'yes') {
-                                ?>
-                                <div class="row payment_block " >
-                                    <form action="#" method="post" enctype="multipart/form-data">
-                                        <div class="col-md-12">
-                                            <!--                                        <div class="col-md-3">
-                                                                                        <div class="thumbnail">
-                                                                                            <img src="<?php
-                                            echo imageservermain . 'barcodes/' . $paymentbarcode->file_name;
-                                            ?>" alt="..." style="height:170px;">
-                                                                                            <div class="caption">
-                                                                                                <h3 style="text-align: center"><?php echo $paymentbarcode->mobile_no; ?></h3>
-                                                                                            </div>
-                                                                                        </div>    
-                                                                                    </div>-->
-
-                                            <div class="col-md-12">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="image1">Upload Payment Screen</label>
-                                                        <input type="file" name="picture" />           
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group sliderbox-panel">
-                                                        <label>Mobile No.</label>
-                                                        <input type="text" class="form-control" name="mobile_no"  placeholder="" value="<?php echo ''; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group sliderbox-panel">
-                                                        <label>Payment ID / Transaction ID</label>
-                                                        <input type="text" class="form-control" name="payment_id"  placeholder="" value="<?php echo ''; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group sliderbox-panel">
-                                                        <label>Payment Date</label>
-                                                        <input type="text" class="form-control" name="payment_date"  placeholder="" value="<?php echo ''; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="form-group sliderbox-panel">
-                                                        <label>Description</label>
-                                                        <textarea class="form-control" name="description"  placeholder=""><?php echo ''; ?></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label></label>
-                                                    <button class="btn btn-success btn-lg" type="submit" name="submit" value="submit" style="margin-top: 32px;">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <?php
-                            }
-                            ?>
-                        </div>
-
-                        <div class="col-md-12" style=" margin-top: 10px;">
-                            <article class="" style="padding: 10px;border: 1px solid #000;
-                                     padding: 6px;
-                                     border-radius: 5px;">
-                                <table class="table table-bordered"  border-color= "#9E9E9E" align="center" border="1" cellpadding="0" cellspacing="0" width="600" style="background: #fff;padding:20px">
-                                    <tr style="font-weight: bold">
-                                        <td style="width: 20px;text-align: right">S.No.</td>
-                                        <td colspan="2"  style="text-align: center">Product</td>
-
-                                        <td style="text-align: right;width: 100px"">Price</td>
-                                        <td style="text-align: right;width: 10px">Qantity</td>
-                                        <td style="text-align: right;width: 100px">Total</td>
-                                    </tr>
-                                    <!--cart details-->
-                                    <?php
-                                    foreach ($cart_data as $key => $product) {
-                                        ?>
-                                        <tr>
-                                            <td style="text-align: right">
-                                                <?php echo $key + 1; ?>
-                                            </td>
-
-                                            <td style="width: 80px">
-                                        <center>   
-                                            <img src=" <?php echo $product->file_name; ?>" style="height: 70px;"/>
-                                        </center>
-                                        </td>
-
-                                        <td style="width: 300px;">
-
-                                            <?php echo $product->title; ?> - <?php echo $product->item_name; ?>
-                                            <br/>
-                                            <small style="font-size: 12px;">(<?php echo $product->sku; ?>)</small>
-
-                                            <h4 class="panel-title">
-                                                <a role="button" class="btn  btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $product->id; ?>" aria-expanded="true" aria-controls="collapseOne" style="    margin: 5px 0px;
-                                                   padding: 4px;">
-                                                    View Summary
-                                                </a>
-                                            </h4>
-                                            </div>
-                                            <div id="collapse<?php echo $product->id; ?>" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body" style="padding:10px 0px;">
-                                                    <?php
-                                                    echo "<ul class='list-group'>";
-                                                    foreach ($product->custom_dict as $key => $value) {
-                                                        $checkextra = $value;
-                                                        $isextra = strpos($value, "$");
-                                                        if ($isextra) {
-                                                            $extraarry = explode(" ", $value);
-                                                            $prefix = array_slice($extraarry, 0, count($extraarry) - 1);
-                                                            $sufix = "<b class='extrapricesummryorder'>" . $extraarry[count($extraarry) - 1] . "</b>";
-                                                            array_push($prefix, $sufix);
-                                                            $fvalue = (implode(" ", $prefix));
-                                                            echo "<li class='list-group-item' style='font-size:12px'>$key <span class='badge'>$fvalue</span></li>";
-                                                        } else {
-                                                            echo "<li class='list-group-item'  style='font-size:12px'>$key <span class='badge'>$value</span></li>";
-                                                        }
-                                                    }
-                                                    echo "</ul>";
-                                                    ?>                                            </div>
-                                            </div>
-
-
-                                        </td>
-
-                                        <td style="text-align: right">
-                                            {{ <?php echo $product->price; ?> |currency:"<?php echo globle_currency; ?> "}}
-                                            <?php
-                                            if ($product->extra_price > 0) {
-                                                ?>
-                                            <span  style="font-size: 12px;
-                                          font-weight: 600;
-                                          text-align: center;">
-                                        <br/>
-                                       {{ <?php echo $product->price - $product->extra_price; ?> |currency:""}}
-                                              + {{ <?php echo $product->extra_price; ?> |currency:""}}
-                                                </span>
-                                                <?php
-                                            }
-                                            ?>
-                                        </td>
-
-                                        <td style="text-align: right;width: 50px;">
-                                            <?php echo $product->quantity; ?> 
-                                        </td>
-
-                                        <td style="text-align: right;">
-                                            {{ <?php echo $product->total_price; ?>|currency:"<?php echo globle_currency; ?> "}}
-                                        </td>
-                                        </tr>
-
-                                        <?php
-                                    }
-                                    ?>
-                                    <td colspan="7">
-                                        Measurement Type :
-                                        <?php
-                                        echo $order_data->measurement_style;
-                                        if (count($measurements_items)) {
-                                            ?>
-                                            <a role="button" class="btn btn-xs btn-default" data-toggle="collapse" data-parent="#accordion" href="#collapsemeasurements" aria-expanded="true" aria-controls="collapseOne">
-                                                View Measurement
-                                            </a>
-                                            <div id="collapsemeasurements" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="panel-body" style="padding:10px 0px;">
-                                                            <?php
-                                                            echo "<ul class='list-group'>";
-                                                            foreach ($measurements_items as $keym => $valuem) {
-                                                                $mvalues = explode(" ", $valuem['measurement_value']);
-                                                                echo "<li class='list-group-item'>" . $valuem['measurement_key'] . " <span class='measurement_right_text'><span class='measurement_text'>" . $mvalues[0] . "</span><span class='fr_value'>" . $mvalues[1] . '"' . "</span></span></li>";
-                                                            }
-                                                            echo "</ul>";
-                                                            ?>                             
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <?php
-                                        }
-                                        ?>
-                                    </td>
-
-
-                                    <!--end of cart details-->
-                                    <tr>
-                                        <td colspan="7">
-                                            <?php
-                                            $laststatus = "";
-                                            $laststatus_cdate = "";
-                                            $laststatus_ctime = "";
-                                            $laststatusremark = "";
-                                            foreach ($order_status as $key => $value) {
-                                                $laststatus = $value->status;
-                                                $laststatus_cdate = $value->c_date;
-                                                $laststatus_ctime = $value->c_time;
-                                                $laststatusremark = $value->remark;
-                                            }
-                                            ?>
-
-
-
-<!--                                        <button class="btn btn-button pull-right" type="button" data-toggle="collapse" data-target="#collapseProduct<?php echo $product->id; ?>" aria-expanded="false" aria-controls="collapseProduct<?php echo $product->id; ?>">
-                                            Show More  <i class="fa fa-arrow-down"></i>
-                                        </button>-->
-
-                                            <div class="statusdiv">
-                                                Current Status: <?php echo $laststatus; ?>
-                                                <p style="font-size: 10px;    margin: 0;">
-                                                    <i class="fa fa-calendar"></i> 
-                                                    <?php echo $laststatus_cdate; ?>
-                                                    <?php echo $laststatus_ctime; ?>
-                                                </p>
-
-                                                <p style="font-size: 12px;    margin: 0;">
-                                                    <?php echo $laststatusremark; ?>
-                                                </p>
-                                            </div>
-
-
-
-
-
-
-                                            <div class="collapse" id="collapseProduct<?php echo $product->id; ?>">
-                                                <div class="">
-                                                    <?php
-                                                    foreach ($product->product_status as $key => $value) {
-                                                        ?>
-                                                        <div class="productStatusBlock">
-                                                            <p style="font-size: 10px;margin: 0;"><i class="fa fa-calendar"></i> <?php echo $value->c_date ?> <?php echo $value->c_time ?></p>
-                                                            <h3><?php echo $value->status; ?></h3>
-                                                        </div>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-
-
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="3"  rowspan="4" style="font-size: 12px">
-                                            <b>Total Amount in Words:</b><br/>
-                                            <span style="text-transform: capitalize"> <?php echo $order_data->amount_in_word; ?></span>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: right">Sub Total</td>
-                                        <td style="text-align: right;width: 60px">{{"<?php echo $order_data->sub_total_price; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>
-                                    </tr>
-    <!--                                <tr>
-                                        <td colspan="2" style="text-align: right">Credit Used</td>
-                                        <td style="text-align: right;width: 60px"><?php echo $order_data->credit_price; ?> </td>
-                                    </tr>-->
-                                    <tr>
-                                        <td colspan="2" style="text-align: right">Total Amount</td>
-                                        <td style="text-align: right;width: 60px">{{"<?php echo $order_data->total_price; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>
-                                    </tr>
-
-
-
-
-                                </table>
-                            </article>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <h3 style="color: #000 !important; font-weight: 300;text-transform: capitalize;">Welcome <?php echo $userInfo['first_name']; ?></h3>
+            <p style="color: black">Order Detail</p>
+            <div style="margin-top: 10px;"></div>
         </div>
     </section>
 
+    <div class="section_offset counter">
+        <div class="container">
+            <div class="row">
+                <aside class="col-lg-3 col-md-3 col-sm-12 m_bottom_50 m_xs_bottom_30 " style=" " >	
+
+                    <?php
+                    $this->load->view('Account/sidebar');
+                    ?>
+
+                </aside>
+
+                <div class="col-lg-9 col-md-9 col-sm-12 m_bottom_70 m_xs_bottom_30 mobilenopadding" style="">
+
+                    <div style="clear:both"></div>
+                    <hr style="margin-top: 6px;margin-bottom: 0px;background: ivory;">
+
+                    <div class=" invoice-info">
+                        <div class="col-sm-4 invoice-col">
+
+                            <address>
+                                <strong>Shipping Address</strong><br>
+
+                                <?php echo $shipping['address1'] . ',' ?><br/>
+                                <?php echo $shipping['address2'] . ',' ?><br/>
+                                <?php echo $shipping['city'] . ', ' . $shipping['state'] . ',' ?><br/>
+                                <?php echo $shipping['country'] ?><br/>
+                                <?php echo $shipping['zip'] ?><br/>
+                                <table class="tb">
+                                    <tr>
+                                        <td>Contact No.</td>
+                                        <td>:</td>
+                                        <td><?php
+                                            echo $userInfo['contact_no'] == 'nul' ? '' : $userInfo['contact_no'];
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fax</td>
+                                        <td>:</td>
+                                        <td><?php
+                                            echo $userInfo['fax_no'] == 'nul' ? '' : $userInfo['fax_no'];
+                                            ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>:</td>
+                                        <td><?php echo $userInfo['email'] ?></td>
+                                    </tr>
+                                </table>
+                            </address>
+                        </div><!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+
+                            <!--                            <address>
+                                                            <strong>Billing Address</strong><br>
+                            <?php echo $biling['address1'] . ',' ?><br/>
+                            <?php echo $biling['address2'] . ',' ?><br/>
+                            <?php echo $biling['city'] . ', ' . $biling['state'] . ',' ?><br/>
+                            <?php echo $biling['country'] ?><br/>
+                            <?php echo $biling['zip'] ?><br/>
+                            
+                                                            <table class="tb">
+                                                                <tr>
+                                                                    <td>Contact No.</td>
+                                                                    <td>:</td>
+                                                                    <td><?php echo $userInfo['contact_no'] ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Fax</td>
+                                                                    <td>:</td>
+                                                                    <td><?php echo $userInfo['fax_no'] ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>:</td>
+                                                                    <td><?php echo $userInfo['email'] ?></td>
+                                                                </tr>
+                                                            </table>
+                            
+                            
+                                                        </address>-->
+                        </div><!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+
+                            <b>Invoice Information</b><br/>
+
+                            <table class="addr">
+                                <tr>
+                                    <td>Invoice No.</td>
+                                    <td>:</td>
+                                    <td><?php echo $invoice_data[0]['invoice_no'] ?><br/></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Date/Time</span></td>
+                                    <td>:</td>
+                                    <td><?php echo $invoice_data[0]['op_date'] ?><br/>
+                                        <?php echo $invoice_data[0]['op_time'] ?></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>Currency</td>
+                                    <td>:</td>
+                                    <td>US$</td>
+                                </tr>
+                                <tr>
+                                    <td>Order No.</td>
+                                    <td>:</td>
+                                    <td><?php echo $orderDetail[0]['order_no'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Client Code</td>
+                                    <td>:</td>
+                                    <td><?php echo $userInfo['registration_id']; ?> </td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Method</td>
+                                    <td>:</td>
+                                    <td><?php echo $orderDetail[0]['payment_gateway'] ?></td>
+                                </tr>
+
+                            </table>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+
+                    <!-- Table row -->
+                    <hr>
+
+                    <div class="col-md-12" style="    padding: 5px 5px;
+                         border: 1px solid #000;
+                         margin-bottom: 18px;
+                         border-radius: 5px;">
+                        <p style="    border-bottom: 1px solid #000;">Order Status</p>
+
+                        <style>
+                            .orderstatustable th{
+                                border: none;
+                            }
+                            .orderstatustable td{
+                                border: none;
+
+                            }
+                            .orderstatustable tr{
+                                border-bottom: 1px solid #D8D8D8;;
+                            }
+                        </style>
+
+                        <table class="orderstatustable" style="    width: 100%;">
+
+                            <?php
+                            $proccessArray = [];
+                            $temp = ($order_status_record);
+
+                            foreach ($temp as $key => $value) {
+
+                                $ht = "<tr '>";
+                                $ht .= "<td style='width:170px'>" . $value['date'] . "</td>";
+                                $ht .= "<td style='      border-left: 1px solid;padding: 0;width: 1px; padding-top: 12px; '><i class='icon-circle' style='margin-left: -25px;margin-left: -11px;    font-size: 25px;
+    margin-top: 11px;'></i></td>";
+                                $ht .= '<th>' . $value['order_status'] . ' <br><small style="font-weight:300;font-size:13px">' . ($value['status_tag'] != '7' ? $value['remark'] : '') . '</small> </th>';
+
+
+                                array_push($proccessArray, $ht);
+                            }
+                            $proccessStatus = implode('', $proccessArray);
+                            echo $proccessStatus;
+                            echo "</td></tr>";
+                            ?>
+                        </table>
+
+                    </div>
+                    <div style="clear: both"></div>
+
+                    <div class="panel panel-default" style="margin-bottom: -23px;">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Order Description</h3>
+                        </div>
+
+                        <div class="row" style=" margin-top:0px;">
+                            <div class="col-xs-12 table-responsive">
+                                <table class="table">
+
+                                    <tbody><tr>
+                                            <th style="width: 25%;"><span style="margin: 0px 0px 0px 13px;">Product</span></th>
+                                            <th style="width: 25%;">Style Id / Measurement Profile	</th>
+                                            <th style="width: 7%;">Item</th>
+                                            <th style="width: 100px;">Qty.</th>
+                                            <th style="width: 9%;">Price</th>
+                                            <th style="width: 12%;">Extra Price</th>
+                                            <th style="width: 9%;">Total</th>
+                                            
+
+                                        </tr>
 
 
 
 
+
+                                        <tr class="" ng-repeat="citem in shopCart.cartdata.products">
+
+                                            <td>
+                                                <div class="col-md-4" style="">
+                                                    <a href="#" class="r_corners d_inline_b wrapper">
+                                                        <img src="{{citem.item_image}}" alt="" style="    height: 70px;    width: 70px;;">
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-8 hideonmobile" style="padding: 0px">
+                                                    <p class=""><a href="#" class="color_dark tr_all">{{citem.title}}</a></p>
+                                                    <p class="textoverflow" style="font-size: 12px" data-toggle="tooltip" data-placement="left" title="Sand ">
+                                                        {{citem.product_speciality}}  
+                                                    </p>
+                                                    <button class="btn btn-xs btn-default" ng-if="citem.customization_id > 0" ng-click="viewStyle(citem.style)">View</button>
+
+                                                </div>
+                                            </td>
+                                            <td data-title="SKU" class="fw_light">
+
+                                                <table class="addr measurement_style" style="width: 100%;margin-top: 11px;">
+                                                    <tbody><tr style="font-size: 13px">
+                                                            <td class="measurement_style" >Style Id</td>
+
+                                                            <td class="measurement_style">{{citem.customization_data}}</td>
+                                                        </tr>
+                                                        <tr style="font-size: 13px">
+                                                            <td class="measurement_style">Measurement Profile</td>
+
+                                                            <td class="measurement_style">{{citem.measurement_data}}</td>
+                                                        </tr>
+                                                    </tbody></table>
+
+
+                                            </td>
+                                            <td>
+
+                                                <p>{{citem.tag_title}}  </p>
+                                            </td>
+
+                                            <td data-title="Quantity" style="width: 90px">
+                                            {{citem.quantity}}
+                                             
+
+
+
+                                            </td>
+
+                                            <td data-title="Price">{{(citem.price - citem.extra_price)|currency}}  </td>
+                                            <td data-title="Extra Price">
+                                                {{citem.extra_price|currency}}<br/>
+                                                <button class="btn btn-xs btn-default" ng-if="citem.extra_price > 0" ng-click="viewExtraPrice(citem.style)">View</button>
+                                            </td>
+                                            <td data-title="Total" class=" color_dark" style="">
+                                                {{citem.total_price|currency}}     
+
+                                            </td>
+
+                                            
+
+                                        </tr>
+
+
+
+
+                                    <input type="hidden" id="no_of_product" value="3">
+
+                                    <tr class="bg_light_2">
+                                        <td colspan="2" rowspan="6">
+                                            
+
+                                        </td>
+
+                                        <td colspan="4"><span class="spna">Sub Total</span>:</td>
+                                        <td>
+                                            <p style="" id="sub_total fw_ex_bold">
+                                                {{shopCart.cartdata.total_price|currency}} 
+                                            </p>
+                                        </td>
+                                    </tr>
+            <!--                                <tr class="bg_light_2">
+            
+                                        <td><span class="spna">Tax/Custom</span>:</td>
+                                        <td><p style="">$00.00</p></td>
+                                    </tr>-->
+                                    <tr class="bg_light_2">
+
+                                        <td colspan="4"><span class="spna">Coupon Discount</span>:</td>
+                                        <td>                                             <p id="discount_coupon fw_ex_bold" style="">$00.00</p>  
+
+                                        </td>
+                                    </tr>
+                                    <tr class="bg_light_2">
+
+                                        <td colspan="4"><span class="spna">Shipping Price</span>:</td>
+                                        <td> <p style="" id="shipping_amount" class="">
+                                                {{shopCart.cartdata.shipping_price|currency}}  
+
+                                            </p></td>
+                                    </tr>
+                                    <tr class="bg_light_2">
+
+                                        <td colspan="4"><span class="spna">My Wallet</span>:</td>
+                                        <td>
+                                            <p style="" id="wallet_amount1" class="">
+                                                $00.00
+                                            </p>
+                                            <form method="post" action="#" class="ng-pristine ng-valid">
+
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg_light_2">
+
+                                        <td colspan="4"><span class="spna" style="color:black;font-size: 16px"><b>Grand Total</b></span>:</td>
+                                        <td><span style="" id="tPrice" class="fw_ex_bold"> {{shopCart.cartdata.grand_total|currency}} </span></td>
+                                    </tr>
+
+                                    </tbody></table>
+                                
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+
+                <!--banners-->
+            </div>
+        </div>
+    </div>
 </div>
 
-
 <script>
-
-    App.controller('OrderDetailsController', function ($scope, $http, $timeout, $interval) {
-        var url = baseurl + "Api/order_mail/" + <?php echo $order_data->id; ?> + "/" + '<?php echo $order_data->order_no; ?>';
-        $scope.checkmailsend = 0;
-        $scope.sendOrderMail = function (order_no) {
-            swal({
-                title: 'Sending Mail...',
-                onOpen: function () {
-                    swal.showLoading()
-                },
-            })
-            $http.get(url).then(function (rdata) {
-                swal({timer: 1500,
-                    title: 'Mail Sent!',
-                    type: 'success', })
-            }, function () {
-                swal({timer: 1500,
-                    title: 'Unable To Send Mail!',
-                    type: 'error', })
-            })
-        }
-
-        $interval(function () {
-            if ($scope.checkmailsend == 1) {
-            }
-            else {
-                $scope.sendOrderMailCheck();
-            }
-        }, 2000)
-
-        $scope.sendOrderMailCheck = function (order_no) {
-            var url1 = baseurl + "Api/order_mailcheck/" + <?php echo $order_data->id; ?> + "/" + '<?php echo $order_data->order_no; ?>';
-
-
-            $http.get(url1).then(function (rdata) {
-                $scope.checkmailsend = rdata.data.checkpre;
-                if ($scope.checkmailsend == 0) {
-                    var url2 = baseurl + "Api/order_mailchecksend/" + <?php echo $order_data->id; ?> + "/" + '<?php echo $order_data->order_no; ?>';
-                    $http.get(url2).then(function (rdata) {
-                        swal({timer: 1500,
-                            title: 'Mail Sent!',
-                            type: 'success', })
-                    }, function () {
-                        swal({timer: 1500,
-                            title: 'Unable To Send Mail!',
-                            type: 'error', })
-                    })
-                }
-
-            }, function () {
-
-            })
-        }
-
-    })
-
-
+    var order_idgbl = <?php echo $orderDetail[0]['id']; ?>;
 </script>
+<script src="<?php echo base_url(); ?>assets/theme/angular/shopAllCart.js"></script>
 
 
 <?php

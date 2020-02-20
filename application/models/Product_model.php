@@ -167,6 +167,42 @@ class Product_model extends CI_Model {
         return $cartdataid;
     }
 
+    function getCartDataCustomOrder($order_id) {
+        $query = "SELECT * from nfw_product_cart where user_id = '$this->user_id' and order_id='$order_id';";
+        $query = $this->db->query($query);
+        $cartdata = $query->result_array();
+        $cartdataid = array();
+        foreach ($cartdata as $key => $value) {
+            $customdata = $this->getCustomizationDataById($value['customization_id']);
+            $cartdataid[$value['id']] = array("item" => $value, "custom_data" => $customdata);
+        }
+        return $cartdataid;
+    }
+
+    function phpjsonstyle($data, $data_type) {
+
+        $data = trim(trim($data, "{"), "}");
+        $t = explode(",", $data);
+
+        $temp = array();
+        foreach ($t as $key => $value) {
+            $t1 = explode(':', $value);
+            $temp3 = $t1[1];
+            $temp3 = substr($temp3, 0, -1);
+            $temp3 = ltrim($temp3, '"');
+            $temp31 = str_replace("++*++", ",", $temp3);
+            $temp32 = str_replace("|||||", "'", $temp31);
+            $temp[trim($t1[0], '"')] = $temp32;
+        }
+
+        if ($data_type == 'php') {
+            return $temp;
+        }
+        if ($data_type == 'json') {
+            return json_encode($temp);
+        }
+    }
+
     function getCartData() {
         $query = "SELECT * from nfw_product_cart where user_id = '$this->user_id' and  measurement_id = '' and !order_id;";
         $query = $this->db->query($query);

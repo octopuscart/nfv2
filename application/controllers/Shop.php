@@ -56,6 +56,101 @@ class Shop extends CI_Controller {
             redirect("Shop/cart?addrurl=paymentMode");
         }
 
+
+        if (isset($_POST['confirm_order'])) {
+            $ship_id = $this->input->post('shipid');
+
+            $totalprice = $this->input->post('totalprice');
+            $totalquantity = $this->input->post('totalquantity');
+            $grandtotal = $this->input->post('grandtotal');
+            $shippingprice = $this->input->post('shippingprice');
+
+            $query = "SELECT address1,address2,city,state,country,zip FROM `nfw_billing_shipping_address` where id = $ship_id ";
+            $shipresult = $this->Product_model->resultAssociate($query);
+            $shipdata = json_encode(end($shipresult));
+
+
+            $query = "SELECT id,first_name,middle_name,last_name,email,telephone_no,fax_no,contact_no,registration_id FROM  `auth_user` where id = $this->user_id";
+            $userinfo = $this->Product_model->resultAssociate($query);
+            $userdata = json_encode(end($userinfo));
+
+            if ($data['cardinfo']) {
+                $carddata1 = ""; //$_SESSION['cardinfo'];
+                $cardTitle = 'Credit Card';
+            } else {
+                $carddata1 = "Manual payment";
+                $cardTitle = 'Manual payment';
+            }
+
+            $dat = date('Y-m-d ');
+            $tm = date('H:i:s');
+            $date_code = date('ym');
+            $dte1 = date('Y-m-d H:i:s');
+
+
+            $orderInsertData = array(
+                "user_id" => $this->user_id,
+                "user_info" => $userdata,
+                "op_date" => $dat,
+                "op_time" => $tm,
+                "total_price" => $grandtotal,
+                "shipping_amount" => $shippingprice,
+                "total_quantity" => $totalquantity,
+                "billing_id" => "",
+                "shipping_id" => $shipdata,
+                "coupon_id" => "",
+                "payment_gateway" => $cardTitle,
+                "payment_gateway_return" => $carddata1,
+                "order_no" => "",
+            );
+
+            $this->db->insert('nfw_product_order', $orderInsertData);
+            $last_id = $this->db->insert_id();
+            $gen_num = 1100 + $last_id;
+            $order_code = 'ON' . $date_code . '' . $gen_num;
+            $invoice_no = 'IN' . $date_code . '' . $gen_num;
+
+            $this->db->set('order_no', $order_code);
+            $this->db->where('id', $last_id); //set column_name and value in which row need to update
+            $this->db->update("nfw_product_order");
+
+            $orderpaymentinsert = array(
+                "user_id" => $this->user_id,
+                "order_id" => $last_id,
+                "card_id" => "",
+                "transaction_no" => "",
+                "transaction_amount" => $grandtotal,
+                "status" => "Pending"
+            );
+            $this->db->insert("nfw_order_payment", $orderpaymentinsert);
+
+            $invoiceinsert = array(
+                "user_id" => $this->user_id,
+                "order_id" => $last_id,
+                "op_date" => $dat,
+                "op_time" => $tm,
+                "total_amount" => $grandtotal,
+                "invoice_no" => $invoice_no,
+            );
+            $this->db->insert("nfw_order_invoice", $invoiceinsert);
+            $dte1 = date('Y-m-d H:i:s');
+            $nfw_order_status = array(
+                "order_id" => $last_id,
+                "op_date_time" => $dte1,
+                "remark" => 'Confirmed on $dte1',
+                "status" => "1"
+            );
+            $this->db->insert("nfw_order_status", $nfw_order_status);
+
+
+            $this->db->set('order_id', $last_id);
+            $this->db->where('order_id', "0");
+            $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
+            $this->db->update("nfw_product_cart");
+            
+            redirect("Order/orderdetails/"+$order_code)
+        }
+
         $this->load->view('Product/shopCart', $data);
     }
 

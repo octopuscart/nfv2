@@ -524,59 +524,65 @@ $this->load->view('layout/header');
 
 
             <div role="tabpanel" class="tab-pane" id="confirmOrder">
+                <form action="#" method="post">
+                    <div class="orderinformation" style="width: 500px;">
+                        <address>
+                            <strong>Ship To</strong><br/>
+                            {{userAddress.selected.address1}}<br>
+                            {{userAddress.selected.address2}}<br>
+                            {{userAddress.selected.city}}, {{userAddress.selected.state}}<br>
+                            {{userAddress.selected.country}}, {{userAddress.selected.zip}}<br>
+                            <input type="hidden" name="shipid" value="{{userAddress.selected.id}}" />
+                        </address>
+                        <hr/>
+                        <strong>
+                            Payment Methods: <?php echo $cardinfo ? 'Card' : 'Manual Payment'; ?>
+                        </strong>
+                        <hr/>
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    Sub Total 
+                                </td>
+                                <td>
+                                    <input type="hidden" name="totalprice" value="{{shopCart.cartdata.total_price|currency}}" />
+                                    {{shopCart.cartdata.total_price|currency}} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Shipping Price
+                                </td>
+                                <td>
+                                    <input type="hidden" name="shippingprice" value="{{shopCart.cartdata.shipping_price}}" />
+                                    {{shopCart.cartdata.shipping_price|currency}} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Grand Total
+                                </td>
+                                <td>
+                                    <input type="hidden" name="totalquantity" value="{{shopCart.cartdata.total_quantity}}" />
+                                    <input type="hidden" name="grandtotal" value="{{shopCart.cartdata.grand_total|currency}}" />
+                                    {{shopCart.cartdata.grand_total|currency}} 
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="m_bottom_23 check">
+                            <input type="checkbox" id="checkbox_71" name="" class="d_none" ng-model="orderProcess.confirmcheck">
+                            <label for="checkbox_71" class="d_inline_m fw_light">I agree to the terms of service </label>
+                            <p class="d_inline_m fw_light">(<a href="termAndCondition.php" target="_blank" class="tr_all color_dark_hover fw_light">Terms of service</a>)</p>
 
-                <div class="orderinformation" style="width: 500px;">
-                    <address>
-                        <strong>Ship To</strong><br/>
-                        {{userAddress.selected.address1}}<br>
-                        {{userAddress.selected.address2}}<br>
-                        {{userAddress.selected.city}}, {{userAddress.selected.state}}<br>
-                        {{userAddress.selected.country}}, {{userAddress.selected.zip}}<br>
-                    </address>
-                    <hr/>
-                    <strong>
-                     Payment Methods: <?php echo $cardinfo?'Card':'Manual Payment';?>
-                    </strong>
-                    <hr/>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                Sub Total 
-                            </td>
-                            <td>
-                                {{shopCart.cartdata.total_price|currency}} 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Shipping Price
-                            </td>
-                            <td>
-                                {{shopCart.cartdata.shipping_price|currency}} 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Grand Total
-                            </td>
-                            <td>
-                                {{shopCart.cartdata.grand_total|currency}} 
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="m_bottom_23 check">
-                        <input type="checkbox" id="checkbox_71" name="" class="d_none" ng-model="orderProcess.confirmcheck">
-                        <label for="checkbox_71" class="d_inline_m fw_light">I agree to the terms of service </label>
-                        <p class="d_inline_m fw_light">(<a href="termAndCondition.php" target="_blank" class="tr_all color_dark_hover fw_light">Terms of service</a>)</p>
-
+                        </div>
+                        <button type="submit" name="confirm_order" ng-if="orderProcess.confirmcheck"  id="btn1" class="d_inline_b tr_all r_corners button_type_1 color_pink fs_medium mini_side_offset" value="dfjdg" style="margin: 0px 0px 10px;">
+                            <i class="icon-check"></i> Confirm Order
+                        </button>
+                        <button type="button" name="orderConfirm" ng-if="!orderProcess.confirmcheck" disabled id="btn1" class=" disabled d_inline_b tr_all r_corners button_type_1 color_pink fs_medium mini_side_offset" value="dfjdg" style="margin: 0px 0px 10px;opacity: 0.5">
+                            <i class="icon-check"></i> Confirm Order
+                        </button>
                     </div>
-                    <button type="submit" name="orderConfirm" ng-if="orderProcess.confirmcheck" disabled id="btn1" class="d_inline_b tr_all r_corners button_type_1 color_pink fs_medium mini_side_offset" value="dfjdg" style="margin: 0px 0px 10px;">
-                        <i class="icon-check"></i> Confirm Order
-                    </button>
-                    <button type="button" name="orderConfirm" ng-if="!orderProcess.confirmcheck" disabled id="btn1" class=" disabled d_inline_b tr_all r_corners button_type_1 color_pink fs_medium mini_side_offset" value="dfjdg" style="margin: 0px 0px 10px;opacity: 0.5">
-                        <i class="icon-check"></i> Confirm Order
-                    </button>
-                </div>
+                </form>
             </div>
 
         </div>

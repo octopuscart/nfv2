@@ -22,70 +22,10 @@ class Account extends CI_Controller {
         redirect('Account/profile');
     }
 
-    //Profile page
-    public function profile() {
-
-        $query = $this->db->get('country');
-        $countrylist = $query->result();
-        $data1['countrylist'] = $countrylist;
-
-        if ($this->user_id == 0) {
-            redirect('Account/login');
-        }
-
-        $user_details = $this->User_model->user_details($this->user_id);
-        $data['user_details'] = $user_details;
-        $data['msg'] = "";
-        if (isset($_POST['change_password'])) {
-            $old_password = $this->input->post('old_password');
-            $new_password = $this->input->post('new_password');
-            $re_password = $this->input->post('re_password');
-
-            if ($user_details->password == md5($old_password)) {
-                if ($new_password == $re_password) {
-                    $password = md5($re_password);
-                    $this->db->set('password', $password);
-                    $this->db->where('id', $this->user_id);
-                    $this->db->update('admin_users');
-                    redirect('Account/profile');
-                } else {
-                    $data['msg'] = "Password didn't match.";
-                }
-            } else {
-                $data['msg'] = 'Enterd wrong password.';
-            }
-        }
-
-
-        if (isset($_POST['update_profile'])) {
-            $this->db->set('first_name', $this->input->post('first_name'));
-            $this->db->set('last_name', $this->input->post('last_name'));
-            $this->db->set('contact_no', $this->input->post('contact_no'));
-            $this->db->set('gender', $this->input->post('gender'));
-            $this->db->set('birth_date', $this->input->post('birth_date'));
-
-            $this->db->where('id', $this->user_id);
-            $this->db->update('admin_users');
-
-            $session_user = $this->session->userdata('logged_in');
-            $session_user['first_name'] = $this->input->post('first_name');
-            $session_user['last_name'] = $this->input->post('last_name');
-            $this->session->set_userdata('logged_in', $session_user);
-
-            redirect('Account/profile');
-        }
-        $this->load->view('Account/profile', $data);
-    }
-
-    //login page
-    //login page
-
-    
-    
     function userLogin() {
         if (isset($_POST['login'])) {
             $username = $this->input->post('email');
-             $password = $this->input->post('password');
+            $password = $this->input->post('password');
 
             $this->db->select('*');
             $this->db->from('auth_user au');
@@ -112,9 +52,9 @@ class Account extends CI_Controller {
 
                 $this->session->set_userdata('logged_in', $userdata);
 
-               
 
-                 redirect('Shop/index');
+
+                redirect('Shop/index');
             } else {
                 // $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
                 //  redirect('Shop/index', $data1);
@@ -122,123 +62,93 @@ class Account extends CI_Controller {
         }
     }
 
-    function login() {
+    function registration() {
         $data1['msg'] = "";
+        $data1["link"] = site_url("Account/registration");
+        $data1['msgtype'] = 'success';
 
-        $query = $this->db->get('country');
-        $countrylist = $query->result();
-        $data1['countrylist'] = $countrylist;
+        $query = $this->db->get('countries');
+        $countrylist = $query->result_array();
+        $data1['country_list'] = $countrylist;
+
+
 
         $link = isset($_GET['page']) ? $_GET['page'] : '';
         $data1['next_link'] = $link;
 
-        if (isset($_POST['signIn'])) {
-            $username = $this->input->post('email');
-            $password = $this->input->post('password');
-
-            $this->db->select('*');
-            $this->db->from('auth_user au');
-            $this->db->where('email', $username);
-            $this->db->where('password', md5($password));
-            $this->db->limit(1);
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) {
-                $userdata = $query->result_array()[0];
-                $usr = $userdata['email'];
-                $pwd = $userdata['password'];
-                if ($username == $usr && md5($password) == $pwd) {
-                    $sess_data = array(
-                        'username' => $username,
-                        'first_name' => $userdata['first_name'],
-                        'last_name' => $userdata['last_name'],
-                        'login_id' => $userdata['id'],
-                    );
-                    $user_id = $userdata['id'];
-                    $session_cart = $this->session->userdata('session_cart');
-                    $productlist = $session_cart['products'];
-
-                    $this->Product_model->cartOperationCustomCopy($user_id);
-
-                    $this->session->set_userdata('logged_in', $sess_data);
-
-                    if ($link == 'checkoutInit') {
-                        redirect('Cart/checkoutInit');
-                    }
-
-                    redirect('Account/profile');
-                } else {
-                    $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
-                }
-            } else {
-                $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
-                redirect('Account/login', $data1);
-            }
-        }
 
         if (isset($_POST['registration'])) {
 
+            $captchacode = $this->session->userdata('captchacode');
+
+
+            $password = $this->input->post('pass');
+            $cpassword = $this->input->post('con_pass');
+
             $email = $this->input->post('email');
-            $password = $this->input->post('password');
             $first_name = $this->input->post('first_name');
             $last_name = $this->input->post('last_name');
-            $cpassword = $this->input->post('con_password');
+            $middle_name = $this->input->post('middle_name');
 
+            $birth_year = $this->input->post('birth_year');
+            $birth_month = $this->input->post('birth_month');
             $birth_date = $this->input->post('birth_date');
+
+            $birth = $birth_year . '-' . $birth_month . '-' . $birth_date;
+
+            $birth_date = $birth;
+
             $gender = $this->input->post('gender');
             $country = $this->input->post('country');
-            $profession = $this->input->post('profession');
+            $profession = $this->input->post('profession_id');
+            $gender = $this->input->post("gender");
 
             if ($cpassword == $password) {
                 $user_check = $this->User_model->check_user($email);
                 if ($user_check) {
                     $data1['msg'] = 'Email Address Already Registered.';
+                    $data1["link"] = site_url("Account/registration");
+                    $data1['msgtype'] = 'warning';
                 } else {
                     $userarray = array(
+                        'middle_name' => $middle_name,
                         'first_name' => $first_name,
                         'last_name' => $last_name,
                         'email' => $email,
                         'password' => md5($password),
-                        'password2' => $password,
-                        'profession' => $profession,
-                        'country' => $country,
+                        'telephone_no' => "",
+                        'fax_no' => "",
+                        'registration_id' => "",
                         'gender' => $gender,
-                        'birth_date' => $birth_date,
-                        'registration_datetime' => date("Y-m-d h:i:s A")
+                        'country' => $country,
+                        'birth_date' => $birth,
+                        'user_img' => "",
+                        'contact_no' => "",
+                        'status' => "Inactive",
+                        'profession_id' => $profession,
+                        'profession_value' => "",
+                        'joining_date' => date('Y-m-d H:i:s'),
+                        'remark' => "",
                     );
-                    $this->db->insert('admin_users', $userarray);
+                    $this->db->insert('auth_user', $userarray);
                     $user_id = $this->db->insert_id();
 
-                    $sess_data = array(
-                        'username' => $email,
-                        'first_name' => $first_name,
-                        'last_name' => $last_name,
-                        'login_id' => $user_id,
-                    );
-
-
-                    try {
-                        $this->User_model->registration_mail($user_id);
-                    } catch (Exception $e) {
-                        
-                    }
-
-                    $this->Product_model->cartOperationCustomCopy($user_id);
-
-                    $this->session->set_userdata('logged_in', $sess_data);
-
-                    if ($link == 'checkoutInit') {
-                        redirect('Cart/checkoutInit');
-                    }
-
-                    redirect('Account/profile');
+                    $this->db->where('id', $user_id);
+                    $query = $this->db->get('auth_user');
+                    $userdata = $query->result_array()[0];
+                    $this->session->set_userdata('logged_in', $userdata);
+                    $data1['msg'] = 'Verification Mail Sent, Check Your Inbox';
+                    $data1["link"] = site_url("/");
+                    $data1['msgtype'] = 'success';
+//                    redirect('/');
                 }
             } else {
+                $data1['msgtype'] = 'error';
                 $data1['msg'] = 'Password did not match.';
+                $data1["link"] = site_url("Account/registration");
             }
         }
-
-
-        $this->load->view('Account/login', $data1);
+        $this->load->view('Account/registration', $data1);
     }
 
     // Logout from admin page
@@ -253,103 +163,6 @@ class Account extends CI_Controller {
         $this->session->sess_destroy();
 
         redirect('Shop/index');
-    }
-
-    //orders list
-    function orderList() {
-        if ($this->user_id == 0) {
-            redirect('Account/login');
-        }
-        $this->db->where('user_id', $this->user_id);
-        $query = $this->db->get('user_order');
-        $orderlist = $query->result();
-
-        $orderslistr = [];
-        foreach ($orderlist as $key => $value) {
-
-            $this->db->order_by('id', 'desc');
-            $this->db->where('order_id', $value->id);
-            $query = $this->db->get('user_order_status');
-            $status = $query->row();
-            $value->status = $status ? $status->status : $value->status;
-            array_push($orderslistr, $value);
-        }
-        $data['orderslist'] = $orderslistr;
-
-
-        $this->load->view('Account/orderList', $data);
-    }
-
-    //Address management
-    function address() {
-        $user_address_details = $this->User_model->user_address_details($this->user_id);
-        $data['user_address_details'] = $user_address_details;
-
-        //Get Address
-        if (isset($_GET['setAddress'])) {
-            $this->db->set('status', "");
-            $this->db->where('user_id', $this->user_id);
-            $this->db->update('shipping_address');
-
-            $adid = $_GET['setAddress'];
-            $this->db->set('status', "default");
-            $this->db->where('id', $adid);
-            $this->db->update('shipping_address');
-            redirect('Account/address');
-        }
-
-        //add New address
-        if (isset($_POST['add_address'])) {
-            $this->db->set('status', "");
-            $this->db->where('user_id', $this->user_id);
-            $this->db->update('shipping_address');
-
-            $category_array = array(
-                'address' => $this->input->post('address'),
-                'city' => $this->input->post('city'),
-                'state' => $this->input->post('state'),
-                'pincode' => $this->input->post('pincode'),
-                'user_id' => $this->user_id,
-                'status' => 'default',
-            );
-            $this->db->insert('shipping_address', $category_array);
-            redirect('Account/address');
-        }
-
-
-        $this->load->view('Account/address', $data);
-    }
-
-    //function credits
-    function credits() {
-        if ($this->user_id == 0) {
-            redirect('Account/login');
-        }
-
-        $user_id = $this->user_id;
-
-        $user_credits = $this->User_model->user_credits($this->user_id);
-        $data['user_credits'] = $user_credits;
-
-        $querys = "select * from (
-                   select credit, '' as debit, order_id, remark, c_date, c_time  FROM `user_credit` 
-                   where user_id = $user_id and credit>0
-                    union
-                   select '' as credit, credit as debit, order_id, remark, c_date, c_time  FROM `user_debit`
-                   where user_id = $user_id  and credit>0
-                   ) as credit order by c_date desc";
-
-        $query = $this->db->query($querys);
-        $creditlist = $query->result();
-        $data['creditlist'] = $creditlist;
-
-
-        $this->load->view('Account/credits', $data);
-    }
-
-    function testReg() {
-        $user_id = $this->user_id;
-        $this->User_model->registration_mail($user_id);
     }
 
 }

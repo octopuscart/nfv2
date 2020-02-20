@@ -1009,422 +1009,76 @@ order by count(nfw_color_id) asc, colorbunch";
         $this->response(array('count' => $count, 'productdata' => $productlists, 'colors' => $colorArray, 'selected_colors' => $selectedColors, 'pricelist' => $pricelist));
     }
 
-    function shirtCustomization_get() {
+    function hexrgb($hexstr) {
+        $int = hexdec($hexstr);
 
-        $watchoption_style = array(
-            'nowatch' => 'No',
-            'leftwatch' => 'Right Wrist',
-            'rightwatch' => 'Left Wrist'
-        );
+        return array("red" => 0xFF & ($int >> 0x10),
+            "green" => 0xFF & ($int >> 0x8),
+            "blue" => 0xFF & $int);
+    }
 
-        $watchoption_container = array();
-        foreach ($watchoption_style as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/watch/" . $key . ".jpg",
-                "default" => $value == 'No' ? '1' : '',
-                "lable" => $value,
-                "parent" => "Long Sleeve",
-                "parenttitle" => "Sleeve Style",
-            );
-            array_push($watchoption_container, $tempcontain);
+    function createCaptha_get() {
+        //Settings: You can customize the captcha here
+        $image_width = 120;
+        $image_height = 40;
+        $characters_on_image = 6;
+        $font = APPPATH . '../assets/monofont.ttf';
+
+//The characters that can be used in the CAPTCHA code.
+//avoid confusing characters (l 1 and i for example)
+        $possible_letters = '23456789bcdfghjkmnpqrstvwxyz';
+        $random_dots = 0;
+        $random_lines = 20;
+        $captcha_text_color = "0x142864";
+        $captcha_noice_color = "0x142864";
+
+        $code = '';
+
+
+        $i = 0;
+        while ($i < $characters_on_image) {
+            $code .= substr($possible_letters, mt_rand(0, strlen($possible_letters) - 1), 1);
+            $i++;
         }
 
-        $cuff_style = array(
-            '1' => 'Single Cuff Rounded',
-            '2' => 'Single Cuff Squared',
-            '3' => 'Single Cuff Cutaway',
-            '4' => 'French Cuff  Rounded',
-            '5' => 'French Cuff Squared',
-            '6' => 'French Cuff Cutaway',
-            '7' => 'Convertible  Cuff Rounded',
-            '8' => 'Convertible Cuff Square',
-            '9' => 'Convertible Cuff Cutaway',
-            '10' => '2 Buttons Rounded',
-            '11' => '2 Buttons Squared',
-            '12' => '2 Buttons Cutaway',
-            '13' => 'Milanese Cuff',
-        );
-
-        $cuff_style_container = array();
-        foreach ($cuff_style as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/cuff_shirt/" . $key . ".jpg",
-                "default" => $value == 'Single Cuff Rounded' ? '1' : '',
-                "lable" => $value,
-                "parent" => "Long Sleeve",
-                "parenttitle" => "Sleeve Style",
-                "child" => array("Wrist Watch" => "No")
-            );
-            array_push($cuff_style_container, $tempcontain);
-        }
-
-        $shortsleevestyle = [
-            array(
-                "title" => "Short Sleeve Without Cuff",
-                "image" => "./custom_form_view/shirt/cuff_shirt/withoutcuff_sort.jpg",
-                "default" => "1",
-                "lable" => "Short Sleeve Without Cuff",
-                "parenttitle" => "Sleeve Style",
-                "parent" => "Short Sleeve",
-            ),
-            array(
-                "title" => "Short Sleeve With Cuff",
-                "image" => "./custom_form_view/shirt/cuff_shirt/withcuff_sort.jpg",
-                "default" => "",
-                "lable" => "Short Sleeve With Cuff",
-                "parenttitle" => "Sleeve Style",
-                "parent" => "Short Sleeve",
-            ),
-        ];
-        foreach ($shortsleevestyle as $key => $value) {
-            array_push($cuff_style_container, $value);
-        }
+        $font_size = $image_height * 0.75;
+        $image = @imagecreate($image_width, $image_height);
 
 
+//        /* setting the background, text and noise colours here */
+        $background_color = imagecolorallocate($image, 255, 255, 255);
+        $arr_text_color = $this->hexrgb($captcha_text_color);
+        $text_color = imagecolorallocate($image, $arr_text_color['red'],
+                $arr_text_color['green'], $arr_text_color['blue']);
+//
+//        $arr_noice_color = $this->hexrgb($captcha_noice_color);
+//        $image_noise_color = imagecolorallocate($image, $arr_noice_color['red'],
+//                $arr_noice_color['green'], $arr_noice_color['blue']);
+//        /* generating the dots randomly in background */
+//        for ($i = 0; $i < $random_dots; $i++) {
+//            imagefilledellipse($image, mt_rand(0, $image_width),
+//                    mt_rand(0, $image_height), 2, 3, $image_noise_color);
+//        }
+//        /* generating lines randomly in background of image */
+//        for ($i = 0; $i < $random_lines; $i++) {
+//            imageline($image, mt_rand(0, $image_width), mt_rand(0, $image_height),
+//                    mt_rand(0, $image_width), mt_rand(0, $image_height), $image_noise_color);
+//        }
+        /* create a text box and add 6 letters code in it */
+        $textbox = imagettfbbox($font_size, 0, $font, $code);
+        $x = ($image_width - $textbox[4]) / 2;
+        $y = ($image_height - $textbox[5]) / 2;
+        imagettftext($image, $font_size, 0, $x, $y, $text_color, $font, $code);
+        $this->session->set_userdata('captchacode', $code);
+        /* Show captcha image in the page html page */
+        header('Content-Type: image/jpeg'); // defining the image type to be shown in browser widow
+        imagejpeg($image); //showing the image
+    }
 
-
-        $sleevestyle = [
-            array(
-                "title" => "Long Sleeve",
-                "image" => "https://nitafashions.com/nfw/small/custom_57657134840.jpeg",
-                "default" => "1",
-                "lable" => "Long Sleeve",
-                "parent" => "",
-                "child" => "Cuff Style",
-                "child" => array("Cuff Style" => "Single Cuff Rounded", "Wrist Watch" => "No")
-            ),
-            array(
-                "title" => "Short Sleeve",
-                "image" => "./custom_form_view/shirt/cuff_shirt/withoutcuff_sort.jpg",
-                "default" => "",
-                "lable" => "Short Sleeve",
-                "parent" => "",
-                "child" => array("Cuff Style" => "Short Sleeve Without Cuff", "Wrist Watch" => "No")
-            ),
-        ];
-
-
-
-        $printed = array(
-            '1.jpg' => 'P 44 ',
-            '2.jpg' => 'P 45 ',
-            '3.jpg' => 'P 49 ',
-            '4.jpg' => 'P 50 ',
-            '5.jpg' => 'P 51 ',
-            '6.jpg' => 'P 58 ',
-            '7.jpg' => 'P 61 ',
-            '8.jpg' => 'P 63 ',
-            '9.jpg' => 'P 65 ',
-            '19.jpg' => 'P 67 ',
-            '20.jpg' => 'P 78 ',
-            '21.jpg' => 'P 96 ',
-            '22.jpg' => 'P 98 ',
-            '23.jpg' => 'P 99 ',
-            '24.jpg' => 'P 100 ',
-            '25.jpg' => 'P 102 ',
-            '26.jpg' => 'P 104 ',
-            '27.jpg' => 'P 105 ',
-            '28.jpg' => 'P 106 ',
-            '29.jpg' => 'P 107 ',
-            '30.jpg' => 'P 109 ',
-            '31.jpg' => 'P 110 ',
-            '32.jpg' => 'P 112 ',
-            '33.jpg' => 'P 113 ',
-            '34.jpg' => 'P 115 ',
-            '35.jpg' => 'P 135 ',
-            '10.jpg' => 'P 126 ',
-            '11.jpg' => 'P 127 ',
-            '12.jpg' => 'P 128 ',
-            '13.jpg' => 'P 129 ',
-            '14.jpg' => 'P 130 ',
-            '15.jpg' => 'P 131 ',
-            '16.jpg' => 'P 144 ',
-            '17.jpg' => 'P 145 ',
-            '18.jpg' => 'P 148 ',
-        );
-        $solid = array(
-            '8.jpg' => 'B 153 ',
-            '9.jpg' => 'B 155 ',
-            '10.jpg' => 'B 159 ',
-            '11.jpg' => 'B 162 ',
-            '12.jpg' => 'B 165 ',
-            '13.jpg' => 'B 166 ',
-            '14.jpg' => 'B 167 ',
-            '15.jpg' => 'B 171 ',
-            '16.jpg' => 'B 174 ',
-            '17.jpg' => 'B 176 ',
-            '18.jpg' => 'B 177 ',
-            '1.jpg' => 'D 692 ',
-            '2.jpg' => 'D 694 ',
-            '3.jpg' => 'D 698 ',
-            '4.jpg' => 'D 700 ',
-            '5.jpg' => 'D 701 ',
-            '6.jpg' => 'D 703 ',
-            '7.jpg' => 'D 704 ',
-        );
-
-
-
-        $ccinsert = array("Printed" => [], "Solid" => []);
-        foreach ($solid as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/fabric/solid_collar/" . $key,
-                "default" => $value == 'No' ? '1' : '',
-                "lable" => $value,
-                "parent" => "",
-                "parenttitle" => "",
-            );
-            array_push($ccinsert['Solid'], $tempcontain);
-        }
-
-        foreach ($printed as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/fabric/printed_collar/" . $key,
-                "default" => $value == 'No' ? '1' : '',
-                "lable" => $value,
-                "parent" => "",
-                "parenttitle" => "",
-            );
-            array_push($ccinsert['Printed'], $tempcontain);
-        }
-
-
-
-        $buttonarray = array(
-            'standard' => 'Standard',
-            'matching' => 'Matching',
-            '1' => 'Thick Mop',
-            '2' => 'Thin Mop',
-            '3' => 'Black Lipshell'
-        );
-        $buttoncontainer = [];
-        foreach ($buttonarray as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/button_shirt/" . $key . ".png",
-                "default" => $value == 'No' ? '1' : '',
-                "lable" => $value,
-                "parent" => "",
-                "parenttitle" => "",
-            );
-            array_push($buttoncontainer, $tempcontain);
-        }
-
-        $monogram = array(
-            '1' => '1',
-            '3' => '3',
-            '8' => '8',
-            '10' => '10',
-            '13' => '13',
-            '14' => '14',
-            '15' => '15',
-            '16' => '16',
-            '17' => '17',
-            '18' => '18',
-            '19' => '19',
-            '20' => '20',
-            '21' => '21',
-            '22' => '22',
-            '23' => '23',
-            '24' => '24',
-            '27' => '27',
-            '28' => '28',
-            '30' => '30',
-            '31' => '31',
-            '34' => '34',
-            '36' => '36'
-        );
-
-
-        $monogramontainer = [];
-        foreach ($monogram as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/monogram_shirt/" . $key . ".jpg",
-                "default" => $value == '1' ? '1' : '',
-                "lable" => $value,
-                "parent" => "",
-                "parenttitle" => "",
-            );
-            array_push($monogramontainer, $tempcontain);
-        }
-
-        $monogram_placement = array(
-            'no_monogram' => 'No Monogram',
-            'left_cuff' => 'Left Cuff',
-            'left_chest_pocket' => 'Left Chest Pocket',
-            'left_sleeve_plocket' => 'Left Sleeve Placket',
-            'left_abdomen' => 'Left Abdomen',
-            'inside_coller_band' => 'Inside Collar Band',
-            'shirt_tail' => 'Shirt Tail',
-        );
-
-        $monogram_placementcontainer = [];
-        foreach ($monogram_placement as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/monogram_placement/" . $key . ".jpg",
-                "default" => $value == 'No Monogram' ? '1' : '',
-                "lable" => $value,
-                "parent" => "",
-                "parenttitle" => "",
-            );
-            array_push($monogram_placementcontainer, $tempcontain);
-        }
-
-
-        $monogram_color = array(
-            'Contrast_Thread' => 'Contrast Thread',
-            'Matching_Thread' => 'Matching Thread',
-        );
-
-
-        $monogram_colorcontainer = [];
-        foreach ($monogram_color as $key => $value) {
-            $tempcontain = array(
-                "title" => $value,
-                "image" => "./custom_form_view/shirt/monogram_color/" . $key . ".jpg",
-                "default" => $value == 'No Monogram' ? '1' : '',
-                "lable" => $value,
-                "parent" => "",
-                "parenttitle" => "",
-            );
-            array_push($monogram_colorcontainer, $tempcontain);
-        }
-
-
-
-
-        $shirtCustomization = array(
-            'Body Fit' => getChildren(10),
-            'Collar Style' => getChildren(11),
-            'Add 2 Buttons On The Collar Band' => getChildren('13'),
-            'Collar & Cuff Stiffness' => getChildren('14'),
-            'Collar Stays' => getChildren('15'),
-            'Sleeve Style' => $sleevestyle,
-            'Cuff Style' => $cuff_style_container,
-            'Wrist Watch' => $watchoption_container,
-            'Front Style' => getChildren('16'),
-            'Back Style' => getChildren('17'),
-            'Darts' => getChildren('18'),
-            'Pocket Style' => getChildren('19'),
-            'Bottom Style' => getChildren('20'),
-            'Collar & Cuff Feature' => getChildren('21'),
-            'Inner Collar Insert' => $ccinsert,
-            'Inner Cuff Insert' => $ccinsert,
-            'Inner Front Placket Insert' => $ccinsert,
-            'Label' => getChildren('24'),
-            'Button' => $buttoncontainer,
-            'Monogram Placement' => $monogram_placementcontainer,
-            'Monogram Style' => $monogramontainer,
-            'Monogram Initial' => array(),
-            'Monogram Color' => $monogram_colorcontainer,
-        );
-
-
-        $selectelements = array(
-            'Body Fit' => "Loose Fit",
-            'Collar Style' => 'Medium Spread (1 5/8" x 3 ")',
-            'Add 2 Buttons On The Collar Band' => "No",
-            'Collar & Cuff Stiffness' => "Standard",
-            'Collar Stays' => "Permanent",
-            'Sleeve Style' => "Long Sleeve",
-            'Cuff Style' => "Single Cuff Rounded",
-            'Wrist Watch' => "No",
-            'Front Style' => "Plain Front",
-            'Back Style' => "Plain",
-            'Darts' => "No Darts",
-            'Pocket Style' => "No Pocket",
-            'Bottom Style' => "Shirt Tail",
-            'Collar & Cuff Feature' => "No",
-            'Inner Collar Insert' => "-",
-            'Inner Cuff Insert' => "-",
-            'Inner Front Placket Insert' => "-",
-            'Label' => "Nita Fashions",
-            'Button' => "Standard",
-            'Monogram Placement' => "No Monogram",
-            'Monogram Style' => "-",
-            'Monogram Initial' => "-",
-            'Monogram Color' => "-",
-        );
-
-
-
-        $mainnavigation = array(
-            "Body Fit" => array(
-                "icon" => "body_fit",
-                "child" => ['Body Fit' => array("col" => "4"),],
-            ),
-            "Collar" => array(
-                "icon" => "body_fit",
-                "child" => [
-                    'Collar Style' => array("col" => "4", "lablestyle" => "height:60px", "maxsize" => "bodymax400"),
-                    'Add 2 Buttons On The Collar Band' => array("col" => "3"),
-                    'Collar & Cuff Stiffness' => array("col" => "3"),
-                    'Collar Stays' => array("col" => "3"),
-                ]
-            ),
-            "Sleeve & Cuff Style" => array(
-                "icon" => "body_fit",
-                "child" => [
-                    'Sleeve Style' => array("col" => "4", "lablestyle" => "",),
-                    'Cuff Style' => array("col" => "4", "lablestyle" => "", "maxsize" => "bodymax400", "depandent" => "Sleeve Style"),
-                    'Wrist Watch' => array("col" => "4", "lablestyle" => "", "depandent" => "Sleeve Style")
-                ],
-            ),
-            "Front & Back" => array(
-                "icon" => "body_fit",
-                "child" => [
-                    'Front Style' => array("col" => "3", "lablestyle" => "",),
-                    'Back Style' => array("col" => "4", "lablestyle" => "",),
-                    'Darts' => array("col" => "4", "lablestyle" => "",),
-                ]
-            ),
-            "Pocket" => array(
-                "icon" => "body_fit",
-                "child" => ['Pocket Style' => array("col" => "4", "lablestyle" => "height:60px",),],
-            ),
-            "Bottom" => array(
-                "icon" => "body_fit",
-                "child" => ['Bottom Style' => array("col" => "4", "lablestyle" => "height:60px",),],
-            ),
-            "Collar & Cuff Feature" => array(
-                "icon" => "body_fit",
-                "child" => [
-                    'Collar & Cuff Feature' => array("col" => "4", "lablestyle" => "",),
-                    'Inner Collar Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi"),
-                    'Inner Cuff Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi"),
-                    'Inner Front Placket Insert' => array("col" => "4", "lablestyle" => "", "view" => "multi"),
-                ],
-            ),
-            "Button & Lable" => array(
-                "icon" => "body_fit",
-                "child" => ['Label' => array("col" => "4", "lablestyle" => "",),
-                    'Button' => array("col" => "4", "lablestyle" => "",)],
-            ),
-            "Monogram" => array(
-                "icon" => "body_fit",
-                "child" => [
-                    'Monogram Placement' => array("col" => "4", "lablestyle" => "",),
-                    'Monogram Style' => array("col" => "4", "lablestyle" => "",),
-                    'Monogram Initial' => array("col" => "4", "lablestyle" => "", "view" => "text"),
-                    'Monogram Color' => array("col" => "4", "lablestyle" => "",),
-                ],
-            ),
-        );
-
-        $return_data = array(
-            "formItems" => $shirtCustomization,
-            "navigation" => $mainnavigation,
-            "title" => "Shirt Customization",
-            "item" => "Shirt",
-            "selection" => $selectelements,
-        );
-        $this->response($return_data);
+    function getUserShippingAddress_get() {
+        $query = "SELECT * from `nfw_billing_shipping_address` where  user_id = '$this->user_id'  ";
+        $result = $this->Product_model->resultAssociate($query);
+        $this->response(array("address"=>$result, "user"=>$this->checklogin));
     }
 
 }

@@ -8,7 +8,12 @@ class Customization extends CI_Controller {
         parent::__construct();
         $this->load->model('Product_model');
         $this->load->library('session');
-        $this->user_id = $this->session->userdata('logged_in')['id'];
+        $session_user = $this->session->userdata('logged_in');
+        if (isset($session_user['id'])) {
+            $this->user_id = $session_user['id'];
+        } else {
+            $this->user_id = 0;
+        }
     }
 
     public function index() {
@@ -16,6 +21,9 @@ class Customization extends CI_Controller {
     }
 
     function start($item_id) {
+        if (!$this->user_id) {
+            redirect("/");
+        }
         $data['item_id'] = $item_id;
         $customdatalink = array(
             "1" => "shirtCustomization",

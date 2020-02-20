@@ -22,7 +22,7 @@ class User_model extends CI_Model {
     //check user if exist in system
     function check_user($emailid) {
         $this->db->where('email', $emailid);
-        $query = $this->db->get('admin_users');
+        $query = $this->db->get('auth_user');
         $user_details = $query->row();
         return $user_details;
     }

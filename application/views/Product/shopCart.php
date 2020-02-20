@@ -43,6 +43,8 @@ $this->load->view('layout/header');
         top: 0;
     }
 
+
+
 </style>
 <style>
     .close{
@@ -396,8 +398,332 @@ $this->load->view('layout/header');
                         </tbody></table>
                 </div>
             </div>
+
+            <div role="tabpanel" class="tab-pane" id="billingShipping">
+                <div class="inloading" ng-if="userAddress.loader == '1'">
+                    <h2>Loading...</h2>
+                </div>
+
+                <div class="shippinginfoblock" ng-if="userAddress.loader == '0'">
+                    <h2>Choose Address For Shipping
+
+                        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#addressModal">
+                            Add New
+                        </button>
+                    </h2>
+
+                </div>
+                <div class="nodatafound shippinginfoblock" ng-if="userAddress.loader == '2'">
+                    <h2>
+                        <span style="color:red">
+                            SHIPPING  ADDRESS NOT FOUND! PLEASE ADD YOUR  SHIPPING  ADDRESS
+                            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#addressModal">
+                                Add New
+                            </button>
+                        </span>
+                    </h2>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+
+                    <div class="col-md-3 " ng-repeat="address in userAddress.list">
+                        <div class="addressblock {{address.id == userAddress.selected.id?'active':''}}">
+                            <address>
+                                {{address.address1}}<br>
+                                {{address.address2}}<br>
+                                {{address.city}}, {{address.state}}<br>
+                                {{address.country}}, {{address.zip}}<br>
+                            </address>
+                            <div ng-if="address.id == userAddress.selected.id" class="addressbarbottom">
+                                <i class="selectedaddress fa fa-check"></i>
+                            </div>
+
+                            <div ng-if="address.id != userAddress.selected.id" class="addressbarbottom">
+                                <button class="btn btn-default buttonaddressselect" ng-click="selectAddress(address)">Select</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <div role="tabpanel" class="tab-pane" id="paymentMode">
+                <div class="" style="margin-top: 10px;">
+                    <div class="col-lg-6 col-md-6 m_bottom_40 m_xs_bottom_30">
+                        <p class="" style="font-size: 28px;font-weight: 300;
+                           background-color: #000;
+                           padding: 10px;
+                           color: #fff;
+                           margin-bottom: 20px;
+                           "><i class="icon-truck"></i> Shipping Method</p>
+
+                        <ul>
+                            <li class="m_bottom_15" style="padding: 0px 25px;    padding: 0px 25px;
+                                font-size: 20px;
+                                color: #000;
+                                font-weight: 300;">
+                                <b>Free Shipping</b> - if your shopping is at least US$<b><?php echo $shiping_deduct[0]['min_amount']; ?></b>, <br/>else US$<b><?php echo $shiping_deduct[0]['shipping_amount']; ?></b> will be charged. 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 col-md-6  m_bottom_40 m_xs_bottom_30">
+                        <p class="" style="   font-size: 28px;
+                           font-weight: 300;
+                           background-color: #000;
+                           padding: 10px;
+                           color: #fff; 
+                           margin-bottom: 20px;
+                           "><i class="icon-dollar"></i> Payment Methods</p>
+
+                        <h5 class="fw_light color_dark m_bottom_23"><i class="icon-money"></i> Manual Payment</h5>
+                        <ul> 
+                            <li class="m_bottom_15">
+                                <input type="radio" checked="" id="radio_131" name="card_id" class="d_none" value="post_pay">
+                                <label for="radio_131" class="d_inline_m m_right_15 m_bottom_3 fw_light">
+                                    For manual payment mail to <b>sales@nitafashions.com</b>                                  
+                                </label>
+                            </li>
+                        </ul>
+
+                        <hr style="height: 0px;margin-top: 0px;">
+                        <?php if ($cardinfo) { ?>
+                            <div class="addressblock" style="    height: 200px;
+                                 margin-bottom: 11px;">
+                                 <?php
+                                 echo "<p style='white-space: pre-line;'>" . $cardinfo . "</p>";
+                                 ?>
+                                <div class="" style="margin-top: 10px;">
+                                    <form method ="post" action="#">
+                                        <button class="btn btn-danger " type="submit" name="removecard">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <input type="radio" checked id="radio_6_card" name="card_id" class="d_none" value="<?php echo $_SESSION['cardinfo']; ?>">
+                            <label for="radio_6_card" class="d_inline_m m_right_15 m_bottom_3 fw_light">Select This Card</label>
+                            <!--                                <form method="post" action="#">
+                                                                <button type="submit" name="removecard" class=" btn btn-danger btn-xs">Remove Card</button>
+                                                            </form>-->
+                            <?php
+                        } else {
+                            ?>
+                            <span style="color:red;margin-top: 17px;">TO PAYMENT WITH CREDIT CARD, KINDLY ADD CREDIT CARD DETAILS <i class="icon-right-1"></i></span>
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myCardModal" id=""><i class="icon-plus"></i> Add Card Detail</button>
+
+                            <?php
+                        }
+                        ?>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div role="tabpanel" class="tab-pane" id="confirmOrder">
+
+                <div class="orderinformation" style="width: 500px;">
+                    <address>
+                        <strong>Ship To</strong><br/>
+                        {{userAddress.selected.address1}}<br>
+                        {{userAddress.selected.address2}}<br>
+                        {{userAddress.selected.city}}, {{userAddress.selected.state}}<br>
+                        {{userAddress.selected.country}}, {{userAddress.selected.zip}}<br>
+                    </address>
+                    <hr/>
+                    <strong>
+                     Payment Methods: <?php echo $cardinfo?'Card':'Manual Payment';?>
+                    </strong>
+                    <hr/>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                Sub Total 
+                            </td>
+                            <td>
+                                {{shopCart.cartdata.total_price|currency}} 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Shipping Price
+                            </td>
+                            <td>
+                                {{shopCart.cartdata.shipping_price|currency}} 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Grand Total
+                            </td>
+                            <td>
+                                {{shopCart.cartdata.grand_total|currency}} 
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="m_bottom_23 check">
+                        <input type="checkbox" id="checkbox_71" name="" class="d_none" ng-model="orderProcess.confirmcheck">
+                        <label for="checkbox_71" class="d_inline_m fw_light">I agree to the terms of service </label>
+                        <p class="d_inline_m fw_light">(<a href="termAndCondition.php" target="_blank" class="tr_all color_dark_hover fw_light">Terms of service</a>)</p>
+
+                    </div>
+                    <button type="submit" name="orderConfirm" ng-if="orderProcess.confirmcheck" disabled id="btn1" class="d_inline_b tr_all r_corners button_type_1 color_pink fs_medium mini_side_offset" value="dfjdg" style="margin: 0px 0px 10px;">
+                        <i class="icon-check"></i> Confirm Order
+                    </button>
+                    <button type="button" name="orderConfirm" ng-if="!orderProcess.confirmcheck" disabled id="btn1" class=" disabled d_inline_b tr_all r_corners button_type_1 color_pink fs_medium mini_side_offset" value="dfjdg" style="margin: 0px 0px 10px;opacity: 0.5">
+                        <i class="icon-check"></i> Confirm Order
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
+
+    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModel" aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 79%;margin: 0px 0px 0px 61px;">
+                <div class="modal-header" style="color: white">
+                    <button type="button" class="close" 
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <p class="modal-title" id="myModalLabel">
+                        <i class="icon-edit"></i> Fill Address Detail
+                    </p>
+                </div>
+                <form method ="post" action="#">
+                    <div class="modal-body">
+
+                        <table class="addr">
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name" class=""><b>Address (Line 1)</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required name="address1" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name" class=""><b>Address (Line 2)</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required required name="address2" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name" class=""><b>Town/City</b></span>
+
+                                </td>
+                                <td>
+                                    <input type="text" required required name="city" class="form-control" value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name"><b>State</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required required name="state" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name"><b>Zip/Postal</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required  name="zip" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="line-height: 25px;">
+                                    <span for="name"><b>Country</b></span>
+                                </td>
+                                <td>
+                                    <input type="text" required required name="country" class="form-control"  value=""  style="height: 10%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="checkbox" id="checkboxs_2" name="ship" class="d_none product_checkBox" value="1">
+                                    <label for="checkboxs_2" class="d_inline_m m_right_10" style="line-height: 18px;">Use as shipping address</label>
+                                </td>
+                            </tr>
+    <!--                        <tr>
+                                <td></td>
+                                <td>
+                                    <input type="checkbox" id="checkboxs_1" name="bill" class="d_none product_checkBox" value="1">
+                                    <label for="checkboxs_1" class="d_inline_m m_right_10" style="line-height: 18px;">Use as billing address</label>
+                                </td>
+                            </tr>-->
+
+
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success " name="submitAddress" value="cc" style="margin: ">
+                            <i class="icon-check"></i> Submit 
+                        </button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade" id="myCardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content" style="">
+                <div class="modal-header" style="color: white">
+                    <button type="button" class="close" 
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <p class="modal-title" id="myModalLabel">
+                        <i class="icon-edit"></i> Fill Card Detail
+                    </p>
+                </div>
+                <form class="form-horizontal" role="form" method="post" action="#">
+                    <div class="modal-body" >
+
+
+                        <fieldset>
+
+                            <div class="form-group " style="    padding: 0px 50px;">
+
+                                <label class=" control-label" for="card-holder-name">Fill Card Details</label>
+                                <div class="">
+                                    <textarea class="form-control" name="card-holder-name" id="card-holder-name" style="width: 100%;height: 200px;font-size: 20px;">Name on Card: ..............&#13;&#10;Card No.: .... .... .... ....&#13;&#10;Exp. Date: .../...&#13;&#10;CVV: ... &#13;&#10;Card Type: ......  
+                                    </textarea>
+                                </div>
+
+
+                            </div>
+
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn btn-success" name="card_submit" value="cc" style="">
+                            <i class="icon-check"></i> Submit 
+                        </button>
+
+
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
 </div>
 

@@ -23,7 +23,40 @@ class Shop extends CI_Controller {
     }
 
     public function cart() {
-        $this->load->view('Product/shopCart');
+        if (isset($_POST['submitAddress'])) {
+            $addressinsert = array(
+                'address1' => $this->input->post('address1'),
+                'address2' => $this->input->post('address2'),
+                'city' => $this->input->post('city'),
+                'state' => $this->input->post('state'),
+                'country' => $this->input->post('country'),
+                'zip' => $this->input->post('zip'),
+                'contact_no' => "",
+                'user_id' => $this->user_id,
+                "shipping_address" => "",
+                "default_shipping_address" => "yes",
+                "default_billing_address" => "",
+            );
+            $this->db->insert('nfw_billing_shipping_address', $addressinsert);
+            redirect("Shop/cart?addrurl=billingShipping");
+        }
+
+        $shiping_deduct = $this->Product_model->resultAssociate("SELECT * FROM `nfw_shipping`");
+        $data['shiping_deduct'] = $shiping_deduct;
+
+        $data['cardinfo'] = $this->session->userdata('cardinfo');
+
+        if (isset($_POST['card_submit'])) {
+            $cardinfo = $this->input->post('card-holder-name');
+            $this->session->set_userdata('cardinfo', $cardinfo);
+            redirect("Shop/cart?addrurl=paymentMode");
+        }
+        if (isset($_POST['removecard'])) {
+            $this->session->unset_userdata('cardinfo');
+            redirect("Shop/cart?addrurl=paymentMode");
+        }
+
+        $this->load->view('Product/shopCart', $data);
     }
 
     public function contactus() {

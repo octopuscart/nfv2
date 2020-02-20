@@ -478,7 +478,7 @@
                                                     <div class="bg_light_2 im_half_container sc_footer">
                                                         <p class=" t_align_l fw_light color_dark d_inline_m half_column">New Customer ?</p>
                                                         <div class="half_column t_align_r d_inline_m">
-                                                            <a href="../views/registration.php" class="btn btn-xs t_xs_align_c d_inline_b tr_all r_corners color_purple transparent fs_medium">Create an Account</a>
+                                                            <a href="<?php echo site_url('Account/registration'); ?>" class="btn btn-xs t_xs_align_c d_inline_b tr_all r_corners color_purple transparent fs_medium">Create an Account</a>
                                                         </div>
                                                     </div>
                                                 </div>

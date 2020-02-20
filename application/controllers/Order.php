@@ -30,7 +30,7 @@ class Order extends CI_Controller {
 
     //orders details
     public function orderdetails($order_no) {
-        $this->db->where('order_no', $order_no);
+        $this->db->where('id', $order_no);
         $query = $this->db->get('nfw_product_order');
         $orderDetails = $query->result_array();
         $order_id = $orderDetails[0]['id'];

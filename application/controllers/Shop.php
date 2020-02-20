@@ -137,7 +137,7 @@ class Shop extends CI_Controller {
             $nfw_order_status = array(
                 "order_id" => $last_id,
                 "op_date_time" => $dte1,
-                "remark" => 'Confirmed on $dte1',
+                "remark" => "Confirmed on $dte1",
                 "status" => "1"
             );
             $this->db->insert("nfw_order_status", $nfw_order_status);
@@ -148,7 +148,7 @@ class Shop extends CI_Controller {
             $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
             $this->db->update("nfw_product_cart");
             
-            redirect("order/orderdetails/"+$last_id);
+            redirect("Order/orderdetails/".$last_id);
         }
 
         $this->load->view('Product/shopCart', $data);

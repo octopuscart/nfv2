@@ -148,7 +148,7 @@ class Shop extends CI_Controller {
             $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
             $this->db->update("nfw_product_cart");
             
-            redirect("Order/orderdetails/"+$order_code)
+            redirect("Order/orderdetails/"+$order_code);
         }
 
         $this->load->view('Product/shopCart', $data);

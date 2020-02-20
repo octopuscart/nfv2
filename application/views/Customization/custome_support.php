@@ -36,7 +36,7 @@
                                 <span class="customtagvalue"> 
                                     {{spacialSelection.itemstyle[item][tagname]}} 
                                     <br/>
-                              
+
                                     <span class="extrapricesummary" ng-if="spacialSelection.itemextraprice[item][tagname]">{{spacialSelection.itemextraprice[item][tagname]|currency}} Extra</span> 
                                 </span>
                             </div>
@@ -45,7 +45,7 @@
 
                     </a>
                 </li>
-         
+
 
             </ul>
 
@@ -65,6 +65,22 @@
                             $this->load->view('Customization/customizationBlockSelection', array("mutliview" => 1));
                             ?>
                         </div>
+                    </div>
+                    <div class="panel-footer">
+                        <nav aria-label="...">
+                            <ul class="pager" ng-if="subelev.prenext == 1">
+                                <li class="previous previous-tab"><a href="javascript:function() { return false; }" ><span aria-hidden="true">&larr;</span> Previous</a></li>
+                                <li class="next next-tab"><a href="javascript:function() { return false; }#">Next <span aria-hidden="true">&rarr;</span></a></li>
+                            </ul>
+                            <ul class="pager" ng-if="subelev.prenext == 0">
+                                <li class="next next-tab"><a href="javascript:function() { return false; }#">Next <span aria-hidden="true">&rarr;</span></a></li>
+                            </ul>
+                            <ul class="pager" ng-if="subelev.prenext == 2">
+                                <li class="previous previous-tab"><a href="javascript:function() { return false; }" ><span aria-hidden="true">&larr;</span> Previous</a></li>
+                                <li class="next next-tab"><a href="javascript:function() { return false; }#" style="color: white;    background: green;">Finish</a></li>
+
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

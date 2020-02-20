@@ -467,7 +467,7 @@ class Product_model extends CI_Model {
                 "lable" => $value,
                 "parent" => "",
                 "parenttitle" => "",
-                "extra_price" => "10"
+                "extra_price" => ""
             );
             array_push($monogramontainer, $tempcontain);
         }

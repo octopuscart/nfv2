@@ -341,7 +341,8 @@ class CustomApi extends REST_Controller {
                     ),
                     "Short Sleeve Without Cuff" => array(
                         "Wrist Watch" => ["Right Wrist", "Left Wrist"],
-                        "Monogram Placement" => ["Left Cuff", "Left Sleeve Placket"],
+                        "Monogram Placement" => ["Left Cuff", "Left Sleeve Plack00000000e]}t"],
+                        
                     ),
                 )
             ),

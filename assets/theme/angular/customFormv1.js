@@ -328,7 +328,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         }
     });
 
-    $scope.monogramValidation = function (stylek) {
+    $scope.monogramValidation = function () {
         var monogramvalidate = ["Monogram Style", "Monogram Color", "Monogram Initial"];
 
         if ($scope.customizationElement.selection['Monogram Placement'] == 'No Monogram') {
@@ -345,12 +345,12 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $scope.customizationElement.selection[stylep] = stylec;
 
         $scope.extraPriceSelection[stylep] = Number(style['extra_price']) ? style.extra_price : '';
-        $scope.monogramValidation(stylep);
+
         if (itemname) {
             $scope.spacialSelection.itemstyle[itemname][stylep] = stylec;
             $scope.spacialSelection.itemextraprice[itemname][stylep] = Number(style['extra_price']) ? style.extra_price : '';
         }
-
+       
         if ($scope.validatiaons[stylep]) {
 
             var validation = $scope.validatiaons[stylep].validate;
@@ -378,14 +378,16 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
                     for (cele in customelements) {
                         var cobj = customelements[cele];
 
-                        cobj.status = 1;
+//                        cobj.status = 1;
 
                     }
                 }
 
             }
         }
-
+        $timeout(function(){
+             $scope.monogramValidation();
+        },500)
         var next = jQuery('.mainelementtab .nav-tabs > .active').next('li');
 //        next.find('a').trigger('click');
     }

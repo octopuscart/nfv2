@@ -2,9 +2,9 @@
     <div class="panel-heading"><?php echo $mutliview == 1?'<span class="multiviewitem">{{item}}</span>':'';?>{{subelek}}  </div>
     <div class="panel-body {{subelev.maxsize}} ">
         <div class=" {{subelev.maxsize}} " ng-if='!subelev.view'>
-            <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in customizationElement.formItems[subelek]"  ng-if="ele.status==1">
+            <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in customizationElement.formItems[subelek]" ng-if="ele.status==1">
                 
-                <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace), ele, <?php echo $mutliview == 1?'item':"''";?>)"  ng-class="(ele.lable | removeExtraSpace) == customizationElement.selection[subelek] ? 'selected' : 'deselect'" style="" >
+                <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace), ele, <?php echo $mutliview == 1?'item':"''";?>)"  ng-class="(ele.lable | removeExtraSpace) == spacialSelection.itemstyle[item][subelek] ? 'selected' : 'deselect'" style="" >
                    
                     <img class="pant_controlZoom " src="{{ele.image}}" alt="">
                     <div class="caption ">
@@ -35,7 +35,7 @@
         <div class=" {{subelev.maxsize}} " ng-if="subelev.view == 'multi'">
             <ul class="nav nav-tabs innerSelectionTab" role="tablist" style="    border-bottom: 0px solid #ddd;">
                 <li role="presentation" class="{{$index==1?'active':''}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
-                    <a href="#{{$parent.$index}}{{$index}}" aria-controls="contrast" role="tab" data-toggle="tab" style="background: #fff;color: #000;">
+                    <a href="#{{item}}{{$parent.$index}}{{$index}}" aria-controls="contrast" role="tab" data-toggle="tab" style="background: #fff;color: #000;">
                         <img src="{{multiele[0].image}}" class="iconimg">  {{mltkey}}
                     </a>
                 </li>
@@ -48,14 +48,15 @@
                  margin-bottom: 15px;
                  ">
 
-                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
+                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{item}}{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]" >
                     <div class=" owlslider owl-carousel owl-theme ">
                         <div class="col-md1-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele"  ng-if="ele.status==1">
-                            <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, mltkey + '-' + (ele.lable | removeExtraSpace), ele, <?php echo $mutliview == 1?'item':0;?>)"  ng-class="(ele.lable | removeExtraSpace) == customizationElement.selection[subelek] ? 'selected' : 'deselect'" style="" >
+                            <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, mltkey + '-' + (ele.lable | removeExtraSpace), ele, <?php echo $mutliview == 1?'item':0;?>)"  ng-class="((mltkey + '-'+ele.lable | removeExtraSpace)  == (spacialSelection.itemstyle[item][subelek] | removeExtraSpace)) ? 'selected' : 'deselect'" style="" >
                                 <img class="pant_controlZoom " src="{{ele.image}}" alt="">
                                 <div class="caption ">
                                     <h3 style="{{subelev.lablestyle}}" ng-bind-html="ele.title"></h3>
                                     <p ng-if="ele.extra_price" class="extrapricetext">({{ele.extra_price|currency}} Extra)</p>
+                                     
                                 </div>
 
                             </div>
@@ -87,14 +88,15 @@
                  padding: 3px;
                  margin-bottom: 15px;
                  ">
-                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
+                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]" >
                     <div class="row  ">
-                        <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele"  ng-if="ele.status==1">
-                            <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace), ele,  <?php echo $mutliview == 1?'item':0;?>)"  ng-class="(ele.lable | removeExtraSpace) == (customizationElement.selection[subelek]| removeExtraSpace) ? 'selected' : 'deselect'" style="" >
+                        <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele">
+                            <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace) + ' (' + mltkey + ')', ele,  <?php echo $mutliview == 1?'item':0;?>)"  ng-class="(ele.lable | removeExtraSpace) == spacialSelection.itemstyle[item][subelek] ? 'selected' : 'deselect'" style="" >
                                 <img class="pant_controlZoom " src="{{ele.image}}" alt="">
                                 <div class="caption ">
                                     <h3 style="{{subelev.lablestyle}}" ng-bind-html="ele.title"></h3>
                                     <p ng-if="ele.extra_price" class="extrapricetext"> ({{ele.extra_price|currency}} Extra)</p>
+                                     
                                 </div>
                             </div>
                         </div>
@@ -118,14 +120,15 @@
                  padding: 3px;
                  margin-bottom: 15px;
                  ">
-                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
+                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]" >
                     <div class="row  ">
-                        <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele"  ng-if="ele.status==1">
-                            <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace), ele,  <?php echo $mutliview == 1?'item':0;?>)"  ng-class="(ele.lable | removeExtraSpace) == customizationElement.selection[subelek] ? 'selected' : 'deselect'" style="" >
+                        <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele" >
+                            <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace), ele,  <?php echo $mutliview == 1?'item':0;?>)"  ng-class="ele.lable  == spacialSelection.itemstyle[item][subelek] ? 'selected' : 'deselect'" style="" >
                                 <img class="pant_controlZoom " src="{{ele.image}}" alt="">
                                 <div class="caption ">
                                     <h3 style="{{subelev.lablestyle}}" ng-bind-html="ele.title"></h3>
                                     <p ng-if="ele.extra_price" class="extrapricetext">({{ele.extra_price|currency}} Extra)</p>
+                                  
                                 </div>
                             </div>
                         </div>

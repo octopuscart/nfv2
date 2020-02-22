@@ -16,7 +16,6 @@
 <div class="col-md-10">
     <div class=" tab-content row" style="">
         <div class="col-sm-5 mainelementtab">
-            <button class="btn btn-success btn-lg bigbuttonspadding" ng-click="finishCustomisation()" style="    width: 100%;">Finish</button>
 
             <ul class="nav nav-tabs tabs-left vertialTab bodymax500 singletag" role="tablist" style=" height:700px ">
                 <li role="presentation" class="{{$index==0?'active':''}} customtabblock" ng-repeat="(tagname, tagkey) in customizationElement.navigation">
@@ -48,6 +47,8 @@
 
 
             </ul>
+            <button class="btn btn-success btn-lg bigbuttonspadding" style="    margin-top: 16px;" ng-click="finishCustomisation()" style="    width: 100%;">Finish</button>
+
 
         </div>
         <div class="col-md-7">
@@ -60,9 +61,8 @@
                     </div>
                     <div class="" ng-if="subelev.choice == 'multi'">
                         <div class="" ng-repeat="(item, itemstyle) in spacialSelection.itemstyle">
-
                             <?php
-                            $this->load->view('Customization/customizationBlockSelection', array("mutliview" => 1));
+                            $this->load->view('Customization/customizationBlockSelectionMulti', array("mutliview" => 1));
                             ?>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             </ul>
                             <ul class="pager" ng-if="subelev.prenext == 2">
                                 <li class="previous previous-tab"><a href="javascript:function() { return false; }" ><span aria-hidden="true">&larr;</span> Previous</a></li>
-                                <li class="next next-tab"><a href="javascript:function() { return false; }#" style="color: white;    background: green;">Finish</a></li>
+                                <li class="next next-tab"><a href="javascript:function() { return false; }#" style="color: white;    background: green;" ng-click="finishCustomisation()">Finish</a></li>
 
                             </ul>
                         </nav>

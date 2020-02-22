@@ -39,6 +39,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     $scope.mesurementSelecttion = {};
     $scope.mesurementSelecttionFrc = {};
     $scope.customProfileArray = [];
+    $scope.validatiaons = {};
 
     $(".customblockstart").hide();
     $(".measurementblockstart").hide();
@@ -285,6 +286,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         $http.get(urldata).then(function (rdata) {
             $scope.customizationElement = rdata.data;
             $scope.defaultvalues = angular.copy(rdata.data.selection);
+            $scope.validatiaons = angular.copy(rdata.data.validation);
             var styleobjdata = rdata.data.navigation
             for (stylep in styleobjdata) {
                 var styleobj = styleobjdata[stylep];
@@ -326,13 +328,62 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         }
     });
 
+    $scope.monogramValidation = function (stylek) {
+        var monogramvalidate = ["Monogram Style", "Monogram Color", "Monogram Initial"];
+
+        if ($scope.customizationElement.selection['Monogram Placement'] == 'No Monogram') {
+            for (mn in monogramvalidate) {
+                var mnobj = monogramvalidate[mn];
+                console.log(mnobj)
+                $scope.customizationElement.selection[mnobj] = "-";
+            }
+
+        }
+    }
+
     $scope.selectStyle = function (stylep, stylec, style, itemname) {
         $scope.customizationElement.selection[stylep] = stylec;
-        console.log(style, stylep, stylec);
+
         $scope.extraPriceSelection[stylep] = Number(style['extra_price']) ? style.extra_price : '';
+        $scope.monogramValidation(stylep);
         if (itemname) {
             $scope.spacialSelection.itemstyle[itemname][stylep] = stylec;
             $scope.spacialSelection.itemextraprice[itemname][stylep] = Number(style['extra_price']) ? style.extra_price : '';
+        }
+
+        if ($scope.validatiaons[stylep]) {
+
+            var validation = $scope.validatiaons[stylep].validate;
+            var pointer = $scope.validatiaons[stylep].pointer;
+            if (validation[stylec]) {
+                for (ele in validation[stylec]) {
+                    var customelements = $scope.customizationElement.formItems[ele]
+                    var subelement = validation[stylec][ele];
+                    for (cele in customelements) {
+                        var cobj = customelements[cele];
+                        var pntv = pointer[ele];
+                        $scope.customizationElement.selection[ele] = pntv;
+                        if (subelement.indexOf(cobj.title) > (-1)) {
+                            cobj.status = 0;
+
+                        }
+
+                    }
+                }
+            } else {
+                for (pnt in pointer) {
+                    var pntv = pointer[pnt];
+                    var customelements = $scope.customizationElement.formItems[pnt]
+                    $scope.customizationElement.selection[pnt] = pntv;
+                    for (cele in customelements) {
+                        var cobj = customelements[cele];
+
+                        cobj.status = 1;
+
+                    }
+                }
+
+            }
         }
 
         var next = jQuery('.mainelementtab .nav-tabs > .active').next('li');

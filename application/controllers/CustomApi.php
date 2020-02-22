@@ -283,7 +283,7 @@ class CustomApi extends REST_Controller {
             'Monogram Color' => $shirtelements['monogram_colorcontainer'],
         );
         $selectelements = array(
-            'Body Fit' => "Loose Fit",
+            'Body Fit' => "Medium Fit",
             'Collar Style' => 'Medium Spread (1 5/8" x 3 ")',
             'Add 2 Buttons On The Collar Band' => "No",
             'Collar & Cuff Stiffness' => "Standard",
@@ -312,7 +312,8 @@ class CustomApi extends REST_Controller {
             'Add 2 Buttons On The Collar Band' => array("choice" => "", "col" => "3", "prenext" => 1),
             'Collar & Cuff Stiffness' => array("choice" => "", "col" => "3", "prenext" => 1,),
             'Collar Stays' => array("choice" => "", "col" => "3", "prenext" => 1),
-            'Sleeve And Cuff Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Sleeve And Cuff Style' => array("choice" => "", "col" => "4",
+                "lablestyle" => "", "view" => "multicol", "prenext" => 1),
             'Wrist Watch' => array("choice" => "", "col" => "4", "lablestyle" => "", "depandent" => "Sleeve Style", "prenext" => 1),
             'Front Style' => array("choice" => "", "col" => "3", "lablestyle" => "", "prenext" => 1),
             'Back Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
@@ -330,11 +331,40 @@ class CustomApi extends REST_Controller {
             'Monogram Color' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
             'Monogram Initial' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "text", "prenext" => 2),
         );
+        $validation = array(
+            "Sleeve And Cuff Style" => array(
+                "pointer" => array("Wrist Watch" => "No", "Monogram Placement" => "No Monogram"),
+                "validate" => array(
+                    "Short Sleeve With Cuff" => array(
+                        "Wrist Watch" => ["Right Wrist", "Left Wrist"],
+                        "Monogram Placement" => ["Left Cuff", "Left Sleeve Placket"],
+                    ),
+                    "Short Sleeve Without Cuff" => array(
+                        "Wrist Watch" => ["Right Wrist", "Left Wrist"],
+                        "Monogram Placement" => ["Left Cuff", "Left Sleeve Placket"],
+                    ),
+                )
+            ),
+            "Pocket Style" => array(
+                "pointer" => array("Monogram Placement" => "No Monogram"),
+                "validate" => array(
+                    "No Pocket" => array(
+                        "Monogram Placement" => ["Left Chest Pocket"],
+                    ),
+                )
+            ),
+            "Monogram Placement" => array(
+                "pointer" => array("Monogram Style" => "-", "Monogram Color" => "-", "Monogram Initial" => "-"),
+                "validate" => array()
+            )
+        );
+
         $return_data = array(
             "formItems" => $shirtCustomization,
             "navigation" => $mainnavigation,
             "title" => "Shirt Customization",
             "item" => "Shirt",
+            "validation" => $validation,
             "selection" => $selectelements,
         );
         $this->response($return_data);
@@ -361,7 +391,7 @@ class CustomApi extends REST_Controller {
             "Contrast First Sleeve Button Hole" => $jacketelements['contrastarray'],
         );
         $selectelements = array(
-            'Body Fit' => "Loose Fit",
+            'Body Fit' => "Medium Fit",
             'Lapel Style & Width' => '3" Classic (Notch Lapel)',
             'Lapel Button Hole' => 'No',
             'Handstitching' => "No",
@@ -429,7 +459,7 @@ class CustomApi extends REST_Controller {
             "Contrast First Sleeve Button Hole" => $jacketelements['contrastarray'],
         );
         $selectelements = array(
-            'Body Fit' => "Loose Fit",
+            'Body Fit' => "Medium Fit",
             'Category' => 'Car Coat',
             'Lapel Style & Width' => '3" Modern (Notch Lapel)',
             'Lapel Button Hole' => 'No',
@@ -546,7 +576,7 @@ class CustomApi extends REST_Controller {
             'Number of Back Pocke' => $this->Product_model->getChildren(8),
         );
         $selectelements = array(
-            'Body Fit' => "Loose Fit",
+            'Body Fit' => "Medium Fit",
             'Lapel Style & Width' => '3" Classic (Notch Lapel)',
             'Lapel Button Hole' => 'No',
             'Handstitching' => "No",
@@ -693,7 +723,7 @@ class CustomApi extends REST_Controller {
             'Number of Back Pocke' => $this->Product_model->getChildren(8),
         );
         $selectelements = array(
-            'Body Fit' => "Loose Fit",
+            'Body Fit' => "Medium Fit",
             'Lapel Style & Width' => '3" Classic (Notch Lapel)',
             'Lapel Button Hole' => 'No',
             'Handstitching' => "No",

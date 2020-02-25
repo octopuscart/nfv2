@@ -93,7 +93,299 @@
         </div>
     </div>
 </div>
+<style type="text/css">
 
+
+
+
+    .tt-dropdown-menu,
+    .gist {
+        text-align: left;
+    }
+
+
+
+
+    /*
+     site theme 
+     ---------- 
+    */
+
+    .typeahead,
+    .tt-query,
+    .tt-hint {
+        width: 100%; 
+        height: 100% !important;
+        padding: 8px 12px;
+
+        line-height: 26px;
+        border: 2px solid #ccc;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    .typeahead {
+        background-color: #fff;
+    }
+
+    .typeahead:focus {
+        border: 2px solid #0097cf;
+    }
+
+    .tt-query {
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999
+    }
+    .twitter-typeahead{
+        width:100% !important;
+    }
+
+
+    .tt-dropdown-menu {
+        width: 98%; 
+        margin-left: 6px;
+        padding: 8px 0;
+        background-color: #fff  !important;
+        border: 1px solid #ccc  !important;
+        border: 1px solid rgba(0, 0, 0, 0.2)  !important;
+
+        -webkit-border-bottom-left-radius: 8px;
+        -moz-border-bottom-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+
+        -webkit-border-bottom-right-radius: 8px;
+        -moz-border-bottom-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+
+
+
+        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    }
+
+    .tt-dropdown-menu img{
+        height: 33px;
+        width: 33px;
+        border-radius: 50%;
+        border: 2px solid #D8D8D8;
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+        //font-size: 12px;
+
+        line-height: 24px;
+    }
+
+    .tt-suggestion.tt-cursor {
+        color: #fff;
+        background-color: #0097cf;
+
+    }
+
+    .tt-suggestion p {
+        margin: 0;
+    }
+
+
+    .typeaheadgroup{
+
+        margin: 0px;
+        padding: 3px 5px;
+        float: left;
+        width: 100%;
+        background: #E0E0E0;
+        color: #000000;
+        border-bottom: 1px solid #ccc;
+
+    }
+
+    .typeahead,
+    .tt-query,
+    .tt-hint {
+        width: 396px;
+        height: 30px;
+        padding: 8px 12px;
+        font-size: 15px;
+        line-height: 30px;
+        border: 2px solid #ccc;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    .typeahead {
+        background-color: #fff;
+    }
+
+    .typeahead:focus {
+        border: 2px solid #000000;
+    }
+
+    .tt-query {
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999
+    }
+
+    .tt-menu {
+        width: 300px;
+        margin: 0px 19px;
+        text-align: left;
+        padding: 8px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+        font-size: 15px;
+        line-height: 24px;
+    }
+
+    .tt-suggestion:hover {
+        cursor: pointer;
+        color: #000;
+        background-color: #EAEAEA;
+    }
+
+    .tt-suggestion.tt-cursor {
+        cursor: pointer;
+        color: #000;
+        background-color: #EAEAEA;
+
+    }
+    .tt-suggestion.tt-cursor:hover {
+        color: #fff !important;
+    }
+
+    .tt_select_link:hover{
+        color: #fff !important;
+    }
+
+    .tt-suggestion p {
+        margin: 0;
+    }
+
+    .gist {
+        font-size: 14px;
+    }
+</style>
+<script id="result-template" type="text/x-handlebars-template">
+
+
+    <div class="col-sm-12">
+
+    <div class="col-sm-12">  
+    <span class="search_title col-sm-12" style="padding: 0px;margin-top: -5px;">{{title}}</span>
+    <small style="font-size: 10px;margin-top: -9px;float: left;">{{sub_title}}</small>
+
+    </div> 
+
+    </div>
+
+</script>
+
+<script>
+
+
+
+    $(document).ready(function () {
+
+
+        var search = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('item_code'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: urllink + "/SearchSuggestApi/%QUERY%",
+                wildcard: '%QUERY%'
+            }
+        });
+
+
+
+
+
+        /////////////////// Search Customer type ahead ////////////////////////////////////
+        $('#searchproduct').typeahead(
+                {highlight: true},
+        {
+            name: 'search',
+            displayKey: 'item_code',
+            limit: 8,
+            source: search.ttAdapter(),
+            templates: {
+                header: '<span class="typeaheadgroup"><i class="icon-search"></i> Searched Result</span>',
+                suggestion: Handlebars.compile($("#result-template").html()),
+            },
+        }
+
+        ).bind('typeahead:selected', function (obj, select_data) {
+            var tag_id = select_data.tag_id;
+            var product_id = select_data.sid;
+//            $("input[name=searchtag]").val(checkd);
+            window.location = "<?php echo site_url("Product/productList?category=0&item_type=");?>"+tag_id+"&product_id="+product_id;
+
+        });
+        
+         $('#searchproduct2').typeahead(
+                {highlight: true},
+        {
+            name: 'search',
+            displayKey: 'item_code',
+            limit: 8,
+            source: search.ttAdapter(),
+            templates: {
+                header: '<span class="typeaheadgroup"><i class="icon-search"></i> Searched Result</span>',
+                suggestion: Handlebars.compile($("#result-template").html()),
+            },
+        }
+
+        ).bind('typeahead:selected', function (obj, select_data) {
+            var checkd = select_data.sid;
+            var tag_id = select_data.tag_id;
+//            $("input[name=searchtag]").val(checkd);
+            window.location = "<?php echo site_url("Product/productList?category=0&item_type=");?>"+tag_id;
+
+        });
+
+
+
+
+    });
+
+
+</script> 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88337196-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 <hr class="divider_type_2" style="margin-bottom:0px;margin-top:0px; ">
 <footer role="contentinfo" class="bg_light_3" style="    padding: 0px;">
 

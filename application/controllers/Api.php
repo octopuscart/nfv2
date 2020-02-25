@@ -131,19 +131,20 @@ class Api extends REST_Controller {
 
     //Product 
     public function SearchSuggestApi_get($keyword) {
-        $query = $this->db->select('title, id, file_name')->from('products')->where("keywords LIKE '%$keyword%' or title LIKE '%$keyword%' ")->get();
-        $searchobj = $query->result_array();
-
-        $pquery = "select title, file_name, id from (
-                    (SELECT title, file_name, id from products where keywords like '%$keyword%' )
-                   union 
-                   (SELECT title, file_name, id from products where title like '%$keyword%')
-                    ) as search group by id   
-                  ";
+        //$query = $this->db->select('title, id, file_name')->from('products')->where("keywords LIKE '%$keyword%' or title LIKE '%$keyword%' ")->get();
+        //$searchobj = $query->result_array();
+        $pquery = "select nps.id as sid, nps.title as title, nptc.tag_id from nfw_product as nps 
+        join nfw_product_tag_connection as nptc on nptc.product_id = nps.id 
+        where nps.title  like '%$keyword%' and   nps.publishing='1' group by nps.title limit 0,15";
         $attr_products = $this->Product_model->query_exe($pquery);
-
-
-        $this->response($searchobj);
+        $container = [];
+        foreach ($attr_products as $key => $value) {
+            if($value['tag_id'] == "2"){
+                $value['tag_id'] = "11";
+            }
+            array_push($container, $value);
+        }
+        $this->response($container);
     }
 
     public function SearchSuggestApiJUI_get() {
@@ -755,6 +756,11 @@ class Api extends REST_Controller {
         };
 //        end of profession sorting
 
+        $searchqury = "";
+        if($this->get("product_id")){
+            $productid = $this->get("product_id");
+            $searchqury = " and np.id = $productid";
+        }
 
         if (isset($sorting)) {
 
@@ -840,7 +846,7 @@ class Api extends REST_Controller {
                    
 
                     join nfw_color as nc on npc.nfw_color_id = nc.id
-                    where ntc.tag_id = $item_type and publishing = 1 $sortt $colorquerycc $category $price group by np.id order by np.id $orderquerycolor ";
+                    where ntc.tag_id = $item_type and publishing = 1 $searchqury $sortt $colorquerycc $category $price group by np.id order by np.id $orderquerycolor ";
 
 
 
@@ -1081,10 +1087,10 @@ order by count(nfw_color_id) asc, colorbunch";
         $this->response(array("address" => $result, "user" => $this->checklogin));
     }
 
-    function setDefaultShippingAddress_get($addressid){
+    function setDefaultShippingAddress_get($addressid) {
         
     }
-    
+
     function getOrderProducts_get($order_id) {
         $result = $this->Product_model->getCartDataCustomOrder($order_id);
         $this->response($result);

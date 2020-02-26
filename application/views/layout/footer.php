@@ -39,9 +39,7 @@
 <!--<script src="" type="text/javascript"></script>-->
 <script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/handlebars-v2.0.0.js"></script> 
 <script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/typeahead.bundle.js"></script> 
-<div id="quandoo-booking-widget"></div> <script src="https://booking-widget.quandoo.com/index.js" data-merchant-id="64066" data-theme="brand"></script>
 
-<div class="quandoo-widget-builder" data-config='{"format":"text-button","bgcolor":"#f5b016","txcolor":"#ffffff","round":"yes","position":"","font":"md","merchant":64066,"txt":"Reserve now"}'></div> <script src="https://s3-eu-west-1.amazonaws.com/quandoo-website/widget-builder/quandoo-widget-builder.js"></script>
 <div class="modal fade ui-draggable" id="myLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLogin">
     <div class="modal-dialog modal-sm" role="document" style="margin-top: 10%">
         <div class="modal-content">

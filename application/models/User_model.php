@@ -117,9 +117,9 @@ class User_model extends CI_Model {
             );
             $this->db->insert('system_log', $orderlog);
 
-            $subject = "Welcome to ".email_sender_name." - Your account has been successfully created!";
+            $subject = "Welcome to " . email_sender_name . " - Your account has been successfully created!";
             $this->email->subject($subject);
-            
+
             $customerdetails['customer'] = $customer;
 
             $htmlsmessage = $this->load->view('Email/registration', $customerdetails, true);
@@ -134,6 +134,30 @@ class User_model extends CI_Model {
                 echo json_encode($error);
             }
         }
+    }
+
+    function getCustomizationDataById($custom_id) {
+        $this->db->where('id', $custom_id);
+        $query = $this->db->get('nfw_custom_form_data');
+        $customdata = $query->row();
+
+        $tempcustom = array("Style Profile" => "", "style" => array(), "extra_price" => array());
+
+        if ($customdata) {
+            $customDataArray = array();
+
+            $this->db->where('style_profile', $custom_id);
+            $query = $this->db->get('nfw_custom_form_data_attr');
+            $customdataattr = $query->result_array();
+            $tempcustom["Style Profile"] = $customdata->style_profile;
+            foreach ($customdataattr as $key1 => $value1) {
+                $tempcustom['style'][$value1['style_key']] = $value1['style_value'];
+                if ($value1['extra_price']) {
+                    $tempcustom['extra_price'][$value1['style_key']] = $value1['extra_price'];
+                }
+            }
+        }
+        return $tempcustom;
     }
 
     // end of user detail by id

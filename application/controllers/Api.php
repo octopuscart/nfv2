@@ -617,7 +617,7 @@ class Api extends REST_Controller {
             array_push($cartdataall['products'], $value);
         }
         $cartdataall['shipping_price'] = 30;
-        if ($cartdataall['total_price'] > 250) {
+        if ($cartdataall['total_price'] > 249) {
             $cartdataall['shipping_price'] = 0;
         }
 

@@ -149,6 +149,22 @@ class Shop extends CI_Controller {
             $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
             $this->db->update("nfw_product_cart");
 
+
+            $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?order_id=$last_id&user_id=$this->user_id&mail_type=1&mail_set=order";
+            $ch = curl_init();
+            // Set the url, number of POST vars, POST data
+            curl_setopt($ch, CURLOPT_URL, $url);
+
+            // Execute post
+            $result = curl_exec($ch);
+            if ($result === FALSE) {
+                die('Curl failed: ' . curl_error($ch));
+            }
+            // Close connection
+            curl_close($ch);
+
+
+
             redirect("Order/orderdetails/" . $last_id);
         }
 
@@ -425,7 +441,7 @@ class Shop extends CI_Controller {
         $send = $this->email->send();
         if ($send) {
             echo json_encode("send");
-              $error = $this->email->print_debugger(array('headers'));
+            $error = $this->email->print_debugger(array('headers'));
             echo json_encode($error);
         } else {
             $error = $this->email->print_debugger(array('headers'));

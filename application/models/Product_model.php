@@ -251,7 +251,7 @@ class Product_model extends CI_Model {
                 "image" => $value['set_image'],
                 "default" => $value['standard'],
                 "lable" => $value['child_label'],
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
                 "parenttitle" => ""
             );
@@ -278,7 +278,7 @@ class Product_model extends CI_Model {
         $query = $this->db->get('nfw_product_order');
         $orderDetails = $query->row_array();
         $orderDetails['products'] = $cartdata;
-          $orderDetails['subtotal'] = 0;
+        $orderDetails['subtotal'] = 0;
         foreach ($cartdata as $key => $value) {
             $custom_id = $value['customization_id'];
             $customdata = $this->getCustomizationDataById($custom_id);
@@ -306,7 +306,7 @@ class Product_model extends CI_Model {
                 "image" => base_url() . "assets/custom_form_view/shirt/watch/" . $key . ".jpg",
                 "default" => $value == 'No' ? '1' : '',
                 "lable" => $value,
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "Long Sleeve",
                 "parenttitle" => "Sleeve Style",
             );
@@ -330,8 +330,8 @@ class Product_model extends CI_Model {
                 "title" => $value,
                 "image" => base_url() . "assets/custom_form_view/shirt/cuff_shirt/" . $key . ".jpg",
                 "default" => $value == 'Single Cuff Rounded' ? '1' : '',
-                "lable" => "Long Sleeve ".$value,
-                "status"=>"1",
+                "lable" => "Long Sleeve " . $value,
+                "status" => "1",
                 "parent" => "Long Sleeve",
                 "parenttitle" => "Sleeve Style",
                 "child" => array("Wrist Watch" => "No")
@@ -346,7 +346,7 @@ class Product_model extends CI_Model {
                 "default" => "1",
                 "lable" => "Short Sleeve Without Cuff",
                 "parenttitle" => "Sleeve Style",
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "Short Sleeve",
             ),
             array(
@@ -354,7 +354,7 @@ class Product_model extends CI_Model {
                 "image" => base_url() . "assets/custom_form_view/shirt/cuff_shirt/withcuff_sort.jpg",
                 "default" => "",
                 "lable" => "Short Sleeve With Cuff",
-                "status"=>"1",
+                "status" => "1",
                 "parenttitle" => "Sleeve Style",
                 "parent" => "Short Sleeve",
             ),
@@ -369,7 +369,7 @@ class Product_model extends CI_Model {
                 "title" => "Short Sleeve",
                 "image" => base_url() . "assets/custom_form_view/shirt/cuff_shirt/withoutcuff_sort.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "Short Sleeve",
                 "parent" => "",
                 "child" => array("Cuff Style" => "Short Sleeve Without Cuff", "Wrist Watch" => "No")
@@ -379,14 +379,37 @@ class Product_model extends CI_Model {
                 "image" => "https://nitafashions.com/nfw/small/custom_57657134840.jpeg",
                 "default" => "1",
                 "lable" => "Long Sleeve",
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
                 "child" => "Cuff Style",
                 "child" => array("Cuff Style" => "Single Cuff Rounded", "Wrist Watch" => "No")
             ),
-            
         ];
         $returnData['sleevestyle'] = $sleevestyle;
+
+        $tuxedocuff_style = array(
+            '4' => 'French Cuff  Rounded',
+            '5' => 'French Cuff Squared',
+            '6' => 'French Cuff Cutaway',
+            '7' => 'Convertible  Cuff Rounded',
+            '8' => 'Convertible Cuff Squared',
+            '9' => 'Convertible Cuff Cutaway',
+        );
+        $tuxedocuff = [];
+        foreach ($tuxedocuff_style as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => base_url() . "assets/custom_form_view/shirt/cuff_shirt/" . $key . ".jpg",
+                "default" => $value == 'French Cuff  Rounded' ? '1' : '',
+                "lable" => "Long Sleeve " . $value,
+                "status" => "1",
+                "parent" => "Long Sleeve",
+                "parenttitle" => "Sleeve Style",
+                "child" => array("Wrist Watch" => "No")
+            );
+            array_push($tuxedocuff, $tempcontain);
+        }
+        $returnData['tuxedosleevestyle'] = $tuxedocuff;
 
 
 
@@ -419,7 +442,7 @@ class Product_model extends CI_Model {
                 "default" => $value == 'No' ? '1' : '',
                 "lable" => $value,
                 "parent" => "",
-                "status"=>"1",
+                "status" => "1",
                 "extra_price" => "10",
                 "parenttitle" => "",
             );
@@ -433,7 +456,7 @@ class Product_model extends CI_Model {
                 "default" => $value == 'No' ? '1' : '',
                 "lable" => $value,
                 "parent" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parenttitle" => "",
                 "extra_price" => "10"
             );
@@ -455,7 +478,7 @@ class Product_model extends CI_Model {
                 "image" => base_url() . "assets/custom_form_view/shirt/button_shirt/" . $key . ".png",
                 "default" => $value[0] == 'No' ? '1' : '',
                 "lable" => $value[0],
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
                 "extra_price" => $value[1],
                 "parenttitle" => "",
@@ -463,6 +486,30 @@ class Product_model extends CI_Model {
             array_push($buttoncontainer, $tempcontain);
         }
         $returnData['buttoncontainer'] = $buttoncontainer;
+
+
+        $tuxedobuttonarray = array(
+            'black' => 'Black Button',
+            'white' => 'White Button',
+            'black-stud' => 'Studs With Black Button Strip',
+            'white-stud' => 'Studs With White Button Strip',
+        );
+        $tuxbuttoncontainer = [];
+        foreach ($tuxedobuttonarray as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => base_url() . "assets/custom_form_view/tuxedo_shirt/button_shirt/" . $key . ".jpg",
+                "default" => $value == 'black' ? '1' : '',
+                "lable" => $value,
+                "status" => "1",
+                "parent" => "",
+                "extra_price" => "",
+                "parenttitle" => "",
+            );
+            array_push($tuxbuttoncontainer, $tempcontain);
+        }
+        $returnData['tuxedobuttoncontainer'] = $tuxbuttoncontainer;
+
 
         $monogram = array(
             '1' => '1', '3' => '3', '8' => '8', '10' => '10', '13' => '13', '14' => '14', '15' => '15', '16' => '16',
@@ -476,7 +523,7 @@ class Product_model extends CI_Model {
                 "image" => base_url() . "assets/custom_form_view/shirt/monogram_shirt/" . $key . ".jpg",
                 "default" => $value == '1' ? '1' : '',
                 "lable" => $value,
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
                 "parenttitle" => "",
                 "extra_price" => ""
@@ -502,7 +549,7 @@ class Product_model extends CI_Model {
                 "image" => base_url() . "assets/custom_form_view/shirt/monogram_placement/" . $key . ".jpg",
                 "default" => $value == 'No Monogram' ? '1' : '',
                 "lable" => $value,
-                "status"=>$value == 'Left Chest Pocket' ? '0' : '1',
+                "status" => $value == 'Left Chest Pocket' ? '0' : '1',
                 "parent" => "",
                 "parenttitle" => "",
             );
@@ -524,7 +571,7 @@ class Product_model extends CI_Model {
                 "default" => $value == 'No Monogram' ? '1' : '',
                 "lable" => $value,
                 "parent" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parenttitle" => "",
             );
             array_push($monogram_colorcontainer, $tempcontain);
@@ -564,9 +611,10 @@ class Product_model extends CI_Model {
                     "image" => base_url() . "assets/custom_form_view/suit/fabric/" . $value['folder'] . "/" . $value1 . ".jpg",
                     "default" => '',
                     "lable" => $value1,
-                    "status"=>"1",
+                    "status" => "1",
                     "parent" => "",
                     "parenttitle" => "",
+                    "extra_price" => $value['folder'] == 'fancy' ? '30' : ''
                 );
                 array_push($liningstyle[$key], $tempcontain);
             }
@@ -576,7 +624,7 @@ class Product_model extends CI_Model {
             "image" => base_url() . "assets/custom_form_view/suit/fabric/matching.jpg",
             "default" => '1',
             "lable" => "Matching",
-            "status"=>"1",
+            "status" => "1",
             "parent" => "",
             "parenttitle" => "",
         );
@@ -591,7 +639,7 @@ class Product_model extends CI_Model {
                 "default" => "",
                 "lable" => "1 Button",
                 "parenttitle" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
             ),
             array(
@@ -600,7 +648,7 @@ class Product_model extends CI_Model {
                 "default" => "",
                 "lable" => "2 Buttons",
                 "parenttitle" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
             ),
             array(
@@ -609,7 +657,7 @@ class Product_model extends CI_Model {
                 "default" => "",
                 "lable" => "3 Button",
                 "parenttitle" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
             ),
             array(
@@ -618,7 +666,7 @@ class Product_model extends CI_Model {
                 "default" => "",
                 "lable" => "4 Button",
                 "parenttitle" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
             ),
         ];
@@ -627,7 +675,7 @@ class Product_model extends CI_Model {
                 "title" => "4 Buttons 1 Button Fasten",
                 "image" => base_url() . "assets/custom_form_view/suit/front_style/double_breasted/button41.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "4 Buttons 1 Button Fasten",
                 "parenttitle" => "",
                 "parent" => "",
@@ -636,7 +684,7 @@ class Product_model extends CI_Model {
                 "title" => "4 Buttons 2 Buttons Fasten",
                 "image" => base_url() . "assets/custom_form_view/suit/front_style/double_breasted/button42.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "4 Buttons 2 Buttons Fasten",
                 "parenttitle" => "",
                 "parent" => "",
@@ -645,7 +693,7 @@ class Product_model extends CI_Model {
                 "title" => "6 Buttons 1 Button Fasten",
                 "image" => base_url() . "assets/custom_form_view/suit/front_style/double_breasted/button61.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "6 Buttons 1 Button Fasten",
                 "parenttitle" => "",
                 "parent" => "",
@@ -657,7 +705,7 @@ class Product_model extends CI_Model {
                 "lable" => "6 Buttons 2 Buttons Fasten",
                 "parenttitle" => "",
                 "parent" => "",
-                "status"=>"1",
+                "status" => "1",
             ),
         ];
 
@@ -711,7 +759,7 @@ class Product_model extends CI_Model {
             "default" => '1',
             "lable" => "Standard",
             "parent" => "",
-            "status"=>"1",
+            "status" => "1",
             "parenttitle" => "",
             "extra_price" => "",
         );
@@ -723,7 +771,7 @@ class Product_model extends CI_Model {
                 "default" => '1',
                 "lable" => $value,
                 "parent" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parenttitle" => "",
                 "extra_price" => "30",
             );
@@ -735,7 +783,7 @@ class Product_model extends CI_Model {
                 "image" => base_url() . "assets/custom_form_view/suit/suitbuttongsbl/",
                 "default" => '1',
                 "lable" => $key,
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
                 "parenttitle" => "",
                 "child" => $value,
@@ -744,6 +792,32 @@ class Product_model extends CI_Model {
             array_push($buttonslist, $tempcontain);
         }
         $returnData["buttonslist"] = $buttonslist;
+
+
+        //tuxedo suit
+        $tuxedo_jacket_button = array(
+            'satin' => 'Satin Covered',
+            'grosgrain' => 'Grosgrain Covered',
+            'standard' => 'Standard'
+        );
+        $tuxbuttonslist = [];
+        foreach ($tuxedo_jacket_button as $key => $value) {
+            $tempcontain = array(
+                "title" => $value,
+                "image" => base_url() . "assets/custom_form_view/tuxedo_jacket/buttons/$key.jpeg",
+                "default" => $key == 'satin' ? '1' : '',
+                "lable" => $value,
+                "parent" => "",
+                "status" => "1",
+                "parenttitle" => "",
+                "extra_price" => "",
+            );
+            array_push($tuxbuttonslist, $tempcontain);
+        }
+        $returnData["tuxbuttonslist"] = $tuxbuttonslist;
+
+
+        //tuxedo suit
 
 
         $contrastbuttonthread = array(
@@ -790,7 +864,7 @@ class Product_model extends CI_Model {
                 "image" => base_url() . "assets/custom_form_view/waistcoat/front_style/single_breasted/button4.jpg",
                 "default" => "",
                 "lable" => "4 Button",
-                "status"=>"1",
+                "status" => "1",
                 "parenttitle" => "",
                 "parent" => "",
             ),
@@ -798,7 +872,7 @@ class Product_model extends CI_Model {
                 "title" => "5 Button",
                 "image" => base_url() . "assets/custom_form_view/waistcoat/front_style/single_breasted/button5.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "5 Button",
                 "parenttitle" => "",
                 "parent" => "",
@@ -807,7 +881,7 @@ class Product_model extends CI_Model {
                 "title" => "6 Button",
                 "image" => base_url() . "assets/custom_form_view/waistcoat/front_style/single_breasted/button6.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "6 Button",
                 "parenttitle" => "",
                 "parent" => "",
@@ -818,7 +892,7 @@ class Product_model extends CI_Model {
                 "title" => "4 Buttons 2 Buttons Fasten",
                 "image" => base_url() . "assets/custom_form_view/waistcoat/front_style/double_breasted/button42.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "4 Buttons 2 Buttons Fasten",
                 "parenttitle" => "",
                 "parent" => "",
@@ -827,7 +901,7 @@ class Product_model extends CI_Model {
                 "title" => "6 Buttons 3 Button Fasten",
                 "image" => base_url() . "assets/custom_form_view/waistcoat/front_style/double_breasted/button63.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "6 Buttons 3 Button Fasten",
                 "parenttitle" => "",
                 "parent" => "",
@@ -871,7 +945,7 @@ class Product_model extends CI_Model {
                     "image" => base_url() . "assets/custom_form_view/suit/fabric/" . $value['folder'] . "/" . $value1 . ".jpg",
                     "default" => '',
                     "lable" => $value1,
-                    "status"=>"1",
+                    "status" => "1",
                     "parent" => "",
                     "parenttitle" => "",
                 );
@@ -882,7 +956,7 @@ class Product_model extends CI_Model {
             "title" => "Matching",
             "image" => base_url() . "assets/custom_form_view/suit/fabric/matching.jpg",
             "default" => '1',
-            "status"=>"1",
+            "status" => "1",
             "lable" => "Matching",
             "parent" => "",
             "parenttitle" => "",
@@ -893,7 +967,7 @@ class Product_model extends CI_Model {
             "title" => "Same Fabric As Vest Front",
             "image" => base_url() . "assets/custom_form_view/suit/fabric/samefront.jpg",
             "default" => '0',
-            "status"=>"1",
+            "status" => "1",
             "lable" => "Same Fabric As Vest Front",
             "parent" => "",
             "parenttitle" => "",
@@ -929,14 +1003,14 @@ class Product_model extends CI_Model {
                 "default" => "",
                 "lable" => "2 Buttons",
                 "parenttitle" => "",
-                "status"=>"1",
+                "status" => "1",
                 "parent" => "",
             ),
             array(
                 "title" => "3 Buttons",
                 "image" => base_url() . "assets/custom_form_view/overcoat/front_style/single_breasted/button3.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "3 Buttons",
                 "parenttitle" => "",
                 "parent" => "",
@@ -945,7 +1019,7 @@ class Product_model extends CI_Model {
                 "title" => "4 Buttons",
                 "image" => base_url() . "assets/custom_form_view/overcoat/front_style/single_breasted/button4.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "4 Buttons",
                 "parenttitle" => "",
                 "parent" => "",
@@ -956,7 +1030,7 @@ class Product_model extends CI_Model {
                 "title" => "6 Buttons 2 Buttons Fasten",
                 "image" => base_url() . "assets/custom_form_view/overcoat/front_style/double_breasted/button62.jpg",
                 "default" => "",
-                "status"=>"1",
+                "status" => "1",
                 "lable" => "6 Buttons 2 Buttons Fasten",
                 "parenttitle" => "",
                 "parent" => "",

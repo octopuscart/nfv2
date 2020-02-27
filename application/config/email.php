@@ -1,15 +1,14 @@
 <?php
  require("configdbconnect.php");
 $configuration = $globleConnectDB;
-
-
 $config['useragent'] = 'CodeIgniter';
 $config['protocol'] = 'smtp';
 //$config['mailpath'] = '/usr/sbin/sendmail';
-$config['smtp_host'] ="smtp.nitafashions.com";
+$config['smtp_host'] ="mail.nitafashions.com";
 $config['smtp_user'] = "donotreply@nitafashions.com";
-$config['smtp_pass'] = "@Dnotreply1234@";
-$config['smtp_port'] = "587";
+$config['smtp_pass'] = "@NDRply123*@";
+$config['smtp_port'] = "2525";
+//$config['smtp_secure'] = "tls";
 $config['smtp_timeout'] = 5;
 $config['wordwrap'] = TRUE;
 $config['wrapchars'] = 76;

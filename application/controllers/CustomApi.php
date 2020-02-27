@@ -342,7 +342,6 @@ class CustomApi extends REST_Controller {
                     "Short Sleeve Without Cuff" => array(
                         "Wrist Watch" => ["Right Wrist", "Left Wrist"],
                         "Monogram Placement" => ["Left Cuff", "Left Sleeve Plack00000000e]}t"],
-                        
                     ),
                 )
             ),
@@ -433,6 +432,7 @@ class CustomApi extends REST_Controller {
             "navigation" => $mainnavigation,
             "title" => "Jacket Customization",
             "item" => "Jacket",
+            "validation" => array(),
             "selection" => $selectelements,
         );
         $this->response($return_data);
@@ -502,6 +502,7 @@ class CustomApi extends REST_Controller {
             "title" => "Overcoat Customization",
             "item" => "Overcoat",
             "selection" => $selectelements,
+            "validation" => array(),
         );
         $this->response($return_data);
     }
@@ -544,6 +545,7 @@ class CustomApi extends REST_Controller {
             "navigation" => $mainnavigation,
             "title" => "Pant Customization",
             "item" => "Pant",
+            "validation" => array(),
             "selection" => $selectelements,
         );
         $this->response($return_data);
@@ -632,6 +634,7 @@ class CustomApi extends REST_Controller {
             "navigation" => $mainnavigation,
             "title" => "Suit Customization",
             "item" => "Suit",
+            "validation" => array(),
             "selection" => $selectelements,
         );
         $this->response($return_data);
@@ -682,6 +685,7 @@ class CustomApi extends REST_Controller {
             "title" => "Pant Customization",
             "item" => "Pant",
             "selection" => $selectelements,
+            "validation" => array(),
         );
         $this->response($return_data);
     }
@@ -798,6 +802,8 @@ class CustomApi extends REST_Controller {
             "title" => "3 Piece Customization",
             "item" => "3 Piece",
             "selection" => $selectelements,
+            
+            "validation" => array(),
         );
         $this->response($return_data);
     }
@@ -843,6 +849,244 @@ class CustomApi extends REST_Controller {
             "navigation" => $mainnavigation,
             "title" => "Pant Customization",
             "item" => "Pant",
+            "selection" => $selectelements,
+            "validation" => array(),
+        );
+        
+        $this->response($return_data);
+    }
+
+    function tuxedoSuitCustomization_get() {
+        $jacketelements = $this->Product_model->jacketCustomElement();
+        $waistelements = $this->Product_model->waistCustomElement();
+        $shirtCustomization = array(
+            'Body Fit' => $this->Product_model->getChildren(43),
+            'Lapel Style & Width' => $jacketelements['laplestyle'],
+            'Lapel Facing' => $this->Product_model->getChildren(85),
+            'Front Style' => $jacketelements['front_Style'],
+            'Sleeve Buttons' => $jacketelements['sleevebuttons'],
+            'Shoulder Padding' => $this->Product_model->getChildren(56),
+            'Breast Pocket' => $this->Product_model->getChildren(86),
+            'Lower Pocket' => $this->Product_model->getChildren(84),
+            'Ticket Pocket' => $this->Product_model->getChildren(59),
+            "Lining Style" => $jacketelements['liningstyle'],
+            "Button" => $jacketelements['tuxbuttonslist'],
+            'Number of Pleat' => $jacketelements['pantpleat'],
+            'Ribbon on Side Seam' => $this->Product_model->getChildren(9),
+            'Waistband' => $this->Product_model->getChildren(2),
+            'Suspender Buttons on Inner waistband' => $this->Product_model->getChildren(3),
+            'Cuff' => $this->Product_model->getChildren(5),
+            'Zipper - Front Fly' => $this->Product_model->getChildren(6),
+            'Front Pocket Style' => $this->Product_model->getChildren(7),
+            'Number of Back Pocke' => $this->Product_model->getChildren(8),
+        );
+        $selectelements = array(
+            'Body Fit' => "Medium Fit",
+            'Lapel Style & Width' => '3" Classic (Notch Lapel)',
+            'Lapel Facing' => "Satin",
+            'Front Style' => "2 Button (Single Breasted)",
+            'Sleeve Buttons' => '4 Flat Buttons (4 Buttons)',
+            'Shoulder Padding' => 'Standard',
+            'Breast Pocket' => "Slanted Breast Pocket",
+            'Lower Pocket' => "Straight Flap Pockets",
+            'Ticket Pocket' => "No",
+            "Lining Style" => "Matching",
+            "Button" => "Standard",
+            'Number of Pleat' => 'No Pleat',
+            'Ribbon on Side Seam' => 'Satin',
+            'Waistband' => 'Belt Loop',
+            'Suspender Buttons on Inner waistband' => "No",
+            'Cuff' => "No Cuff",
+            'Zipper - Front Fly' => 'Metal (Standard)',
+            'Front Pocket Style' => '1/4" Slanting Pocket (Standard)',
+            'Number of Back Pocke' => "2 Pockets with Buttons (Standard)",
+        );
+        $mainnavigation = array(
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Lapel Facing' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Sleeve Buttons' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Shoulder Padding' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            "Lining Style" => array("choice" => "multi", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            "Button" => array("choice" => "multi", "col" => "4", "lablestyle" => "height:40px", "view" => "", "prenext" => 1),
+            'Number of Pleat' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Ribbon on Side Seam' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Suspender Buttons on Inner waistband' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Cuff' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Zipper - Front Fly' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Pocket Style' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Number of Back Pocke' => array("choice" => "", "col" => "4", "prenext" => 0),
+        );
+
+        $return_data = array(
+            "formItems" => $shirtCustomization,
+            "navigation" => $mainnavigation,
+            "title" => "Tuxedo Suit Customization",
+            "item" => "Tuxedo Suit",
+            "validation" => array(),
+            "selection" => $selectelements,
+        );
+        $this->response($return_data);
+    }
+
+    function tuxedoJacketCustmization_get() {
+        $jacketelements = $this->Product_model->jacketCustomElement();
+        $waistelements = $this->Product_model->waistCustomElement();
+        $shirtCustomization = array(
+            'Body Fit' => $this->Product_model->getChildren(43),
+            'Lapel Style & Width' => $jacketelements['laplestyle'],
+            'Lapel Facing' => $this->Product_model->getChildren(85),
+            'Front Style' => $jacketelements['front_Style'],
+            'Sleeve Buttons' => $jacketelements['sleevebuttons'],
+            'Shoulder Padding' => $this->Product_model->getChildren(56),
+            'Breast Pocket' => $this->Product_model->getChildren(86),
+            'Lower Pocket' => $this->Product_model->getChildren(84),
+            'Ticket Pocket' => $this->Product_model->getChildren(59),
+            "Lining Style" => $jacketelements['liningstyle'],
+            "Button" => $jacketelements['tuxbuttonslist'],
+        );
+        $selectelements = array(
+            'Body Fit' => "Medium Fit",
+            'Lapel Style & Width' => '3" Classic (Notch Lapel)',
+            'Lapel Facing' => "Satin",
+            'Front Style' => "2 Button (Single Breasted)",
+            'Sleeve Buttons' => '4 Flat Buttons (4 Buttons)',
+            'Shoulder Padding' => 'Standard',
+            'Breast Pocket' => "Slanted Breast Pocket",
+            'Lower Pocket' => "Straight Flap Pockets",
+            'Ticket Pocket' => "No",
+            "Lining Style" => "Matching",
+            "Button" => "Standard",
+        );
+        $mainnavigation = array(
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lapel Style & Width' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol2", "prenext" => 1),
+            'Lapel Facing' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Front Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Sleeve Buttons' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Shoulder Padding' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Breast Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 0),
+            "Lining Style" => array("choice" => "multi", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
+            "Button" => array("choice" => "multi", "col" => "2", "lablestyle" => "height:40px", "view" => "", "prenext" => 1),
+        );
+
+        $return_data = array(
+            "formItems" => $shirtCustomization,
+            "navigation" => $mainnavigation,
+            "title" => "Tuxedo Jacket Customization",
+            "item" => "Tuxedo Jacket",
+            "selection" => $selectelements,
+            "validation" => array(),
+        );
+        $this->response($return_data);
+    }
+
+    function tuxedoShirtCustomization_get() {
+        $shirtelements = $this->Product_model->shirtCustomElement();
+        $shirtCustomization = array(
+            'Body Fit' => $this->Product_model->getChildren(10),
+            'Collar Style' => $this->Product_model->getChildren(96),
+            'Collar & Cuff Stiffness' => $this->Product_model->getChildren('14'),
+            'Collar Stays' => $this->Product_model->getChildren('15'),
+            'Sleeve And Cuff Style' => $shirtelements['tuxedosleevestyle'],
+            'Wrist Watch' => $shirtelements['watchoption_container'],
+            'Front Style' => $this->Product_model->getChildren('88'),
+            'Back Style' => $this->Product_model->getChildren('17'),
+            'Darts' => $this->Product_model->getChildren('18'),
+            'Bottom Style' => $this->Product_model->getChildren('20'),
+            'Label' => $this->Product_model->getChildren('24'),
+            'Button' => $shirtelements['tuxedobuttoncontainer'],
+            'Monogram Placement' => $shirtelements['monogram_placementcontainer'],
+            'Monogram Style' => $shirtelements['monogramontainer'],
+            'Monogram Initial' => array(),
+            'Monogram Color' => $shirtelements['monogram_colorcontainer'],
+        );
+        $selectelements = array(
+            'Body Fit' => "Medium Fit",
+            'Collar Style' => 'Medium Spread (1 5/8" x 3 ")',
+            'Add 2 Buttons On The Collar Band' => "No",
+            'Collar & Cuff Stiffness' => "Standard",
+            'Collar Stays' => "Permanent",
+            'Sleeve And Cuff Style' => "Long Sleeve Single Cuff Rounded",
+            'Wrist Watch' => "No",
+            'Front Style' => "Plain Front",
+            'Back Style' => "Plain",
+            'Darts' => "No Darts",
+            'Pocket Style' => "No Pocket",
+            'Bottom Style' => "Shirt Tail",
+            'Collar & Cuff Feature' => "No",
+            'Inner Collar Insert' => "-",
+            'Inner Cuff Insert' => "-",
+            'Inner Front Placket Insert' => "-",
+            'Label' => "Nita Fashions",
+            'Button' => "Standard",
+            'Monogram Placement' => "No Monogram",
+            'Monogram Style' => "-",
+            'Monogram Initial' => "-",
+            'Monogram Color' => "-",
+        );
+        $mainnavigation = array(
+            'Body Fit' => array("choice" => "", "col" => "4", "prenext" => 0),
+            'Collar Style' => array("choice" => "", "col" => "4", "lablestyle" => "height:60px", "maxsize" => "bodymax400", "prenext" => 1),
+            'Add 2 Buttons On The Collar Band' => array("choice" => "", "col" => "3", "prenext" => 1),
+            'Collar & Cuff Stiffness' => array("choice" => "", "col" => "3", "prenext" => 1,),
+            'Collar Stays' => array("choice" => "", "col" => "3", "prenext" => 1),
+            'Sleeve And Cuff Style' => array("choice" => "", "col" => "4",
+                "lablestyle" => "", "view" => "multicol", "prenext" => 1),
+            'Wrist Watch' => array("choice" => "", "col" => "4", "lablestyle" => "", "depandent" => "Sleeve Style", "prenext" => 1),
+            'Front Style' => array("choice" => "", "col" => "3", "lablestyle" => "", "prenext" => 1),
+            'Back Style' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Darts' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Pocket Style' => array("choice" => "", "col" => "4", "lablestyle" => "height:60px", "prenext" => 1),
+            'Bottom Style' => array("choice" => "", "col" => "4", "lablestyle" => "height:60px", "prenext" => 1),
+            'Label' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Button' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Monogram Placement' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Monogram Style' => array("choice" => "", "col" => "2", "lablestyle" => "", "prenext" => 1),
+            'Monogram Color' => array("choice" => "", "col" => "4", "lablestyle" => "", "prenext" => 1),
+            'Monogram Initial' => array("choice" => "", "col" => "4", "lablestyle" => "", "view" => "text", "prenext" => 2),
+        );
+        $validation = array(
+            "Sleeve And Cuff Style" => array(
+                "pointer" => array("Wrist Watch" => "No", "Monogram Placement" => "No Monogram"),
+                "validate" => array(
+                    "Short Sleeve With Cuff" => array(
+                        "Wrist Watch" => ["Right Wrist", "Left Wrist"],
+                        "Monogram Placement" => ["Left Cuff", "Left Sleeve Placket"],
+                    ),
+                    "Short Sleeve Without Cuff" => array(
+                        "Wrist Watch" => ["Right Wrist", "Left Wrist"],
+                        "Monogram Placement" => ["Left Cuff", "Left Sleeve Plack00000000e]}t"],
+                    ),
+                )
+            ),
+            "Pocket Style" => array(
+                "pointer" => array("Monogram Placement" => "No Monogram"),
+                "validate" => array(
+                    "No Pocket" => array(
+                        "Monogram Placement" => ["Left Chest Pocket"],
+                    ),
+                )
+            ),
+            "Monogram Placement" => array(
+                "pointer" => array("Monogram Style" => "-", "Monogram Color" => "-", "Monogram Initial" => "-"),
+                "validate" => array()
+            )
+        );
+
+        $return_data = array(
+            "formItems" => $shirtCustomization,
+            "navigation" => $mainnavigation,
+            "title" => "Shirt Customization",
+            "item" => "Shirt",
+            "validation" => $validation,
             "selection" => $selectelements,
         );
         $this->response($return_data);

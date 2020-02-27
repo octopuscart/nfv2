@@ -645,3 +645,35 @@ main .shell { padding: 25px 0 90px 43px; width: 917px;}
 .deleteaddress {
     right: 60px;
 }
+
+
+.custome_summary_popup{
+    height: 419px;
+    overflow-y: scroll;
+}
+
+.swal2-modal .swal2-styled {
+    border: 0;
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 10px 5px 0;
+    padding: 2px 24px;
+}
+
+.swal2-modal .swal2-title {
+    color: #595959;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: none;
+    position: relative;
+    margin: 0 0 .4em;
+    padding: 0;
+    display: block;
+    word-wrap: break-word;
+}

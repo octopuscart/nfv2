@@ -17,7 +17,7 @@
     <div class=" tab-content row" style="">
         <div class="col-sm-5 mainelementtab">
 
-            <ul class="nav nav-tabs tabs-left vertialTab bodymax500 singletag" role="tablist" style=" height:700px ">
+            <ul class="nav nav-tabs tabs-left vertialTab  singletag" role="tablist" style=" ">
                 <li role="presentation" class="{{$index==0?'active':''}} customtabblock" ng-repeat="(tagname, tagkey) in customizationElement.navigation">
                     <a class="" href="#custom{{$index}}" aria-controls="custom{{$index}}" role="tab" data-toggle="tab">
 

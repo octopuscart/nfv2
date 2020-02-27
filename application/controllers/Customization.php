@@ -27,6 +27,7 @@ class Customization extends CI_Controller {
         $data['item_id'] = $item_id;
         $customdatalink = array(
             "1" => "shirtCustomization",
+            "7" => "tuxedoShirtCustomization",
             "5" => "jacketCustomization",
             "12" => "jacketCustomization",
             "2" => "pantCustomization",
@@ -34,7 +35,9 @@ class Customization extends CI_Controller {
             "3" => "waistcoatCustomization",
             "13" => "c3PieceSuitCustomization",
             "15" => "overcoatCustomization",
-            "8" => "tuxedoPantCustomization"
+            "8" => "tuxedoPantCustomization",
+            "10" => "tuxedoSuitCustomization",
+            "14" => "tuxedoJacketCustmization"
         );
 
 

@@ -148,8 +148,8 @@ class Shop extends CI_Controller {
             $this->db->where("measurement_id != ''");
             $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
             $this->db->update("nfw_product_cart");
-            
-            redirect("Order/orderdetails/".$last_id);
+
+            redirect("Order/orderdetails/" . $last_id);
         }
 
         $this->load->view('Product/shopCart', $data);
@@ -407,6 +407,29 @@ class Shop extends CI_Controller {
                 #  $this->db->where('id', $ids); //set column_name and value in which row need to update
                 # $this->db->delete('products'); //
             }
+        }
+    }
+
+    function testEmail() {
+        $receiver = "octopuscartltd@gmail.com";
+        $this->email->set_newline("\r\n");
+        $this->email->from(email_bcc, "Test");
+        $this->email->to($receiver);
+//                $this->email->bcc(email_bcc);
+        $subjectt = "Test Email";
+
+        $subject = $subjectt;
+        $this->email->subject($subject);
+        $this->email->message("This is test mail");
+        $this->email->print_debugger();
+        $send = $this->email->send();
+        if ($send) {
+            echo json_encode("send");
+              $error = $this->email->print_debugger(array('headers'));
+            echo json_encode($error);
+        } else {
+            $error = $this->email->print_debugger(array('headers'));
+            echo json_encode($error);
         }
     }
 

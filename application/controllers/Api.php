@@ -573,6 +573,8 @@ class Api extends REST_Controller {
         } else {
             $session_cart = $this->session->userdata('session_cart');
             if (isset($session_cart['products'])) {
+                                $message = array("status" => 2, "msg" => "Already In Cart", "type" => "warning", "product" => $productadd);
+
                 array_push($session_cart['products'], $productadd);
             } else {
                 $session_cart = array('products' => array());

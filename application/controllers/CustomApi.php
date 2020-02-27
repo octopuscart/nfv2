@@ -1091,6 +1091,11 @@ class CustomApi extends REST_Controller {
         );
         $this->response($return_data);
     }
+    
+    function getPphp_get(){
+        phpinfo();
+
+    }
 
 }
 

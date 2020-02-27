@@ -151,17 +151,13 @@ class Shop extends CI_Controller {
 
 
             $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?order_id=$last_id&user_id=$this->user_id&mail_type=1&mail_set=order";
-            $ch = curl_init();
-            // Set the url, number of POST vars, POST data
-            curl_setopt($ch, CURLOPT_URL, $url);
 
-            // Execute post
-            $result = curl_exec($ch);
-            if ($result === FALSE) {
-                die('Curl failed: ' . curl_error($ch));
-            }
-            // Close connection
-            curl_close($ch);
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            $data = curl_exec($curl);
+            curl_close($curl);
 
 
 

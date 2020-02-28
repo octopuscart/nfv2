@@ -1,198 +1,136 @@
 <?php
 
 $this->load->view('layout/header');
-?>
-<style>
-    .shop_timing{
-        float: left;
-        width: 135px;
-    }
-</style>
+?><script src='https://www.google.com/recaptcha/api.js'></script>
+<!--page title-->
+<section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="    padding: 0px 1px 8px 1px;background: black;">
+    <div class="">
+ 
+        <!-- breadcrumbs -->
+        <ul class="hr_list d_inline_m breadcrumbs" style="margin-top: 10px;">
+            <li class="m_right_8 f_xs_none" style="margin-right:0px !important">
+                <a href="#" class="color_default d_inline_m m_right_10" style="margin-right:0px !important;color:white;">
+                    <i class="icon-mail-alt"></i>&nbsp;&nbsp;Contact Us&nbsp;&nbsp;
+                </a>
+            </li>
 
-<!-- MAP -->
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="google-map-area">
-        <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA319S-ZyrzBQNhbYmjGedtOfl8wm6tY0Y&v=3.exp'></script><div style='overflow:hidden;height:338px;width:100%;'>
-            <div id='gmap_canvas' style='height:338px;width:100%;'></div><div><small><a href="http://embedgooglemaps.com">									embed google maps							</a></small></div><div><small>
-
-                </small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
-        </div><script type='text/javascript'>
-            function init_map() {
-                //22.2968045,114.1687551  22.2969039,114.1623853
-                var myOptions = {zoom: 17, center: new google.maps.LatLng(22.2974065, 114.1715963),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP};
-                map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-                marker = new google.maps.Marker({map: map, position: new google.maps.LatLng(22.297284, 114.172686)});
-
-
-                infowindow = new google.maps.InfoWindow({content: '<strong>HONG KONG WOOLEN TEXTILE CO.</strong><br>Flat D3 11/F, Mirador Mansion,<br/> 54-64B Nathan Rd, Kowloon, Hong Kong'});
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map, marker);
-                });
-                infowindow.open(map, marker);
-
-
-
-
-            }
-            google.maps.event.addDomListener(window, 'load', init_map);</script>
-
+        </ul>
     </div>
-</div>
-<div style="clear: both"></div>
-<!-- Content -->
-<div id="contactus"> 
-    <!-- Contact Us -->
-    <section class="lets-talk pad-t-b-30">
-        <div class="container"> 
-            <!-- Cantact Us -->
-            <div class="row">
-                <div class="col-md-6 contact-social"> 
+</section>
+<!--content-->
+<section class="section_offset">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 m_xs_bottom_30">
+                <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">Contact Information</h3>
 
-                    <!-- Main Heading -->
-                    <div class="heading-block margin-bottom-30">
-                        <h3 class="text-transform-none letter-space-0">Our Location</h3>
-                    </div>
-                    <ul class="studio-loc padding-right-100">
-                        <div class="widget clearfix">
-                            <div>
-                                <h5><i class='icon-map-marker'></i> Address:</h5>
-                                <address class="nobottommargin">
-                                    <div class="text-muted">
-                                        <p class="nobottommargin">
-                                            Flat D3 11/F, Mirador Mansion,<br/>
-                                            54-64B Nathan Rd,<br/>
-                                            Kowloon, 
-                                            Hong Kong
-                                        </p>
-                                    </div>
-                                </address>
+                <p class="fw_light m_bottom_23">
+                    World’s finest fabrics are carefully selected to live up to name of Nita Fashions. We carry over 11,000 fabrics: English flannels and worsted, Scottish tweeds and cashmere, French Gabardines and Italian and silk Mohairs.
+                </p>
+                <div class="row">
+                    <ul class="col-lg-6 col-md-6 col-sm-12 fw_light w_break m_bottom_45 m_xs_bottom_30">
+                        <li class="m_bottom_8">
+                            <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
+                                <i class="icon-phone-1"></i>
                             </div>
-                        </div>
-                        <div class="widget clearfix">
-                            <div>
-                                <h5><i class='icon-phone-sign'></i> Contact:</h5>
-                                <address class="nobottommargin">
-                                    <abbr title="Phone Number"><strong class="telprefix">MOB:</strong></abbr> +(852) 6388 6067<br>
-                                    <abbr title="Phone Number"><strong class="telprefix">TEL:</strong></abbr> +(852) 3619 7454<br>
-                                    <abbr title="Phone Number"><strong class="telprefix">FAX:</strong></abbr> +(852) 3619 7453<br>
-                                    <abbr title="Email Address"><strong class="telprefix">EMAIL:</strong></abbr> sales@hkwoolentextile.com 
-                                </address>
+                            + (852) 2721-9990
+                        </li>
+                        <li class="m_bottom_8">
+                            <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
+                                <i class="icon-mail-alt"></i>
                             </div>
-                        </div>  
+                            <a href="mailto:sales@nitafashions.com" class=" color_pink_hover" style="font-size: 18px;
+                               color: rgb(122, 125, 127);">sales@nitafashions.com</a>
+                        </li>
+
                     </ul>
+                    <ul class="col-lg-6 col-md-6 col-sm-12 m_xs_bottom_30 vr_list_type_5">
+                        <li class="m_bottom_8 fw_light">
+                            <div class="f_left icon_wrap_size_1 color_pink circle">
+                                <i class="icon-location"></i>
+                            </div>
+                            16 Mody Road, G/F, T.S.T, Kowloon, Hong Kong
+                        </li>
 
-                    <!-- Main Heading -->
-                    <div class="heading-block margin-bottom-20 margin-top-30">
-                        <h3 class="text-transform-none letter-space-0">Follow Us</h3>
-                    </div>
-                    <div class="social-links">
-                        <div class="topmargin-sm clearfix">
-                            <a href="#" class="social-icon si-small si-colored si-facebook">
-                                <i class="icon-facebook"></i>
-                                <i class="icon-facebook"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-colored si-twitter">
-                                <i class="icon-twitter"></i>
-                                <i class="icon-twitter"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-colored si-instagram">
-                                <i class="icon-instagram"></i>
-                                <i class="icon-instagram"></i>
-                            </a>
-
-
-                            <a href="#" class="social-icon si-small si-colored si-pinterest">
-                                <i class="icon-pinterest"></i>
-                                <i class="icon-pinterest"></i>
-                            </a>
-
-
-
-                            <a href="#" class="social-icon si-small si-colored si-youtube">
-                                <i class="icon-youtube"></i>
-                                <i class="icon-youtube"></i>
-                            </a>
-                        </div>
-                    </div>
+                    </ul>
                 </div>
+                <h5 class="color_dark m_bottom_20 fw_light">Stay Connected</h5>
+                <ul class="hr_list social_icons">
+                    <!--tooltip_container class is required-->
+                    <li class="m_right_15 m_bottom_15 tooltip_container">
+                        <!--tooltip-->
+                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
+                        <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" target="_blank" class="d_block facebook icon_wrap_size_2 circle color_grey_light_2">
+                            <i class="icon-facebook fs_small"></i>
+                        </a>
+                    </li>
+                    <li class="m_right_15 m_bottom_15 tooltip_container">
+                        <!--tooltip-->
+                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
+                        <a href="https://twitter.com/nitafashions" target="_blank" class="d_block twitter icon_wrap_size_2 circle color_grey_light_2">
+                            <i class="icon-twitter fs_small"></i>
+                        </a>
+                    </li>
+                    <li class="m_right_15 m_bottom_15 tooltip_container m_xs_right_15">
+                        <!--tooltip-->
+                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Instagram </span>
+                        <a href="https://www.instagram.com/Nita.fashions" target="_blank" class="d_block googleplus icon_wrap_size_2 circle color_grey_light_2">
+                            <i class="icon-instagram fs_small"></i>
+                        </a>
+                    </li>
 
-                <!-- Contact Form -->
-                <div class="col-sm-6">
-                    <!-- Main Heading -->
-                    <div class="heading-block left-align margin-bottom-30">
-                        <h3 class="text-transform-none letter-space-0">Conatct Us</h3>
-                    </div>
+                    <li class="m_right_15 m_bottom_15 tooltip_container">
+                        <!--tooltip-->
+                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Youtube</span>
+                        <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" target="_blank" class="d_block youtube icon_wrap_size_2 circle color_grey_light_2">
+                            <i class="icon-youtube-play fs_small"></i>
+                        </a>
+                    </li>
 
-                    <div class="postcontent nobottommargin" style="width: 100%;">
+                    
 
-
-
-                        <div class="contact-widget">
-
-                            <div class="contact-form-result"></div>
-
-                            <form class="nobottommargin" id="template-contactform" name="template-contactform" action="#" method="post">
-
-                                <div class="form-process"></div>
-
-                                <div class="col_half">
-                                    <label for="template-contactform-name">First Name <small>*</small></label>
-                                    <input type="text" id="template-contactform-name" name="first_name" value="" class="sm-form-control required" />
-                                </div>
-
-                                <div class="col_half col_last">
-                                    <label for="template-contactform-email">Last Name <small>*</small></label>
-                                    <input type="text" id="template-contactform-email" name="last_name" value="" class="required email sm-form-control" />
-                                </div>
-                                <div class="clear"></div>
-                                <div class="col_half ">
-                                    <label for="template-contactform-phone">Contact No.</label>
-                                    <input type="tel" id="template-contactform-phone" name="contact" value="" class="sm-form-control" />
-                                </div>
-
-
-                                <div class="col_half col_last">
-                                    <label for="template-contactform-phone">Email</label>
-                                    <input type="email" id="template-contactform-phone" name="email" value="" required="" class="required sm-form-control" />
-                                </div>
-                                <div class="clear"></div>
-                                <div class="col_full">
-                                    <label for="template-contactform-phone">Subject</label>
-                                    <input type="text" id="template-contactform-phone" name="subject" value="" class="sm-form-control" />
-                                </div>
-                                <div class="clear"></div>
-
-
-
-
-
-                                <div class="clear"></div>
-
-                                <div class="col_full">
-                                    <label for="template-contactform-message">Message <small>*</small></label>
-                                    <textarea class="required sm-form-control" id="template-contactform-message" required="" name="message" rows="6" cols="30"></textarea>
-                                </div>
-
-
-                                <div class="col_full">
-                                    <button class="button button-3d nomargin" type="submit" id="template-contactform-submit" name="sendmessage" value="submit">Send Message</button>
-                                </div>
-
-                            </form>
-                        </div>
-
-                    </div><!-- .postcontent end -->
-                </div>
+                </ul>
             </div>
-            <div class="goldline2 " style="margin-bottom: 30px;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 m_xs_bottom_30">
+                <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">Contact Form</h3>
+                <p class="m_bottom_35 heading_2 t_align_c">Send us Enquiry by filling the form. </p>		
+                <form id="" method="post" action="#">
+                    <ul>
+                        <li class="row m_bottom_10">
+                            <div class="col-lg-6 col-md-6 col-sm-12 w_xs_full m_xs_bottom_10">
+                                <input type="text" name="name" placeholder="Name*" class="w_full r_corners fw_light" required="">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 w_xs_full">
+                                <input type="email" name="email" placeholder="Email*" class="w_full r_corners fw_light" required="">
+                            </div>
+                        </li>
+                        <li class="m_bottom_10">
+                            <select name="subject" placeholder="Subject" class="w_full r_corners fw_light bg_light border_light select_title" style="   " required="">
+                                <option>Enquiry</option>
+                                <option>Send Swatches</option>
+                                <option>Feedback</option>
+                            </select>
+                        </li>
+                        <li class="m_bottom_10">
+                            <input class="w_full r_corners fw_light " name="address" placeholder="Address" >
+                        </li>
+                        <li class="m_bottom_5">
+                            <textarea class="w_full r_corners fw_light height_3" name="message" placeholder="Message" required=""></textarea>
+                        </li>
+                        <li class="m_bottom_10">
+                            <div class="g-recaptcha" data-sitekey="6LeHqQ0UAAAAAA4nqqGPVY3nw7Uoih8aXHyoQAOc"></div>
+                        </li>
+                        <li class="m_bottom_10">
+                            <button name="submitEnquiry" class="button_type_5 color_blue transparent r_corners fs_medium tr_all m_right_10 m_sm_bottom_10">Submit</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
         </div>
+    </div>
+</section>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.5001960504874!2d114.17316699999999!3d22.296914999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400f2069d92bf%3A0x3184e99f392dc91e!2sNITA+FASHIONS!5e0!3m2!1sen!2sin!4v1432895214401" width="1500" height="350" frameborder="0" style="border:0"></iframe>		
 
-    </section>
-</div>
 
 <?php
 

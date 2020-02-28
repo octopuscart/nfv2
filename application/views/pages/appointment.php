@@ -2,159 +2,155 @@
 $this->load->view('layout/header');
 ?>
 <style>
-    .ui-datepicker-trigger{
-        text-align: center;
-        height: 50px;
-        padding-left: 14px;
-        width: 45px;
-        position: absolute;
+    .calendar {     
+        background:white !important; 
     }
+    table tr td:first-child, table tr th:first-child {
+        border-left: 1px solid #D3D3D3; 
+        border-top: 1px solid #D3D3D3; 
+    }
+
+    table td, table th {
+
+        border: none ; 
+    }
+    table tr td:last-child, table tr th:last-child {
+        border-right: 1px solid #D3D3D3; 
+
+    }
+    table tr:last-child td {
+        border-bottom:  1px solid #D3D3D3; 
+        border-top:  1px solid #D3D3D3; 
+
+    }
+    .fc-event-title{
+        font-weight: 300  ;
+        font-size: 24px;
+    }
+
+    .fc-event-title small{
+        font-weight: 400  ;
+        font-size: 12px;
+    }
+    .fc-event {
+        border: 1px solid #fff;
+        background-color: #E8E6E6;
+        color: #000;
+        font-size: .85em;
+        cursor: default;
+        padding: 0px 10px;
+    }
+    .fc-header-left{
+        padding: 10px !important;
+    }
+    .fc-header-title h2 {
+        margin-top: 0;
+        white-space: nowrap;
+        font-family: lato;
+        font-weight: 300;
+    }
+    .make_appointment{
+        background: red;
+        color: white;
+        border: 1px solid red;
+        margin-bottom: 5px;
+    }
+    .set_appointment{
+        background: red;
+        color:white
+    }
+    #calendar{
+        color:black;
+    }
+
+    .fc-today {
+        background: #FFFFFF;
+        color: red;
+
+        font-size: 25px;
+    }
+
+    .fc-state-default.fc-corner-right {
+
+        text-transform: capitalize;
+    }
+    sup{
+        line-height: 19px;
+    }
+
 </style>
 
-<!-- Slider -->
-<section class="sub-bnr" data-stellar-background-ratio="0.5">
-    <div class="position-center-center">
-        <div class="container">
-            <h4>Book An Appointment</h4>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?php echo site_url("/"); ?>">Home</a></li>
-                <li><a href="<?php echo site_url("Shop/appointment"); ?>">Appointment</a></li>
+<section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="    padding: 0px 1px 8px 1px;background: black;">
+    <div class="">
 
-            </ol>
-        </div>
+        <!-- breadcrumbs -->
+        <ul class="hr_list d_inline_m breadcrumbs" style="margin-top: 10px;">
+            <li class="m_right_8 f_xs_none" style="margin-right:0px !important">
+                <a href="#" class="color_default d_inline_m m_right_10" style="margin-right:0px !important;color:white;">
+                    <i class="icon-calendar"></i>&nbsp;&nbsp;   Make your appointment Schedule&nbsp;&nbsp;
+
+
+                </a>
+            </li>
+
+        </ul>
     </div>
 </section>
 
 
 
 
-<!-- Left Background -->
-<div class="main-page-section half_left_layout" ng-controller="bookingController">
-    <div class="main-half-layout half_left_layout studio-bg"></div>
-
-    <!-- Right Content -->
-    <div class="main-half-layout-container half_left_layout pricing">
-        <div class="about-us-con">
-            <div class="skills padding-top-30"> 
-
-                <article style="padding: 10px;">
-                    <!-- Main Heading -->
-                    <div class="heading-block left-align margin-bottom-30">
-                        <h3 class="text-transform-none text-center letter-space-0" style="display: block">Book An Appointment</h3>
-                    </div>
-
-                    <div class="contact">               
-                        <!-- Success Msg -->
-                        <div id="contact_message" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>              
-                        <!-- FORM -->
-                        <form role="form" id="contact_form" action="#" class="contact-form" method="post" >
-                            <ul class="row nolist-style">
-                                <li class="col-sm-5">
-                                    <label>
-                                        <input type="text" class="form-control" name="last_name" id="name" placeholder="Last Name" required="">
-                                    </label>
-                                </li>
-                                <div class="col-sm-1 "></div>
-                                <li class="col-sm-6 ">
-                                    <label>
-                                        <input type="text" class="form-control" name="first_name" id="name" placeholder="First Name" required="">
-                                    </label>
-                                </li>
-                                <li class="col-sm-12">
-                                    <label>
-                                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" required="">
-                                    </label>
-                                </li>
-                                <li class="col-sm-12">
-                                    <label>
-                                        <input type="text" class="form-control" name="contact_no" id="contact_no" placeholder="Contact No.">
-                                    </label>
-                                </li>
-
-                                <li class="col-sm-5">
-                                    <label>
-                                        <input type="hidden" class="form-control" name="select_date"  value="{{selection.date}}"  >
-
-                                        <input type="text" id="datepicker" ng-model="selection.date" class="form-control"  placeholder="Date"  required="" min="<?php echo date('Y-m-d'); ?>" value="{{selection.date}}" disabled="" ng-change="changeTimeSlot()" style="width:90% ">
-                                    </label>
-                                </li>
-                                <div class="col-sm-1 "></div>
-                                <li class="col-sm-6">
-                                    <label>
-                                        <select class="form-control" name="select_time" style=" padding: 0px 20px;   line-height: 50px;
-                                                height: 50px;
-                                                background: rgba(0,0,0,0.02);">
-                                            <option value="{{time}}" ng-repeat="time in selection.time">{{time}}</option>
-                                        </select>
-                                    </label>
-                                </li>
 
 
 
+<div class="section_offset" style="    padding: 30px 0 67px;">
+    <div class="container clearfix">
+        <div class="row page_block">
+            <section class="col-lg-12 col-md-12 col-sm-12 m_xs_bottom_30" style="margin-bottom: 20px;">
+                <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">Tour Schedule</h3>
 
-                                <li class="col-sm-12">
-                                    <label>
-                                        <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message" ></textarea>
-                                    </label>
-                                </li>
-                                <li class="col-sm-12 text-left">
-                                    <button type="submit"  class="btn btn-inverse" name="submit" value="sendmessage" >SUBMIT</button>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                </article>
+
+            </section>
+
+            <table class="table table-borderd hideonmobile">
+                <tr style="    background-color: #000;
+                    color: #fff;">
+                    <th style="width: 100px">Country</th>
+                    <th style="width: 150px">City/State</th>
+                    <th style="">Hotel Name & Address</th>
+
+                    <th style="width: 350px">From Date - To Date</th>
+                    <th style="width: 200px"></th>
+
+                </tr>
+            </table>
+            <!--<div id="calendar" class="calendar"></div>-->
+
+
+
+            <div class="row showonmobile">
+
             </div>
+
         </div>
     </div>
 </div>
 
-<div style="clear: both"></div>
 
 
-<script>
-
-    App.controller('bookingController', function ($scope, $http, $timeout, $interval) {
-        $scope.selection = {'date': '<?php echo date('Y-m-d'); ?>', 'time': ''};
-        $scope.timeSlot = <?php echo json_encode($timing_data); ?>;
-        $("#datepicker").datepicker({
-            minDate: new Date('<?php echo date('Y-m-d'); ?>'),
-            dateFormat: 'yy-mm-dd',
-            showOn: "button",
-            buttonText: '<i class="fa fa-calendar"></i>',
-            onSelect: function () {
-                $scope.changeTimeSlot(this.value);
-            }
-        });
-        $scope.changeTimeSlot = function (cdate) {
-            console.log(cdate);
-            var day = new Date(cdate);
-            var cday = day.getDay();
-
-            var selectedday = "" + cday;
-            console.log(cday, typeof (cday))
-            if (cday < 6 && cday > 0) {
-                selectedday = "mon_fri";
-                console.log("positon1");
-            } else if (cday == 6) {
-                selectedday = "6";
-                console.log("positon2");
-            } else {
-                selectedday = "0";
-                console.log("positon3");
-            }
-            $timeout(function () {
-                $scope.selection.time = $scope.timeSlot[selectedday];
-            }, 100)
+<button type="button" style="display: none" class="btn btn-primary btn-lg Login" data-toggle="modal" data-target="#myLogin">
+</button>
+<style>
+    .modal table tr{
+        padding: 8px;
+        line-height: 0.42857143 !important;
+        vertical-align: top;
+        /*border-bottom: 1px solid;*/
+    }
+</style>
 
 
-        }
-        $scope.changeTimeSlot($scope.selection.date);
-    })
-
-</script>
 
 <?php
 $this->load->view('layout/footer');

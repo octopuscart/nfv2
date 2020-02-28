@@ -1,12 +1,12 @@
 <?php
 $menuArrayMain = [
-    array("title" => "Home", "link" => "", "submenu" => [
-            array("title" => "About Us", "link" => "", "submenu" => []),
-            array("title" => "FAQ's", "link" => "", "submenu" => []),
-            array("title" => "Terms of Service", "link" => "", "submenu" => []),
-            array("title" => "Privacy Policy", "link" => "", "submenu" => []),
-            array("title" => "Schedule", "link" => "", "submenu" => []),
-            array("title" => "Contact Us", "link" => "", "submenu" => []),
+    array("title" => "Home", "link" => site_url("/"), "submenu" => [
+            array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
+            array("title" => "FAQ's", "link" => site_url("Shop/faqs"), "submenu" => []),
+            array("title" => "Terms of Service", "link" => site_url("Shop/term_of_service"), "submenu" => []),
+            array("title" => "Privacy Policy", "link" => site_url("Shop/privacy_policy"), "submenu" => []),
+            array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
+            array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
         ]),
     array("title" => "Customize Now", "link" => "", "submenu" => [
             array("title" => "Shirt", "link" => site_url("Product/productList?category=0&item_type=1"), "submenu" => []),
@@ -24,11 +24,11 @@ $menuArrayMain = [
             array("title" => "Sports Jacket", "link" => site_url("Product/productList?category=0&item_type=12"), "submenu" => []),
             array("title" => "Overcoat", "link" => site_url("Product/productList?category=0&item_type=15"), "submenu" => []),
         ]),
-    array("title" => "About Us", "link" => "", "submenu" => []),
-    array("title" => "Schedule", "link" => "", "submenu" => []),
-    array("title" => "Contact Us", "link" => "", "submenu" => []),
+    array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
+    array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
+    array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
     array("title" => "Offers", "link" => "", "submenu" => []),
-    array("title" => "Guide", "link" => "", "submenu" => []),
+    array("title" => "Guide", "link" => site_url("Shop/guide"), "submenu" => []),
 ];
 ?>
 

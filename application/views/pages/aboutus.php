@@ -1,106 +1,98 @@
 <?php
+
 $this->load->view('layout/header');
 ?>
+<!--page title-->
+<section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="    padding: 0px 1px 8px 1px;background: black;">
+    <div class="">
+
+        <!-- breadcrumbs -->
+        <ul class="hr_list d_inline_m breadcrumbs" style="margin-top: 10px;">
+            <li class="m_right_8 f_xs_none" style="margin-right:0px !important">
+                <a href="#" class="color_default d_inline_m m_right_10" style="margin-right:0px !important;color:white;">
+                    <i class="ion-information-circled"></i>&nbsp;&nbsp;  About Us&nbsp;&nbsp;
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</section>
+<style>
+    .page_block p.fw_light.first_letter_1 {
+        font-weight: 500;
+    }
+    .page_block{
+        background-image: url(<?php echo base_url(); ?>/assets/images/aboutpage.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #fff;
+        padding: 33px;
+        /*background-position: -30px -55px;*/
+
+    }
+    .page_block h3{
+        font-size: 24px;
+        font-weight: 500;
+        color: #FFF;
+    }
+    span.fl.color_pink.circle.t_align_c.f_left.d_block {
+        color: #fff;
+    }
+</style>
+<div class="section_offset" style="    padding: 30px 0 67px;">
+    <div class="container clearfix">
+        <div class="row">
+            <section class="col-lg-12 col-md-12 col-sm-12 m_xs_bottom_30">
+                <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">About Nita Fashions</h3>
+                <p class="m_bottom_35 heading_2 t_align_c"></p>		
+
+            </section>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 m_bottom_40 m_xs_bottom_30 paddinglr125 " style='  '>
+
+                <div class="page_block">
+                    <h3 class="color_dark fw_light m_bottom_20">Company History </h3>
+                    <p class="fw_light first_letter_1"><span class="fl color_pink circle t_align_c f_left ">N</span>
+                        ita Fashions has been well recognized for its superior fabrics, meticulous hand tailoring, outstanding quality and customer service since 1953.  Its owner and Chief Tailor, Mr. Peter Daswani, recently partnered with his son Anil Daswani giving the business the perfect balance of classic and modern, taking it to its peak. 
+                        <br/>
+                        Nita Fashions’ mission is to equip customers with the knowledge and bespoke wardrobe to attend every event with confidence. They are able to achieve this by working closely with clients and understanding their style and knowing what will flatter their form. 
+                        <br/>
+                        The roots of Mr. Peter Daswani’s craftsmanship are derived from the pioneer, his father - who began as an apprentice on Saville Row;   as a result, his cutting style is both traditional and very British.  To contrast, Anil has a very modern Italian style and technique that resembles the current running trends. His knowledge and understanding stems from being under the guidance of his Father, Mr. Peter Daswani, whilst over the years adding his own twist. 
+                    </p>
+
+                    <hr>
 
 
-<!-- MAP -->
+
+                    <h3 class="color_dark fw_light m_bottom_20">Business Environment </h3>
+                    <p class="fw_light first_letter_1"><span class="fl color_pink circle t_align_c f_left ">A</span>
+                        t Nita Fashions, we believe in doing everything in-house. We have 65 tailors in our workshop that produce up to 30 suits and 200 shirts in a day. Even with our in-house tailors the business and craftsmanship has been passed-on from one generation to the next. 
+
+                    </p>
+                    <hr>
 
 
-<div id="content"> 
+                    <h3 class="color_dark fw_light m_bottom_20">Techniques used to produce a Garment  </h3>
+                    <p class="fw_light first_letter_1"><span class="fl color_pink circle t_align_c f_left ">U</span>
 
-    <!-- SERVICES -->
-    <section class="what-we pad-t-b-30">
-        <div class="container">
+                        pon your first encounter with us, we take 36 detailed measurements of your body and posture. These detailed notations can only be identified by a professional who has years of experience in the art of tailoring. 
 
-
-
-            <div class="row"> 
-                <div class="col-md-12">
-                    <div class="heading-block ">
-                        <div class="intro-small1 col-md-8 center-auto">
-                            <img class="img-responsive" src="<?php echo base_url(); ?>assets/images/sidelogo.jpg" alt="" style="height: 200px">
-                        </div>
-                    
-                 
-                        <p>
-                            We are tailoring artists. Understand our guests; we are committed to build authentic attire for every lady and gentleman.
-                        </p>
-                    </div>
+                        For each bespoke garment, a paper pattern is created to emulate the build and unique figure of each individual. No standard pattern can ever be used for two different individuals. These steps make the experience very personal. 
+                        <br/>
+                        At our store, you will enjoy the benefit of a muslin canvas fitting where you are able to fit the garment on you and proof the vital elements of the suit: shoulders, sleeve break, jacket silhouette, trouser break etc. After making the necessary modifications, we then open up this garment and formulate the final paper pattern. 
+                        <br/>
+                        If you have bought from us during one of our trunk shows, you will receive the suit complete for your proofing. At our store, the proofing takes place with us on site, and we are able to make any small tweaks to your garment. We want you to feel confident and composed in every garment we make you, as these clothes are the way that you present yourself to the world.
+                    </p>
                 </div>
-                <!-- Images -->
-                <div class="col-md-6">
-                    <div class="nolist-style imgres">
-                        <ul class="row">
-                            <li class="col-xs-12 pad-t-b-30"> <img class="img-responsive" src="<?php echo base_url(); ?>assets/theme/images/shopmain.JPG" alt=""> </li>
-                       </ul>
-                    </div>
-                </div>
 
-                <!-- Text sec -->
-                <div class="col-md-6 margin-top-30"> 
-
-                    <!-- Heading -->
-                    <div class="heading-block ">
-
-                        <h3>what we do</h3>
-                 
-                        <p class="pad-t-b-30" style="text-align: center;padding: 20px;font-size: 15px;">We always listen to the expressed and unexpressed wish of our guests. We have over 6000 fabric choices to attire different style and need. <br/>We tailor-made every lining color and detail for each unique and personalized character.<br/>
-                        	
-                            We will offer you with world-famous brands and 6000 kinds of different fabrics. If you want know more, please visit our facebook <a href="https://www.facebook.com/royaltailorhk" target="_blank">https://www.facebook.com/royaltailorhk</a></p>
-                    </div>
-
-              
-                </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
+&nbsp;
 
-    <iframe allowfullscreen="" frameborder="0" height="450" src="https://www.google.com/maps/embed?pb=!1m0!3m2!1sen!2shk!4v1456977617142!6m8!1m7!1sXFluMOhNrAAAAAQvOkheoQ!2m2!1d22.28139521767876!2d114.1563935905979!3f1.619097136258755!4f-1.326284744175581!5f0.7820865974627469" style="border:0" width="100%"></iframe>
-    
-    
-<!--     OUR SERVICES 
-    <section class="our-main-ser pad-t-b-130">
-        <div class="container"> 
 
-             Heading 
-            <div class="heading-block">
-                <h4>our services</h4>
-                <hr>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-            </div>
+<?php
 
-             OUR SERVICES LIST 
-            <div class="nolist-style">
-                <ul class="row">
-
-                     OUR SERVICES LIST 
-                    <li class="col-sm-3"> <i class="icon-tools animate fadeInDown" data-wow-delay="0.4s"></i>
-                        <h6>Creative Design</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                    </li>
-
-                     Unlimited Features 
-                    <li class="col-sm-3"> <i class="icon-layers animate fadeInDown" data-wow-delay="0.6s"></i>
-                        <h6>Unlimited Features</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                    </li>
-
-                     Ultra Responsive 
-                    <li class="col-sm-3"> <i class="icon-lightbulb animate fadeInDown" data-wow-delay="0.4s"></i>
-                        <h6>Ultra Responsive</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                    </li>
-
-                     Discuss Idea 
-                    <li class="col-sm-3"> <i class="icon-strategy animate fadeInDown" data-wow-delay="0.6s"></i>
-                        <h6>Discuss Idea</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>-->
-
-    <?php
-    $this->load->view('layout/footer');
-    ?>
+$this->load->view('layout/footer');
+?>

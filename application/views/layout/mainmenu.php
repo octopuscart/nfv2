@@ -27,7 +27,7 @@ $menuArrayMain = [
     array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
     array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
     array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
-    array("title" => "Offers", "link" => "", "submenu" => []),
+    array("title" => "Offers", "link" => site_url("Product/productListOffers"."?category=0&item_type=1&sorting=On+Sale"), "submenu" => []),
     array("title" => "Guide", "link" => site_url("Shop/guide"), "submenu" => []),
 ];
 ?>

@@ -103,106 +103,61 @@ $this->load->view('layout/header');
         display: inherit;
     }
 </style>
+    <?php
+       $offertitle = array(
+           '1'=>'Shirt',
+           '2'=>'Pant',
+           '5'=>'Jacket',
+           '11'=>'Suit',
+       );
+//       error_reporting(E_ALL); ini_set('display_errors', 1);
+       ?>
+
 <div ng-controller="productConroller" id="ProductListControllerId">
     <!--end of template-->
-    <section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="    padding: 0px 1px 8px 1px;background: black;">
-        <div class="mobilecategoryscroll" >
+  
 
+    <section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="    padding: 0px 1px 8px 1px;background: black;">
+        <div class="">
+            <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c" style=" color:white;   margin: 13px auto 0px;font-size: 24px;">Offers - <span ><?php echo $offertitle[$_GET['item_type']]; ?></span></h3>
             <!-- breadcrumbs -->
-            <ul class="hr_list d_inline_m breadcrumbs mobilecategoryscrollul" style="margin-top: 10px;">
-                <?php
-                $res = $tagdata;
-                ?>
-                <li class="m_right_8 f_xs_none" style="margin-right:0px !important" >
-                    <a href="<?php echo site_url("/"); ?>" class="color_default d_inline_m m_right_10" style="margin-right:0px !important;color:white;">
-                        <i class="icon-home-1"></i>&nbsp;&nbsp;Home&nbsp;&nbsp;<i class="icon-angle-right d_inline_m color_white fs_small"></i>&nbsp;&nbsp;&nbsp;
+            <ul class="hr_list d_inline_m breadcrumbs" style="margin-top: 10px;">
+
+                <li class="m_right_8 f_xs_none" style="    margin: 0 18px;">
+                    <a href="<?php echo site_url("Product/productListOffers"); ?>?category=0&item_type=1&sorting=Offers" class="" style="margin-right:0px !important;color:white;">
+                        Shirt&nbsp;&nbsp;
                     </a>
                 </li>
-                <li class="m_right_8 f_xs_none" style="margin-right:0px !important" >
-                    <a href="<?php echo site_url("Product/productList"); ?>?category=0&item_type=<?php echo $_GET['item_type']; ?>" class="" style="margin-right:0px !important;color:white;">
-                        <?php echo $res[0]['tag_title']; ?>&nbsp;&nbsp;
+
+                <li class="m_right_8 f_xs_none" style="    margin: 0 18px;">
+                    <a href="<?php echo site_url("Product/productListOffers"); ?>?category=0&item_type=2&sorting=Offers" class="" style="margin-right:0px !important;color:white;">
+                        Pant&nbsp;&nbsp;
                     </a>
                 </li>
+
+                <li class="m_right_8 f_xs_none" style="    margin: 0 18px;">
+                    <a href="<?php echo site_url("Product/productListOffers"); ?>?category=0&item_type=5&sorting=Offers" class="" style="margin-right:0px !important;color:white;">
+                        Jacket&nbsp;&nbsp;
+                    </a>
+                </li>
+
+                <li class="m_right_8 f_xs_none" style="    margin: 0 18px;">
+                    <a href="<?php echo site_url("Product/productListOffers"); ?>?category=0&item_type=11&sorting=Offers" class="" style="margin-right:0px !important;color:white;">
+                        Suit&nbsp;&nbsp;
+                    </a>
+                </li>
+
+
             </ul>
         </div>
     </section>
+
     <!--content-->
     <div class="section_offset" style="padding: 13px 0 67px;">
         <div class="container" style="    ">
             <div class="row">
 
-                <aside class="col-lg-2 col-md-2 col-sm-2 m_bottom_70 m_xs_bottom_30"  style="padding: 0">
-
-                    <div class="m_bottom_45 m_xs_bottom_30" >
-
-                        <div class="m_bottom_40 m_xs_bottom_30">
-
-
-                            <h7 style="color: #000 !important; font-weight: 500">Product Categories</h7>
-                            <ul class="categories_list" style="font-size: 14px;">
-
-                                <?php
-                                foreach ($categorylist as $key => $value) {
-                                    if ($value['id']) {
-                                        ?>
-                                        <li>
-                                            <a href="<?php echo site_url("Product/productList?category=" . $value['id'] . "&item_type=" . $_GET['item_type']); ?>" class="color_dark tr_all d_block">
-                                                <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
-                                                    <i class="icon-angle-right"></i>
-                                                </span>
-                                                <?php echo $value['name']; ?>
-                                            </a>
-                                        </li>
-                                        <?php
-                                    }
-                                }
-                                ?>
-
-
-
-                        </div>
-
-                        <form id="filterform">
-                            <!--price-->
-                            <div class="m_bottom_12" style="margin-top:-17px;">
-                                <p class="m_bottom_15" style="color: #000 !important; font-weight: 500">Price</p>
-                                <div id="pricerange"><div id="price_loader">Loading...</div></div>
-                                <div class="clearfix" style="font-size:12px;color:black;">
-
-                                    <input type="text" value=""  id="from_price" name="from_price"  class="f_left half_column first_limit color_dark fw_light d_done" style="color:black;font-size: 12px;
-                                           font-weight: 700;">
-                                    <input type="text" value="" id="to_price" name="to_price"  class="f_right half_column t_align_r last_limit color_dark fw_light d_done" style="color:black;font-size: 12px;
-                                           font-weight: 700;">
-                                </div>
-                            </div>
-                            <!--colors-->
-
-                            <div class="m_bottom_20" style="margin-top:-8%">
-
-                                <input type="hidden" name="color"  value="<?php echo isset($_GET['color']) ? $_GET['color'] : ''; ?>">
-                                <input type="hidden" name="category"  value="<?php echo isset($_GET['category']) ? $_GET['category'] : ''; ?>">
-                                <input type="hidden" name="item_type"  value="<?php echo isset($_GET['item_type']) ? $_GET['item_type'] : ''; ?>">
-                                <input type="hidden" name="searchtag"  value="<?php echo isset($_GET['searchtag']) ? $_GET['searchtag'] : ''; ?>">
-
-                                <p class="m_bottom_5" style="color: #000 !important; font-weight: 500">Colors</p>
-                                <ul class="hr_list color_list">
-                                    <li class=" m_sm_bottom_5"  data-toggle="tooltip" data-placement="left" title="{{color.title}}" ng-repeat="color in colorList"> 
-                                        <input type="checkbox" id="shop_style{{color.id}}" class="shop_style d_none selected_colors" colorname="{{color.title}}" colorcode="{{color.color_code}}" name="colors[]" value="{{color.id}}">
-                                        <label    for="shop_style{{color.id}}" class="d_inline_m m_right_2 color_button color_button_check tr_delay  bg_color_dark " style="font-size: 22px;background:{{color.color_code}};"></label>
-                                    </li>
-                                </ul>
-
-
-                                <br>
-
-
-
-                            </div>
-                            <div class="m_bottom_20 clearfix">
-                                <button type="submit" id="filter" class="button_type_5 f_left m_right_5 m_sm_bottom_5 r_corners tr_all color_pink transparent fs_medium" style="display: none">Show</button>
-    <!--                                <button type="reset" id="reset_filter_form" form="manufacturers_form" class="btn btn-default btn-xs" onclick=" window.location.href = 'http://192.168.3.47/nf3/frontend/views/product_list.php?category=0&item_type=1'"><i class="icon-arrow">Reset</button>-->
-                            </div>
-                    </div>
+                <aside class="col-lg-1 col-md-1 col-sm-1 m_bottom_70 m_xs_bottom_30"  style="padding: 0">
                 </aside>
 
                 <section class="col-lg-10 col-md-10 col-sm-10 m_bottom_70 m_xs_bottom_30" style="margin-top: -25px;">
@@ -219,19 +174,7 @@ $this->load->view('layout/header');
                     <!--<hr class="m_bottom_10">-->
 
                     <div class="row" style="margin-bottom: 20px;">
-                        <div class="custom_select products_filter type_2 f_xs_none m_xs_left_0 f_left m_left_5 m_xs_bottom_10" style="margin: -17px 0px 0px 14px;width: 150px;">
-                            <div class="select_title sortby r_corners color_grey fs_medium" style="    font-size: 13px;">Sort By</div>
-                            <ul class="select_list r_corners wrapper shadow_1 bg_light tr_all"></ul>
-                            <select class="target d_none" name="sorting">
-                                <option value="">All Type</option>
-                                <option value="On Sale">On Sale</option>
-                                <option value="Most Popular">Most Popular</option>
-                                <option value="New Arrival">New Arrival</option>
-                                <!-- <option value="Price-Asc">Price-Asc</option>
-                                <option value="Price-Desc">Price-Desc</option>-->
-                                <option value="Sale/Most Popular">Sale/Most Popular</option>
-                            </select>
-                        </div>
+                     
 
                         <?php
                         if (isset($_SESSION['colorlist'])) {
@@ -461,6 +404,9 @@ $this->load->view('layout/header');
                         color: #000;">No Product Found.</h1>
 
                 <?php } ?>
+
+                <aside class="col-lg-1 col-md-1 col-sm-1 m_bottom_70 m_xs_bottom_30"  style="padding: 0">
+                </aside>
 
             </div>
             <!--banners-->

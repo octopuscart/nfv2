@@ -44,6 +44,33 @@ class Product extends CI_Controller {
 
         $this->load->view('Product/productList2', $data);
     }
+    
+    
+        //function for product list
+    function productListOffers() {
+        $id = $_GET['item_type'];
+        $catid = $_GET['category'];
+        $query = "select tag_title from nfw_product_tag where id = $id";
+        $res = $this->Product_model->resultAssociate($query);
+        $data['tagdata'] = $res;
+        if ($catid == 0) {
+            
+             $query = "select ct.* from nfw_category as ct"
+                    . " right join  nfw_category_tag_connection "
+                    . "as nct on nct.category_id = ct.id where nct.tag_id=$id order by index_menu";
+            $categorylist = $this->Product_model->resultAssociate($query);
+            
+        } else {
+           $this->db->where('parent', $catid);
+            $this->db->order_by('index_menu asc');
+            $query = $this->db->get('nfw_category');
+            $categorylist = $query->result_array();
+        }
+        $data['categorylist'] = $categorylist;
+
+        $this->load->view('Product/productListOffers', $data);
+    }
+    
 
     function ProductSearch() {
         $data['keyword'] = $_GET['keyword'];

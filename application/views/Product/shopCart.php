@@ -141,7 +141,7 @@ $this->load->view('layout/header');
     }
 
 
-    
+
 
 
 </style>
@@ -399,6 +399,13 @@ $this->load->view('layout/header');
 
                         </tbody></table>
                 </div>
+                <div class="well well-sm">
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li class="next next-tab"><a href="javascript:function() { return false; }">Next <span aria-hidden="true">&rarr;</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
 
             <div role="tabpanel" class="tab-pane" id="billingShipping">
@@ -446,8 +453,14 @@ $this->load->view('layout/header');
                         </div>
                     </div>
                 </div>
-
-
+                <div class="well well-sm">
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li class="previous previous-tab"><a href="javascript:function() { return false; }" ><span aria-hidden="true">&larr;</span> Previous</a></li>
+                            <li class="next next-tab"><a href="javascript:function() { return false; }">Next <span aria-hidden="true">&rarr;</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
 
 
@@ -521,7 +534,15 @@ $this->load->view('layout/header');
 
                     </div>
                 </div>
-
+                <div style="clear: both"></div>
+                <div class="well well-sm">
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li class="previous previous-tab"><a href="javascript:function() { return false; }" ><span aria-hidden="true">&larr;</span> Previous</a></li>
+                            <li class="next next-tab"><a href="javascript:function() { return false; }">Next <span aria-hidden="true">&rarr;</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
 
 
@@ -585,9 +606,20 @@ $this->load->view('layout/header');
                         </button>
                     </div>
                 </form>
+                <div style="clear: both"></div>
+                <div class="well well-sm">
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li class="previous previous-tab"><a href="javascript:function() { return false; }" ><span aria-hidden="true">&larr;</span> Previous</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                
             </div>
 
         </div>
+
     </div>
 
     <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModel" aria-hidden="true" >

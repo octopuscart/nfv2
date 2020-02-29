@@ -17,7 +17,7 @@ $menuArrayMain = [
                     array("title" => "Suit", "link" => site_url("Product/productList?category=0&item_type=10")),
                 ]),
             array("title" => "Suit", "link" => site_url("Product/productList?category=0&item_type=11"), "submenu" => []),
-            array("title" => "3 Piece Suit", "link" => "", "submenu" => []),
+            array("title" => "3 Piece Suit","link" =>  site_url("Product/productList?category=0&item_type=13"), "submenu" => []),
             array("title" => "Pant", "link" => site_url("Product/productList?category=0&item_type=2"), "submenu" => []),
             array("title" => "Jacket", "link" => site_url("Product/productList?category=0&item_type=5"), "submenu" => []),
             array("title" => "Waistcoat", "link" => site_url("Product/productList?category=0&item_type=3"), "submenu" => []),

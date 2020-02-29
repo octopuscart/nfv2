@@ -8,20 +8,30 @@ nitaFasions.controller('shopAllCart', function ($scope, $http, $filter, $timeout
 
     $scope.getCartData().then(function (resdata) {
         var cartdata = resdata.cartdata.products;
-        console.log(cartdata)
+        var templist = {};
         for (cind in cartdata) {
             var cartobj = cartdata[cind];
             var tagname = cartobj.tag_title;
-            console.log(cartobj)
             if ($scope.shopCart.itemnames.indexOf(tagname) > (-1)) {
-                if ($scope.shopCart.itemslist[tagname]) {
-                    $scope.shopCart.itemslist[tagname].push(cartobj);
+                if (templist[tagname]) {
+                    templist[tagname].push(cartobj);
                 } else {
-                    $scope.shopCart.itemslist[tagname] = [cartobj];
+                    templist[tagname] = [cartobj];
                 }
+            }
+        }
+
+        for (cin in $scope.shopCart.itemnames) {
+            var ciname = $scope.shopCart.itemnames[cin];
+            if (templist[ciname]) {
+                var cartobj = templist[ciname];
+
+                $scope.shopCart.itemslist[ciname] = cartobj;
 
             }
         }
+
+
     });
 
     $scope.viewStyle = function (objarray) {
@@ -184,18 +194,39 @@ nitaFasions.controller('shopAllCartCustom', function ($scope, $http, $filter, $t
     }
 
 
+    jQuery('body').on('click', '.next-tab', function () {
+        var next = jQuery('.nav-tabs > .active').next('li');
+        if (next.length) {
+  
+            next.find('a').trigger('click');
+        } else {
+            jQuery('#myTabs a:first').tab('show');
+        }
+    });
+
+    jQuery('body').on('click', '.previous-tab', function () {
+        var prev = jQuery('.nav-tabs > .active').prev('li')
+        if (prev.length) {
+       
+            prev.find('a').trigger('click');
+        } else {
+            jQuery('#myTabs a:last').tab('show');
+        }
+    });
+
+
 })
 
 
 nitaFasions.controller('OrderDetailsController', function ($scope, $http, $timeout, $interval) {
     $scope.shopCart = {};
-    
-    $http.get(urllink + "/getCustomCartDataOrder/"+order_idgbl).then(function (rdata) {
-       $scope.shopCart = rdata.data;
+
+    $http.get(urllink + "/getCustomCartDataOrder/" + order_idgbl).then(function (rdata) {
+        $scope.shopCart = rdata.data;
     }, function () {
         $scope.userAddress.loader = "0";
     });
-  $scope.viewStyle = function (objarray) {
+    $scope.viewStyle = function (objarray) {
         var customhtmlarray = [];
         var objarrayprice = objarray.style;
         for (i in objarrayprice) {

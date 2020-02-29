@@ -75,10 +75,10 @@ class Shop extends CI_Controller {
             $userdata = json_encode(end($userinfo));
 
             if ($data['cardinfo']) {
-                $carddata1 = ""; //$_SESSION['cardinfo'];
+                $carddata1 =  $this->session->userdata('cardinfo');
                 $cardTitle = 'Credit Card';
             } else {
-                $carddata1 = "Manual payment";
+                $carddata1 = "";
                 $cardTitle = 'Manual payment';
             }
 
@@ -100,8 +100,9 @@ class Shop extends CI_Controller {
                 "shipping_id" => $shipdata,
                 "coupon_id" => "",
                 "payment_gateway" => $cardTitle,
-                "payment_gateway_return" => $carddata1,
+                "payment_gateway_return" => "",
                 "order_no" => "",
+                "card"=> $carddata1,
             );
 
             $this->db->insert('nfw_product_order', $orderInsertData);
@@ -156,7 +157,7 @@ class Shop extends CI_Controller {
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_HEADER, false);
-            $data = curl_exec($curl);
+            $data2 = curl_exec($curl);
             curl_close($curl);
 
 

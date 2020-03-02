@@ -1128,7 +1128,7 @@ order by count(nfw_color_id) asc, colorbunch";
         $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
 //                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
 
-        $url = $emailurl . "?user_id=" . $user_id . "&mail_type=2";
+        echo $url = $emailurl . "?user_id=" . $user_id . "&mail_type=2";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

@@ -155,22 +155,6 @@ class Account extends CI_Controller {
                     $username = $userdata['first_name'] . ' ' . $userdata['middle_name'] . ' ' . $userdata['last_name'];
                     $email = $userdata['email'];
                     $token = "";
-
-//                    $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
-////                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
-//
-//                    $url = $emailurl . "?user_id=".$user_id."&mail_type=2";
-//                    $curl = curl_init();
-//                    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
-//                    curl_setopt($curl, CURLOPT_URL, $url);
-//                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-//                    curl_setopt($curl, CURLOPT_HEADER, false);
-//                    $data2 = curl_exec($curl);
-//                    curl_close($curl);
-        
-
-
-
 //                    redirect('/');
                 }
             } else {
@@ -180,6 +164,26 @@ class Account extends CI_Controller {
             }
         }
         $this->load->view('Account/registration', $data1);
+    }
+
+    function activation() {
+        $user_id = $this->input->get('user_id');
+        $this->db->where('id', $user_id);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $token = $this->input->get("token");
+        $data = array();
+        if ($token == $userdata['user_img']) {
+            $this->db->set('status', '1');
+            $this->db->where('id', $adid); //set column_name and value in which row need to update
+            $this->db->update("auth_user");
+            $data['status'] = '1';
+            $data['messsage'] = "<i class='fa fa-smile-o'></i> Your Account has been activated.";
+        } else {
+            $data['status'] = '0';
+            $data['messsage'] = "Error in activation link please check the link in your email.";
+        }
+        $this->load->view('Account/activation', $data);
     }
 
     // Logout from admin page

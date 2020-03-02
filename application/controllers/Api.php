@@ -1137,6 +1137,10 @@ order by count(nfw_color_id) asc, colorbunch";
         curl_close($curl);
     }
 
+    
+    function sendTestEmail_get(){
+        
+    }
 }
 
 ?>

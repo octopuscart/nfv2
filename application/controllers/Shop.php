@@ -235,7 +235,7 @@ class Shop extends CI_Controller {
     function testEmail() {
         $receiver = "octopuscartltd@gmail.com";
         $this->email->set_newline("\r\n");
-        $this->email->from(email_bcc, "Test");
+        $this->email->from($receiver, "Test");
         $this->email->to($receiver);
 //                $this->email->bcc(email_bcc);
         $subjectt = "Test Email";

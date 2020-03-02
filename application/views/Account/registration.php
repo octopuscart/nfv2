@@ -27,7 +27,7 @@ $this->load->view('layout/header');
                             <li class="m_bottom_20 m_xs_bottom_15 relative" style="margin-bottom: 10px;">
                                 <select name="profession_id" id="profession_select"  onchange="professionChange()" class="r_corners bg_light w_full border_none" style="width: 100%;height: 40px;padding: 5px;" required >
                                     <option value="" >Select Profession</option>
-                                    <?php foreach ($profession_list as $key => $value) { ?>
+                                    <?php foreach ($professionlist as $key => $value) { ?>
                                         <option value="<?php echo $value['id']; ?>" ><?php echo $value['title']; ?></option>
                                     <?php } ?>
                                     <option value="0" >Other</option>
@@ -138,7 +138,7 @@ if ($msg != "") {
                 timer: 2500,
                 onClose: () => {
 
-                    window.location = '<?php echo $link; ?>';
+                   // window.location = '<?php echo $link; ?>';
                 }
             })
         })

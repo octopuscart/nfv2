@@ -72,10 +72,20 @@ class Account extends CI_Controller {
         $data1['country_list'] = $countrylist;
 
 
+        $query = $this->db->get('nfw_profession');
+        $professionlist = $query->result_array();
+        $data1['professionlist'] = $professionlist;
+
+
 
         $link = isset($_GET['page']) ? $_GET['page'] : '';
         $data1['next_link'] = $link;
-
+        $temp = array_merge(range('A', 'Z'), range(0, 9));
+        $temp1 = "";
+        for ($i = 0; $i < 8; $i++) {
+            $temp1 .= $temp[rand(0, (count($temp) - 1))];
+        }
+        $token = md5($temp1);
 
         if (isset($_POST['registration'])) {
 
@@ -122,7 +132,7 @@ class Account extends CI_Controller {
                         'gender' => $gender,
                         'country' => $country,
                         'birth_date' => $birth,
-                        'user_img' => "",
+                        'user_img' => $token,
                         'contact_no' => "",
                         'status' => "Inactive",
                         'profession_id' => $profession,
@@ -140,6 +150,25 @@ class Account extends CI_Controller {
                     $data1['msg'] = 'Verification Mail Sent, Check Your Inbox';
                     $data1["link"] = site_url("/");
                     $data1['msgtype'] = 'success';
+                    $username = $userdata['first_name'] . ' ' . $userdata['middle_name'] . ' ' . $userdata['last_name'];
+                    $email = $userdata['email'];
+                    $token = "";
+
+                    $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
+//                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
+
+                    $url = $emailurl . "?mail_type=2&user=" . $username . "&email=" . $email . "&token=" . $token . "&country=" . $country . "&access=" . $user_id;
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
+                    curl_setopt($curl, CURLOPT_URL, $url);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_HEADER, false);
+                    $data2 = curl_exec($curl);
+                    print_r($data2);
+                    curl_close($curl);
+
+
+
 //                    redirect('/');
                 }
             } else {
@@ -278,7 +307,7 @@ class Account extends CI_Controller {
             array_push($orderarray, $order);
         }
         $data['invoicedata'] = $orderarray;
-        
+
         $this->load->view('Account/orderInvoice', $data);
     }
 

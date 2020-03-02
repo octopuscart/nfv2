@@ -112,6 +112,7 @@ class Account extends CI_Controller {
             $country = $this->input->post('country');
             $profession = $this->input->post('profession_id');
             $gender = $this->input->post("gender");
+            $data1['user_id'] = 0;
 
             if ($cpassword == $password) {
                 $user_check = $this->User_model->check_user($email);
@@ -150,21 +151,22 @@ class Account extends CI_Controller {
                     $data1['msg'] = 'Verification Mail Sent, Check Your Inbox';
                     $data1["link"] = site_url("/");
                     $data1['msgtype'] = 'success';
+                    $data1['user_id'] = $user_id;
                     $username = $userdata['first_name'] . ' ' . $userdata['middle_name'] . ' ' . $userdata['last_name'];
                     $email = $userdata['email'];
                     $token = "";
 
-                    $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
-//                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
-
-                    $url = $emailurl . "?user_id=".$user_id."&mail_type=2";
-                    $curl = curl_init();
-                    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
-                    curl_setopt($curl, CURLOPT_URL, $url);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($curl, CURLOPT_HEADER, false);
-                    $data2 = curl_exec($curl);
-                    curl_close($curl);
+//                    $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
+////                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
+//
+//                    $url = $emailurl . "?user_id=".$user_id."&mail_type=2";
+//                    $curl = curl_init();
+//                    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
+//                    curl_setopt($curl, CURLOPT_URL, $url);
+//                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//                    curl_setopt($curl, CURLOPT_HEADER, false);
+//                    $data2 = curl_exec($curl);
+//                    curl_close($curl);
         
 
 

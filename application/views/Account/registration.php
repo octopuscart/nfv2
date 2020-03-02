@@ -130,7 +130,6 @@ $this->load->view('layout/header');
 <?php
 if ($msg != "") {
     ?>
-
         $(document).ready(function () {
             swal({
                 type: '<?php echo $msgtype; ?>',
@@ -138,11 +137,13 @@ if ($msg != "") {
                 timer: 2500,
                 onClose: () => {
 
-                    window.location = '<?php echo $link; ?>';
-                }
-            })
-        })
-
+                    $.get('<?php echo base_url(); ?>index.php/Api/sendRegistrationEmail/<?php echo $user_id; ?>',
+                                            function () {
+                                                window.location = '<?php echo $link; ?>';
+                                            })
+                                }
+                            })
+                        })
     <?php
 }
 ?>

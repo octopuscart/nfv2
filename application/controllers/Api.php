@@ -139,7 +139,7 @@ class Api extends REST_Controller {
         $attr_products = $this->Product_model->query_exe($pquery);
         $container = [];
         foreach ($attr_products as $key => $value) {
-            if($value['tag_id'] == "2"){
+            if ($value['tag_id'] == "2") {
                 $value['tag_id'] = "11";
             }
             array_push($container, $value);
@@ -573,7 +573,7 @@ class Api extends REST_Controller {
         } else {
             $session_cart = $this->session->userdata('session_cart');
             if (isset($session_cart['products'])) {
-                                $message = array("status" => 2, "msg" => "Already In Cart", "type" => "warning", "product" => $productadd);
+                $message = array("status" => 2, "msg" => "Already In Cart", "type" => "warning", "product" => $productadd);
 
                 array_push($session_cart['products'], $productadd);
             } else {
@@ -759,7 +759,7 @@ class Api extends REST_Controller {
 //        end of profession sorting
 
         $searchqury = "";
-        if($this->get("product_id")){
+        if ($this->get("product_id")) {
             $productid = $this->get("product_id");
             $searchqury = " and np.id = $productid";
         }
@@ -1122,6 +1122,19 @@ order by count(nfw_color_id) asc, colorbunch";
         $this->response(array(
             "cartdata" => $cartdataall,
         ));
+    }
+
+    function sendRegistrationEmail_get($user_id) {
+        $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
+//                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
+
+        $url = $emailurl . "?user_id=" . $user_id . "&mail_type=2";
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        $data2 = curl_exec($curl);
+        curl_close($curl);
     }
 
 }

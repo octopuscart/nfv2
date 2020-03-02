@@ -1,104 +1,110 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <style>
-            .carttable{
-                border-color: #fff;
-            }
 
-            .carttable td{
-                padding: 5px 10px;
-                border-color: #9E9E9E;
-            }
-            .carttable tr{
-                /*padding: 0 10px;*/
-                border-color: #9E9E9E;
-                font-size: 12px
-            }
 
-            .detailstable td{
-                padding:10px 20px;
-            }
 
-            .gn_table td{
-                padding:3px 0px;
-            }
-            .gn_table th{
-                padding:3px 0px;
-                text-align: left;
 
-            }
-            .style_block{
-                float: left;
-                padding: 1px 1px;
-                margin: 2.5px;
-                /* background: #000; */
-                color: white;
-                border: 1px solid #e4e4e4;
-                width: 47%;
-                font-size: 10px;
-            }
-
-            .style_block span {
-                background: #fff;
-                margin-left: 5px;
-                color: #000;
-                padding: 0px 5px;
-                width: 50%;
-            }
-            .style_block b {
-                width: 46%;
-                float: left;
-                background: #dedede;
-                color: black;
-            }
-        </style>
-    </head>
-
-    <body style="margin: 0;
-          padding: 0;
-          background: rgb(225, 225, 225);
-          font-family: sans-serif;">
-        <div class="" style="padding:50px 0px">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" style=" background: #000;padding: 0 20px">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic" rel="stylesheet" type="text/css" />
+<style type="text/css">div{
+        font-family:lato;
+    }
+    td, th{
+        padding: 10px;
+    }
+</style>
+<div style="    margin: 0px;
+     padding: 30px;
+     font: 300 lato;
+     background-color: #E2E2E2;">
+    <div style="    padding: 20px;;background:#fff">
+        <!--end of upper level header-->
+        <table width="100%" border="0" style="padding: 5px; background-color: white;" cellspacing="0" cellpadding="0" align="center">
+            <tbody>
                 <tr>
-                    <td >
-                       
-                        <center><img src="<?php echo site_mail_logo; ?> " style="margin: 10px;
-                                     height: 50px;
-                                     width: auto;"/><br/>
-                            <h4 style="color: white;"> <?php echo $web_enquiry['subject']; ?> </h4>
-                        </center>
+                    <td>
+                        <table style="    width: 100%;" border="0" align="center" cellpadding="0" cellspacing="0" style="padding: 38px  30px  30px  30px; background-color: #fafafa;">
+                            <tbody>
+                                <tr style="background-color: #FFF;">
+                                    <td style="width:100%;    padding: 10px;">
+                            <center><img src="https://www.nitafashions.com/assets/theme/images/logo/nf_logo_8.png" style="height: 100px;width:183px;"></center>
                     </td>
 
                 </tr>
 
-            </table>
-
-            <table class="carttable"  border-color= "#9E9E9E" align="center" border="1" cellpadding="0" cellspacing="0" width="700" style="background: #fff;padding:20px">
 
 
+            </tbody>
+        </table>
+        </td>
+        </tr>
+        </tbody>
+        </table>
 
+
+     
+
+        <table style="    width: 100%;" border="0" align="center" cellpadding="0" cellspacing="0" style="padding: 38px  30px  30px  30px; background-color: #fafafa;">
+            <tbody>
                 <tr>
-                    <td colspan="6" style="font-size: 12px;">
-
-                        <p><?php echo $web_enquiry['first_name']; ?> <?php echo $web_enquiry['last_name']; ?>,</p><br/>
-                        E:<?php echo $web_enquiry['email']; ?><br/>
-                        T:<?php echo $web_enquiry['contact']; ?>
-                        <p><?php echo $web_enquiry['message']; ?></p> 
-                        <br/>
-                        <div style="height: 200px;">End<br />
-                            
-                        </div>
-
+                    <td colspan="3" height="10" style="border-bottom: 1px  solid  #eaedef;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <span style="
+                              text-align: center;
+                              width: 100%;
+                              font-size: 24px;
+                              float: left;
+                              border-bottom: 1px solid #eaedef;
+                              margin-bottom: 20px;
+                              padding: 20px 0;
+                              background-color: #000;
+                              color: #fff;
+                              font-weight: 300;                                
+                              "> <?php echo $web_enquiry['subject']; ?></span>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
-            </table>
+        <table class="carttable"  border-color= "#9E9E9E" align="center" border="1" cellpadding="0" cellspacing="0" width="700" style="background: #fff;padding:20px">
+            <tr>
+                <th style="    width: 100px;">Name</th>
+                <td><?php echo $web_enquiry['name']; ?></td>
+            </tr>   
+            <tr>
+                <th>Email</th>
+                <td><?php echo $web_enquiry['email']; ?></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><?php echo $web_enquiry['address']; ?></td>
+            </tr>   
+            <tr>
+                <th>Subject</th>
+                <td><?php echo $web_enquiry['subject']; ?></td>
+            </tr>  
+            <tr>
+                <th>Message</th>
+                <td>
+                    <?php echo $web_enquiry['message']; ?> 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h4 style="    color: #f7d47a;text-align: center;
+                        font-family: initial;"> Thank You</h4>
+                </td>
+            </tr>
+        </table>
 
+
+
+        <br>
+        <div style="height: 200px;font-size:14px">Sincerely,<br /><strong>Jaya Daswani</strong><br /> <strong>Nita&nbsp;Fashions</strong><br />
+            <p>Boutique Address:<br />16 Mody Road, G/F,&nbsp;T. S. T, Kowloon,<br />Hong Kong</p>
+            <p>T &nbsp;: + (852) 27219990<br />F &nbsp;: + (852) 27234886<br />E &nbsp;: sales@nitafashions.com<br />W : www.nitafashions.com</p>
         </div>
-    </body>
-</html>
+
+    </div>
+    <div style="clear:both"></div>
+</div> 

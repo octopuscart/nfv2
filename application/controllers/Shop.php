@@ -75,7 +75,7 @@ class Shop extends CI_Controller {
             $userdata = json_encode(end($userinfo));
 
             if ($data['cardinfo']) {
-                $carddata1 =  $this->session->userdata('cardinfo');
+                $carddata1 = $this->session->userdata('cardinfo');
                 $cardTitle = 'Credit Card';
             } else {
                 $carddata1 = "";
@@ -102,7 +102,7 @@ class Shop extends CI_Controller {
                 "payment_gateway" => $cardTitle,
                 "payment_gateway_return" => "",
                 "order_no" => "",
-                "card"=> $carddata1,
+                "card" => $carddata1,
             );
 
             $this->db->insert('nfw_product_order', $orderInsertData);
@@ -154,56 +154,42 @@ class Shop extends CI_Controller {
         }
         $this->load->view('Product/shopCart', $data);
     }
-    
-    public function error(){
+
+    public function error() {
         redirect(site_url("/"));
     }
 
     public function contactus() {
-        if (isset($_POST['sendmessage'])) {
-            $web_enquiry = array(
-                'last_name' => $this->input->post('last_name'),
-                'first_name' => $this->input->post('first_name'),
-                'email' => $this->input->post('email'),
-                'contact' => $this->input->post('contact'),
-                'subject' => $this->input->post('subject'),
-                'message' => $this->input->post('message'),
-                'datetime' => date("Y-m-d H:i:s a"),
-            );
-
-            $this->db->insert('web_enquiry', $web_enquiry);
-
-            $emailsender = email_sender;
-            $sendername = email_sender_name;
-            $email_bcc = email_bcc;
-            $sendernameeq = $this->input->post('last_name') . " " . $this->input->post('first_name');
-            if ($this->input->post('email')) {
+        if (isset($_POST['submitEnquiry'])) {
+            $captcha = $this->input->post('g-recaptcha-response');
+            if (1) {
+                $web_enquiry = array(
+                    'name' => $this->input->post('name'),
+                    'address' => $this->input->post('address'),
+                    'email' => $this->input->post('email'),
+                    'subject' => $this->input->post('subject'),
+                    'message' => $this->input->post('message'),
+                );
+                $email_bcc = "do-not-reply-nita-fashions-ssl-email-465@costcokart.com";
                 $this->email->set_newline("\r\n");
-                $this->email->from($this->input->post('email'), $sendername);
-                $this->email->to(email_bcc);
-//                $this->email->bcc(email_bcc);
+                $this->email->from("sales@nitafashions.com", "Nita Fashions");
+                $this->email->to($this->input->post('email'));
+                $this->email->bcc(email_bcc);
                 $subjectt = $this->input->post('subject');
-
-
                 $subject = "Enquiry from website - " . $this->input->post('subject');
                 $this->email->subject($subject);
-
                 $web_enquiry['web_enquiry'] = $web_enquiry;
-
-                echo $htmlsmessage = $this->load->view('Email/web_enquiry', $web_enquiry, true);
+                $htmlsmessage = $this->load->view('Email/web_enquiry', $web_enquiry, true);
                 $this->email->message($htmlsmessage);
-
-                $this->email->print_debugger();
-                //$send = $this->email->send();
-                //if ($send) {
-                //     echo json_encode("send");
-                // } else {
-                //      $error = $this->email->print_debugger(array('headers'));
-                //      echo json_encode($error);
-                //  }
+                $send = $this->email->send();
+                if ($send) {
+                    echo json_encode("send");
+                } else {
+                    $error = $this->email->print_debugger(array('headers'));
+                    echo json_encode($error);
+                }
+                redirect('Shop/contactus');
             }
-
-            redirect('Shop/contactus');
         }
         $this->load->view('pages/contactus');
     }

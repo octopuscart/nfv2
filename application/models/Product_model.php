@@ -103,7 +103,7 @@ class Product_model extends CI_Model {
         $query = $this->db->get('nfw_product_tag');
         $tag = $query->row();
         $productinfo['item_name'] = $tag->tag_title;
-        $productinfo['price'] = $producttag->price;
+        $productinfo['price'] = $producttag->sale_price ? $producttag->sale_price :$producttag->price;
         return $productinfo;
     }
 

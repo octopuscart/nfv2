@@ -96,8 +96,10 @@ class Product_model extends CI_Model {
     function productItemInformation($product_id, $item_id) {
         $productinfo = $this->productInformation($product_id);
         $this->db->where('tag_id', $item_id);
+        $this->db->where('product_id', $product_id);
         $query = $this->db->get('nfw_product_tag_connection');
         $producttag = $query->row();
+        print_r($producttag);
         $this->db->where('id', $item_id);
         $query = $this->db->get('nfw_product_tag');
         $tag = $query->row();

@@ -549,7 +549,7 @@ class Api extends REST_Controller {
             "sku" => $productinfo['title'],
             "item_code" => $productinfo['title'],
             "item_image" => $productinfo['images'][0]['image'],
-            "price" => $productinfo['price'],
+            "price" => $productinfo['sale_price'] ? $productinfo['sale_price'] : $productinfo['price'],
             "tag_title" => $productinfo['item_name'],
             "customization_id" => '0',
             "customization_data" => '',
@@ -1138,8 +1138,9 @@ order by count(nfw_color_id) asc, colorbunch";
     }
 
     
-    function sendTestEmail_get(){
-        
+    function product_get($pid, $iid){
+        $prd = $this->Product_model->productItemInformation($pid, $iid);
+        print_r($prd);
     }
 }
 

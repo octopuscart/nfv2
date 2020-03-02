@@ -183,10 +183,10 @@ class Shop extends CI_Controller {
                 $this->email->message($htmlsmessage);
                 $send = $this->email->send();
                 if ($send) {
-                    echo json_encode("send");
+//                    echo json_encode("send");
                 } else {
                     $error = $this->email->print_debugger(array('headers'));
-                    echo json_encode($error);
+                    //  echo json_encode($error);
                 }
                 redirect('Shop/contactus');
             }

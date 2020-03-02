@@ -154,6 +154,10 @@ class Shop extends CI_Controller {
         }
         $this->load->view('Product/shopCart', $data);
     }
+    
+    public function error(){
+        redirect(site_url("/"));
+    }
 
     public function contactus() {
         if (isset($_POST['sendmessage'])) {

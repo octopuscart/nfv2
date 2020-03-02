@@ -160,7 +160,7 @@
                         ?>
                         <li class="container3d relative "  >
                         <li class="has_sub_menu  m_bottom_10">
-                            <a href="#" class="d_block relative  color_black color_blue_hover"><?php echo $mvalue['title']; ?></a>
+                            <a href="<?php echo $mvalue['link']; ?>" class="d_block relative  color_black color_blue_hover"><?php echo $mvalue['title']; ?></a>
                             <?php
                             if (count($mvalue['submenu'])) {
                                 ?>
@@ -169,7 +169,7 @@
                                     foreach ($mvalue['submenu'] as $mskey => $msvalue) {
                                         ?>
                                         <li class="m_bottom_10">
-                                            <a href="product_list.php?item_type=1 " class="d_block relative color_black color_blue_hover"> <?php echo $msvalue['title']; ?> </a>
+                                            <a href="<?php echo $msvalue['link']; ?>" class="d_block relative color_black color_blue_hover"> <?php echo $msvalue['title']; ?> </a>
                                             <?php
                                             if ($msvalue['submenu']) {
                                                 ?>
@@ -178,7 +178,7 @@
                                                     foreach ($msvalue['submenu'] as $msskey => $mssvalue) {
                                                         ?>
                                                         <li class="m_bottom_10">
-                                                            <a href="product_list.php?item_type=7 " class="d_block relative color_black color_blue_hover">  <?php echo $mssvalue['title']; ?>  </a>
+                                                            <a href="<?php echo $mssvalue['link']; ?>" class="d_block relative color_black color_blue_hover">  <?php echo $mssvalue['title']; ?>  </a>
                                                         </li>
                                                         <?php
                                                     }

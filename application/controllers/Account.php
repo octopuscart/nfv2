@@ -155,7 +155,7 @@ class Account extends CI_Controller {
                     $token = "";
 
                     $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
-                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
+//                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
 
                     $url = $emailurl . "?user_id=".$user_id."&mail_type=2";
                     $curl = curl_init();

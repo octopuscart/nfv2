@@ -138,7 +138,7 @@ if ($msg != "") {
                 timer: 2500,
                 onClose: () => {
 
-                   // window.location = '<?php echo $link; ?>';
+                    window.location = '<?php echo $link; ?>';
                 }
             })
         })

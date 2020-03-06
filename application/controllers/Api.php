@@ -1138,7 +1138,7 @@ order by count(nfw_color_id) asc, colorbunch";
     }
 
     function orderEmailApi_get($order_id) {
-      echo  $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?order_id=$order_id&user_id=$this->user_id&mail_type=1&mail_set=order";
+        $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?order_id=$order_id&user_id=$this->user_id&mail_type=1&mail_set=order";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

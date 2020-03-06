@@ -1144,7 +1144,7 @@ order by count(nfw_color_id) asc, colorbunch";
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
         $data = curl_exec($curl);
-        print_r($data);
+//        print_r($data);
         curl_close($curl);
     }
 

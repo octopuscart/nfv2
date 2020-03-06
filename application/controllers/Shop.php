@@ -149,8 +149,14 @@ class Shop extends CI_Controller {
             $this->db->where("measurement_id != ''");
             $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
             $this->db->update("nfw_product_cart");
-            
-          
+
+            $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?order_id=$last_id&user_id=$this->user_id&mail_type=1&mail_set=order";
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            $data = curl_exec($curl);
+            curl_close($curl);
 
             redirect("Order/orderdetails/" . $last_id);
         }

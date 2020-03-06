@@ -94,8 +94,8 @@ class Account extends CI_Controller {
 
                 redirect('Shop/index');
             } else {
-                // $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
-                //  redirect('Shop/index', $data1);
+                 $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
+                  redirect('Shop/index', $data1);
             }
         }
     }

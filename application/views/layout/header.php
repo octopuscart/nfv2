@@ -70,7 +70,7 @@
                 text-indent: -9999px;
                 top: 0px;
             }
-            
+
             .v2 #loading { display: none; }
 
 
@@ -88,34 +88,34 @@
 
         <script>
 
-           (function ($) {
+            (function ($) {
 
-               $("html").removeClass("v2");
-               $("body").ready(function () {
-               })
+                $("html").removeClass("v2");
+                $("body").ready(function () {
+                })
 
-               $("#header").ready(function () {
-                   $("#progress-bar").stop().animate({top: "25%", opacity: 0.8}, 1000)
-               });
-               $("#footer").ready(function () {
-                   $("#progress-bar").stop().animate({top: "75%", opacity: 0.5}, 1000)
-               });
-               $(window).load(function () {
+                $("#header").ready(function () {
+                    $("#progress-bar").stop().animate({top: "25%", opacity: 0.8}, 1000)
+                });
+                $("#footer").ready(function () {
+                    $("#progress-bar").stop().animate({top: "75%", opacity: 0.5}, 1000)
+                });
+                $(window).load(function () {
 
-                   $("#progress-bar").stop().animate({top: "100%", opacity: 0}, 500, function () {
-                       $("#loading").fadeOut("fast", function () {
-                           $(this).remove();
-                           $("#price_loader").remove();
-                           Waves.attach('.button_wave', ['waves-button', 'waves-float']);
-                           Waves.attach('.waves-image1');
-                           Waves.init();
-                       });
-                   });
-               });
-           })(jQuery);
-           $(function () {
+                    $("#progress-bar").stop().animate({top: "100%", opacity: 0}, 500, function () {
+                        $("#loading").fadeOut("fast", function () {
+                            $(this).remove();
+                            $("#price_loader").remove();
+                            Waves.attach('.button_wave', ['waves-button', 'waves-float']);
+                            Waves.attach('.waves-image1');
+                            Waves.init();
+                        });
+                    });
+                });
+            })(jQuery);
+            $(function () {
 
-           })
+            })
         </script>
 
 
@@ -135,6 +135,23 @@
         include('mainmenu.php');
         ?>
 
+        <?php
+        $session_data = $this->session->userdata('logged_in');
+        if ($session_data) {
+            if ($session_data['status'] == 'Inactive') {
+                ?>
+
+
+                <h2 style="    font-size: 18px;
+                    text-align: center;
+                    background: red;
+                    color: white;
+                    padding: 10px;">Your account is not active please check your inbox to get the activation link or contact to sales@nitafashions.com</h2>
+
+                <?php
+            }
+        }
+        ?>
 
         <div id="side_menu" class='bg_gradiant'>
             <header class="m_bottom_30 d_table w_full" >
@@ -278,7 +295,7 @@
 
                                                 <div class="col-md-6" style="padding: 0px">
                                                     <span class="pull-left" ng-if="initApp.customcart.total_quantity" style="color:navy;font-size:10px">Total {{initApp.customcart.total_quantity}} items waiting for checkout</span><br/>
-                                                    <a href="<?php echo site_url("Shop/cart")?>" class="pull-left" ng-if="initApp.customcart.total_quantity">
+                                                    <a href="<?php echo site_url("Shop/cart") ?>" class="pull-left" ng-if="initApp.customcart.total_quantity">
                                                         <span style="font-size: 13px;border-radius:3px;background-color: #F1F1F1; font-weight: 500;padding: 0px 10px;">
                                                             Proceed to Checkout
                                                         </span>
@@ -292,7 +309,7 @@
                                                 <div class="col-md-6 pull-right" style="padding: 0px">
                                                     <div ng-if="initApp.maincart.products.length">
                                                         <span ng-if="initApp.maincart.products.length" class="pull-right" style="color:navy;font-size:10px;margin-top: -24px">Recently added item(s)</span><br/>
-                                                        <a href="<?php echo site_url('Product/shopAllCart');?>" class="pull-right" style="margin-top: -24px" ng-if="initApp.maincart.products.length">
+                                                        <a href="<?php echo site_url('Product/shopAllCart'); ?>" class="pull-right" style="margin-top: -24px" ng-if="initApp.maincart.products.length">
                                                             <span style="font-size: 13px;border-radius:3px;background-color: #F1F1F1; font-weight: 500;padding: 0px 10px;">
                                                                 Go for Customization &rarr;
                                                             </span>
@@ -340,7 +357,7 @@
                                                         <li class="color_dark" style="font-weight: 400; "> 
                                                             <span class="">Total:</span> 
                                                             <span class=" d_inline_b m_left_15 price t_align_l color_pink ">  {{ initApp.maincart.total_price | currency}}   <small style="    font-size: 11px;
-                                                                                                                                                                        line-height: 21px;">(Quantity:{{initApp.maincart.total_quantity}})</small></span>
+                                                                                                                                                                                    line-height: 21px;">(Quantity:{{initApp.maincart.total_quantity}})</small></span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -363,9 +380,7 @@
 
 
 
-                                        <?php
-                                        $session_data = $this->session->userdata('logged_in');
-                                        ?>
+
 
 
                                         <!--login-->
@@ -418,11 +433,11 @@
                                                                             </a>
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            
-                                                                            <a name="profile" href="<?php echo site_url("Account/profile");?>" type="submit" class="btn btn-default btn-xs pull-right" style="">
-                                                                                    <i class="icon-list"></i> View Account
-                                                                                </a>
-                                                                            
+
+                                                                            <a name="profile" href="<?php echo site_url("Account/profile"); ?>" type="submit" class="btn btn-default btn-xs pull-right" style="">
+                                                                                <i class="icon-list"></i> View Account
+                                                                            </a>
+
                                                                         </div>
                                                                     </div>
                                                                     <!--</div>-->

@@ -360,10 +360,10 @@
         }
 
         ).bind('typeahead:selected', function (obj, select_data) {
-            var checkd = select_data.sid;
             var tag_id = select_data.tag_id;
+            var product_id = select_data.sid;
 //            $("input[name=searchtag]").val(checkd);
-            window.location = "<?php echo site_url("Product/productList?category=0&item_type=");?>"+tag_id;
+            window.location = "<?php echo site_url("Product/productList?category=0&item_type=");?>"+tag_id+"&product_id="+product_id;
 
         });
 

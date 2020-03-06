@@ -694,6 +694,7 @@ class Api extends REST_Controller {
         if (($this->get('category')) && $this->get('category') != 0) {
 
             $dataId = $this->parents($category_id, array());
+           
             $dataId[] = $category_id;
             $query_data = array();
             $categoryString = implode(',', $dataId);
@@ -828,7 +829,7 @@ class Api extends REST_Controller {
 
 
 
-        $query = "SELECT 
+       echo $query = "SELECT 
                    np.id as id,
                    nc.id  as colorid,
                    np.product_category as category_id,

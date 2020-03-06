@@ -131,7 +131,7 @@ $this->load->view('layout/header');
         <div class="container" style="    ">
             <div class="row">
 
-                <aside class="col-lg-2 col-md-2 col-sm-2 m_bottom_70 m_xs_bottom_30"  style="padding: 0">
+                <aside class="col-lg-2 col-md-2 col-sm-2 m_bottom_70 m_xs_bottom_30"  >
 
                     <div class="m_bottom_45 m_xs_bottom_30" >
 

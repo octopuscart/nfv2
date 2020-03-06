@@ -676,14 +676,20 @@ class Api extends REST_Controller {
         return $colorpermutations;
     }
 
-    function parents($parentId, $arrayChild) {
+    function parents($parentId) {
         $query = "select id from nfw_category where parent = $parentId";
         $res = $this->Product_model->resultAssociate($query);
+        global $arrayChild;
+        if (count($arrayChild)) {
+            
+        } else {
+            $arrayChild = [];
+        }
         for ($i = 0; $i < count($res); $i++) {
             $id = $res[$i]['id'];
 
             array_push($arrayChild, $id);
-            $this->parents($res[$i]['id'], $arrayChild);
+            $this->parents($res[$i]['id']);
         }
         return $arrayChild;
     }
@@ -693,8 +699,8 @@ class Api extends REST_Controller {
         $category_id = $this->get('category');
         if (($this->get('category')) && $this->get('category') != 0) {
 
-            $dataId = $this->parents($category_id, array());
-           
+            $dataId = $this->parents($category_id);
+
             $dataId[] = $category_id;
             $query_data = array();
             $categoryString = implode(',', $dataId);
@@ -829,7 +835,7 @@ class Api extends REST_Controller {
 
 
 
-       echo $query = "SELECT 
+         $query = "SELECT 
                    np.id as id,
                    nc.id  as colorid,
                    np.product_category as category_id,

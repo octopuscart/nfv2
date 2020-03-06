@@ -22,6 +22,44 @@ class Account extends CI_Controller {
         redirect('Account/profile');
     }
 
+    function backendlogin() {
+        $username = $this->input->get('email');
+        $password = $this->input->get('password');
+
+        $this->db->select('*');
+        $this->db->from('auth_user au');
+        $this->db->where('email', $username);
+        $this->db->where('password', $password);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $userdata = $query->result_array()[0];
+            $usr = $userdata['email'];
+            $pwd = $userdata['password'];
+
+            $this->db->where('user_id', $userdata['id']);
+            $this->db->order_by('id desc');
+            $query = $this->db->get('auth_event');
+            $lastlogin = $query->row();
+            $userdata['lastlogin'] = $lastlogin->time_stamp;
+
+
+            $user_id = $userdata['id'];
+            // $session_cart = $this->session->userdata('session_cart');
+            // $productlist = $session_cart['products'];
+            //$this->Product_model->cartOperationCustomCopy($user_id);
+
+            $this->session->set_userdata('logged_in', $userdata);
+
+
+
+            redirect('Shop/index');
+        } else {
+            // $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
+            //  redirect('Shop/index', $data1);
+        }
+    }
+
     function userLogin() {
         if (isset($_POST['login'])) {
             $username = $this->input->post('email');

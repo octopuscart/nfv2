@@ -2,430 +2,232 @@
 $this->load->view('layout/header');
 ?>
 
-<?php
-$linklist = [];
-$cattitle = "";
-foreach ($categorie_parent as $key => $value) {
-    $cattitle = $value['category_name'];
-    $catid = $value['id'];
-    $liobj = "<li><a href='" . site_url("Product/ProductList/" . $catid) . "'>$cattitle</a></li>";
-    array_push($linklist, $liobj);
-}
-?>
 
 
-<style>
-   .frame {
-  
-  font-family: sans-serif;
-	overflow: hidden;
-
-	margin: 3vw;
-  display: inline-block;
-  
-  .zoom {
-    
-    font-size: 1.3vw;
-		transition: transform 0.2s linear;
-    
-  }
-  
-  
-  img {
-	  
-    max-width: 25vw;
-  
-  }
-  
-  
-  .lorem {
-    
-    padding: 2% 2%;
-  
-  }
-  
-  
-  form {
-
-    margin : 2% auto;    
-    text-align: center;
-    
-    button {
-      
-      font-size: inherit;
-      margin: inherit;
-      
-    }
-  
-    input {
-      
-      border {
-        radius : 5px;
-        style: 1px solid;
-      }    
-     
-      width :20vw;
-      margin : 2% auto;
-      padding: .5vw .8vw;
-      font-size: 1.3vw;
-    
-    }
-  }
-}
-</style>
 
 
-<!-- Inner Page Banner Area Start Here -->
-<div class="inner-page-banner-area" style="background: url(<?php echo imageserver . $product_details['file_name2']; ?>);    background-position: center;background-size: cover;
-     background-repeat: no-repeat;">
+<div class="section_offset counter">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcrumb-area">
-                    <h1>
-                        <?php echo $product_details['title']; ?>
-                    </h1>
-                    <ul>
-                        <li><a href="<?php echo site_url("/"); ?>">Home</a></li>
-                        <?php echo count($linklist) ? "<b class='barcomb-list'>/</b>" : ''; ?>
-                        <?php
-                        echo implode("<b class='barcomb-list'>/</b>", $linklist)
-                        ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-<!-- Product Details2 Area Start Here -->
-<div class="product-details2-area" ng-controller="ProductDetails">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="inner-product-details-left">
-                    <div class="tab-content frame">
-
-                        <?php
-                        $images = array(
-                            'img1' => $product_details['file_name'],
-                            'img2' => $product_details['file_name1'],
-                            'img3' => $product_details['file_name2'],
-                        );
-                        foreach ($images as $key => $value) {
-                            $countarray = explode(".", $value);
-                            if (end($countarray)) {
-                                if ($value) {
-                                    ?>
-                                    <div class="tab-pane fade <?php echo $key == 'img1' ? 'active in' : ''; ?> zoom" id="images_<?php echo $key; ?>">
-                                        <a href="#" class="zoom ex1 product_image_detail">
-                                            <div class="product_image_back product_image_detail_big" style="background: url(<?php echo imageserver . $value; ?>"></div>
-                                            <!--<img alt="single" src="img/product/product-details1.jpg" class="img-responsive">-->
-                                        </a>
-                                    </div>
-                                    <?php
-                                }
-                            }
-                        }
-                        ?>
-                    </div>
-                    <ul>
-                        <?php
-                        foreach ($images as $key => $value) {
-                            $countarray = explode(".", $value);
-                            if (end($countarray)) {
-                                if ($value) {
-                                    ?>
-                                    <li class="<?php echo $key == 'img1' ? 'active' : ''; ?>">
-                                        <a class="product_image_detail" href="#images_<?php echo $key; ?>" data-toggle="tab" aria-expanded="false">
-                                            <div class="product_image_back product_image_detail_small" style="background: url(<?php echo imageserver . $value; ?>"></div>
-                                        </a>
-                                    </li>
-                                    <?php
-                                }
-                            }
-                        }
-                        ?>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="inner-product-details-right">
-                    <h3><?php echo $product_details['title']; ?><br/>
-                        <small><?php echo $product_details['title']; ?>
-                            <span style="    font-size: 12px;color: #000;"></span>
-                        </small>
-                    </h3>
-                    <ul>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    </ul>
-                    <p class="price">{{<?php echo $product_details['price']; ?>|currency:"<?php echo globle_currency; ?> "}}</p>
-                    <p>
-                        <?php echo $product_details['short_description']; ?>
-                    </p>
-
-
-                    <div class="product-details-content">
-                        <p><span>Availability:</span> <?php echo $product_details['stock_status']; ?></p>
-                        <p><span>Category:</span> <?php echo $cattitle; ?></p>
-
-                    </div>
-
-
-                    <div class="product_variation_list">
-
-                        <?php
-                        foreach ($product_attr as $key => $value) {
-                            $productvrnt = $product_attr_variant[$value['attribute']];
-                            if (count($productvrnt) > 1) {
-                                ?>
-                                <p class="product_detail_attr" style="margin-top: 10px;"><?php echo $value['attribute']; ?></p>
-
-                                <ul class="product-tags">
-                                    <?php
-                                    foreach ($product_attr_variant[$value['attribute']] as $kat => $vat) {
-                                        ?>
-                                        <li class="<?php echo $vat['attribute_value'] == $value['attribute_value'] ? 'active' : ''; ?>">
-                                            <a href="<?php echo site_url("Product/ProductDetails/" . $vat['product_id']); ?>" ><?php echo $vat['attribute_value']; ?></a>
-                                        </li>
+            <section class="col-lg-10 col-md-9 col-sm-9 m_bottom_70 m_xs_bottom_30">
+                <div class="clearfix m_bottom_45 m_xs_bottom_30">
+                    <div class="f_left product_view f_sm_none m_sm_bottom_30">
+                        <div class="clearfix">
+                            <div class="thumbnails_carousel t_align_c f_left m_right_20">
+                                <ul id="thumbnails">
+                                    <li>
                                         <?php
-                                    }
-                                    ?>
+                                        for ($i = 0; $i < count($product['images']); $i++) {
+                                            $img = $product['images'][$i];
+                                            $img = $img['image'];
+                                            $largeImg = str_replace("small", "large", $img);
+
+                                            $img = str_replace("small", "smaller", $img);
+                                            ?>
+                                            <a href="#" data-zoom-image="<?php echo $largeImg; ?>" data-image="<?php echo $largeImg; ?>" class="active d_block wrapper r_corners tr_all translucent m_bottom_10"><img src="<?php echo $img; ?>" alt="" class="r_corners" style="    height: 100px;width: 80px;"></a>
+
+                                        <?php } ?>
+                                    </li>
                                 </ul>
-                                <?php
-                            }
-                        }
-                        ?>
-
-
-                        <!--                        <form id="checkout-form">
-                        
-                        <?php
-                        foreach ($product_attr as $key => $value) {
-                            $productvrnt = $product_attr_variant[$value['attribute']];
-                            if (count($productvrnt) > 1) {
-                                ?>
-                                                                                                                                                                            <div class="col-md-6">
-                                                                                                                                                                                <ul class="more-option">
-                                                                                                                                                                                    <li>
-                                                                                                                                                                                        <div class="form-group">
-                                                                                                                                                                                            <div class="custom-select">
-                                                                                                                                                                                                 COLOR 
-                                                                                                                                                                                                <p class="product_detail_attr"><?php echo $value['attribute']; ?></p>
-                                                                                                                                                                                                <select  class='select2'>
-                                <?php
-                                foreach ($product_attr_variant[$value['attribute']] as $kat => $vat) {
-                                    ?>
-                                    <?php //echo $value['attribute_value']; ?>
-                                                                                                                                                                                                                                                                <option <?php echo $vat['attribute_value'] == $value['attribute_value'] ? 'selected' : ''; ?> value="<?php echo $vat['product_id']; ?>" ><?php echo $vat['attribute_value']; ?></option>
-                                    <?php
-                                }
-                                ?>
-                                                                                                                                                                                                </select>
-                                                                                                                                                                                            </div>
-                                                                                                                                                                                        </div>
-                                                                                                                                                                                    </li>
-                                                                                                                                                                                </ul>
-                                                                                                                                                                            </div>
-                                <?php
-                            }
-                        }
-                        ?>
-                                                </form>-->
-                    </div>
-
-
-                    <ul class="inner-product-details-cart">
-                        <li>
-                            <div class="input-group quantity-holder" id="quantity-holder">
-                                <input type="text" name='quantity' class="form-control quantity-input" ng-model="productver.quantity" placeholder="1">
-                                <div class="input-group-btn-vertical">
-                                    <button class="btn btn-default quantity-plus" type="button" ng-click="updateCartDetail('add')"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                    <button class="btn btn-default quantity-minus" type="button" ng-click="updateCartDetail('sub')"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                <!---->
+                                <div class="helper-list"></div>
+                            </div>
+                            <div class="wrapper r_corners container_zoom_image relative">
+                                <img id="img_zoom" src="<?php echo $largeImg; ?>" data-zoom-image="<?php echo $largeImg; ?>" alt="">
+                                <div class="labels_container">
+<!--                                    <a href="#" class="d_block label color_pink color_pink_hover tt_uppercase fs_ex_small circle m_bottom_5 vc_child t_align_c"><span class="d_inline_m">Sale</span></a>-->
                                 </div>
                             </div>
-                        </li>
-                        <li><a href="#" ng-click="addToCart(<?php echo $product_details['id']; ?>, productver.quantity)">Add To Cart</a></li>
-    <!--                            <li><a href="#"><i aria-hidden="true" class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                        -->
-                    </ul>
-
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-        <div class="product-details-tab-area">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <ul>
-                        <li class="active"><a href="#highlights" data-toggle="tab" aria-expanded="false">Highlights</a></li>
-                        <li><a href="#description" data-toggle="tab" aria-expanded="false">Description</a></li>
-                        <?php
-                        if ($product_details['video_link']) {
-                            ?>
-                            <li><a href="#videodescription" data-toggle="tab" aria-expanded="false">Video Description</a></li>
-
-                            <?php
-                        }
-                        ?>
-                    </ul>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="tab-content">
-
-                        <div class="tab-pane fade active in spacification_product_details" id="highlights">
-                            <div class="product-details-content product_highlights">
-                                <p><span>Availability:</span> <?php echo $product_details['stock_status']; ?></p>
-                                <p><span>Category:</span> <?php echo $cattitle; ?></p>
-                                <?php
-                                foreach ($product_attr as $key => $value) {
-                                    ?>
-                                    <p><span><?php echo $value['attribute']; ?>:</span> <?php echo $value['attribute_value']; ?></p>
-                                    <?php
-                                }
-                                ?>
-                            </div>
+                            <!--                            <a href="#" class="open_product f_right button_type_6 d_block r_corners tr_all t_align_c">
+                                                            <i class="icon-resize-full"></i>
+                                                        </a>-->
                         </div>
-
-                        <div class="tab-pane fade in spacification_product_details" id="description">
-                            <p class="">
-                                <?php echo $product_details['description']; ?> 
-                            </p>
-                        </div>
-
-                        <?php
-                        if ($product_details['video_link']) {
-                            ?>
-                            <div class="tab-pane fade in spacification_product_details" id="videodescription">
-                                <p class="">
-                                <center>
-                                    <iframe width="800" height="400" src="<?php echo $product_details['video_link']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                </center>
-                                </p>
-                            </div>
-                            <?php
-                        }
-                        ?>
-
-
+                        <!--share buttons-->
 
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="featured-products-area2">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h2 class="title-carousel">Related Products</h2>
-                </div>
-            </div>
-            <div class="metro-carousel" data-loop="true" data-items="4" data-margin="30" data-autoplay="true" data-autoplay-timeout="10000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="2" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="2" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="3" data-r-medium-nav="true" data-r-medium-dots="false" data-r-large="4" data-r-large-nav="true" data-r-large-dots="false">
-
-                <?php
-                foreach ($product_related as $key => $value) {
-                    ?>
-
-                    <div class="product-box1">
-                        <ul class="product-social">
-                            <li><a href="#" ng-click="addToCart(<?php echo $value['id']; ?>, 1)"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-                        </ul>
-                        <div class="product-img-holder">
-                            <?php
-                            if ($value['sale_price']) {
-                                ?>
-                                <div class="hot-sale" >
-                                    <span>Sale</span>
-                                </div>
-                                <?php
-                            }
-                            ?>
-
-                            <a href="#">
-                                <div class="product_image_back product_image_back_grid" style="background: url(<?php echo imageserver . $value['file_name']; ?>);"></div>
-
+                    <div class="f_right product_info f_sm_none w_sm_full">
+                        <div class="clearfix m_bottom_15">
+                            <a class="reviews fs_medium f_left color_dark tr_all lh_ex_small" href="#">
+                                <h4 style="color:black"><?php echo $product['title']; ?></h4>
                             </a>
                         </div>
-                        <div class="product-content-holder">
-                            <h3><a href="#"><?php echo $value['title']; ?></a></h3>
-                            <span>
-                                <?php
-                                if ($value['sale_price']) {
-                                    ?>
-                                    <span>{{<?php echo $value['sale_price']; ?>|currency:"<?php echo globle_currency; ?> "}}</span>
-                                    <?php
-                                }
-                                ?>
-                                {{<?php echo $value['price']; ?>|currency:"<?php echo globle_currency; ?> "}}
+
+                        <hr class="hr_clss">
+                        <p class="color_grey fs_medium m_bottom_15">
+                            <?php echo $product['short_description']; ?>
+                        </p>
+                        <hr class="hr_clss">
+                        <table class="fw_light table_type_9 m_bottom_15">
+                            <tr>
+                                <td>Category</td>
+
+                                <td><?php echo $product['category_name']; ?></td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    SKU
+                                </td>
+
+                                <td class="color_dark">
+                                    <?php echo $product['sku']; ?>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Feature</td>
+
+                                <td><?php echo $product['product_speciality']; ?></td>
+                            </tr>
+                            <tr class="color_dark" style="font-weight: initial;font-weight: initial;
+                                padding-top: 15px;
+                                height: 0px;
+                                line-height: 72px;
+                                /* font-size: 25px; */
+                                font-size: 1.375em;">
+                                <td>
+                                    Price
+                                </td>
+
+                                <td>
+
+                                    <span class="color_dark">
+                                        <?php
+                                        if ($product['sprice']) {
+                                            echo '<span class="cut_price">$' . $productInfo['rprice'] . "</span>$" . $productInfo['sprice'];
+                                        } else {
+                                            echo '$' . $product['price'];
+                                        }
+                                        ?> 
+
+                                        <small style="font-weight: 300;margin-left: 10px;font-size:15px"><b>(<?php echo $product['item_name']; ?>)</b></small>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr class="hr_clss">
+                        <table class="fw_light table_type_9 m_bottom_20">
+
+                            <tr>
+                                <td class="v_align_m">
+                                    Color
+                                </td>
+                                <td class="color_dark">
+                                    <ul class="hr_list m_top_10 m_bottom_12">
+                                        <?php
+                                        //print_r($colors);
+                                        for ($i = 0; $i < count($product['productColor']); $i++) {
+                                            $value = $product['productColor'][$i];
+                                            ?>  
+                                            <li class="m_right_10 m_sm_bottom_5">
+                                                <button class="color_button tr_delay  bg_color_dark circle radio m_bottom_5" value="<?php echo $value['id']; ?>" style="background:<?php echo $value['color_code']; ?>;margin-top:auto"></button>
+                                            </li>
+                                        <?php } ?>  
+                                    </ul>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <hr class="hr_clss">
+                        <a href="#" class="button_type_6 m_mxs_bottom_5 d_inline_b m_right_2 tt_uppercase color_pink r_corners vc_child tr_all add_to_cart_button" cartaddid="<?php echo $product['id']; ?>"  ng-click="addTocart(<?php echo $product['id']; ?>, <?php echo $item_id; ?>)">
+                            <span class="d_inline_m clerarfix"><i class="icon-basket f_left m_right_10 fs_large"> </i>
+                                <span class="fs_medium">Add to Cart</span>
+
                             </span>
+                        </a>
+
+                    </div>
+                </div>
+
+
+            </section>
+
+
+
+            <?php
+            if ($product['related']) {
+                ?>
+                <aside class="col-lg-2 col-md-3 col-sm-3 m_bottom_70 m_xs_bottom_30">
+                    <!--bestsellers-->
+
+
+                    <!--related products-->
+                    <div class="m_bottom_50 m_xs_bottom_30">
+                        <!--title & nav-->
+                        <div class="clearfix m_bottom_25 m_xs_bottom_20">
+                            <h5 class="fw_light f_left f_sm_none f_xs_left color_dark m_sm_bottom_5 m_xs_bottom_0">Related Products</h5><br>
+
+                        </div>
+                        <div class="owl-carousel t_xs_align_c" data-plugin-options='{"transitionStyle":"backSlide","autoPlay" : true}' data-nav="specials_">
+                            <?php
+                                            foreach ($product['related'] as $key => $prd) {
+                                                
+                                            
+                                        ?>
+                                    <!--product-->
+                                    <figure class="fp_item t_align_c d_xs_inline_b">
+                                        <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23">
+                                            <!--images container-->
+                                            <div class="fp_images relative" style="height:200px">
+                                                <a href="#">
+                                                    <img src="<?php echo $prd['images'][0]['image']; ?>" alt="" class="tr_all" style ="height:270px; width: 270px">
+                                                    <img src="<?php echo $prd['images'][1]['image']; ?>" alt="" class="tr_all"style ="height:270px; width: 270px">
+                                                </a>
+                                            </div>
+                                            <!--labels-->
+
+                                        </div>
+                                        <figcaption>
+                                            <h6 class=""><a href="#" class="color_dark"><?php echo $prd['title']; ?> </a></h6>
+                                            <i><?php echo $prd['product_speciality']; ?></i>                       
+                                            <div class="">
+                                                <p>
+                                                <div class="price_pd im_half_container m_bottom_10 ng-binding">
+                                                   
+                                                    <?php echo 'US$ ' . $prd['price']; ?> 
+                                                </div>
+
+
+                                                </p>		
+
+                                            </div>
+                                            <div class="t_align_c">
+                                                <button class="btn btn-default add_to_cart_button"   ng-click="addTocart(<?php echo $prd['id']; ?>, <?php echo $item_id; ?>)"
+                                                        style="font-size: 12px;
+                                                        height: 26px;
+                                                        padding: 0px 6px;
+                                                        width: 118px;">
+                                                    <span class="d_inline_m clerarfix" style="padding-top: 4px;"><i class="fa fa-shopping-cart"></i><span class="fs_medium">   Add to Cart</span></span>
+                                                </button>
+
+                                            </div>
+                                        </figcaption>
+                                    </figure>
+                                    <?php
+                                
+                            }
+                            ?>
                         </div>
                     </div>
-                <?php }
-                ?>
-            </div>
+
+
+                </aside>
+                <hr class="hr_clss">
+                <?php
+            }
+            ?>
+
+
+
+
+
+
+
         </div>
+
     </div>
 </div>
-<!-- Product Details1 Area End Here -->
-
-
-
 
 <?php
 $this->load->view('layout/footer');
 ?>
-<script>
-    
-    //zoom plugin
-
-        $(document).on('mousemove', '.frame', function () {
-
-            var element = {
-                width: $(this).width(),
-                height: $(this).height()
-            };
-
-            var mouse = {
-                x: event.pageX,
-                y: event.pageY
-            };
-
-            var offset = $(this).offset();
-
-            var origin = {
-                x: (offset.left + (element.width / 2)),
-                y: (offset.top + (element.height / 2))
-            };
-
-            var trans = {
-                left: (origin.x - mouse.x) / 2,
-                down: (origin.y - mouse.y) / 2
-            };
-
-            var transform = ("scale(2,2) translateX(" + trans.left + "px) translateY(" + trans.down + "px)");
-
-            $(this).children(".zoom").css("transform", transform);
-
-        });
-
-        $(document).on('mouseleave', '.frame', function () {
-            $(this).children(".zoom").css("transform", "none");
-        });
-
-        //end of zoom
-    
-</script>

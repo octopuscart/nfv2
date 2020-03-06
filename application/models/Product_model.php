@@ -93,6 +93,22 @@ class Product_model extends CI_Model {
         return $productinfo;
     }
 
+    function productColor($product_id) {
+        $query = "SELECT nc.* FROM `nfw_product_color` as pc join 
+                        nfw_color as nc on pc.nfw_color_id = nc.id
+                        join nfw_product as np on pc.nfw_product_id = np.id
+                        where np.id = '$product_id' ";
+        $result = $this->resultAssociate($query);
+        return $result;
+    }
+
+    function relatedProducts($product_id) {
+
+        $related_product_query = " select nfw_related_product_id as nfw_product_id from nfw_product_related where nfw_product_id = $product_id ";
+        $related_product_list = $this->resultAssociate($related_product_query);
+        return $related_product_list;
+    }
+
     function productItemInformation($product_id, $item_id) {
         $productinfo = $this->productInformation($product_id);
         $this->db->where('tag_id', $item_id);
@@ -102,8 +118,37 @@ class Product_model extends CI_Model {
         $this->db->where('id', $item_id);
         $query = $this->db->get('nfw_product_tag');
         $tag = $query->row();
+
+        $this->db->where('id', $productinfo['product_category']);
+        $query = $this->db->get('nfw_category');
+        $productcat = $query->row();
+
         $productinfo['item_name'] = $tag->tag_title;
-        $productinfo['price'] = $producttag->sale_price ? $producttag->sale_price :$producttag->price;
+        $productinfo['price'] = $producttag->sale_price ? $producttag->sale_price : $producttag->price;
+        $productinfo['rprice'] = $producttag->price;
+        $productinfo['sprice'] = $producttag->sale_price ? $producttag->sale_price : 0;
+        $productinfo['categorystring'] = $this->getparent($productinfo['product_category']);
+        $productinfo['category_name'] = $productcat->name;
+        $productinfo['productColor'] = $this->productColor($product_id);
+
+        $relatedproducts = $this->relatedProducts($product_id);
+
+        $related = [];
+
+        if ($relatedproducts) {
+            foreach ($relatedproducts as $key => $value) {
+                $pid = $value['nfw_product_id'];
+                $productinfo2 = $this->productInformation($pid);
+                $this->db->where('tag_id', $item_id);
+                $this->db->where('product_id', $productinfo2['id']);
+                $query = $this->db->get('nfw_product_tag_connection');
+                $producttag2 = $query->row();
+                $productinfo2['price'] = $producttag2->sale_price ? $producttag2->sale_price : $producttag2->price;
+
+                array_push($related, $productinfo2);
+            }
+        }
+        $productinfo['related'] = $related;
         return $productinfo;
     }
 
@@ -236,8 +281,10 @@ class Product_model extends CI_Model {
         $query = $this->db->get('nfw_category');
         $texts = array();
         foreach ($query->result_array() as $row) {
-            $texts = $this->getparent($row['parent_id']);
-            array_push($texts, $row);
+            if (isset($row['parent_id'])) {
+                $texts = $this->getparent($row['parent_id']);
+                array_push($texts, $row);
+            }
         }
         return $texts;
     }

@@ -14,9 +14,8 @@ class Product extends CI_Controller {
     public function index() {
         redirect('/');
     }
-    
-    
-    function shopAllCart(){
+
+    function shopAllCart() {
         $this->load->view('Product/shopAllCart');
     }
 
@@ -28,14 +27,13 @@ class Product extends CI_Controller {
         $res = $this->Product_model->resultAssociate($query);
         $data['tagdata'] = $res;
         if ($catid == 0) {
-            
-             $query = "select ct.* from nfw_category as ct"
+
+            $query = "select ct.* from nfw_category as ct"
                     . " right join  nfw_category_tag_connection "
                     . "as nct on nct.category_id = ct.id where nct.tag_id=$id order by index_menu";
             $categorylist = $this->Product_model->resultAssociate($query);
-            
         } else {
-           $this->db->where('parent', $catid);
+            $this->db->where('parent', $catid);
             $this->db->order_by('index_menu asc');
             $query = $this->db->get('nfw_category');
             $categorylist = $query->result_array();
@@ -44,9 +42,8 @@ class Product extends CI_Controller {
 
         $this->load->view('Product/productList2', $data);
     }
-    
-    
-        //function for product list
+
+    //function for product list
     function productListOffers() {
         $id = $_GET['item_type'];
         $catid = $_GET['category'];
@@ -54,14 +51,13 @@ class Product extends CI_Controller {
         $res = $this->Product_model->resultAssociate($query);
         $data['tagdata'] = $res;
         if ($catid == 0) {
-            
-             $query = "select ct.* from nfw_category as ct"
+
+            $query = "select ct.* from nfw_category as ct"
                     . " right join  nfw_category_tag_connection "
                     . "as nct on nct.category_id = ct.id where nct.tag_id=$id order by index_menu";
             $categorylist = $this->Product_model->resultAssociate($query);
-            
         } else {
-           $this->db->where('parent', $catid);
+            $this->db->where('parent', $catid);
             $this->db->order_by('index_menu asc');
             $query = $this->db->get('nfw_category');
             $categorylist = $query->result_array();
@@ -70,7 +66,6 @@ class Product extends CI_Controller {
 
         $this->load->view('Product/productListOffers', $data);
     }
-    
 
     function ProductSearch() {
         $data['keyword'] = $_GET['keyword'];
@@ -78,36 +73,11 @@ class Product extends CI_Controller {
     }
 
     //function for details
-    function ProductDetails($product_id) {
-        $prodct_details = $this->Product_model->productDetails($product_id);
+    function ProductDetails($product_id, $item_id) {
+        $prodct_details = $this->Product_model->productItemInformation($product_id, $item_id);
+        $data['product'] = $prodct_details;
+        $data['item_id'] = $item_id;
         if ($prodct_details) {
-            $prodct_details_attrs = $this->Product_model->productDetailsVariants($product_id);
-
-            $data['product_attr_variant'] = $prodct_details_attrs;
-
-            $pquery = "SELECT pa.attribute, cav.attribute_value FROM product_attribute as pa
-      join category_attribute_value as cav on cav.id = pa.attribute_value_id
-      where pa.product_id = $product_id";
-            $attr_products = $this->Product_model->query_exe($pquery);
-            $data["product_attr"] = $attr_products;
-            $categorie_parent = $this->Product_model->getparent($prodct_details['category_id']);
-            $data["categorie_parent"] = $categorie_parent;
-            $data["product_details"] = $prodct_details;
-
-
-            $pquery = "SELECT pa.* FROM product_related as pr 
-      join products as pa on pa.id = pr.related_product_id
-      where pr.product_id = $product_id";
-            $product_related = $this->Product_model->query_exe($pquery);
-
-            $data["product_related"] = $product_related;
-
-            $this->config->load('seo_config');
-            $this->config->set_item('seo_title', $prodct_details['title']);
-            $this->config->set_item('seo_desc', $prodct_details['short_description']);
-            $this->config->set_item('seo_keywords', $prodct_details['keywords']);
-            $this->config->set_item('seo_imgurl', imageserver . $prodct_details['file_name']);
-
             $this->load->view('Product/productDetails', $data);
         } else {
             $this->load->view('errors/html/error_404');

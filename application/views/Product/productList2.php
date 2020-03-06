@@ -276,7 +276,7 @@ $this->load->view('layout/header');
                                     <figure class="fp_item t_align_c d_xs_inline_b ">
                                         <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23 t_xs_align_c">
                                             <!--images container-->
-                                            <a href="#" class='redirecturl'>
+                                            <a href="<?php echo site_url("Product/ProductDetails/");?>{{product.id}}/<?php echo $_GET['item_type']; ?>" class='redirecturl'>
                                                 <div class="fp_images relative ">
                                                     <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="" class=" tr_all img1 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"  >
                                                     <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="" class=" tr_all img2 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"   >

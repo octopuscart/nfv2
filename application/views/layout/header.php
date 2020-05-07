@@ -142,11 +142,11 @@
                 ?>
 
 
-                <h2 style="    font-size: 18px;
+<!--                <h2 style="    font-size: 18px;
                     text-align: center;
                     background: red;
                     color: white;
-                    padding: 10px;">Your account is not active please check your inbox to get the activation link or contact to sales@nitafashions.com</h2>
+                    padding: 10px;">Your account is not active please check your inbox to get the activation link or contact to sales@nitafashions.com</h2>-->
 
                 <?php
             }

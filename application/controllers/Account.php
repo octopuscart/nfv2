@@ -173,7 +173,7 @@ class Account extends CI_Controller {
                         'birth_date' => $birth,
                         'user_img' => $token,
                         'contact_no' => "",
-                        'status' => "Inactive",
+                        'status' => "Active",
                         'profession_id' => $profession,
                         'profession_value' => "",
                         'joining_date' => date('Y-m-d H:i:s'),

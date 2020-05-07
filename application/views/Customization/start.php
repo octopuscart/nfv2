@@ -44,7 +44,7 @@ $this->load->view('layout/header');
                         text-align: center;
                         ">Design  Your {{customizationElement.item}}<br>
                     </h3>
-                    <p style="text-align: center">Click the fabric image and select</p><br/>
+                    <p style="text-align: center">Please click to select the fabrics you wish to proceed</p><br/>
 
                     <div class="row" style="text-align: center; ">
                         <!-- ngRepeat: product in productStyleArrayNg -->

@@ -43,6 +43,16 @@
         <link href="<?php echo base_url(); ?>assets/theme/css/customstyle.css" rel="stylesheet"/>
         <script>
             var urllink = "<?php echo site_url("Api"); ?>";
+            var checklogin = "";
+            var registrationurl = "<?php echo site_url("Account/registration"); ?>";
+<?php
+$session_data = $this->session->userdata('logged_in');
+if ($session_data) {
+    ?>
+                var checklogin = "yes";
+    <?php
+}
+?>
         </script>
         <script src="<?php echo base_url(); ?>assets/theme/angular/rootController.js"></script>
 
@@ -136,17 +146,16 @@
         ?>
 
         <?php
-        $session_data = $this->session->userdata('logged_in');
         if ($session_data) {
             if ($session_data['status'] == 'Inactive') {
                 ?>
 
 
-<!--                <h2 style="    font-size: 18px;
-                    text-align: center;
-                    background: red;
-                    color: white;
-                    padding: 10px;">Your account is not active please check your inbox to get the activation link or contact to sales@nitafashions.com</h2>-->
+                <!--                <h2 style="    font-size: 18px;
+                                    text-align: center;
+                                    background: red;
+                                    color: white;
+                                    padding: 10px;">Your account is not active please check your inbox to get the activation link or contact to sales@nitafashions.com</h2>-->
 
                 <?php
             }

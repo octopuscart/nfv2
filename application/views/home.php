@@ -112,7 +112,7 @@ $this->load->view('layout/header');
                         ?>   
                         <!--product-->
                         <figure class="fp_item t_align_c d_xs_inline_b col-lg-12 col-md-12 col-sm-12 animated" data-appear-animation="bounceIn" style="   ">
-                            <a href="shop_product.php?product_id=377&item_type=1">
+                            <a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>">
                                 <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23 t_xs_align_c animated productimagesfrontpage">
                                     <!--images container-->
                                     <div class="fp_images relative">
@@ -127,8 +127,8 @@ $this->load->view('layout/header');
                             </a>
                             <figcaption>
     <!--                                    <input type="text" name="item_type" value="1" >-->
-                                <h6 class="m_bottom_5"><a href="shop_product.php?product_id=377&item_type=1" class="color_dark"><?php echo $value['title'];?></a></h6>
-                                <a href="shop_product.php?product_id=377" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality'];?>">
+                                <h6 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>" class="color_dark"><?php echo $value['title'];?></a></h6>
+                                <a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality'];?>">
                                     <i><?php echo $value['product_speciality'];?></i>
                                 </a>
                                 <div class="im_half_container m_bottom_10 hideonmobile">

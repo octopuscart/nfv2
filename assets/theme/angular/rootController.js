@@ -90,40 +90,46 @@ nitaFasions.controller('rootController', function ($scope, $http, $filter, $time
     var currencyfilter = $filter('currency');
 
     $scope.addTocart = function (product_id, item_id) {
-        swal({
-            title: 'Adding to Cart',
-            onOpen: function () {
-                swal.showLoading()
-            }
-        });
-        var form = new FormData()
-        form.append('product_id', product_id);
-        form.append('item_id', item_id);
-        $http.post(urllink + "/addToCart", form).then(function (rdata) {
-            var status = rdata.data;
-            var product = rdata.data.product;
+
+        if (checklogin == 'yes') {
 
             swal({
-                title: status.msg,
-                type: status.type,
-                html: "<p class='swalproductdetail'><span>" + product.title + "</span><br>" + "Total Price: " + currencyfilter(product.total_price, "US$ ") + ", Quantity: " + product.quantity + "</p>",
-                imageUrl: product.image,
-                imageWidth: 100,
-                timer: 1500,
-//                 background: '#fff url(//bit.ly/1Nqn9HU)',
-                imageAlt: 'Custom image',
-                showConfirmButton: false,
-                animation: true
-
-            })
-            $scope.cartDataGbl();
-
-        }, function () {
-            swal({
-                title: 'Connection Error',
-                timer: 1500,
+                title: 'Adding to Cart',
+                onOpen: function () {
+                    swal.showLoading()
+                }
             });
-        })
+            var form = new FormData()
+            form.append('product_id', product_id);
+            form.append('item_id', item_id);
+            $http.post(urllink + "/addToCart", form).then(function (rdata) {
+                var status = rdata.data;
+                var product = rdata.data.product;
+
+                swal({
+                    title: status.msg,
+                    type: status.type,
+                    html: "<p class='swalproductdetail'><span>" + product.title + "</span><br>" + "Total Price: " + currencyfilter(product.total_price, "US$ ") + ", Quantity: " + product.quantity + "</p>",
+                    imageUrl: product.image,
+                    imageWidth: 100,
+                    timer: 1500,
+//                 background: '#fff url(//bit.ly/1Nqn9HU)',
+                    imageAlt: 'Custom image',
+                    showConfirmButton: false,
+                    animation: true
+
+                })
+                $scope.cartDataGbl();
+
+            }, function () {
+                swal({
+                    title: 'Connection Error',
+                    timer: 1500,
+                });
+            })
+        } else {
+            window.location = registrationurl;
+        }
 
     }
 

@@ -64,6 +64,8 @@ $this->load->view('layout/header');
         padding: 0px 5px;
         width: 50%;
     }
+    
+    
 
 
 </style>
@@ -140,6 +142,19 @@ $this->load->view('layout/header');
         float: right;
     }
 
+    
+    .cardcontiner{
+            width: 389px;
+    display: inline-block;
+    background: #fffafa;
+    padding: 10px;
+        margin-top: 20px;
+    }
+    
+    .cardcontiner .form-control_card{
+        width: 100%;
+         margin-top: 10px;
+    }
 
 
 
@@ -149,6 +164,15 @@ $this->load->view('layout/header');
 <link href="<?php echo base_url(); ?>assets/theme/angular/customform.css" rel="stylesheet"/>
 <link href="<?php echo base_url(); ?>assets/theme/angular/customstyle.css" rel="stylesheet"/>
 <link href="<?php echo base_url(); ?>assets/bootstrap.vertical-tabs.css" rel="stylesheet"/>
+
+
+<!--card holder-->
+<script src="<?php echo base_url(); ?>assets/theme/card-master/dist/card.js"></script>
+<script src="<?php echo base_url(); ?>assets/theme/card-master/dist/jquery.card.js"></script>
+<link href="<?php echo base_url(); ?>assets/theme/card-master/dist/card.css" rel="stylesheet"/>
+
+<!--end of card holder-->
+
 
 
 
@@ -614,8 +638,8 @@ $this->load->view('layout/header');
                         </ul>
                     </nav>
                 </div>
-                
-                
+
+
             </div>
 
         </div>
@@ -738,11 +762,35 @@ $this->load->view('layout/header');
 
                         <fieldset>
 
-                            <div class="form-group " style="    padding: 0px 50px;">
+                            <div class="form-group " style="    padding: 0px 50px;text-align: center">
 
-                                <label class=" control-label" for="card-holder-name">Fill Card Details</label>
-                                <div class="">
-                                    <textarea class="form-control" name="card-holder-name" id="card-holder-name" style="width: 100%;height: 200px;font-size: 20px;">Name on Card: .&#13;&#10;Card No.: &#13;&#10;Exp. Date: /&#13;&#10;CVV:  &#13;&#10;Card Type:  
+                                <div class="card-wrapper"></div>
+
+                                <div class="form-container cardcontiner active">
+                                    <div id="create_form">
+                                        <div class="col-md-12">
+                                            <input class="form-control_card" id="card-number" ng-model="cardHolder.card_no" placeholder="Card number" type="tel" name="number"><br/>
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input class="form-control_card" id="card-holder-name" placeholder="Full name" ng-model="cardHolder.name" type="text" name="name"><br/>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control_card"  id="exp_year"  placeholder="MM/YY" ng-model="cardHolder.exp_date" type="tel" name="expiry"><br/>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control_card" id="cvv"  placeholder="CVC" ng-model="cardHolder.cvv" type="number" name="cvc">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="" style="display: none;">
+                                    <textarea class="form-control" name="card-holder-name" id="card-holder-name" style="width: 100%;height: 200px;font-size: 20px;">Name on Card: {{cardHolder.name}}&#13;&#10;Card No.: {{cardHolder.card_no}}&#13;&#10;Exp. Date: {{cardHolder.exp_date}}&#13;&#10;CVV: {{cardHolder.cvv}} &#13;&#10;Card Type: {{cardHolder.card_type}} 
                                     </textarea>
                                 </div>
 

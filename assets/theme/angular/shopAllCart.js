@@ -197,7 +197,7 @@ nitaFasions.controller('shopAllCartCustom', function ($scope, $http, $filter, $t
     jQuery('body').on('click', '.next-tab', function () {
         var next = jQuery('.nav-tabs > .active').next('li');
         if (next.length) {
-  
+
             next.find('a').trigger('click');
         } else {
             jQuery('#myTabs a:first').tab('show');
@@ -207,13 +207,49 @@ nitaFasions.controller('shopAllCartCustom', function ($scope, $http, $filter, $t
     jQuery('body').on('click', '.previous-tab', function () {
         var prev = jQuery('.nav-tabs > .active').prev('li')
         if (prev.length) {
-       
+
             prev.find('a').trigger('click');
         } else {
             jQuery('#myTabs a:last').tab('show');
         }
     });
 
+
+    $scope.cardHolder = {
+        "name": "",
+        "card_no": "",
+        "exp_date": "",
+        "cvv": "",
+        "card_type": "",
+    }
+
+    var CardType = {'amex': 'American Express',
+        'dankort': 'Dankort',
+        'dinersclub': 'Diners Club',
+        'discover': 'Discover',
+        'jcb': 'JCB',
+        'laser': 'Laser',
+        'maestro': 'Maestro',
+        'mastercard': 'Master Card',
+        'unionpay': 'Union Pay',
+        'visa': 'VISA',
+        'visaelectron': 'VISA Electron',
+        'elo': 'Elo'};
+
+    var cardss = new Card({
+        form: '#create_form',
+        formSelectors: {
+            numberInput: 'input#card-number', // optional — default input[name="number"]
+            expiryInput: 'input#exp_year', // optional — default input[name="expiry"]
+            cvcInput: 'input#cvv', // optional — default input[name="cvc"]
+            nameInput: 'input#card-holder-name' // optional - defaults input[name="name"]
+        },
+        container: '.card-wrapper'
+    });
+    $("#card-number").keyup(function () {
+        console.log(cardss);
+        $scope.cardHolder.card_type = CardType[cardss.cardType];
+    });
 
 })
 

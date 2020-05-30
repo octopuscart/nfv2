@@ -289,6 +289,18 @@ class Product_model extends CI_Model {
         return $texts;
     }
 
+    function getparentCategory($id, $catearray) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('nfw_category');
+        $data = $query->row();
+        if ($data) {
+            $catearray = $this->getparentCategory($data->parent, $catearray);
+            array_push($catearray, $data);
+        } else {
+        }
+        return $catearray;
+    }
+
     function getChildren($custom_element_id) {
         $row_query = "SELECT * FROM `nfw_custom_element_field` where nfw_custom_element_id = $custom_element_id";
         $resultdata = $this->resultAssociate($row_query);

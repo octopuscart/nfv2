@@ -123,6 +123,19 @@ $this->load->view('layout/header');
                         <?php echo $res[0]['tag_title']; ?>&nbsp;&nbsp;
                     </a>
                 </li>
+                <?php
+                foreach ($categoriesdata as $ckey => $cvalue) {
+                    
+                    ?>
+                    <li class="m_right_8 f_xs_none" style="margin-right:0px !important" >
+                        
+                        <a href="<?php echo site_url("Product/productList"); ?>?category=<?php echo $cvalue->id; ?>&item_type=<?php echo $_GET['item_type']; ?>" class="" style="margin-right:0px !important;color:white;">
+                           <i class="icon-angle-right d_inline_m color_white fs_small"></i> &nbsp;&nbsp;<?php echo $cvalue->name; ?>&nbsp;&nbsp;
+                        </a>
+                    </li>
+                    <?php
+                }
+                ?>
             </ul>
         </div>
     </section>
@@ -276,7 +289,7 @@ $this->load->view('layout/header');
                                     <figure class="fp_item t_align_c d_xs_inline_b ">
                                         <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23 t_xs_align_c">
                                             <!--images container-->
-                                            <a href="<?php echo site_url("Product/ProductDetails/");?>{{product.id}}/<?php echo $_GET['item_type']; ?>" class='redirecturl'>
+                                            <a href="<?php echo site_url("Product/ProductDetails/"); ?>{{product.id}}/<?php echo $_GET['item_type']; ?>" class='redirecturl'>
                                                 <div class="fp_images relative ">
                                                     <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="" class=" tr_all img1 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"  >
                                                     <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="" class=" tr_all img2 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"   >

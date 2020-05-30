@@ -25,6 +25,9 @@ class Product extends CI_Controller {
         $catid = $_GET['category'];
         $query = "select tag_title from nfw_product_tag where id = $id";
         $res = $this->Product_model->resultAssociate($query);
+        $parentsarray = $this->Product_model->getparentCategory($catid, array());
+        $data['categoriesdata'] = $parentsarray;
+        
         $data['tagdata'] = $res;
         if ($catid == 0) {
 

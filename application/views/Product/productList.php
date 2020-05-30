@@ -3,9 +3,9 @@ $this->load->view('layout/header');
 ?>
 <?php
 $linklist = [];
-foreach ($categorie_parent as $key => $value) {
-    $cattitle = $value['category_name'];
-    $catid = $value['id'];
+foreach ($categoriesdata as $key => $value) {
+    $cattitle = $value->category_name;
+    $catid = $value->id;
     $liobj = "<li><a href='" . site_url("Product/ProductList/" . $catid) . "'>$cattitle</a></li>";
     array_push($linklist, $liobj);
 }
@@ -216,9 +216,11 @@ $image2 = "";
          background: #E0E0E0;">
     <div class="position-center-center">
         <div class="container   ">
-            <h2 class="heading_product" style="text-transform: capitalize"><?php
+            <h2 class="heading_product" style="text-transform: capitalize">
+                <?php
                 echo $producttype;
-                ?> </h2>
+                ?> 
+            </h2>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">

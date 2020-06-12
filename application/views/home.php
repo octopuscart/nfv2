@@ -129,7 +129,7 @@ $this->load->view('layout/header');
     <!--                                    <input type="text" name="item_type" value="1" >-->
                                 <h4 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="color_dark"><?php echo $value['title']; ?></a></h4>
                                 <a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality']; ?>">
-                                    <i><?php echo $value['product_speciality']; ?></i>
+                                    <i style="color:black"><?php echo $value['product_speciality']; ?></i>
                                 </a>
                                 <div class="im_half_container m_bottom_10 hideonmobile">
                                     <p class="color_dark  half_column  t_align_c tr_all animate_fctl fp_price with_ie">Shirt - $95</p>	

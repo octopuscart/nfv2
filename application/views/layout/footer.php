@@ -409,7 +409,7 @@
         </div>
     </section>
     <section class="footer_bottom_part t_align_c color_grey bg_light_4 fw_light" style="padding: 5px;">
-        <p>Copyright © 2020 NitaFashions.com, All rights reserved.</p>
+        <p style="color:black">Copyright © 2020 NitaFashions.com, All rights reserved.</p>
     </section>
 </footer>
 </div>

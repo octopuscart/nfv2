@@ -196,7 +196,7 @@ $this->load->view('layout/header');
 
             </div>
             <?php
-            if (!checkmobile) {
+            if (!$checkmobile) {
                 ?>
                 <!--carousel nav-->
                 <button aria-label="iconleft" class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_prev d_md_none" data-appear-animation="fadeIn">

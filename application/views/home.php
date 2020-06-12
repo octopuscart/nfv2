@@ -127,7 +127,7 @@ $this->load->view('layout/header');
                             </a>
                             <figcaption>
     <!--                                    <input type="text" name="item_type" value="1" >-->
-                                <h6 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>" class="color_dark"><?php echo $value['title'];?></a></h6>
+                                <h4 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>" class="color_dark"><?php echo $value['title'];?></a></h4>
                                 <a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality'];?>">
                                     <i><?php echo $value['product_speciality'];?></i>
                                 </a>

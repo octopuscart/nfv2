@@ -274,7 +274,7 @@ if ($session_data) {
                             <!--logo-->
                             <div class="col-lg-3 col-md-3 col-sm-3 d_table_cell d_xs_block f_none v_align_m logo t_xs_align_c">
                                 <a href="#" class="d_inline_m m_xs_top_20 m_xs_bottom_20">
-                                    <img src="<?php echo base_url(); ?>assets/theme/images/logo/nf_logo_8.png" style="margin-top: -11px; height: 80px; " alt="">
+                                    <img src="<?php echo base_url(); ?>assets/theme/images/logo/nf_logo_8.png" style="margin-top: -11px; width: 146px; " alt="">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-9 t_align_r d_table_cell d_xs_block f_none">

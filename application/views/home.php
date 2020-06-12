@@ -160,7 +160,7 @@ $this->load->view('layout/header');
                                 </div>
                                 <div class="clearfix hideonmobile">
                                     <div class=" w_md_full m_md_bottom_10 animate_fctl tr_all f_left f_md_none with_ie">
-                                        <button class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id'];?>, <?php echo $value['tag_id'];?>)" 
+                                        <button aria-label="add to cart"  class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id'];?>, <?php echo $value['tag_id'];?>)" 
                                                 style="font-size: 12px;
                                                 height: 26px;
                                                 padding: 0px 6px;
@@ -173,7 +173,7 @@ $this->load->view('layout/header');
                                 </div>
                                 <div class="clearfix showonmobile">
                                     <div class="">
-                                        <button class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id'];?>, <?php echo $value['tag_id'];?>)" 
+                                        <button aria-label="add to cart" class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id'];?>, <?php echo $value['tag_id'];?>)" 
                                                 style="font-size: 12px;
                                                 height: 26px;
                                                 padding: 0px 6px;
@@ -197,10 +197,10 @@ $this->load->view('layout/header');
             </div>
 
             <!--carousel nav-->
-            <button class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_prev d_md_none" data-appear-animation="fadeIn">
+            <button aria-label="iconleft" class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_prev d_md_none" data-appear-animation="fadeIn">
                 <i class="icon-left-open-big"></i>
             </button>
-            <button class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_next d_md_none" data-appear-animation="fadeIn">
+            <button aria-label="iconright" class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_next d_md_none" data-appear-animation="fadeIn">
                 <i class="icon-right-open-big"></i>
             </button>
         </div>

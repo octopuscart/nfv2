@@ -1,6 +1,6 @@
 <!--footer-->
 
-<button type="button" style="display: none" class="btn btn-primary btn-lg Login" data-toggle="modal" data-target="#myLogin">
+<button type="button" aria-label="hiddenbutton" style="display: none" class="btn btn-primary btn-lg Login" data-toggle="modal" data-target="#myLogin">
 </button>
 <style>
     .modal table tr{
@@ -38,7 +38,7 @@
 
 <!--<script src="" type="text/javascript"></script>-->
 <script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/handlebars-v2.0.0.js"></script> 
-<script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/typeahead.bundle.js"></script> 
+<script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/typeahead.bundle.min.js"></script> 
 
 <div class="modal fade ui-draggable" id="myLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLogin">
     <div class="modal-dialog modal-sm" role="document" style="margin-top: 10%">

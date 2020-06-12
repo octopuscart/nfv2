@@ -27,7 +27,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/plugins/owl-carousel/owl.transitions.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/css/settings.css"/>
         <!--theme css-->
-        <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/animate.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/theme-animate.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/style.css"/>
@@ -171,7 +171,7 @@ if ($session_data) {
                 </div>
                 <!--close sidemenu button-->
                 <div class="d_table_cell half_column v_align_m t_align_r">
-                    <button class="icon_wrap_size_2 circle color_light _2 d_inline_m" id="close_side_menu">
+                    <button class="icon_wrap_size_2 circle color_light _2 d_inline_m" id="close_side_menu" aria-label="menuclose">
                         <i class="icon-cancel"></i>
                     </button>
                 </div>
@@ -237,7 +237,7 @@ if ($session_data) {
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" id="open_side_menu3" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <button type="button" class="navbar-toggle collapsed" aria-label="mobilemenu" id="open_side_menu3" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -286,7 +286,7 @@ if ($session_data) {
 
 
                                         <div class="relative m_right_10 f_right dropdown_2_container shoppingcart " >
-                                            <button class="icon_wrap_size_2 color_grey_light circle tr_all  animated">
+                                            <button class="icon_wrap_size_2 color_grey_light circle tr_all  animated" aria-label="cart">
                                                 <i class="icon-basket color_grey_light_2 tr_inherit"></i>
                                             </button>
                                             <span id="" class="animated notification_budget cart_budget " >
@@ -397,7 +397,7 @@ if ($session_data) {
                                             ?>
                                             <!--login-->
                                             <div class="relative f_right m_right_10 dropdown_2_container login">
-                                                <button class="icon_wrap_size_2 color_grey_light circle tr_all">
+                                                <button class="icon_wrap_size_2 color_grey_light circle tr_all" aria-label="userprofile">
                                                     <i class="icon-user color_grey_light_2 tr_inherit"></i>
                                                 </button>
                                                 <div class="dropdown_2 bg_light shadow_1 tr_all dropdownheader" style=" padding: 0px 15px 0;">
@@ -461,7 +461,7 @@ if ($session_data) {
                                             ?>
 
                                             <div class="relative f_right m_right_10 dropdown_2_container login">
-                                                <button class="icon_wrap_size_2 color_grey_light circle tr_all">
+                                                <button class="icon_wrap_size_2 color_grey_light circle tr_all" aria-label="login">
                                                     <i class="icon-lock color_grey_light_2 tr_inherit"></i>
                                                 </button>
                                                 <div class="dropdown_2 bg_light shadow_1 tr_all dropdownheader" style=" padding: 0px 15px 0;">
@@ -541,7 +541,7 @@ if ($session_data) {
 
                                         <div role="search" class="m_right_10 relative type_2 f_left type_3 f_xs_none t_xs_align_l m_xs_bottom_15 hideonmobile" style="">
                                             <input type="text" placeholder="Search" class="r_corners fw_light bg_light w_full" style="    border-radius: 48px;    border: 1px solid #000000;    width: 100%;" id="searchproduct" data-provide="typeahead">
-                                            <button class="color_grey_light color_purple_hover tr_all" style="color: #000000">
+                                            <button class="color_grey_light color_purple_hover tr_all" style="color: #000000" aria-label="search">
                                                 <i class="icon-search"></i>
                                             </button>
                                         </div>
@@ -596,7 +596,7 @@ if ($session_data) {
                     </div>
                     <div  role="search" class="m_right_10 relative type_2  type_3 f_xs_none t_xs_align_l m_xs_bottom_15 showonmobile mobileserach" style="">
                         <input type="text" placeholder="Search" class="r_corners fw_light bg_light w_full " style="   width: 100%;border-radius: 0px;" id="searchproduct2" data-provide="typeahead">
-                        <button class="color_grey_light color_purple_hover tr_all" style="color: #000000">
+                        <button class="color_grey_light color_purple_hover tr_all" style="color: #000000" aria-label="search">
                             <i class="icon-search"></i>
                         </button>
                     </div>
@@ -615,7 +615,7 @@ if ($session_data) {
                 <section class="sticky_part bg_light desktopmenu hideonmobile" style="">
                     <div class="container">
                         <!--main navigation-->
-                        <button id="menu_button" class="r_corners tr_all color_blue db_centered m_bottom_20 d_none d_xs_block">
+                        <button aria-label="menuitems" id="menu_button" class="r_corners tr_all color_blue db_centered m_bottom_20 d_none d_xs_block">
                             <i class="icon-menu"></i>
                         </button>
                         <!--main navigation-->

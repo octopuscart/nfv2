@@ -18,6 +18,11 @@ class Shop extends CI_Controller {
     }
 
     public function index() {
+        $this->load->library('user_agent');
+
+        $checkmobile = $this->agent->is_mobile();
+        
+        $data['checkmobile'] = $checkmobile;
         $data['featuredProducts'] = $this->Product_model->featurProductTag();
         $this->load->view('home', $data);
     }

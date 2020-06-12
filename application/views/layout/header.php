@@ -564,7 +564,7 @@ if ($session_data) {
                                             <div class="cartAjax animated"  style="position: relative;display:none">
                                                 <img src="<?php echo base_url(); ?>assets/theme/images/ajaxCart.png" style=" height: 125px;
                                                      z-index: 20000;
-                                                     position: relative;" >
+                                                     position: relative;" alt="Ajax Cart">
                                                 <img src="" id="cartImages" class="animated" style="    width: 69px;
                                                      position: absolute;
                                                      margin-left: -83px;

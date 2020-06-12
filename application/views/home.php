@@ -4,7 +4,7 @@ $this->load->view('layout/header');
 <section class="relative w_full m_bottom_15">
     <div class="r_slider">
         <ul>
-           
+
             <li data-transition="fade" data-slotamount="10">
                 <img src="<?php echo base_url(); ?>assets/theme/images/web10.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
@@ -112,12 +112,12 @@ $this->load->view('layout/header');
                         ?>   
                         <!--product-->
                         <figure class="fp_item t_align_c d_xs_inline_b col-lg-12 col-md-12 col-sm-12 animated" data-appear-animation="bounceIn" style="   ">
-                            <a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>">
+                            <a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>">
                                 <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23 t_xs_align_c animated productimagesfrontpage">
                                     <!--images container-->
                                     <div class="fp_images relative">
-                                        <img src="<?php echo $value['imagelink'][0]['image'];?>" alt="" class="tr_all" style ="width: 250px"/>
-                                        <img src="<?php echo $value['imagelink'][0]['image'];?>" alt="" class="tr_all"style ="width: 250px"/>
+                                        <img src="<?php echo $value['imagelink'][0]['image']; ?>" alt="" class="tr_all" style ="width: 250px"/>
+                                        <img src="<?php echo $value['imagelink'][0]['image']; ?>" alt="" class="tr_all"style ="width: 250px"/>
                                     </div>
                                     <!--labels-->
                                     <div class="labels_container">
@@ -127,9 +127,9 @@ $this->load->view('layout/header');
                             </a>
                             <figcaption>
     <!--                                    <input type="text" name="item_type" value="1" >-->
-                                <h4 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>" class="color_dark"><?php echo $value['title'];?></a></h4>
-                                <a href="<?php echo site_url('Product/ProductDetails/'.$value['id'].'/'. $value['tag_id'])?>" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality'];?>">
-                                    <i><?php echo $value['product_speciality'];?></i>
+                                <h4 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="color_dark"><?php echo $value['title']; ?></a></h4>
+                                <a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality']; ?>">
+                                    <i><?php echo $value['product_speciality']; ?></i>
                                 </a>
                                 <div class="im_half_container m_bottom_10 hideonmobile">
                                     <p class="color_dark  half_column  t_align_c tr_all animate_fctl fp_price with_ie">Shirt - $95</p>	
@@ -160,7 +160,7 @@ $this->load->view('layout/header');
                                 </div>
                                 <div class="clearfix hideonmobile">
                                     <div class=" w_md_full m_md_bottom_10 animate_fctl tr_all f_left f_md_none with_ie">
-                                        <button aria-label="add to cart"  class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id'];?>, <?php echo $value['tag_id'];?>)" 
+                                        <button aria-label="add to cart"  class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id']; ?>, <?php echo $value['tag_id']; ?>)" 
                                                 style="font-size: 12px;
                                                 height: 26px;
                                                 padding: 0px 6px;
@@ -173,7 +173,7 @@ $this->load->view('layout/header');
                                 </div>
                                 <div class="clearfix showonmobile">
                                     <div class="">
-                                        <button aria-label="add to cart" class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id'];?>, <?php echo $value['tag_id'];?>)" 
+                                        <button aria-label="add to cart" class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id']; ?>, <?php echo $value['tag_id']; ?>)" 
                                                 style="font-size: 12px;
                                                 height: 26px;
                                                 padding: 0px 6px;
@@ -195,14 +195,19 @@ $this->load->view('layout/header');
                 </div>
 
             </div>
-
-            <!--carousel nav-->
-            <button aria-label="iconleft" class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_prev d_md_none" data-appear-animation="fadeIn">
-                <i class="icon-left-open-big"></i>
-            </button>
-            <button aria-label="iconright" class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_next d_md_none" data-appear-animation="fadeIn">
-                <i class="icon-right-open-big"></i>
-            </button>
+            <?php
+            if (!checkmobile) {
+                ?>
+                <!--carousel nav-->
+                <button aria-label="iconleft" class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_prev d_md_none" data-appear-animation="fadeIn">
+                    <i class="icon-left-open-big"></i>
+                </button>
+                <button aria-label="iconright" class="icon_wrap_size_4 circle color_grey_light tr_all color_blue_hover fproducts_nav_next d_md_none" data-appear-animation="fadeIn">
+                    <i class="icon-right-open-big"></i>
+                </button>
+                <?php
+            }
+            ?>
         </div>
         <!--banners-->
         <section class="row t_xs_align_c">

@@ -1,0 +1,16 @@
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /index.php
+Disallow: /Account/
+Disallow: /readme.html
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: googlebot-image
+Allow: /
+
+User-agent: googlebot-mobile
+Allow: /
+
+Sitemap: https://www.nitafashions.com/sitemap_index.xml

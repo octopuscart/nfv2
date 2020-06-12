@@ -9,7 +9,9 @@
 
         <!-- Stylesheets
         ============================================= -->
-        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/css/bootstrap.css" type="text/css" />
+<?php
+        meta_tags();
+        ?>
 
 
         <link rel="shortcut icon" type="image/x-icon" href="favicon.png"/>
@@ -59,10 +61,7 @@ if ($session_data) {
         <!-- Document Title
         
         ============================================= -->
-        <?php
-        meta_tags();
-        ?>
-
+        
 
 
 

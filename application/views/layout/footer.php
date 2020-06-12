@@ -393,16 +393,16 @@
             <a href="<?php echo site_url("Shop/faqs");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">FAQ's</a>  |                             
             <a href="<?php echo site_url("Shop/term_of_service");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Terms of Service</a>  |                          
             <a href="<?php echo site_url("Shop/privacy_policy");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Privacy Policy</a>     
-            <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle footersociallisnk ">
+            <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" rel="noopener" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle footersociallisnk ">
                 <i class="icon-youtube-play fs_small"></i>
             </a>
-            <a href="https://www.instagram.com/Nita.fashions" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle  footersociallisnk">
+            <a href="https://www.instagram.com/Nita.fashions" target="_blank" rel="noopener" class="menu-link facebook active icon_wrap_size_1  circle  footersociallisnk">
                 <i class="icon-instagram fs_small"></i>
             </a>
-            <a href="https://twitter.com/nitafashions" target="_blank" class="menu-link twitter icon_wrap_size_1 circle footersociallisnk">
+            <a href="https://twitter.com/nitafashions" target="_blank" rel="noopener" class="menu-link twitter icon_wrap_size_1 circle footersociallisnk">
                 <i class="icon-twitter fs_small"></i>
             </a>
-            <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle footersociallisnk">
+            <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" rel="noopener" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle footersociallisnk">
                 <i class="icon-facebook fs_small"></i>
             </a>
 

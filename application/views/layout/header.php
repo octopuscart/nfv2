@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US" ng-app="NitaFashions" >
+<html dir="ltr" lang="en-US" ng-app="nitaFashions" >
     <head>
 
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />

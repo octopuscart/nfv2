@@ -1,5 +1,5 @@
 
-var nitaFasions = angular.module('NitaFashions', ['ngSanitize']).config(function ($httpProvider) {
+var nitaFasions = angular.module('nitaFashions', ['ngSanitize']).config(function ($httpProvider) {
     $httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.headers.post = {};
 });

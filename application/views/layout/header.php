@@ -36,10 +36,10 @@
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/theme-animate.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/style.css"/>
         <!--head libs-->
-        <!--<script src="<?php echo base_url(); ?>assets/theme/js/angular.min.js"></script>-->
-        <script src="https://code.angularjs.org/1.8.0/angular.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/theme/js/angular.min.1.8.js"></script>
+        <!--<script src="https://code.angularjs.org/1.8.0/angular.min.js"></script>-->
         
-        <script src="<?php echo base_url(); ?>assets/theme/js/angular-sanitize.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/theme/js/angular-sanitize.min.1.8.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.queryloader2.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/modernizr.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/angular/moment.min.js"></script>

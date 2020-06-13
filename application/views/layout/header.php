@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
+<html dir="ltr" lang="en-US" ng-app="NitaFashions" >
     <head>
 
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -74,7 +74,7 @@ if ($session_data) {
     </head>
 
 
-    <body ng-app="NitaFashions"  style="">
+    <body  style="">
         <style type="text/css">
             #loading {
                 position: fixed;

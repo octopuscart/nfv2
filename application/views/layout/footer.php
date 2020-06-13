@@ -38,11 +38,11 @@
 <!------------End--------------------------------------------------->
 
 <!--<script src="" type="text/javascript"></script>-->
-<!--<script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/handlebars-v2.0.0.js"></script> -->
+<script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/handlebars-v2.0.0.js"></script> 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script> 
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>--> 
 
-<script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/typeahead.bundle.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/theme/plugins/typeahead/typeahead.bundle.js"></script> 
 
 <div class="modal fade ui-draggable" id="myLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLogin">
     <div class="modal-dialog modal-sm" role="document" style="margin-top: 10%">
@@ -364,6 +364,7 @@
         }
 
         ).bind('typeahead:selected', function (obj, select_data) {
+            console.log("sdfsdfsd");
             var tag_id = select_data.tag_id;
             var product_id = select_data.sid;
 //            $("input[name=searchtag]").val(checkd);

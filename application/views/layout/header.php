@@ -49,6 +49,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/theme/sweetalert2/sweetalert2.min.css"/>
         <link href="<?php echo base_url(); ?>assets/theme/css/customstyle.css" rel="stylesheet"/>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js"></script>
         <script>
             var urllink = "<?php echo site_url("Api"); ?>";
             var checklogin = "";

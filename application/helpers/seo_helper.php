@@ -67,6 +67,7 @@ if (!function_exists('meta_tags')) {
         if ($enable['og']) {
             $output .= '<meta property="og:title" content="' . $title . '"/>'
                     . '<meta property="og:type" content="' . $desc . '"/>'
+                    . '<meta property="og:description" content="' . $desc . '"/>'
                     . '<meta property="og:image" content="' . $imgurl . '"/>'
                     . '<meta property="og:url" content="' . $url . '"/>';
         }
@@ -75,6 +76,7 @@ if (!function_exists('meta_tags')) {
         if ($enable['twitter']) {
             $output .= '<meta name="twitter:card" content="summary"/>'
                     . '<meta name="twitter:title" content="' . $title . '"/>'
+                    . '<meta name="twitter:site" content="' . $url . '"/>'
                     . '<meta name="twitter:url" content="' . $url . '"/>'
                     . '<meta name="twitter:description" content="' . $desc . '"/>'
                     . '<meta name="twitter:image" content="' . $imgurl . '"/>';

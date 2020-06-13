@@ -3,8 +3,8 @@ $menuArrayMain = [
     array("title" => "Home", "link" => site_url("/"), "submenu" => [
             array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
             array("title" => "FAQ's", "link" => site_url("Shop/faqs"), "submenu" => []),
-            array("title" => "Terms of Service", "link" => site_url("Shop/term_of_service"), "submenu" => []),
-            array("title" => "Privacy Policy", "link" => site_url("Shop/privacy_policy"), "submenu" => []),
+            array("title" => "Terms of Service", "link" => site_url("term-of-service"), "submenu" => []),
+            array("title" => "Privacy Policy", "link" => site_url("privacy-policy"), "submenu" => []),
             array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
             array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
         ]),

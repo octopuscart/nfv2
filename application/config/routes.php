@@ -54,3 +54,5 @@ $route['404_override'] = 'Shop/error404';
 $route['404'] = 'Shop/error404';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['term-of-service'] = 'Shop/term_of_service';
+$route['privacy-policy'] = 'Shop/privacy_policy';

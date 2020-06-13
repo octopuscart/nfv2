@@ -214,13 +214,13 @@ $this->load->view('layout/header');
         <!--banners-->
         <section class="row t_xs_align_c">
             <div class="col-lg-4 col-md-4 col-sm-4 m_bottom_12 m_xs_bottom_30" data-appear-animation="fadeInUp">
-                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_1.jpg" alt="Nita Fashions"  width="371" ></a>
+                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_1_1.jpg" alt="Nita Fashions"  width="371" ></a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 m_bottom_12 m_xs_bottom_30" data-appear-animation="fadeInUp" data-appear-animation-delay="200">
-                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_2.jpg" alt="Nita Fashions"  width="371" ></a>
+                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_2_1.jpg" alt="Nita Fashions"  width="371" ></a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 m_bottom_12 m_xs_bottom_0" data-appear-animation="fadeInUp" data-appear-animation-delay="400">
-                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_4.jpg" alt="Nita Fashions"  width="371" ></a>
+                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_4_1.jpg" alt="Nita Fashions"  width="371" ></a>
             </div>
         </section>
     </div>

@@ -16,6 +16,11 @@ class Shop extends CI_Controller {
             $this->user_id = 0;
         }
     }
+    
+    public function error404() {
+        set_status_header('404');
+        $this->load->view('errors/error_404');
+    }
 
     public function index() {
         $this->load->library('user_agent');

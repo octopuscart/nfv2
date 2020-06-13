@@ -116,8 +116,8 @@ $this->load->view('layout/header');
                                 <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23 t_xs_align_c animated productimagesfrontpage">
                                     <!--images container-->
                                     <div class="fp_images relative">
-                                        <img src="<?php echo $value['imagelink'][0]['image']; ?>" alt="" class="tr_all" style="    width: 204px;"/>
-                                        <img src="<?php echo $value['imagelink'][0]['image']; ?>" alt="" class="tr_all" style="    width: 204px;"/>
+                                        <img src="<?php echo $value['imagelink'][0]['image']; ?>" alt="" class="tr_all" height="200px" width="266px"/>
+                                        <img src="<?php echo $value['imagelink'][0]['image']; ?>" alt="" class="tr_all" height="200px" width="266px"/>
                                     </div>
                                     <!--labels-->
                                     <div class="labels_container">

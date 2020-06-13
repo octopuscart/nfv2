@@ -182,7 +182,7 @@
 
     .tt-suggestion {
         padding: 3px 20px;
-        //font-size: 12px;
+      
 
         line-height: 24px;
     }

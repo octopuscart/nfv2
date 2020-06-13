@@ -6,7 +6,7 @@ $this->load->view('layout/header');
         <ul>
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web10.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web10.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>         </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>    </p>
@@ -19,7 +19,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web13.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web13.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -31,7 +31,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web21.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web21.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="left" data-y="109" data-speed="700" data-start="1500">
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small'>New</p>
                     <h1 class='fw_ex_light color_light slider_title_3 tt_uppercase m_bottom_10 m_sm_bottom_0' style="color: #1FB8C6 !important;">Arrivals</h1>
@@ -44,7 +44,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web22.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web22.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -57,7 +57,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web12.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web12.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -69,7 +69,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/slide_04.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/slide_04.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>The biggest</h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>Sale</p>
@@ -83,7 +83,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web23.jpg" alt="" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web23.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -212,13 +212,13 @@ $this->load->view('layout/header');
         <!--banners-->
         <section class="row t_xs_align_c">
             <div class="col-lg-4 col-md-4 col-sm-4 m_bottom_12 m_xs_bottom_30" data-appear-animation="fadeInUp">
-                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_1.jpg" alt=""  width="371" ></a>
+                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_1.jpg" alt="Nita Fashions"  width="371" ></a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 m_bottom_12 m_xs_bottom_30" data-appear-animation="fadeInUp" data-appear-animation-delay="200">
-                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_2.jpg" alt=""  width="371" ></a>
+                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_2.jpg" alt="Nita Fashions"  width="371" ></a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 m_bottom_12 m_xs_bottom_0" data-appear-animation="fadeInUp" data-appear-animation-delay="400">
-                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_4.jpg" alt=""  width="371" ></a>
+                <a href="#" class="d_block d_xs_inline_b d_mxs_block"><img src="<?php echo base_url(); ?>assets/theme/images/banner_4.jpg" alt="Nita Fashions"  width="371" ></a>
             </div>
         </section>
     </div>
@@ -239,28 +239,28 @@ $this->load->view('layout/header');
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 m_bottom_20 f_mxs_none w_mxs_full m_mxs_bottom_10">
                                 <div class="clients_item db_xs_centered wrapper relative r_corners d_xs_block d_mxs_inline_b">
                                     <a href="#" class="d_block translucent tr_all wrapper r_corners">
-                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/ThomasMasonShort-170x100.jpg" alt="">
+                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/ThomasMasonShort-170x100.jpg" alt="Nita Fashions">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 m_bottom_20 f_mxs_none w_mxs_full m_mxs_bottom_10">
                                 <div class="clients_item db_xs_centered wrapper relative r_corners d_xs_block d_mxs_inline_b">
                                     <a href="#" class="d_block translucent tr_all wrapper r_corners">
-                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_4-170x100.jpg" alt="">
+                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_4-170x100.jpg" alt="Nita Fashions">
                                     </a>
                                 </div>
                             </div>   
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 m_bottom_20 f_mxs_none w_mxs_full m_mxs_bottom_10">
                                 <div class="clients_item db_xs_centered wrapper relative r_corners d_xs_block d_mxs_inline_b">
                                     <a href="#" class="d_block translucent tr_all wrapper r_corners">
-                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_5-170x100.jpg" alt="">
+                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_5-170x100.jpg" alt="Nita Fashions">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 m_bottom_20 f_mxs_none w_mxs_full m_mxs_bottom_10">
                                 <div class="clients_item db_xs_centered wrapper relative r_corners d_xs_block d_mxs_inline_b">
                                     <a href="#" class="d_block translucent tr_all wrapper r_corners">
-                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_6-170x100.jpg" alt="">
+                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_6-170x100.jpg" alt="Nita Fashions">
                                     </a>
                                 </div>
                             </div>
@@ -268,14 +268,14 @@ $this->load->view('layout/header');
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 m_bottom_20 f_mxs_none w_mxs_full m_mxs_bottom_10">
                                 <div class="clients_item db_xs_centered wrapper relative r_corners d_xs_block d_mxs_inline_b">
                                     <a href="#" class="d_block translucent tr_all wrapper r_corners">
-                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_Holland-Sherry2-170x100.jpg" alt="">
+                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/1_Holland-Sherry2-170x100.jpg" alt="Nita Fashions">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 m_bottom_20 f_mxs_none w_mxs_full m_mxs_bottom_10">
                                 <div class="clients_item db_xs_centered wrapper relative r_corners d_xs_block d_mxs_inline_b">
                                     <a href="#" class="d_block translucent tr_all wrapper r_corners">
-                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/reda.jpg" alt="">
+                                        <img src="<?php echo base_url(); ?>assets/theme/images/images/reda.jpg" alt="Nita Fashions">
                                     </a>
                                 </div>
                             </div>

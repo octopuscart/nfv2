@@ -175,7 +175,7 @@ if ($session_data) {
                 <!--logo-->
                 <div class="d_table_cell half_column v_align_m" style="background: white">
                     <a href="/">
-                        <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" alt="">
+                        <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" alt="Nita Fashions Logo">
                     </a>
                 </div>
                 <!--close sidemenu button-->
@@ -283,7 +283,7 @@ if ($session_data) {
                             <!--logo-->
                             <div class="col-lg-3 col-md-3 col-sm-3 d_table_cell d_xs_block f_none v_align_m logo t_xs_align_c">
                                 <a href="#" class="d_inline_m m_xs_top_20 m_xs_bottom_20">
-                                    <img src="<?php echo base_url(); ?>assets/theme/images/logo/nf_logo_8.png" style="margin-top: -11px; width: 146px; " alt="">
+                                    <img src="<?php echo base_url(); ?>assets/theme/images/logo/nf_logo_8.png" style="margin-top: -11px; width: 146px; " alt="Nita Fashions Logo">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-9 t_align_r d_table_cell d_xs_block f_none">
@@ -344,7 +344,7 @@ if ($session_data) {
 
                                                     <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
                                                         <a href="shop_product.php?product_id={{cartd.id}}&item_type={{cartd.tag_id}}" class="d_block f_left m_right_10">
-                                                            <img src="{{cartd.item_image}}" alt="" class="imageData" style="height:66px;width: 66px">
+                                                            <img src="{{cartd.item_image}}" alt="Item Image" class="imageData" style="height:66px;width: 66px">
                                                             <div class="f_left  lh_ex_small" style="text-align: left;">
                                                                 <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">
                                                                     <span style="float: left">{{cartd.title}}</span>
@@ -502,7 +502,7 @@ if ($session_data) {
                                                                     <input type="submit" name="login" class="btn btn-default btn-xs tr_all color_black transparent r_corners"  value="Login" style="    float: left;">
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 t_align_r lh_medium">
-                                                                    <a href="forgetdetail.php" class="fs_small" style="color: #000000">Forgot your password?</a><br>
+                                                                    <a href="#" class="fs_small" style="color: #000000">Forgot your password?</a><br>
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -532,7 +532,7 @@ if ($session_data) {
 
                                         <div style="display:none" id="WishListTemplate">
                                             <li class="clearfix lh_large m_bottom_20 relative" >
-                                                <a href="#" class="d_block f_left m_right_10"><img src="" alt="" class="WishList_imageData" style="height:66px;width: 66px"></a>
+                                                <a href="#" class="d_block f_left m_right_10"><img src="" alt="Wishlist" class="WishList_imageData" style="height:66px;width: 66px"></a>
                                                 <div class="f_left WishList_item_description lh_ex_small" style="text-align: left">
                                                     <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 WishList_titleData">Duis ac turpis</a>
                                                     <p class="color_grey_light fs_small"><span class="WishList_skuData"></span></p>

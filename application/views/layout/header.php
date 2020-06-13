@@ -14,7 +14,7 @@
         ?>
 
 
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.png"/>
+  
         <!--web fonts-->
         <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic' rel='stylesheet' type='text/css'/>
         <!--libs css-->
@@ -30,15 +30,15 @@
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/css/settings.css"/>
         <!--theme css-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        
-        
+
+
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/animate.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/theme-animate.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/style.css"/>
         <!--head libs-->
         <script src="<?php echo base_url(); ?>assets/theme/js/angular.min.1.8.js"></script>
         <!--<script src="https://code.angularjs.org/1.8.0/angular.min.js"></script>-->
-        
+
         <script src="<?php echo base_url(); ?>assets/theme/js/angular-sanitize.min.1.8.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.queryloader2.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/modernizr.js"></script>
@@ -49,8 +49,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/theme/sweetalert2/sweetalert2.min.css"/>
         <link href="<?php echo base_url(); ?>assets/theme/css/customstyle.css" rel="stylesheet"/>
-        
-        
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js"></script>
         <script>
             var urllink = "<?php echo site_url("Api"); ?>";
@@ -341,26 +341,30 @@ if ($session_data) {
                                                     text-align: center;padding-bottom: 13px;"
                                                     ng-if="initApp.maincart.products.length"
                                                     > 
+                                                        <?php
+                                                        if ($session_data) {
+                                                            ?>
+                                                        <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
+                                                            <a href="shop_product.php?product_id={{cartd.id}}&item_type={{cartd.tag_id}}" class="d_block f_left m_right_10">
+                                                                <img src="{{cartd.item_image}}" alt="Item Image" class="imageData" style="height:66px;width: 66px">
+                                                                <div class="f_left  lh_ex_small" style="text-align: left;">
+                                                                    <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">
+                                                                        <span style="float: left">{{cartd.title}}</span>
 
-                                                    <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
-                                                        <a href="shop_product.php?product_id={{cartd.id}}&item_type={{cartd.tag_id}}" class="d_block f_left m_right_10">
-                                                            <img src="{{cartd.item_image}}" alt="Item Image" class="imageData" style="height:66px;width: 66px">
-                                                            <div class="f_left  lh_ex_small" style="text-align: left;">
-                                                                <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">
-                                                                    <span style="float: left">{{cartd.title}}</span>
-
-                                                                    <span class="color_grey" style="float: right"><span class="quantityData">{{cartd.quantity}} x {{cartd.price| currency }}</span></span>
-                                                                </a>
-                                                                <p class="fs_small"><span class="skuData"></span></p>
-                                                                <p class="fs_small">Item: <span class="customData" style="color:black">{{cartd.tag_title}}</span></p>
-                                                                <a href="#" class="fs_small" style="font-size: 11px;">{{cartd.product_speciality|limitTo:30}} {{cartd.product_speciality.length>30?'. . .':''}}</a>
-                                                            </div>
-                                                            <!--<button ng-click="removeCartData(cartd)">X</button>-->
-                                                            <i class="icon-cancel-circled color_grey_light_2 fs_large color_dark_hover tr_al " ng-click="removeCartData(cartd)" ></i>
-                                                            <!--cartRemoveid="{{cartd.id}}/{{cartd.tag_id}}"-->
-                                                        </a>
-                                                    </li>
-
+                                                                        <span class="color_grey" style="float: right"><span class="quantityData">{{cartd.quantity}} x {{cartd.price| currency }}</span></span>
+                                                                    </a>
+                                                                    <p class="fs_small"><span class="skuData"></span></p>
+                                                                    <p class="fs_small">Item: <span class="customData" style="color:black">{{cartd.tag_title}}</span></p>
+                                                                    <a href="#" class="fs_small" style="font-size: 11px;">{{cartd.product_speciality|limitTo:30}} {{cartd.product_speciality.length>30?'. . .':''}}</a>
+                                                                </div>
+                                                                <!--<button ng-click="removeCartData(cartd)">X</button>-->
+                                                                <i class="icon-cancel-circled color_grey_light_2 fs_large color_dark_hover tr_al " ng-click="removeCartData(cartd)" ></i>
+                                                                <!--cartRemoveid="{{cartd.id}}/{{cartd.tag_id}}"-->
+                                                            </a>
+                                                        </li>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </ul>
 
                                                 <ul class="added_items_list productCartinfo" ng-if="initApp.maincart.products.length == 0" style="max-height: 500px;
@@ -705,5 +709,3 @@ if ($session_data) {
 
             <!--end of wave js-->
             <!--revolution slider-->
-            <link rel="stylesheet" href="./custom_form_view/static/animate/animate.min.css" />
-

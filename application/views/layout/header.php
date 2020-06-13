@@ -9,7 +9,7 @@
 
         <!-- Stylesheets
         ============================================= -->
-<?php
+        <?php
         meta_tags();
         ?>
 
@@ -18,7 +18,9 @@
         <!--web fonts-->
         <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic' rel='stylesheet' type='text/css'/>
         <!--libs css-->
-        <script src="<?php echo base_url(); ?>assets/theme/js/jquery-2.1.0.min.js"></script>
+        <!--<script src="<?php echo base_url(); ?>assets/theme/js/jquery-2.1.0.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
         <!--icoinc icon-->
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" media="all">
 
@@ -27,7 +29,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/plugins/owl-carousel/owl.transitions.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/css/settings.css"/>
         <!--theme css-->
-        <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/animate.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/theme-animate.css"/>
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/style.css"/>
@@ -61,7 +63,7 @@ if ($session_data) {
         <!-- Document Title
         
         ============================================= -->
-        
+
 
 
 

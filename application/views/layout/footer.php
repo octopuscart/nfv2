@@ -14,7 +14,7 @@
 
 <!--Libs-->
 <!------------------------------old footer--------------------------------->
-<script src="<?php echo base_url(); ?>assets/theme/plugins/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.appear.js"></script>
@@ -28,7 +28,8 @@
 <!--<script src="<?php echo base_url(); ?>assets/theme/plugins/isotope.pkgd.min.js"></script>-->
 <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.elevateZoom-3.0.8.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script src="<?php echo base_url(); ?>assets/theme/js/jquery-ui-1.10.4.min.js"></script>
+<!--<script src="<?php echo base_url(); ?>assets/theme/js/jquery-ui-1.10.4.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/js/theme.plugins.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/js/theme.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/js/toword.js"></script>

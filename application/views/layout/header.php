@@ -42,7 +42,7 @@
         <script src="<?php echo base_url(); ?>assets/theme/js/angular-sanitize.min.1.8.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.queryloader2.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/modernizr.js"></script>
-        <script src="<?php echo base_url(); ?>assets/theme/angular/moment.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/theme/angular/moment.min.2.26.js"></script>
 
         <!--vertical tabs-->
         <!--custom form support css and js-->

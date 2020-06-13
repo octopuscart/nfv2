@@ -19,7 +19,7 @@
         <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic' rel='stylesheet' type='text/css'/>
         <!--libs css-->
         <!--<script src="<?php echo base_url(); ?>assets/theme/js/jquery-2.1.0.min.js"></script>-->
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
         <!--icoinc icon-->
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" media="all">
@@ -37,7 +37,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>assets/theme/css/style.css"/>
         <!--head libs-->
         <!--<script src="<?php echo base_url(); ?>assets/theme/js/angular.min.js"></script>-->
-        <script src="https://code.angularjs.org/1.6.4/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.8.0/angular.min.js"></script>
         
         <script src="<?php echo base_url(); ?>assets/theme/js/angular-sanitize.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.queryloader2.min.js"></script>

@@ -109,87 +109,89 @@ $this->load->view('layout/header');
                 <div class="owl-carousel t_xs_align_c featured_products" data-nav="fproducts_nav_" data-plugin-options='{"singleItem":false,"itemsCustom":[[992,5],[768,3],[600,2],[10,2]]}'>
                     <?php
                     foreach ($featuredProducts as $key => $value) {
-                        ?>   
-                        <!--product-->
-                        <figure class="fp_item t_align_c d_xs_inline_b col-lg-12 col-md-12 col-sm-12 animated" data-appear-animation="bounceIn" style="   ">
-                            <a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>">
-                                <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23 t_xs_align_c animated productimagesfrontpage">
-                                    <!--images container-->
-                                    <div class="fp_images relative">
-                                        <img data-src="<?php echo $value['imagelink'][0]['image']; ?>" alt="NF <?php echo $value['title']; ?>" class="tr_all lazyload" style="width: 100%;"/>
-                                        <img data-src="<?php echo $value['imagelink'][0]['image']; ?>" alt="NF <?php echo $value['title']; ?>" class="tr_all lazyload" style="width: 100%;"/>
+                        if ($key < 8) {
+                            ?>   
+                            <!--product-->
+                            <figure class="fp_item t_align_c d_xs_inline_b col-lg-12 col-md-12 col-sm-12 animated" data-appear-animation="bounceIn" style="   ">
+                                <a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>">
+                                    <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23 t_xs_align_c animated productimagesfrontpage">
+                                        <!--images container-->
+                                        <div class="fp_images relative">
+                                            <img data-src="<?php echo $value['imagelink'][0]['image']; ?>" alt="NF <?php echo $value['title']; ?>" class="tr_all lazyload" style="width: 100%;"/>
+                                            <img data-src="<?php echo $value['imagelink'][0]['image']; ?>" alt="NF <?php echo $value['title']; ?>" class="tr_all lazyload" style="width: 100%;"/>
+                                        </div>
+                                        <!--labels-->
+                                        <div class="labels_container">
+                                            <a href="#" class="d_block label color_scheme hideonmobile tt_uppercase fs_ex_small circle m_bottom_5 vc_child t_align_c"><span class="d_inline_m">New</span></a>
+                                        </div>
                                     </div>
-                                    <!--labels-->
-                                    <div class="labels_container">
-                                        <a href="#" class="d_block label color_scheme hideonmobile tt_uppercase fs_ex_small circle m_bottom_5 vc_child t_align_c"><span class="d_inline_m">New</span></a>
-                                    </div>
-                                </div>
-                            </a>
-                            <figcaption>
-    <!--                                    <input type="text" name="item_type" value="1" >-->
-                                <h4 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="color_dark"><?php echo $value['title']; ?></a></h4>
-                                <a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality']; ?>">
-                                    <i style="color:black"><?php echo $value['product_speciality']; ?></i>
                                 </a>
-                                <div class="im_half_container m_bottom_10 hideonmobile">
-                                    <p class="color_dark  half_column  t_align_c tr_all animate_fctl fp_price with_ie">Shirt - $95</p>	
-                                    <div class="half_column d_inline_m t_align_r tr_all animate_fctr with_ie hideonmobile">
-                                        <ul class="rating_list d_inline_m hr_list tr_all">
-                                            <li class="relative active lh_ex_small">
-                                                <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
-                                                <i class="icon-star-1 color_yellow tr_all"></i>
-                                            </li>
-                                            <li class="relative active lh_ex_small">
-                                                <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
-                                                <i class="icon-star-1 color_yellow tr_all"></i>
-                                            </li>
-                                            <li class="relative active lh_ex_small">
-                                                <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
-                                                <i class="icon-star-1 color_yellow tr_all"></i>
-                                            </li>
-                                            <li class="relative active lh_ex_small">
-                                                <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
-                                                <i class="icon-star-1 color_yellow tr_all"></i>
-                                            </li>
-                                            <li class="relative lh_ex_small">
-                                                <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
-                                                <i class="icon-star-1 color_yellow tr_all"></i>
-                                            </li>
-                                        </ul>
+                                <figcaption>
+        <!--                                    <input type="text" name="item_type" value="1" >-->
+                                    <h4 class="m_bottom_5"><a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="color_dark"><?php echo $value['title']; ?></a></h4>
+                                    <a href="<?php echo site_url('Product/ProductDetails/' . $value['id'] . '/' . $value['tag_id']) ?>" class="fs_medium color_grey d_inline_b m_bottom_3 textoverflow" title="<?php echo $value['product_speciality']; ?>">
+                                        <i style="color:black"><?php echo $value['product_speciality']; ?></i>
+                                    </a>
+                                    <div class="im_half_container m_bottom_10 hideonmobile">
+                                        <p class="color_dark  half_column  t_align_c tr_all animate_fctl fp_price with_ie">Shirt - $95</p>	
+                                        <div class="half_column d_inline_m t_align_r tr_all animate_fctr with_ie hideonmobile">
+                                            <ul class="rating_list d_inline_m hr_list tr_all">
+                                                <li class="relative active lh_ex_small">
+                                                    <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
+                                                    <i class="icon-star-1 color_yellow tr_all"></i>
+                                                </li>
+                                                <li class="relative active lh_ex_small">
+                                                    <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
+                                                    <i class="icon-star-1 color_yellow tr_all"></i>
+                                                </li>
+                                                <li class="relative active lh_ex_small">
+                                                    <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
+                                                    <i class="icon-star-1 color_yellow tr_all"></i>
+                                                </li>
+                                                <li class="relative active lh_ex_small">
+                                                    <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
+                                                    <i class="icon-star-1 color_yellow tr_all"></i>
+                                                </li>
+                                                <li class="relative lh_ex_small">
+                                                    <i class="icon-star-empty-1 color_grey_light_2 tr_all"></i>
+                                                    <i class="icon-star-1 color_yellow tr_all"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="clearfix hideonmobile">
-                                    <div class=" w_md_full m_md_bottom_10 animate_fctl tr_all f_left f_md_none with_ie">
-                                        <button aria-label="add to cart"  class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id']; ?>, <?php echo $value['tag_id']; ?>)" 
-                                                style="font-size: 12px;
-                                                height: 26px;
-                                                padding: 0px 6px;
-                                                width: 118px;">
-                                            <span class="d_inline_m clerarfix" style="padding-top: 4px;"><i class="fa fa-shopping-cart"></i><span class="fs_medium">   Add to Cart</span></span>
-                                        </button>
+                                    <div class="clearfix hideonmobile">
+                                        <div class=" w_md_full m_md_bottom_10 animate_fctl tr_all f_left f_md_none with_ie">
+                                            <button aria-label="add to cart"  class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id']; ?>, <?php echo $value['tag_id']; ?>)" 
+                                                    style="font-size: 12px;
+                                                    height: 26px;
+                                                    padding: 0px 6px;
+                                                    width: 118px;">
+                                                <span class="d_inline_m clerarfix" style="padding-top: 4px;"><i class="fa fa-shopping-cart"></i><span class="fs_medium">   Add to Cart</span></span>
+                                            </button>
+                                        </div>
+                                        <div class="half_column w_md_full animate_fctr tr_all f_left f_md_none clearfix with_ie ">
+                                        </div>
                                     </div>
-                                    <div class="half_column w_md_full animate_fctr tr_all f_left f_md_none clearfix with_ie ">
-                                    </div>
-                                </div>
-                                <div class="clearfix showonmobile">
-                                    <div class="">
-                                        <button aria-label="add to cart" class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id']; ?>, <?php echo $value['tag_id']; ?>)" 
-                                                style="font-size: 12px;
-                                                height: 26px;
-                                                padding: 0px 6px;
-                                                width: 118px;">
-                                            <span class="d_inline_m clerarfix" style="padding-top: 4px;"><i class="fa fa-shopping-cart"></i><span class="fs_medium">   Add to Cart</span></span>
-                                        </button>
-                                    </div>
-                                    <div class="">
+                                    <div class="clearfix showonmobile">
+                                        <div class="">
+                                            <button aria-label="add to cart" class="btn btn-default add_to_cart_button" ng-click="addTocart(<?php echo $value['id']; ?>, <?php echo $value['tag_id']; ?>)" 
+                                                    style="font-size: 12px;
+                                                    height: 26px;
+                                                    padding: 0px 6px;
+                                                    width: 118px;">
+                                                <span class="d_inline_m clerarfix" style="padding-top: 4px;"><i class="fa fa-shopping-cart"></i><span class="fs_medium">   Add to Cart</span></span>
+                                            </button>
+                                        </div>
+                                        <div class="">
 
+                                        </div>
                                     </div>
-                                </div>
 
 
-                            </figcaption>
-                        </figure>
-                        <?php
+                                </figcaption>
+                            </figure>
+                            <?php
+                        }
                     }
                     ?>
                 </div>

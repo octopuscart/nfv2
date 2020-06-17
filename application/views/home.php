@@ -6,7 +6,7 @@ $this->load->view('layout/header');
         <ul>
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web10.webp" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web10.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>         </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>    </p>
@@ -19,7 +19,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web13.webp" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web13.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -31,7 +31,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web21.webp" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web21.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="left" data-y="109" data-speed="700" data-start="1500">
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small'>New</p>
                     <h1 class='fw_ex_light color_light slider_title_3 tt_uppercase m_bottom_10 m_sm_bottom_0' style="color: #1FB8C6 !important;">Arrivals</h1>
@@ -44,7 +44,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web22.webp" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web22.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -57,7 +57,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web12.webp" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web12.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -69,7 +69,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/slide_04.webp" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/slide_04.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>The biggest</h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>Sale</p>
@@ -83,7 +83,7 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web23.webp" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web23.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                 <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
                     <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
@@ -100,7 +100,7 @@ $this->load->view('layout/header');
 <!--content-->
 <section class="section_offset" style="padding-bottom: 50px;padding-top: 50px;">
     <div class="container frontpagecontainer" style="margin-top: -50px;">
-        <h3 class="fw_light color_dark m_bottom_35 t_align_c appear-animation bounceInLeft appear-animation-visible" data-appear-animation="bounceInLeft" style="font-size: 20px; font-weight: 400;margin-bottom: 18px;">Featured Products 2020</h3>
+        <h3 class="fw_light color_dark m_bottom_35 t_align_c appear-animation bounceInLeft appear-animation-visible" data-appear-animation="bounceInLeft" style="font-size: 30px; font-weight: 500;margin-bottom: 18px;">Featured Products 2020</h3>
         <!--
         <h3 class="fw_light color_dark m_bottom_35 t_align_c appear-animation bounceInLeft appear-animation-visible" data-appear-animation="bounceInLeft" style="font-size: 20px; font-weight: 400;margin-bottom: 18px;">Top 10 Sea Island Cotton Shirt Fabrics of 2019</h3>
         -->

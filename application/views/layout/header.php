@@ -252,7 +252,11 @@ if ($session_data) {
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="index.php" style="color:white">Nita Fashions - Since 1953</a>
+                            <a class="navbar-brand" href="index.php" style="color:white;    color: white;
+    text-align: center;
+    width: 100%;
+    float: left;
+    position: absolute;">Nita Fashions - Since 1953</a>
                         </div>
 
 

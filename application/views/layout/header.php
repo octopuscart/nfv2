@@ -14,7 +14,7 @@
         ?>
 
 
-  
+
         <!--web fonts-->
         <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic' rel='stylesheet' type='text/css'/>
         <!--libs css-->
@@ -247,20 +247,20 @@ if ($session_data) {
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" aria-label="mobilemenu" id="open_side_menu3" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="position: absolute;
-    float: right;
-    right: 0px;
-    z-index: 2000;
-    opacity: 1;">
+                                    float: right;
+                                    right: 0px;
+                                    z-index: 2000;
+                                    opacity: 1;">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
                             <a class="navbar-brand"  style="color:white;    color: white;
-    text-align: center;
-    width: 100%;
-    float: left;
-    position: absolute;">Nita Fashions - Since 1953</a>
+                               text-align: center;
+                               width: 100%;
+                               float: left;
+                               position: absolute;">Nita Fashions - Since 1953</a>
                         </div>
 
 

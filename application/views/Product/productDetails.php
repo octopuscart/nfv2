@@ -169,7 +169,7 @@ $this->load->view('layout/header');
                                         <div class="relative r_corners d_xs_inline_b d_mxs_block wrapper m_bottom_23">
                                             <!--images container-->
                                             <div class="fp_images relative" style="height:200px">
-                                                <a href="#">
+                                                <a href="<?php echo site_url('Product/ProductDetails/'.$prd['id'].'/'.$item_id);?>">
                                                     <img src="<?php echo $prd['images'][0]['image']; ?>" alt="" class="tr_all" style ="height:270px; width: 270px">
                                                     <img src="<?php echo $prd['images'][1]['image']; ?>" alt="" class="tr_all"style ="height:270px; width: 270px">
                                                 </a>
@@ -178,7 +178,7 @@ $this->load->view('layout/header');
 
                                         </div>
                                         <figcaption>
-                                            <h6 class=""><a href="#" class="color_dark"><?php echo $prd['title']; ?> </a></h6>
+                                            <h6 class=""><a href="<?php echo site_url('Product/ProductDetails/'.$prd['id'].'/'.$item_id);?>" class="color_dark"><?php echo $prd['title']; ?> </a></h6>
                                             <i><?php echo $prd['product_speciality']; ?></i>                       
                                             <div class="">
                                                 <p>

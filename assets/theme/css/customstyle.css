@@ -677,3 +677,16 @@ main .shell { padding: 25px 0 90px 43px; width: 917px;}
     display: block;
     word-wrap: break-word;
 }
+
+
+hr {
+    height: auto;
+    background: #ecf0f1;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  
+    border: 1px solid #eee;
+}

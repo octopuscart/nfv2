@@ -617,7 +617,7 @@ main .shell { padding: 25px 0 90px 43px; width: 917px;}
 }
 
 .addressblock.active{
-     border: 3px solid green;
+    border: 3px solid green;
 }
 
 .buttonaddressselect{
@@ -626,17 +626,17 @@ main .shell { padding: 25px 0 90px 43px; width: 917px;}
 }
 
 .selectedaddress{
-       position: absolute;
+    position: absolute;
     right: 56px;
     font-size: 30px;
     color: green;
     /* float: right; */
     bottom: 5px;  
-        
+
 }
 
 .addressbarbottom{
-   position: absolute;
+    position: absolute;
     bottom: 2px;
     width: 100%;
     height: 41px;
@@ -687,6 +687,50 @@ hr {
 hr {
     margin-top: 20px;
     margin-bottom: 20px;
-  
+
     border: 2px solid #eee;
+}
+
+
+
+/*//featureblock*/
+.featureblock{
+    padding: 0px;
+} 
+
+.featureblock a{
+
+    text-align: center;
+    background: #e3e7e9;
+    margin: 8px;
+    padding:50px 0px;
+}
+
+.featureblock .insideblock{
+    width:100%;
+    text-align: center;
+    
+
+}
+.featureblock img{
+    height: 70px;
+}
+
+.featureblock p{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.featureblock h2 {
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 10px;
+}
+.featureblock a:hover {
+    text-decoration: none;
+}
+
+.brandlogo{
+        border: 5px solid #e3e7e9;
 }

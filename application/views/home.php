@@ -15,6 +15,17 @@ $this->load->view('layout/header');
                 </div>
 
             </li>
+            
+            <li data-transition="fade" data-slotamount="10">
+                <img src="<?php echo base_url(); ?>assets/theme/images/web31.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
+                    <h1 class='fw_ex_light color_light tt_uppercase'>         </h1>
+                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>    </p>
+                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      </b></p>
+
+                </div>
+
+            </li>
 
 
 

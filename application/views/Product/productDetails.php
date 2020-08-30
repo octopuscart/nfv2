@@ -2,7 +2,15 @@
 $this->load->view('layout/header');
 ?>
 
-
+<style>
+    span.cut_price {
+    text-decoration: line-through;
+    color: #c5c5c5;
+    margin-right: 12px;
+    float: left;
+}
+    
+</style>
 
 
 
@@ -94,7 +102,7 @@ $this->load->view('layout/header');
                                     <span class="color_dark">
                                         <?php
                                         if ($product['sprice']) {
-                                            echo '<span class="cut_price">$' . $productInfo['rprice'] . "</span>$" . $productInfo['sprice'];
+                                            echo '<span class="cut_price">$' . $product['rprice'] . "</span> $" . $product['sprice'];
                                         } else {
                                             echo '$' . $product['price'];
                                         }

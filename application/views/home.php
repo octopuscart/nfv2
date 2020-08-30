@@ -17,11 +17,11 @@ $this->load->view('layout/header');
             </li>
             
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web32.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
-                    <h1 class='fw_ex_light color_light tt_uppercase'>         </h1>
+                <img src="<?php echo base_url(); ?>assets/theme/images/web33.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <div class="caption str str" data-x="right" data-y="200" data-speed="700">
+                    <p class='slider_title_3 fw_ex_bold color_light tt_uppercase lh_ex_small'>Superior Fabrics</p>
                     <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>    </p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      </b></p>
+                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      Outstanding quality and customer service since 1953. </b></p>
 
                 </div>
 

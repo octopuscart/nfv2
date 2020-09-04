@@ -88,7 +88,7 @@ $this->load->view('layout/header');
         <ul class="hr_list d_inline_m breadcrumbs" style="margin-top: 10px;">
             <li class="m_right_8 f_xs_none" style="margin-right:0px !important">
                 <a href="#" class="color_default d_inline_m m_right_10" style="margin-right:0px !important;color:white;">
-                    <i class="icon-calendar"></i>&nbsp;&nbsp;   Make your appointment Schedule&nbsp;&nbsp;
+                    <i class="icon-calendar"></i>&nbsp;&nbsp;  Schedule Your Next Appointment&nbsp;&nbsp;
 
 
                 </a>

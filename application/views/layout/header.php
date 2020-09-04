@@ -174,7 +174,7 @@ if ($session_data) {
             <header class="m_bottom_30 d_table w_full" >
                 <!--logo-->
                 <div class="d_table_cell half_column v_align_m" style="background: white">
-                    <a href="/">
+                    <a href="<?php echo site_url("/");?>">
                         <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" alt="Nita Fashions Logo">
                     </a>
                 </div>
@@ -290,7 +290,7 @@ if ($session_data) {
                         <div class="d_table w_full d_xs_block">
                             <!--logo-->
                             <div class="col-lg-3 col-md-3 col-sm-3 d_table_cell d_xs_block f_none v_align_m logo t_xs_align_c">
-                                <a href="#" class="d_inline_m m_xs_top_20 m_xs_bottom_20">
+                                <a href="<?php echo site_url("/");?>" class="d_inline_m m_xs_top_20 m_xs_bottom_20">
                                     <img src="<?php echo base_url(); ?>assets/theme/images/logo/nf_logo_8.png" style="margin-top: -11px; width: 146px; " alt="Nita Fashions Logo">
                                 </a>
                             </div>

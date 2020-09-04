@@ -6,87 +6,51 @@ $this->load->view('layout/header');
         <ul>
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web10.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
-                    <h1 class='fw_ex_light color_light tt_uppercase'>         </h1>
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>    </p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      </b></p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/web10.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                
 
             </li>
             
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web33.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption str str" data-x="right" data-y="200" data-speed="700">
-                    <p class='slider_title_3 fw_ex_bold color_light tt_uppercase lh_ex_small'>Superior Fabrics</p>
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>    </p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      Outstanding quality and customer service since 1953. </b></p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/v2/old-Gentelmen-1-2020.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+               
 
             </li>
 
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web13.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
-                    <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      </b></p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/web13.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                
 
             </li>
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web21.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="left" data-y="109" data-speed="700" data-start="1500">
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small'>New</p>
-                    <h1 class='fw_ex_light color_light slider_title_3 tt_uppercase m_bottom_10 m_sm_bottom_0' style="color: #1FB8C6 !important;">Arrivals</h1>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'>Meticulous hand tailoring, and quality <br>
-                        that is becoming harder and harder to find.</p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/v2/web21.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+               
 
             </li>
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web22.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
-                    <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      </b></p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/web22.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+               
 
             </li>
 
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web12.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
-                    <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      </b></p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/web12.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+              
 
             </li>
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/slide_04.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
-                    <h1 class='fw_ex_light color_light tt_uppercase'>The biggest</h1>
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>Sale</p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>Nita Fashions carry over 11,000 fabrics</b></p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/v2/bride-groom1-2020.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+               
 
             </li>
 
@@ -94,13 +58,8 @@ $this->load->view('layout/header');
 
 
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/theme/images/web23.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                <div class="caption sfl str" data-x="right" data-y="108" data-speed="700">
-                    <h1 class='fw_ex_light color_light tt_uppercase'>        </h1>
-                    <p class='slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small m_bottom_23 m_sm_bottom_5'>     </p>
-                    <p class='color_light m_bottom_25 m_sm_bottom_5'><b>      </b></p>
-
-                </div>
+                <img src="<?php echo base_url(); ?>assets/sliders/v2/Web12-1-2020.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+               
 
             </li>
 
@@ -120,7 +79,7 @@ $this->load->view('layout/header');
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
 
-                    <img src="<?php echo base_url(); ?>assets/images/nitaabout.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
+                    <img src="<?php echo base_url(); ?>assets/images/nitaabout2.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
 
 
 

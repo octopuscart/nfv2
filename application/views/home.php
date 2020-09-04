@@ -19,11 +19,6 @@ $this->load->view('layout/header');
 
 
 
-            <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/sliders/web13.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
-                
-
-            </li>
 
 
             <li data-transition="fade" data-slotamount="10">

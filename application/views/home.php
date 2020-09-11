@@ -12,7 +12,7 @@ $this->load->view('layout/header');
             </li>
             
             <li data-transition="fade" data-slotamount="10">
-                <img src="<?php echo base_url(); ?>assets/sliders/v2/old-Gentelmen-1-2020.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
+                <img src="<?php echo base_url(); ?>assets/sliders/v2/old-Gentelmen-2-2020.jpg" alt="Nita Fashions" data-bgfit="cover" data-bgposition="center center">
                
 
             </li>

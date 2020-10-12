@@ -396,8 +396,8 @@
         <div class="footerlinks" style="    ">
 
             <a href="<?php echo site_url("Shop/faqs");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">FAQ's</a>  |                             
-            <a href="<?php echo site_url("Shop/term-of-service");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Terms of Service</a>  |                          
-            <a href="<?php echo site_url("Shop/privacy-policy");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Privacy Policy</a>     
+            <a href="<?php echo site_url("term-of-service");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Terms of Service</a>  |                          
+            <a href="<?php echo site_url("privacy-policy");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Privacy Policy</a>     
             <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" rel="noopener" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle footersociallisnk ">
                 <i class="icon-youtube-play fs_small"></i>
             </a>

@@ -21,6 +21,7 @@ $this->load->view('layout/header');
 <section class="section_offset">
     <div class="container clearfix">
         <div class="row">
+            <div class="col-md-3"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 m_xs_bottom_30">
                 <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">Contact Information</h3>
 
@@ -91,7 +92,8 @@ $this->load->view('layout/header');
 
                 </ul>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 m_xs_bottom_30">
+            <div class="col-md-3"></div>
+<!--            <div class="col-lg-6 col-md-6 col-sm-12 m_xs_bottom_30">
                 <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">Contact Form</h3>
                 <p class="m_bottom_35 heading_2 t_align_c">Send us Enquiry by filling the form. </p>		
                 <form id="" method="post" action="#">
@@ -125,7 +127,7 @@ $this->load->view('layout/header');
                         </li>
                     </ul>
                 </form>
-            </div>
+            </div>-->
         </div>
     </div>
 </section>

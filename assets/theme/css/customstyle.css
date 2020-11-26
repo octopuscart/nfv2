@@ -734,3 +734,7 @@ hr {
 .brandlogo{
         border: 5px solid #e3e7e9;
 }
+
+.font-225-em{
+        font-size: 2.25em!important;
+}

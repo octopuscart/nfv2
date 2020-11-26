@@ -291,8 +291,8 @@ $this->load->view('layout/header');
                                             <!--images container-->
                                             <a href="<?php echo site_url("Product/ProductDetails/"); ?>{{product.id}}/<?php echo $_GET['item_type']; ?>" class='redirecturl'>
                                                 <div class="fp_images relative ">
-                                                    <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="" class=" tr_all img1 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"  >
-                                                    <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="" class=" tr_all img2 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"   >
+                                                    <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="{{product.title}}" class=" tr_all img1 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"  >
+                                                    <img src="<?php echo IMAGESERVER; ?>{{product.image}}" alt="{{product.title}}" class=" tr_all img2 lazy productlistimage" data-original="<?php echo IMAGESERVER; ?>{{product.image}}"   >
 
                                                 </div>
                                                 <div class="fabric_color" style="">

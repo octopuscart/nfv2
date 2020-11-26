@@ -43,7 +43,7 @@ $this->load->view('layout/header');
     <div class="container clearfix">
         <div class="row">
             <section class="col-lg-12 col-md-12 col-sm-12 m_xs_bottom_30">
-                <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">About Nita Fashions</h3>
+                <h1 class="color_dark fw_light m_bottom_15 heading_1 t_align_c font-225-em">About Nita Fashions</h1>
                 <p class="m_bottom_35 heading_2 t_align_c"></p>		
 
             </section>

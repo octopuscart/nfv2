@@ -39,7 +39,7 @@ $this->load->view('layout/header');
     <div class="container clearfix">
         <div class="row page_block">
             <section class="col-lg-12 col-md-12 col-sm-12 m_xs_bottom_30">
-                <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">Privacy Policy</h3>
+                <h1 class="color_dark fw_light m_bottom_15 heading_1 t_align_c font-225-em">Privacy Policy</h1>
 
 
             </section>

@@ -108,7 +108,7 @@ $this->load->view('layout/header');
     <div class="container clearfix">
         <div class="row page_block">
             <section class="col-lg-12 col-md-12 col-sm-12 m_xs_bottom_30" style="margin-bottom: 20px;">
-                <h3 class="color_dark fw_light m_bottom_15 heading_1 t_align_c">Tour Schedule</h3>
+                <h1 class="color_dark fw_light m_bottom_15 heading_1 t_align_c font-225-em">Tour Schedule</h1>
 
 
             </section>

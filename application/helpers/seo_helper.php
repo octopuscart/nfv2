@@ -25,7 +25,7 @@ if (!defined('BASEPATH'))
  */
 if (!function_exists('meta_tags')) {
 
-    function meta_tags($enable = array('general' => true, 'og' => true, 'twitter' => true, 'robot' => true), $title = '', $desc = '', $imgurl = '', $url = '') {
+    function meta_tags($enable = array('general' => true, 'og' => true, 'twitter' => true, 'robot' => true), $title = '', $desc = '', $imgurl = '', $url = '', $imgurlcard='') {
         $CI = & get_instance();
         $CI->config->load('seo_config');
 
@@ -48,6 +48,9 @@ if (!function_exists('meta_tags')) {
         if ($imgurl == '') {
             $imgurl = $CI->config->item('seo_imgurl');
         }
+        if ($imgurlcard == '') {
+            $imgurlcard = $CI->config->item('seo_imgurl_card');
+        }
         if ($url == '') {
             $url = base_url();
         }
@@ -66,9 +69,9 @@ if (!function_exists('meta_tags')) {
         //open graph
         if ($enable['og']) {
             $output .= '<meta property="og:title" content="' . $title . '"/>'
-                    . '<meta property="og:type" content="' . $desc . '"/>'
+                    . '<meta property="og:type" content="website"/>'
                     . '<meta property="og:description" content="' . $desc . '"/>'
-                    . '<meta property="og:image" content="' . $imgurl . '"/>'
+                    . '<meta property="og:image" content="' . $imgurlcard . '"/>'
                     . '<meta property="og:url" content="' . $url . '"/>';
         }
 
@@ -79,7 +82,7 @@ if (!function_exists('meta_tags')) {
                     . '<meta name="twitter:site" content="' . $url . '"/>'
                     . '<meta name="twitter:url" content="' . $url . '"/>'
                     . '<meta name="twitter:description" content="' . $desc . '"/>'
-                    . '<meta name="twitter:image" content="' . $imgurl . '"/>';
+                    . '<meta name="twitter:image" content="' . $imgurlcard . '"/>';
         }
 
         echo $output;

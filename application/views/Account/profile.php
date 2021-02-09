@@ -147,7 +147,7 @@ $this->load->view('layout/header');
                                                 <span for="name" class="control-label" style="">Email</span>
                                             </td>
                                             <td>
-<?php echo $userInfo['email']; ?>
+                                                <?php echo $userInfo['email']; ?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -269,6 +269,14 @@ $this->load->view('layout/header');
 $this->load->view('layout/footer');
 ?>
 <script>
+<?php
+if ($message) {
+    ?>
+        alert("<?php echo $message; ?>");
+    <?php
+}
+?>
+
     $(function () {
         $(".woocommerce-MyAccount-navigation-link--dashboard").removeClass("active");
         $(".profile_page").addClass("active");

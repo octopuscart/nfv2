@@ -94,8 +94,8 @@ class Account extends CI_Controller {
 
                 redirect('Shop/index');
             } else {
-                 $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
-                  redirect('Shop/index', $data1);
+                $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
+                redirect('Shop/index', $data1);
             }
         }
     }
@@ -244,6 +244,22 @@ class Account extends CI_Controller {
         $query = $this->db->get('auth_user');
         $userdata = $query->row_array();
         $data['userInfo'] = $userdata;
+        $data["message"] = "";
+        if (isset($_POST['updatePass'])) {
+            $pass1 = $this->input->post("pwd");
+            $pass2 = $this->input->post("pwd1");
+            if ($pass1 == $pass2) {
+                $this->db->where('id', $userid);
+                $this->db->set('password', md5($pass1));
+                $this->db->update("auth_user");
+                 $data["message"] = "Password changed.";
+            }
+            else{
+                 $data["message"] = "Password not matched.";
+            }
+        }
+
+
         $this->load->view('Account/profile', $data);
     }
 

@@ -183,7 +183,7 @@ $this->load->view('layout/header');
     var customlinkitem = "<?php echo $customlink; ?>";
 </script>
 
-<script src="<?php echo base_url(); ?>assets/theme/angular/customFormv1.js"></script>
+<script src="<?php echo base_url(); ?>assets/theme/angular/customFormv2.js"></script>
 <?php
 $this->load->view('layout/footer');
 ?>

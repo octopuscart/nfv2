@@ -59,64 +59,79 @@ class CustomApi extends REST_Controller {
         $itemInsertArray = array();
         $styleid = $this->post("profile");
         $insertArray = $this->post();
-        foreach ($insertArray as $key => $value) {
-            $keyarray = explode("___", $key);
-            $valuearray = explode("___", $value);
-            if (count($keyarray) == 2) {
-                $itemid = $keyarray[0];
-                $itemstylekey = $keyarray[1];
-
-                $itemstylevalue = $valuearray[0];
-                $extraprice = $valuearray[1];
-                $tmpinsert = array(
-                    "style_key" => $itemstylekey,
-                    "style_value" => $itemstylevalue,
-                    "extra_price" => $extraprice,
-                    "style_profile" => "",
-                    "datetime" => date('Y-m-d H:i:s')
-                );
-                if (isset($itemInsertArray[$itemid])) {
-                    array_push($itemInsertArray[$itemid]["style"], $tmpinsert);
-                    $itemInsertArray[$itemid]["extra_price"] += $extraprice;
-                } else {
-                    $profileInsert = array(
-                        "style_profile" => $styleid . $itemid,
-                        "custom_form_data" => "",
-                        "user_id" => $this->user_id,
-                        "tag_id" => $tag_id,
-                        "default" => "0",
-                        "is_active" => "1",
-                        "datetime" => date('Y-m-d H:i:s'),
-                        "update_datetime" => "",
-                    );
-                    $itemInsertArray[$itemid] = array("style" => [$tmpinsert], "profile" => $profileInsert, "extra_price" => 0);
-                }
+        $styletype = $this->post("styletype");
+        if ($styletype == "shop_stored") {
+            $cart_id = $this->post("cart_id");
+            $cartidlist = explode(",", $cart_id);
+            foreach ($cartidlist as $key => $value) {
+                $itemid = $value;
+                $this->db->set('customization_id', "0");
+                $this->db->set('customization_data', "Shop Stored");
+                $this->db->where('id', $itemid); //set column_name and value in which row need to update
+                $this->db->update('nfw_product_cart');
             }
         }
-        foreach ($itemInsertArray as $key => $value) {
-            $itemid = $key;
-            $profilestyle = $value['profile'];
-            $extra_price = $value['extra_price'];
-            $this->db->insert("nfw_custom_form_data", $profilestyle);
-            $styleid_id = $this->db->insert_id();
-            $stylearray = $value['style'];
-            foreach ($stylearray as $stk => $stv) {
-                $stv["style_profile"] = $styleid_id;
-                $this->db->insert("nfw_custom_form_data_attr", $stv);
-            }
-            $this->db->where('id', $itemid); //set column_name and value in which row need to update
-            $cquery = $this->db->get('nfw_product_cart');
-            $cobj = $cquery->row();
-            $cartprice = $cobj->price;
+        if ($styletype == "custom") {
+            foreach ($insertArray as $key => $value) {
+                $keyarray = explode("___", $key);
+                $valuearray = explode("___", $value);
+                if (count($keyarray) == 2) {
+                    $itemid = $keyarray[0];
+                    $itemstylekey = $keyarray[1];
 
-            $totalprice = $extra_price + $cartprice;
-            $this->db->set('customization_id', $styleid_id);
-            $this->db->set("extra_price", $extra_price);
-            $this->db->set("total_price", $totalprice);
-            $this->db->set("price", $totalprice);
-            $this->db->set('customization_data', $profilestyle["style_profile"]);
-            $this->db->where('id', $itemid); //set column_name and value in which row need to update
-            $this->db->update('nfw_product_cart');
+                    $itemstylevalue = $valuearray[0];
+                    $extraprice = $valuearray[1];
+                    $tmpinsert = array(
+                        "style_key" => $itemstylekey,
+                        "style_value" => $itemstylevalue,
+                        "extra_price" => $extraprice,
+                        "style_profile" => "",
+                        "datetime" => date('Y-m-d H:i:s')
+                    );
+                    if (isset($itemInsertArray[$itemid])) {
+                        array_push($itemInsertArray[$itemid]["style"], $tmpinsert);
+                        $itemInsertArray[$itemid]["extra_price"] += $extraprice;
+                    } else {
+                        $profileInsert = array(
+                            "style_profile" => $styleid . $itemid,
+                            "custom_form_data" => "",
+                            "user_id" => $this->user_id,
+                            "tag_id" => $tag_id,
+                            "default" => "0",
+                            "is_active" => "1",
+                            "datetime" => date('Y-m-d H:i:s'),
+                            "update_datetime" => "",
+                        );
+                        $itemInsertArray[$itemid] = array("style" => [$tmpinsert], "profile" => $profileInsert, "extra_price" => 0);
+                    }
+                }
+            }
+            foreach ($itemInsertArray as $key => $value) {
+                print_r($value);
+                $itemid = $key;
+                $profilestyle = $value['profile'];
+                $extra_price = $value['extra_price'];
+                $this->db->insert("nfw_custom_form_data", $profilestyle);
+                $styleid_id = $this->db->insert_id();
+                $stylearray = $value['style'];
+                foreach ($stylearray as $stk => $stv) {
+                    $stv["style_profile"] = $styleid_id;
+                    $this->db->insert("nfw_custom_form_data_attr", $stv);
+                }
+                $this->db->where('id', $itemid); //set column_name and value in which row need to update
+                $cquery = $this->db->get('nfw_product_cart');
+                $cobj = $cquery->row();
+                $cartprice = $cobj->price;
+
+                $totalprice = $extra_price + $cartprice;
+                $this->db->set('customization_id', $styleid_id);
+                $this->db->set("extra_price", $extra_price);
+                $this->db->set("total_price", $totalprice);
+                $this->db->set("price", $totalprice);
+                $this->db->set('customization_data', $profilestyle["style_profile"]);
+                $this->db->where('id', $itemid); //set column_name and value in which row need to update
+                $this->db->update('nfw_product_cart');
+            }
         }
     }
 
@@ -802,7 +817,6 @@ class CustomApi extends REST_Controller {
             "title" => "3 Piece Customization",
             "item" => "3 Piece",
             "selection" => $selectelements,
-            
             "validation" => array(),
         );
         $this->response($return_data);
@@ -852,7 +866,7 @@ class CustomApi extends REST_Controller {
             "selection" => $selectelements,
             "validation" => array(),
         );
-        
+
         $this->response($return_data);
     }
 
@@ -1091,10 +1105,9 @@ class CustomApi extends REST_Controller {
         );
         $this->response($return_data);
     }
-    
-    function getPphp_get(){
-        phpinfo();
 
+    function getPphp_get() {
+        phpinfo();
     }
 
 }

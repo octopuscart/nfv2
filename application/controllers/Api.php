@@ -716,7 +716,7 @@ class Api extends REST_Controller {
             $color_id = implode(",", $colorlistf);
             $colorlist = explode(",", $color_id);
         }
-        $colorcount = count($colorlistf);
+        $colorcount = $colorlistf ? count($colorlistf) :0;
         $colorjoin = "";
 
         $colorquerycc = "";

@@ -35,7 +35,7 @@
         <div class=" {{subelev.maxsize}} " ng-if="subelev.view == 'multi'">
             <ul class="nav nav-tabs innerSelectionTab" role="tablist" style="    border-bottom: 0px solid #ddd;">
                 <li role="presentation" class="{{$index==1?'active':''}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
-                    <a href="#{{item}}{{$parent.$index}}{{$index}}" aria-controls="contrast" role="tab" data-toggle="tab" style="background: #fff;color: #000;">
+                    <a href="#{{item}}{{$parent.$index}}{{$index}}{{subelek.replaceAll(' ', '')}}" aria-controls="contrast" role="tab" data-toggle="tab" style="background: #fff;color: #000;">
                         <img src="{{multiele[0].image}}" class="iconimg">  {{mltkey}}
                     </a>
                 </li>
@@ -48,7 +48,7 @@
                  margin-bottom: 15px;
                  ">
 
-                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{item}}{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]" >
+                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{item}}{{$parent.$index}}{{$index}}{{subelek.replaceAll(' ', '')}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]" >
                     <div class=" owlslider owl-carousel owl-theme ">
                         <div class="col-md1-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele"  ng-if="ele.status==1">
                             <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, mltkey + '-' + (ele.lable | removeExtraSpace), ele, <?php echo $mutliview == 1?'item':0;?>)"  ng-class="((mltkey + '-'+ele.lable | removeExtraSpace)  == (spacialSelection.itemstyle[item][subelek] | removeExtraSpace)) ? 'selected' : 'deselect'" style="" >
@@ -66,6 +66,7 @@
                     <center>
                         <div class="customNavigation" style="margin-bottom: 10px;" ng-if="multiele.length > 4">
                             <a class="btn btn-default btn-sm prev prevtrigger" >&larr;</a>
+                             <a class="btn btn-default btn-sm " ng-click="selectStyle(subelek, '-', {'extra_price':''}, <?php echo $mutliview == 1?'item':0;?>)">Remove</a>
                             <a class="btn btn-default btn-sm next nexttrigger">&rarr;</a>
                         </div>
                     </center>

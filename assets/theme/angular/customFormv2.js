@@ -195,8 +195,8 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         form.append("cart_id", cartidslist.join(","));
         form.append("tag_id", itemidgbl);
         form.append("profile", prestyle.profile);
-
-        form.append("styletype", prestyle.id);
+        form.append("styleid", prestyle.id);
+        form.append("styletype", "previous");
         $http.post(urldatastorestyle, form).then(function () {
             $http.post(urldatastorestyle, form).then(function () {
                 swal({

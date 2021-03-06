@@ -233,7 +233,7 @@ $this->load->view('layout/header');
                                 <th style="width: 25%;"><span style="margin: 0px 0px 0px 13px;">Product</span></th>
                                 <th style="width: 25%;">Style Id / Measurement Profile	</th>
                                 <th style="width: 7%;">Item</th>
-                                <th style="width: 100px;">Qty.</th>
+                                <th style="width: 120px;">Qty.</th>
                                 <th style="width: 9%;">Price</th>
                                 <th style="width: 12%;">Extra Price</th>
                                 <th style="width: 9%;">Total</th>

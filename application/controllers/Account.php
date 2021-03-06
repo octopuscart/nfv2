@@ -252,10 +252,9 @@ class Account extends CI_Controller {
                 $this->db->where('id', $userid);
                 $this->db->set('password', md5($pass1));
                 $this->db->update("auth_user");
-                 $data["message"] = "Password changed.";
-            }
-            else{
-                 $data["message"] = "Password not matched.";
+                $data["message"] = "Password changed.";
+            } else {
+                $data["message"] = "Password not matched.";
             }
         }
 
@@ -369,6 +368,11 @@ class Account extends CI_Controller {
         $data['invoicedata'] = $orderarray;
 
         $this->load->view('Account/orderInvoice', $data);
+    }
+
+    function resetPassword() {
+        $data = array();
+        $this->load->view('Account/resetPassword', $data);
     }
 
 }

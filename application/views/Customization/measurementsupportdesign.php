@@ -41,7 +41,7 @@
                 <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" ng-click="startMeasurementsCustom()" >Create New Measurement Profile?  →
                 </button>
             </div>
-
+<!--
             <br/>
             <div class="well well-sm">
                 <p>
@@ -51,7 +51,7 @@
                 </p>
                 <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization2" data-toggle="modal" data-target="#measurementModal" >Select size from Previous Measurement →
                 </button>
-            </div>
+            </div>-->
 
 
         </center>

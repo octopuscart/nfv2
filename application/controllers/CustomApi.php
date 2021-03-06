@@ -60,6 +60,19 @@ class CustomApi extends REST_Controller {
         $styleid = $this->post("profile");
         $insertArray = $this->post();
         $styletype = $this->post("styletype");
+        if ($styletype == "previous") {
+            $cart_id = $this->post("cart_id");
+            $cartidlist = explode(",", $cart_id);
+            $profile = $this->post("profile");
+            $styleid = $this->post("styleid");
+            foreach ($cartidlist as $key => $value) {
+                $itemid = $value;
+                $this->db->set('customization_id', $styleid);
+                $this->db->set('customization_data', $profile);
+                $this->db->where('id', $itemid); //set column_name and value in which row need to update
+                $this->db->update('nfw_product_cart');
+            }
+        }
         if ($styletype == "shop_stored") {
             $cart_id = $this->post("cart_id");
             $cartidlist = explode(",", $cart_id);

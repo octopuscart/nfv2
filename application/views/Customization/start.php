@@ -64,9 +64,9 @@ $this->load->view('layout/header');
                         <br/>
                         <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" ng-click="shopStored()"  >Most Recent Offline Purchase
                         </button>
-                        <br/>
+<!--                        <br/>
                         <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" data-toggle="modal" data-target="#styleModal" >Select From Previous Style →
-                        </button>
+                        </button>-->
                     </center>
                     <div class="measurementprocess col-md-12" ng-if="customFabricsArrayDone.length" style="    margin: 10px 15px 0px 20px;">
                         <p>You can proceed for measurement now or choose more fabrics.</p>

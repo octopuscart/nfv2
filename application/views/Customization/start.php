@@ -1,6 +1,25 @@
 <?php
 $this->load->view('layout/header');
 ?>
+<style>
+    span.clipbox {
+        float: left;
+        margin: 5px;
+        background: #e5e5e5;
+        padding: 0px 10px;
+        color: black;
+        font-size: 12px;
+        border-radius: 14px;
+        border:2px solid #e5e5e5;
+    }
+
+    .clipbox.deselect{
+        opacity: 1;
+    }
+    .clipbox.selected{
+        border:2px solid #000;
+    }
+</style>
 <link href="<?php echo base_url(); ?>assets/bootstrap.vertical-tabs.css" rel="stylesheet"/>
 <link href="<?php echo base_url(); ?>assets/theme/angular/customform.css" rel="stylesheet"/>
 <link href="<?php echo base_url(); ?>assets/theme/angular/customstyle.css" rel="stylesheet"/>
@@ -64,9 +83,9 @@ $this->load->view('layout/header');
                         <br/>
                         <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" ng-click="shopStored()"  >Most Recent Offline Purchase
                         </button>
-<!--                        <br/>
-                        <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" data-toggle="modal" data-target="#styleModal" >Select From Previous Style →
-                        </button>-->
+                        <!--                        <br/>
+                                                <button class="btn btn-danger button_wave waves-effect waves-button waves-float customoselectbutton" id="start_customization" data-toggle="modal" data-target="#styleModal" >Select From Previous Style →
+                                                </button>-->
                     </center>
                     <div class="measurementprocess col-md-12" ng-if="customFabricsArrayDone.length" style="    margin: 10px 15px 0px 20px;">
                         <p>You can proceed for measurement now or choose more fabrics.</p>

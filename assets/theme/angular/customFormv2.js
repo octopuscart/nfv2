@@ -342,6 +342,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     }
 
     $scope.selectStyle = function (stylep, stylec, style, itemname) {
+        console.log(style, stylep);
         $scope.customizationElement.selection[stylep] = stylec;
 
         $scope.extraPriceSelection[stylep] = Number(style['extra_price']) ? style.extra_price : '';

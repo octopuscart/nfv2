@@ -140,11 +140,12 @@
 
         <div class=" {{subelev.maxsize}} " ng-if="subelev.view == 'selection'">
             <div class="col-md-12 col-md-padding5 ">
-                <div class=" style_selection    "    >
+                <div class=" style_selection  waves-effect ZoomIn  "    >
                     <div class=" ">
-               
-                    <span ng-class="(cck | removeExtraSpace) == spacialSelection.itemstyle[item][subelek] ? 'selected' : 'deselect'"   class="clipbox waves-effect ZoomIn" ng-if="$index>0" ng-repeat="(cck, ccv) in customizationElement.formItems[subelek].child" ng-click="selectStyle(subelek, (cck | removeExtraSpace), {},  <?php echo $mutliview == 1?'item':0;?>)">{{cck}}</span>
-                                                  
+
+                        <select ng-model="customizationElement.formItems[subelek].title" style="height: 34px;padding: 0px 6px;border: 1px solid #000;"  ng-change="selectStyle(subelek, (customizationElement.formItems[subelek].title | removeExtraSpace), {},  <?php echo $mutliview == 1?'item':0;?>)">
+                            <option ng-repeat="(cck, ccv) in customizationElement.formItems[subelek].child" {{$index==0?"selected":""}} value="{{ccv}}">{{cck}}</option>
+                        </select>                                     
                     </div>
                 </div>
             </div>

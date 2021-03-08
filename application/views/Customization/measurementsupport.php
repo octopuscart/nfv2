@@ -92,16 +92,7 @@
                 </li>
 
 
-                <form action="#" method="post" style="margin-top:10px;">
-                    <div class="" style="display: none">
-
-                        <input name="profile_name" type="hidden" value="{{mesurementSelecttion['Profile']}}">
-                        <input name="cart_id[]" value="{{cart.item.id}}" ng-repeat="(itemk, cart) in customFabricsDone" type="hidden" />
-
-                    </div>  
-                    <button class="btn btn-success btn-lg bigbuttonspadding" name="confirm_measurements"  style="    width: 100%;">Confirm Measurements </button>
-                </form>
-
+               
             </ul>
 
         </div>

@@ -445,7 +445,7 @@ if ($session_data) {
                                                                         </a>
                                                                         <p class="color_dark fs_small"><?php echo $session_data['email']; ?></p>
                                                                         <a href="#" class="fs_small color_grey">
-                                                                            Last Login <i>2020-01-15 20:26:18</i>
+                                                                            Last Login <i><?php echo $session_data["lastlogin"]?></i>
                                                                         </a>
                                                                     </div>
                                                                 </li>

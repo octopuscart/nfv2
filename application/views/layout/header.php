@@ -514,7 +514,7 @@ if ($session_data) {
                                                                     <input type="submit" name="login" class="btn btn-default btn-xs tr_all color_black transparent r_corners"  value="Login" style="    float: left;">
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 t_align_r lh_medium">
-                                                                    <a href="#" class="fs_small" style="color: #000000">Forgot your password?</a><br>
+                                                                    <a href="<?php echo site_url("Account/resetPassword")?>" class="fs_small" style="color: #000000">Forgot your password?</a><br>
                                                                 </div>
                                                             </li>
                                                         </ul>

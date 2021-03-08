@@ -35,26 +35,23 @@ $this->load->view('layout/header');
     }
 
 <?php
-if ($msg != "") {
+if ($checkmail == "yes") {
     ?>
         $(document).ready(function () {
             swal({
-                type: '<?php echo $msgtype; ?>',
-                title: '<?php echo $msg; ?>',
+                type:"success",
+                title: "Request Mail Sent!",
+                text: "Check Email In Your Inbox",
                 timer: 2500,
                 onClose: () => {
+                    window.location = '<?php echo site_url("/"); ?>';
 
-                    $.get('<?php echo base_url(); ?>index.php/Api/sendRegistrationEmail/<?php echo $user_id; ?>',
-                                            function () {
-                                                window.location = '<?php echo $link; ?>';
-                                            })
-                                }
-                            })
-                        })
+                }
+            })
+        })
     <?php
 }
 ?>
-
 </script>
 <?php
 $this->load->view('layout/footer');

@@ -466,8 +466,54 @@ class Account extends CI_Controller {
     }
 
     function resetPassword() {
-        $data = array();
+        $data = array("email" => "", "checkmail" => "");
+
+
+        if (isset($_POST['forget'])) {
+            $usermail = $this->input->post("email");
+            $this->db->where('email', $usermail);
+            $query = $this->db->get('auth_user');
+            $userdata = $query->row_array();
+            if ($userdata) {
+                $data["user_id"] = $userdata["id"];
+                $data["checkmail"] = "yes";
+                $data["password"] = $userdata["password"];
+                $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
+
+                echo $url = $emailurl . "?mail_type=3&passwordkey=" . $userdata["password"] . "&email=" . $userdata["email"] . "&id=" . $userdata["id"];
+
+//            $curl = curl_init();
+//            curl_setopt($curl, CURLOPT_URL, $url);
+//            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//            curl_setopt($curl, CURLOPT_HEADER, false);
+//            $data2 = curl_exec($curl);
+//            curl_close($curl);
+            }
+        }
+
         $this->load->view('Account/resetPassword', $data);
+    }
+
+    function resetNewPassword() {
+        $token = $this->input->get("admin");
+        $data = array("status" => "");
+        if ($token) {
+            $idpass = explode('_____AAAAAAAA', $token);
+            if (count($idpass)) {
+                $userid = $idpass[1];
+                if (isset($_POST["change"])) {
+                    $new_password = $this->input->post("pass");
+                    $new_pass = md5($new_password);
+                    $this->db->set("password", $new_pass);
+                    $this->db->where("id", $userid);
+                    $this->db->update("auth_user");
+                    $data["status"] = "done";
+                }
+            }
+            $this->load->view('Account/resetPasswordNew', $data);
+        } else {
+            redirect(site_url("/"));
+        }
     }
 
 }

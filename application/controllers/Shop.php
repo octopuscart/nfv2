@@ -74,6 +74,7 @@ class Shop extends CI_Controller {
             $totalquantity = $this->input->post('totalquantity');
             $grandtotal = $this->input->post('grandtotal');
             $shippingprice = $this->input->post('shippingprice');
+            $maintotal =  $this->input->post('maintotal');
 
             $query = "SELECT address1,address2,city,state,country,zip FROM `nfw_billing_shipping_address` where id = $ship_id ";
             $shipresult = $this->Product_model->resultAssociate($query);
@@ -103,6 +104,7 @@ class Shop extends CI_Controller {
                 "user_info" => $userdata,
                 "op_date" => $dat,
                 "op_time" => $tm,
+                "sub_total"=>$maintotal,
                 "total_price" => $grandtotal,
                 "shipping_amount" => $shippingprice,
                 "total_quantity" => $totalquantity,

@@ -82,6 +82,25 @@ class Account extends CI_Controller {
                 $lastlogin = $query->row();
                 $userdata['lastlogin'] = $lastlogin->time_stamp;
 
+                if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                    $ip = $_SERVER['HTTP_CLIENT_IP'];
+                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } else {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                }
+                $userarray = array(
+                    'client_ip' => $ip,
+                    'user_id' => $userdata['id'],
+                    'origin' => "",
+                    'time_stamp' => date('Y-m-d H:i:s'),
+                    'description' => "",
+                );
+                $this->db->insert('auth_event', $userarray);
+                $user_id = $this->db->insert_id();
+
+
+
 
                 $user_id = $userdata['id'];
                 // $session_cart = $this->session->userdata('session_cart');

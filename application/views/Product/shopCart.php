@@ -64,8 +64,8 @@ $this->load->view('layout/header');
         padding: 0px 5px;
         width: 50%;
     }
-    
-    
+
+
 
 
 </style>
@@ -142,18 +142,18 @@ $this->load->view('layout/header');
         float: right;
     }
 
-    
+
     .cardcontiner{
-            width: 389px;
-    display: inline-block;
-    background: #fffafa;
-    padding: 10px;
+        width: 389px;
+        display: inline-block;
+        background: #fffafa;
+        padding: 10px;
         margin-top: 20px;
     }
-    
+
     .cardcontiner .form-control_card{
         width: 100%;
-         margin-top: 10px;
+        margin-top: 10px;
     }
 
 
@@ -612,6 +612,7 @@ $this->load->view('layout/header');
                                 <td>
                                     <input type="hidden" name="totalquantity" value="{{shopCart.cartdata.total_quantity}}" />
                                     <input type="hidden" name="grandtotal" value="{{shopCart.cartdata.grand_total|currency}}" />
+                                    <input type="hidden" name="maintotal" value="{{shopCart.cartdata.grand_total - shopCart.cartdata.shipping_price}}" />
                                     {{shopCart.cartdata.grand_total|currency}} 
                                 </td>
                             </tr>

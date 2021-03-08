@@ -846,7 +846,7 @@ class Product_model extends CI_Model {
         foreach ($extra_button as $key => $value) {
             $tempcontain = array(
                 "title" => $value[0],
-                "image" => base_url() . "assets/custom_form_view/suit/suitbuttongsbl/",
+                "image" => base_url() . "assets/custom_form_view/suit/suitbuttongsbl/new/",
                 "default" => '1',
                 "lable" => $key,
                 "status" => "1",

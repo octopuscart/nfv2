@@ -368,6 +368,54 @@ class Account extends CI_Controller {
         $this->load->view('Account/orderTracking', $data);
     }
 
+    function paymentHistory() {
+        $userid = $this->user_id;
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+
+        $po_query = "";
+
+
+
+        $query = "SELECT np.transaction_no,np.status,po.order_no,ni.invoice_no,ni.op_date,ni.op_time,ni.total_amount,nc.card_number,nc.bank_name, po.payment_gateway FROM `nfw_order_invoice` as ni
+                      join nfw_order_payment as np on ni.order_id = np.order_id
+                      join nfw_product_order as po on ni.order_id = po.id
+                      left join nfw_user_card as nc on np.card_id = nc.id
+                      where ni.user_id = " . $userid . $po_query . " order by ni.invoice_no desc,ni.op_date desc";
+
+
+        $data['data'] = $this->Product_model->resultAssociate($query);
+        $data['productmodel'] = $this->Product_model;
+        $this->load->view('Account/paymentHistory', $data);
+    }
+
+    function preferences() {
+        $userid = $this->user_id;
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+
+        $po_query = "";
+
+
+
+        $query = "SELECT np.transaction_no,np.status,po.order_no,ni.invoice_no,ni.op_date,ni.op_time,ni.total_amount,nc.card_number,nc.bank_name, po.payment_gateway FROM `nfw_order_invoice` as ni
+                      join nfw_order_payment as np on ni.order_id = np.order_id
+                      join nfw_product_order as po on ni.order_id = po.id
+                      left join nfw_user_card as nc on np.card_id = nc.id
+                      where ni.user_id = " . $userid . $po_query . " order by ni.invoice_no desc,ni.op_date desc";
+
+
+        $data['data'] = $this->Product_model->resultAssociate($query);
+        $data['productmodel'] = $this->Product_model;
+        $this->load->view('Account/preferences', $data);
+    }
+
     function invoices() {
 //        orderSortDetail()
         $userid = $this->user_id;

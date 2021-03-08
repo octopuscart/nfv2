@@ -271,9 +271,14 @@ class Product_model extends CI_Model {
     }
 
     function resultAssociate($query) {
+       
         $fquery = $this->db->query($query);
-        $datalist = $fquery->result_array();
-        return $datalist ? $datalist : [];
+        if ($fquery) {
+            $datalist = $fquery->result_array();
+            return $datalist ? $datalist : [];
+        } else {
+            return [];
+        }
     }
 
     function getparent($id) {
@@ -297,6 +302,7 @@ class Product_model extends CI_Model {
             $catearray = $this->getparentCategory($data->parent, $catearray);
             array_push($catearray, $data);
         } else {
+            
         }
         return $catearray;
     }

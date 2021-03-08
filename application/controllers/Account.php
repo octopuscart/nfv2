@@ -480,14 +480,14 @@ class Account extends CI_Controller {
                 $data["password"] = $userdata["password"];
                 $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
 
-                echo $url = $emailurl . "?mail_type=3&passwordkey=" . $userdata["password"] . "&email=" . $userdata["email"] . "&id=" . $userdata["id"];
+                $url = $emailurl . "?mail_type=3&passwordkey=" . $userdata["password"] . "&email=" . $userdata["email"] . "&id=" . $userdata["id"];
 
-//            $curl = curl_init();
-//            curl_setopt($curl, CURLOPT_URL, $url);
-//            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-//            curl_setopt($curl, CURLOPT_HEADER, false);
-//            $data2 = curl_exec($curl);
-//            curl_close($curl);
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_HEADER, false);
+                $data2 = curl_exec($curl);
+                curl_close($curl);
             }
         }
 

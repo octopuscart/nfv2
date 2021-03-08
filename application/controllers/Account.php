@@ -392,6 +392,34 @@ class Account extends CI_Controller {
         $this->load->view('Account/paymentHistory', $data);
     }
 
+    function newsLetters() {
+        $userid = $this->user_id;
+        $userid = $this->user_id;
+        $this->db->where('id', $userid);
+        $query = $this->db->get('auth_user');
+        $userdata = $query->row_array();
+        $data['userInfo'] = $userdata;
+
+
+
+        $data["maliInfo"] = $this->Product_model->resultAssociate("select * from nfw_news_letters as nnl join nfw_news_letter_box as nlb on nlb.news_letter_id=nnl.id  where nlb.receiver_id='$userid' and nlb.flag in (0,1)");
+
+        $data["total_msg"] = $this->Product_model->resultAssociate("select * from nfw_news_letters as nnl join nfw_news_letter_box as nlb on nlb.news_letter_id=nnl.id  where nlb.receiver_id='$userid' and nlb.flag in (0,1)");
+        $data["read_msg"] = $this->Product_model->resultAssociate("select * from nfw_news_letters as nnl join nfw_news_letter_box as nlb on nlb.news_letter_id=nnl.id  where nlb.receiver_id='$userid' and nlb.flag in (1)");
+        $data["unread_msg"] = $this->Product_model->resultAssociate("select * from nfw_news_letters as nnl join nfw_news_letter_box as nlb on nlb.news_letter_id=nnl.id  where nlb.receiver_id='$userid' and nlb.flag in (0)");
+
+
+        if (isset($_POST["deletenews"])) {
+            $deleteid = $this->input->post("newsid");
+            $this->db->where("id", $deleteid);
+            $this->db->set("flag", "2");
+            $this->db->update("nfw_news_letter_box");
+            redirect("Account/newsLetters");
+        }
+
+        $this->load->view('Account/newsLetters', $data);
+    }
+
     function preferences() {
         $userid = $this->user_id;
         $userid = $this->user_id;

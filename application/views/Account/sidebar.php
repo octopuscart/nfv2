@@ -107,15 +107,7 @@
 
         </li>
 
-        <li>
-            <a href="wishlist.php" class="color_dark tr_all d_block test">
-                <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
-                    <i class="icon-angle-right"></i>
-                </span>
-                Wishlist
-            </a>
-
-        </li>
+       
         <!--   
                 <li>
                     <a href="couponPurchase.php" class="color_dark tr_all d_block test">
@@ -137,7 +129,7 @@
                 </li>-->
 
         <li>
-            <a href="newsLetter.php" class="color_dark tr_all d_block test">
+            <a href="<?php echo site_url('Account/newsLetters');?>" class="color_dark tr_all d_block test">
                 <span class="icon_wrap_size_0 circle d_inline_m m_right_8 color_grey_light_5 tr_inherit">
                     <i class="icon-angle-right"></i>
                 </span>

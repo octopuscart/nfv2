@@ -314,7 +314,6 @@ $this->load->view('layout/header');
                                             <td data-title="Price">{{(citem.price - citem.extra_price)|currency}}  </td>
                                             <td data-title="Extra Price">
                                                 {{citem.extra_price|currency}}<br/>
-                                                <button class="btn btn-xs btn-default" ng-if="citem.extra_price > 0" ng-click="viewExtraPrice(citem.style)">View</button>
                                             </td>
                                             <td data-title="Total" class=" color_dark" style="">
                                                 {{citem.total_price|currency}}     

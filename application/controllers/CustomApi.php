@@ -476,7 +476,7 @@ class CustomApi extends REST_Controller {
             'Lapel Button Hole' => $this->Product_model->getChildren(75),
             'Front Style' => $overcoatelement['front_Style'],
             'Sleeve Buttons' => $jacketelements['sleevebuttons'],
-            'Shoulder Epaulettes' => $this->Product_model->getChildren(75),
+            'Shoulder Epaulettes' => $this->Product_model->getChildren(76),
             'Sleeve Epaulettes' => $this->Product_model->getChildren(77),
             'Breast Pocket' => $this->Product_model->getChildren(80),
             'Lower Pocket' => $this->Product_model->getChildren(81),

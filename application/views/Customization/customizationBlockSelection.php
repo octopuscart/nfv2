@@ -74,7 +74,7 @@
 
         <div class=" {{subelev.maxsize}} " ng-if="subelev.view == 'multicol'">
             <ul class="nav nav-tabs innerSelectionTab" role="tablist" style="    border-bottom: 0px solid #ddd;">
-                <li role="presentation" class="{{$index==1?'active':''}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
+                <li role="presentation" class="{{$index==0?'active':''}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
                     <a href="#{{$parent.$index}}{{$index}}" aria-controls="contrast" role="tab" data-toggle="tab" style="background: #fff;color: #000;">
                         <img src="{{multiele[0].image}}" class="iconimg">  {{mltkey}}
                     </a>
@@ -87,7 +87,7 @@
                  padding: 3px;
                  margin-bottom: 15px;
                  ">
-                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
+                <div role="tabpanel" class="tab-pane  {{$index==0?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
                     <div class="row  ">
                         <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele"  ng-if="ele.status == 1">
                             <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace), ele, <?php echo $mutliview == 1 ? 'item' : 0; ?>)"  ng-class="(ele.lable | removeExtraSpace) == (customizationElement.selection[subelek] | removeExtraSpace) ? 'selected' : 'deselect'" style="" >
@@ -105,7 +105,7 @@
 
         <div class=" {{subelev.maxsize}} " ng-if="subelev.view == 'multicol2'">
             <ul class="nav nav-tabs innerSelectionTab" role="tablist" style="    border-bottom: 0px solid #ddd;">
-                <li role="presentation" class="{{$index==1?'active':''}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
+                <li role="presentation" class="{{$index==0?'active':''}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
                     <a href="#{{$parent.$index}}{{$index}}" aria-controls="contrast" role="tab" data-toggle="tab" style="background: #fff;color: #000;">
                         <img src="{{multiele[0].image}}" class="iconimg">  {{mltkey}}
                     </a>
@@ -118,7 +118,7 @@
                  padding: 3px;
                  margin-bottom: 15px;
                  ">
-                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
+                <div role="tabpanel" class="tab-pane  {{$index==0?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]">
                     <div class="row  ">
                         <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele"  ng-if="ele.status == 1">
                             <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace), ele, <?php echo $mutliview == 1 ? 'item' : 0; ?>)"  ng-class="(ele.lable | removeExtraSpace) == customizationElement.selection[subelek] ? 'selected' : 'deselect'" style="" >

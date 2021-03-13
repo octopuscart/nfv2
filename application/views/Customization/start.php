@@ -206,3 +206,8 @@ $this->load->view('layout/header');
 <?php
 $this->load->view('layout/footer');
 ?>
+
+<script type='text/javascript'>
+
+
+</script>

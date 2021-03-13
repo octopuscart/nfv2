@@ -93,7 +93,7 @@ $this->load->view('layout/header');
 
                                         </td>
 
-                                        <td><?php echo '$' . number_format(explode('$', $dat['total_amount'])[1], 2, '.', '') ?></td>
+                                        <td><?php echo $dat['total_amount'];?></td>
 
                                         <td><?php echo $dat['status'] ?></td>
                                     </tr>

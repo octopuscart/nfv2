@@ -351,7 +351,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
             $scope.spacialSelection.itemstyle[itemname][stylep] = stylec;
             $scope.spacialSelection.itemextraprice[itemname][stylep] = Number(style['extra_price']) ? style.extra_price : '';
         }
-       
+
         if ($scope.validatiaons[stylep]) {
 
             var validation = $scope.validatiaons[stylep].validate;
@@ -386,9 +386,9 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
 
             }
         }
-        $timeout(function(){
-             $scope.monogramValidation();
-        },500)
+        $timeout(function () {
+            $scope.monogramValidation();
+        }, 500)
         var next = jQuery('.mainelementtab .nav-tabs > .active').next('li');
 //        next.find('a').trigger('click');
     }
@@ -551,6 +551,18 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
 
         })
     });
+
+//    $scope.onloadcheck = function () {
+//        console.log("check loading");
+//        window.onbeforeunload = function () {
+//            return 'Are you sure you want to leave? Your current style will be losted...';
+//        };
+//    }
+//    
+//    $timeout(function(){
+//         $scope.onloadcheck();
+//    },3000)
+   
 
 
 

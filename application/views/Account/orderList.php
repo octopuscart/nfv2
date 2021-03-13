@@ -56,7 +56,7 @@ $this->load->view('layout/header');
                                 <tr style="font-size: 12px">
                                     <th><b>S. No.</b></th>
                                     <th><b>Order No.</b></th>
-                                    <th><b>Description</b></th>
+                         
                                     <th><b>Date/Time</b></th>
                                     <th><b>Total Price</b></th>
                                     <th><b>Order Status</b></th>
@@ -76,24 +76,21 @@ $this->load->view('layout/header');
                                         </td>
                                         <td><?php echo $orderData['order_no'] ?></td>
 
-                                        <td>
-
-
-                                        </td>
+   
 
                                         <td>
                                             <?php echo $orderData['op_date'] ?>/<?php echo $orderData['op_time'] ?> 
                                         </td>
 
-                                        <td><?php echo '$' . number_format(explode('$', $orderData['total_price'])[1], 2, '.', '') ?>
+                                        <td><?php echo $orderData['total_price']; ?>
                                         </td>
                                         <td>
                                             <?php echo $orderData['title'] ?>
                                         </td>
 
                                         <td> 
-                                            <a href="orderDetail.php?order_id=<?php echo $orderData['id'] ?>" class="btn btn-default btn-xs"> Invoice</a>
-                                            <a href="" class="btn btn-default btn-xs" target="_blank"> Style</a>
+                                            <a href="<?php echo site_url("Order/orderdetails/".$orderData['id']); ?>" class="btn btn-default btn-xs"> Invoice</a>
+                                         
                                         </td>  
 
                                     </tr>

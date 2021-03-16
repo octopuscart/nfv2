@@ -247,7 +247,7 @@
                         $(function () {
                             var pipsSlider<?php echo $value['id']; ?> = document.getElementById('slider-pips<?php echo $value['id']; ?>');
                             noUiSlider.create(pipsSlider<?php echo $value['id']; ?>, {
-                                start: [<?php echo $value['standard_value']; ?> + 10],
+                                start: [<?php echo $value['standard_value']; ?>],
                                 connect: true,
                                 step: 0.125,
                                 tooltips: [true, ],

@@ -102,7 +102,7 @@
                  padding: 3px;
                  margin-bottom: 15px;
                  ">
-                <div role="tabpanel" class="tab-pane  {{$index==1?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]" >
+                <div role="tabpanel" class="tab-pane  {{$index==0?'active':''}}" id="{{$parent.$index}}{{$index}}" ng-repeat="(mltkey, multiele) in customizationElement.formItems[subelek]" >
                     <div class="row  ">
                         <div class="col-md-{{subelev.col}} col-md-padding5 " ng-repeat="ele in multiele">
                             <div class="thumbnail  style_selection  waves-effect ZoomIn  "  ng-click="selectStyle(subelek, (ele.lable | removeExtraSpace) + ' (' + mltkey + ')', ele, <?php echo $mutliview == 1 ? 'item' : 0; ?>)"  ng-class="(ele.lable | removeExtraSpace) == spacialSelection.itemstyle[item][subelek] ? 'selected' : 'deselect'" style="" >

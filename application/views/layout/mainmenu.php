@@ -21,7 +21,7 @@ $menuArrayMain = [
             array("title" => "Pant", "link" => site_url("Product/productList?category=0&item_type=2"), "submenu" => []),
             array("title" => "Jacket", "link" => site_url("Product/productList?category=0&item_type=5"), "submenu" => []),
             array("title" => "Waistcoat", "link" => site_url("Product/productList?category=0&item_type=3"), "submenu" => []),
-            array("title" => "Sports Jacket", "link" => site_url("Product/productList?category=0&item_type=12"), "submenu" => []),
+            array("title" => "Formal Jackets", "link" => site_url("Product/productList?category=0&item_type=12"), "submenu" => []),
             array("title" => "Overcoat", "link" => site_url("Product/productList?category=0&item_type=15"), "submenu" => []),
         ]),
     array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),

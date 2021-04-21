@@ -309,7 +309,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
 
 
     jQuery('body').on('click', '.next-tab', function () {
-        var next = jQuery('.nav-tabs > .active').next('li');
+        var next = jQuery('.vertialTab > .active').next('li');
         if (next.length) {
             $scope.initAnimate.sumtop += 50;
             next.find('a').trigger('click');
@@ -319,7 +319,7 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
     });
 
     jQuery('body').on('click', '.previous-tab', function () {
-        var prev = jQuery('.nav-tabs > .active').prev('li')
+        var prev = jQuery('.vertialTab > .active').prev('li')
         if (prev.length) {
             $scope.initAnimate.sumtop -= 50;
             prev.find('a').trigger('click');

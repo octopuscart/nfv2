@@ -493,12 +493,27 @@ nitaFasions.controller('customizationPage', function ($scope, $http, $filter, $t
         var feetval = mvalue + " Feet" + inchval;
 
         $timeout(function () {
-            $scope.mesurementSelecttion['Height'] = feetval;
+           // $scope.mesurementSelecttion['Height'] = feetval;
         })
 
         console.log(feetval);
 
     });
+	
+	
+    $scope.$watch("temp_height_f", function (n, o) {
+        var inchval = $scope.temp_height_inc ? " " + $scope.temp_height_inc + " Inches" : "";
+        var feetval = $scope.temp_height_f + " Feet" + inchval;
+        $scope.mesurementSelecttion['Height'] = feetval;
+
+    })
+    
+     $scope.$watch("temp_height_inc", function (n, o) {
+        var inchval = $scope.temp_height_inc ? " " + $scope.temp_height_inc + " Inches" : "";
+        var feetval = $scope.temp_height_f + " Feet" + inchval;
+        $scope.mesurementSelecttion['Height'] = feetval;
+
+    })
 
     $scope.measurementWeightUnit = {'unit': 'KG'};
     $scope.changeWeightUnit = function () {

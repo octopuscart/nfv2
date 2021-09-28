@@ -128,7 +128,7 @@
                                             </div>
                                             <div class="input-group input-group-lg col-md-4 pull-left" style="">
                                                 <span class="input-group-addon" id="sizing-addon1">Inch</span>
-                                                <input type="number" min="0" max="12" class="form-control" placeholder="0" aria-describedby="sizing-addon1" ng-model="temp_height_inc" ng-init="temp_height_inc=0">
+                                                <input type="number" min="0" max="11" class="form-control" placeholder="0" aria-describedby="sizing-addon1" ng-model="temp_height_inc" ng-init="temp_height_inc=0">
                                             </div>
                                             
                                             <div  type="text" id="slider-pips_height" value="5" minval="3" maxval="8" startval="5" style="display: none"></div>

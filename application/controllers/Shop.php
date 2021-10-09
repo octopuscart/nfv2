@@ -16,7 +16,7 @@ class Shop extends CI_Controller {
             $this->user_id = 0;
         }
     }
-    
+
     public function error404() {
         set_status_header('404');
         $this->load->view('errors/error_404');
@@ -26,7 +26,7 @@ class Shop extends CI_Controller {
         $this->load->library('user_agent');
 
         $checkmobile = $this->agent->is_mobile();
-        
+
         $data['checkmobile'] = $checkmobile;
         $data['featuredProducts'] = $this->Product_model->featurProductTag();
         $this->load->view('home', $data);
@@ -74,7 +74,7 @@ class Shop extends CI_Controller {
             $totalquantity = $this->input->post('totalquantity');
             $grandtotal = $this->input->post('grandtotal');
             $shippingprice = $this->input->post('shippingprice');
-            $maintotal =  $this->input->post('maintotal');
+            $maintotal = $this->input->post('maintotal');
 
             $query = "SELECT address1,address2,city,state,country,zip FROM `nfw_billing_shipping_address` where id = $ship_id ";
             $shipresult = $this->Product_model->resultAssociate($query);
@@ -104,7 +104,7 @@ class Shop extends CI_Controller {
                 "user_info" => $userdata,
                 "op_date" => $dat,
                 "op_time" => $tm,
-                "sub_total"=>$maintotal,
+                "sub_total" => $maintotal,
                 "total_price" => $grandtotal,
                 "shipping_amount" => $shippingprice,
                 "total_quantity" => $totalquantity,
@@ -218,16 +218,40 @@ class Shop extends CI_Controller {
         $this->load->view('pages/aboutus');
     }
 
-      public function schedule() {
-         $query  = $this->db->query("
+    public function schedule() {
+        $query = $this->db->query("
                   SELECT sa.*,sed.start_date,sed.end_date,sed.id as main_id
                   FROM  `nfw_app_set_appointment` as sa 
                   join nfw_app_start_end_date as sed 
                   on sa.id = sed.nfw_set_appointment_id");
 
-       $data =  $query->result_array();
+        $data = $query->result_array();
+        if (isset($_POST['submit'])) {
+            $inputdata = $this->input->post();
+            $inputarray = array(
+                "nfw_time_schedule_id" => $inputdata['select_time'],
+                "first_name" => ($inputdata['first_name']),
+                "last_name" => ($inputdata['last_name']),
+                "email" => $inputdata['email'],
+                "telephone" => $inputdata['telephone'],
+                "address" => "",
+                "op_date" => date('Y-m-d'),
+                "op_time" => date('H:i:s'),
+                "no_of_person" => $inputdata['no_of_person'],
+            );
+            $this->db->insert('nfw_app_userlist', $inputarray);
+            $last_id = $this->db->insert_id();
+            $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?mail_type=4&last_id=$$last_id";
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            $data = curl_exec($curl);
+            curl_close($curl);
+            redirect(site_url("Shop/schedule"));
+        }
 
-        $this->load->view('pages/appointment', array("data"=>$data));
+        $this->load->view('pages/appointment', array("data" => $data));
     }
 
     public function guide() {

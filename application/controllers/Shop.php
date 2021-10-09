@@ -241,7 +241,7 @@ class Shop extends CI_Controller {
             );
             $this->db->insert('nfw_app_userlist', $inputarray);
             $last_id = $this->db->insert_id();
-            $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?mail_type=4&last_id=$$last_id";
+            $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?mail_type=4&last_id=$last_id";
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

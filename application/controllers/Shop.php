@@ -218,8 +218,16 @@ class Shop extends CI_Controller {
         $this->load->view('pages/aboutus');
     }
 
-    public function schedule() {
-        $this->load->view('pages/appointment');
+      public function schedule() {
+         $query  = $this->db->query("
+                  SELECT sa.*,sed.start_date,sed.end_date,sed.id as main_id
+                  FROM  `nfw_app_set_appointment` as sa 
+                  join nfw_app_start_end_date as sed 
+                  on sa.id = sed.nfw_set_appointment_id");
+
+       $data =  $query->result_array();
+
+        $this->load->view('pages/appointment', array("data"=>$data));
     }
 
     public function guide() {

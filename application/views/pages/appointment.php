@@ -113,7 +113,7 @@ $this->load->view('layout/header');
 
             </section>
 
-            <table class="table table-borderd hideonmobile">
+            <table class="table table-borderd hideonmobile" style="font-size: 14px;">
                 <tr style="    background-color: #000;
                     color: #fff;">
                     <th style="width: 100px">Country</th>
@@ -124,14 +124,95 @@ $this->load->view('layout/header');
                     <th style="width: 200px"></th>
 
                 </tr>
+                         <?php
+                foreach ($data as $key => $value) {
+                    ?>
+                    <tr>
+                        <td>
+
+                            <?php echo $value['country']; ?>
+                        </td>
+                        <td>
+                            <?php echo $value['city']; ?><br/>  <?php echo $value['state']; ?>
+                        </td>
+
+                        <td>
+                            <b>
+                                <i class="fa fa-building-o"></i>
+                                <span style="line-height: 14px;"> <?php echo $value['location']; ?></span>
+                            </b>
+                            <br/>
+                            <small>
+                                <?php echo $value['address']; ?>
+                            </small>
+                        </td>
+
+                        <td>
+                            <i class="fa fa-calendar"></i>
+                            <b><?php
+                                $date1 = date_create($value['start_date']);
+                                echo date_format($date1, "j<\s\u\p>S</\s\u\p>   F");
+                                ?></b> <span style="
+                                font-size: 12px;
+                                line-height: 24px;
+                                           margin: 0px 10px;"> Until</span>  <b><?php
+                                           $date2 = date_create($value['end_date']);
+                                           echo date_format($date2, "j<\s\u\p>S</\s\u\p> F Y");
+                                           if ($value['total_days'] == "") {
+                                               $days = $date2->diff($date1)->format("%a");
+                                               echo "<br/> <center> (" . ($days + 1) . " Days)</center> ";
+                                           } else {
+                                               echo "<br/> <center> (" . ($value['total_days']) . " Days)</center> ";
+                                           }
+                                           ?></b>
+                            <br/>
+
+                            <?php
+                            $date_ids = $value['main_id'];
+
+                            $timequery = $this->db->query("SELECT id,schedule_date FROM nfw_app_time_schedule where nfw_app_start_end_date_id = $date_ids group by schedule_date");
+
+                            $temp = $timequery->result_array();                            // $shedulearray['main_id'] = $temp;
+                            $temp2 = array('timing' => array(), 'schedule_date' => $temp, 'location' => $value['location'], 'address' => $value['address']);
+
+                            for ($j = 0; $j < count($temp); $j++) {
+                                $tp = $temp[$j];
+                                $app_date = $tp['schedule_date'];
+                                $app_id = $tp['id'];
+                                $sptimequery = $this->db->query("SELECT * FROM nfw_app_time_schedule where  nfw_app_start_end_date_id = $date_ids and schedule_date = '$app_date' ");
+
+                                $app_data = $sptimequery->result_array();
+                                $temp2['timing'][$app_id] = $app_data;
+                            }
+                            $shedulearray[$date_ids] = $temp2;
+                            ?>
+                            <br/>
+
+                            <button class="btn btn-danger" style="background: black" data-toggle="modal" data-target="#schedule_modal" onclick="setAddress(<?php echo $date_ids; ?>)">
+                                Book Now
+                            </button>
+                        </td>
+                        <td style="">
+                            <span style="    line-height: 15px;
+                                  padding: 0px 0px 10px;    color: black;
+                                  float: left;">
+                                <i class="fa fa-phone-square"></i>  <?php echo $value['contact_no']; ?>
+                            </span>
+                            <iframe  frameborder='0' scrolling='no'  marginheight='0' marginwidth='0'  height="100px" width="300px"  src="https://maps.google.com/?q=<?php echo $value['location']; ?>+<?php echo $value['address']; ?>&output=embed">
+                            </iframe>  
+
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
             </table>
             <!--<div id="calendar" class="calendar"></div>-->
 
 
 
-            <div class="row showonmobile">
-
-            </div>
+        
+       
 
         </div>
     </div>
@@ -155,6 +236,183 @@ $this->load->view('layout/header');
 <?php
 $this->load->view('layout/footer');
 ?>
+<!-- Modal -->
+<div class = "modal fade" id = "schedule_modal" tabindex = "-1" role = "dialog" 
+     aria-labelledby = "myModalLabel" aria-hidden = "true">
 
+    <div class = "modal-dialog ">
+        <div class = "modal-content">
+            <form method="post" action="#">
+                <div class = "modal-header" style=" color: #fff;background: #000 ">
+                    <button type = "button" style="    background-color: #000;
+                            border: 1px solid #000;" class = " btn btn-danger btn-xm pull-right" data-dismiss = "modal" aria-hidden = "true">
+
+                        <i class="fa fa-close"></i>
+
+                    </button>
+
+                    <div class = "modal-title row" id = "myModalLabel">
+
+                        <address style="">
+                            <span id="location"></span><br>
+                            <span id="address"></span><br>
+                        </address>
+
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+
+
+
+                <div class = "modal-body">
+
+
+                    <div class="row" style="    border-bottom: 1px solid #E5E5E5;">
+                        <div class="col-md-6" >
+                            <div class="form-group" style="font-color:black">
+
+                                <label for="select_date">Available Date</label> 
+                                <select class="form-control" name="select_date" id="select_date"  style="height:34px;" required /></select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" >
+                            <div class="form-group" style="font-color:black">
+
+                                <label for="select_time">Available Time</label> 
+                                <select class="form-control" name="select_time" id="select_time" style="height:34px;" required /></select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="    border-bottom: 1px solid #E5E5E5;">
+                        <div class="col-md-4" >
+                            <div class="form-group" style="font-color:black">
+
+                                <label for="first_name">First Name</label> 
+                                <input type="text" class="time start form-control" name="first_name"  style="height:34px;" required />
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" >
+                            <div class="form-group" style="font-color:black">
+
+                                <label for="first_name">Last Name</label> 
+                                <input type="text" class="time start form-control" name="last_name"  style="height:34px;" required/>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4" >
+                            <div class="form-group" style="font-color:black">
+                                <label for="first_name">No. Of Persons</label> 
+                                <input  class="time start form-control" type="number"  name="no_of_person"  style="height:34px;" min="1" value="1" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="    border-bottom: 1px solid #E5E5E5;">
+                        <div class="col-md-6" >
+                            <div class="form-group" style="font-color:black">
+
+                                <label for="first_name">Email</label> 
+                                <input type="text" class="time start form-control" name="email"   style="height:34px;" required />
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" >
+                            <div class="form-group" style="font-color:black">
+
+                                <label for="first_name">Contact No.</label> 
+                                <input type="text" class="time start form-control" name="telephone"  style="height:34px;" required />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--                    <div class="row" style="    border-bottom: 1px solid #E5E5E5;">
+                                            <div class="col-md-12" >
+                                                <label for="first_name">Address</label> <br>
+                                                <textarea name="address" class="form-control"  rows="1" cols="27" style="height: 94px !important;"></textarea>
+                                            </div>
+                                        </div>-->
+
+
+
+                    <div style="clear:both"></div>
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class = "modal-footer">
+
+
+                    <button type = "submit" name="submit" class="btn btn-danger" style="background: black" >
+                        Book Appointment
+                    </button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+                                var scheduleData = <?php echo json_encode($shedulearray); ?>;
+
+                                var selectdate = {};
+
+                                function setTime(id) {
+                                    var datearray = selectdate[id];
+                                    console.log(datearray);
+                                    var tempt = '';
+                                    for (d in datearray) {
+                                        var temp_id = datearray[d]['id'];
+                                        var temp_val = datearray[d]['schedule_start_time'];
+                                        tempt += "<option value='" + temp_id + "'>" + temp_val + "</option>";
+                                    }
+                                    $("#select_time").html(tempt);
+                                }
+
+                                function setAddress(id) {
+
+                                    var selectevent = scheduleData[String(id)];
+                                    var datearray = selectevent['schedule_date'];
+                                    var alltime = selectevent['timing'];
+                                    var tempt = '';
+                                    for (d in datearray) {
+                                        var temp_id = datearray[d]['id'];
+                                        var temp_val = datearray[d]['schedule_date'];
+                                        tempt += "<option value='" + temp_id + "'>" + temp_val + "</option>";
+                                    }
+                                    $("#select_date").html(tempt);
+
+                                    selectdate = alltime;
+                                    var ids = Number(datearray[0]['id']);
+                                    setTime(ids);
+
+
+                                    $("#location").text(selectevent['location']);
+                                    $("#address").text(selectevent['address']);
+                                }
+
+
+                                $(function () {
+                                    $("#select_date").change(function () {
+                                        setTime($(this).val());
+                                    })
+                                })
+
+
+</script>

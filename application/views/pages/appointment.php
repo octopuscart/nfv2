@@ -214,7 +214,7 @@ $this->load->view('layout/header');
                 <?php
                 foreach ($data as $key => $value) {
                     ?>
-                    <div class="scheduleclass">
+                    <div class="scheduleclass" style="font-size: 14px;">
                         <div class="col-sm-12" style="    margin-bottom: 20px;">
 
                             <h4> <?php echo $value['country']; ?>, <?php echo $value['city']; ?><br/>  <?php echo $value['state']; ?></h4>

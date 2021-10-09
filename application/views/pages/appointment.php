@@ -124,7 +124,7 @@ $this->load->view('layout/header');
                     <th style="width: 200px"></th>
 
                 </tr>
-                         <?php
+                <?php
                 foreach ($data as $key => $value) {
                     ?>
                     <tr>
@@ -209,10 +209,93 @@ $this->load->view('layout/header');
             </table>
             <!--<div id="calendar" class="calendar"></div>-->
 
+            <div class="row showonmobile">
+
+                <?php
+                foreach ($data as $key => $value) {
+                    ?>
+                    <div class="scheduleclass">
+                        <div class="col-sm-12" style="    margin-bottom: 20px;">
+
+                            <h4> <?php echo $value['country']; ?>, <?php echo $value['city']; ?><br/>  <?php echo $value['state']; ?></h4>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <b>
+                                <i class="fa fa-building-o"></i>
+                                <span style="line-height: 14px;"> <?php echo $value['location']; ?></span>
+                            </b>
+
+                            <p>
+                                <?php echo $value['address']; ?>
+                            </p>
+                        </div>
 
 
-        
-       
+                        <div class="col-sm-12 scheduledate">
+                            <i class="fa fa-calendar"></i>
+                            <b><?php
+                                $date1 = date_create($value['start_date']);
+                                echo date_format($date1, "j<\s\u\p>S</\s\u\p>   F");
+                                ?></b> <span style="
+                                font-size: 12px;
+                                line-height: 24px;
+                                           margin: 0px 10px;"> Until</span>  <b><?php
+                                           $date2 = date_create($value['end_date']);
+                                           echo date_format($date2, "j<\s\u\p>S</\s\u\p> F Y");
+                                           if ($value['total_days'] == "") {
+                                               $days = $date2->diff($date1)->format("%a");
+                                               echo "<br/> <h4> (" . ($days + 1) . " Days)</h4> ";
+                                           } else {
+                                               echo "<br/> <h4> (" . ($value['total_days']) . " Days)</h4>  ";
+                                           }
+                                           ?></b>
+
+
+                            <?php
+                            $date_ids = $value['main_id'];
+
+                            $timequery = $this->db->query("SELECT id,schedule_date FROM nfw_app_time_schedule where nfw_app_start_end_date_id = $date_ids group by schedule_date");
+
+                            $temp = $timequery->result_array();                               // $shedulearray['main_id'] = $temp;
+                            $temp2 = array('timing' => array(), 'schedule_date' => $temp, 'location' => $value['location'], 'address' => $value['address']);
+
+                            for ($j = 0; $j < count($temp); $j++) {
+                                $tp = $temp[$j];
+                                $app_date = $tp['schedule_date'];
+                                $app_id = $tp['id'];
+                                $sptimequery = $this->db->query("SELECT * FROM nfw_app_time_schedule where  nfw_app_start_end_date_id = $date_ids and schedule_date = '$app_date' ");
+
+                                $app_data = $sptimequery->result_array();
+                                $temp2['timing'][$app_id] = $app_data;
+                            }
+                            $shedulearray[$date_ids] = $temp2;
+                            ?>
+
+
+                            <button class="btn btn-danger" style="background: black" data-toggle="modal" data-target="#schedule_modal" onclick="setAddress(<?php echo $date_ids; ?>)">
+                                Book Now
+                            </button>
+                        </div>
+                        <div class="col-sm-12">
+                            <span style="    line-height: 15px;
+                                  padding: 0px 0px 10px;    color: black;
+                                  float: left;">
+                                <i class="fa fa-phone-square"></i>  <?php echo $value['contact_no']; ?>
+                            </span>
+                            <iframe  frameborder='0' scrolling='no'  marginheight='0' marginwidth='0'  height="100px" width="100%"  src="https://maps.google.com/?q=<?php echo $value['location']; ?>+<?php echo $value['address']; ?>&output=embed">
+                            </iframe>  
+
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+
+
+
+
 
         </div>
     </div>

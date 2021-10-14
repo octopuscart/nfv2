@@ -92,7 +92,7 @@
                 </li>
 
 
-               
+
             </ul>
 
         </div>
@@ -124,13 +124,13 @@
                                         <div class="col-md-12 number_slider_div2 row" >
                                             <div class="input-group input-group-lg col-md-4 pull-left" style="padding-right:10px">
                                                 <span class="input-group-addon" id="sizing-addon1">Feet</span>
-                                                <input type="number" min="3" max="8" class="form-control" placeholder="5" aria-describedby="sizing-addon1" ng-model="temp_height_f" ng-init="temp_height_f=5">
+                                                <input type="number" min="3" max="8" class="form-control" placeholder="5" aria-describedby="sizing-addon1" ng-model="temp_height_f" ng-init="temp_height_f = 5">
                                             </div>
                                             <div class="input-group input-group-lg col-md-4 pull-left" style="">
                                                 <span class="input-group-addon" id="sizing-addon1">Inch</span>
-                                                <input type="number" min="0" max="11" class="form-control" placeholder="0" aria-describedby="sizing-addon1" ng-model="temp_height_inc" ng-init="temp_height_inc=0">
+                                                <input type="number" min="0" max="11" class="form-control" placeholder="0" aria-describedby="sizing-addon1" ng-model="temp_height_inc" ng-init="temp_height_inc = 0">
                                             </div>
-                                            
+
                                             <div  type="text" id="slider-pips_height" value="5" minval="3" maxval="8" startval="5" style="display: none"></div>
                                         </div>
                                     </td>
@@ -237,7 +237,19 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <?php echo $value['measurement_text']; ?>
+                                    <div class="col-md-4">
+                                        <img src="<?php echo base_url(); ?>assets/custom_form_view/measurement_img/mens_measure_img/<?php echo $value['image']; ?>" class="measurementimageblock" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <table class="measurementdescription">
+                                            <tr>
+                                                <td style="height:280px;vertical-align: middle">
+                                                    <?php echo $value['measurement_text']; ?>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
                                 </div>
 
                             </div>

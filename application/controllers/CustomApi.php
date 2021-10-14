@@ -786,7 +786,7 @@ class CustomApi extends REST_Controller {
             'Waistcoat Lapel Button Hole' => 'No',
             'Waistcoat Handstitching' => "No",
             'Waistcoat Front Style' => "Single Breasted (5 Buttons)",
-            'Waistcoat Front Edge' => 'Metal (Standard)',
+            'Waistcoat Front Edge' => 'Cutaway',
             'Waistcoat Back Fabric' => '1/4" Slanting Pocket (Standard)',
             'Waistcoat Back Style' => "Welt Pocket",
             'Waistcoat Breast Pocket' => "No",

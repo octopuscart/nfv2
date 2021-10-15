@@ -40,7 +40,7 @@ $this->load->view('layout/header_v3');
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
 
-                    <img src="<?php echo base_url(); ?>assets/v2/homev3/image3.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
+                    <img src="<?php echo base_url(); ?>assets/v3/homev3/image3.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
 
 
 
@@ -88,8 +88,8 @@ These luxurious fabrics are  breathable and comfortable to wear all year round.
 
                     ",
                     "imagelist" => [
-                        base_url() . "assets/v2/homev3/image5a.jpg",
-                        base_url() . "assets/v2/homev3/image5.jpg"
+                        base_url() . "assets/v3/homev3/image5a.jpg",
+                        base_url() . "assets/v3/homev3/image5.jpg"
                     ],),
                 array(
                     "title" => "SUITS",
@@ -99,7 +99,7 @@ Our suit fabrics are sourced from premier Italian and English mills that adhere 
 
                     ",
                     "imagelist" => [
-                        base_url() . "assets/v2/homev3/image6.jpg",
+                        base_url() . "assets/v3/homev3/image6.jpg",
                     ],),
                 array(
                     "title" => "TUXEDOS",
@@ -109,7 +109,7 @@ Our Tuxedo fabric collection is both unique and vast.
 Whether the tuxedo is being worn to a special event or on your wedding day, we will have you looking dapper and ready to seize the moment.
                     ",
                     "imagelist" => [
-                        base_url() . "assets/v2/homev3/image7.jpg",
+                        base_url() . "assets/v3/homev3/image7.jpg",
                     ],),
             ];
             foreach ($featureproductblock as $key => $value) {
@@ -162,7 +162,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
 
-                    <img src="<?php echo base_url(); ?>assets/v2/homev3/image8.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
+                    <img src="<?php echo base_url(); ?>assets/v3/homev3/image8.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
                 </div>
                 <div class="col-lg-6 col-md-6 t_align_l aboutsetion" style='    font-size: 16px;
                      color: black;'>
@@ -398,7 +398,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
 
-                    <img src="<?php echo base_url(); ?>assets/v2/homev3/image10.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
+                    <img src="<?php echo base_url(); ?>assets/v3/homev3/image10.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
 
 
 
@@ -460,7 +460,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
 
-                    <img src="<?php echo base_url(); ?>assets/v2/homev3/image12.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
+                    <img src="<?php echo base_url(); ?>assets/v3/homev3/image12.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
 
 
 
@@ -495,7 +495,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                         $bespokejourny = [
                             array(
                                 "title" => "Style Consultation & Measurements",
-                                "image" => base_url() . "assets/v2/homev3/image14b.jpg",
+                                "image" => base_url() . "assets/v3/homev3/image14b.jpg",
                                 "text" => [
                                     "Your initial consultation with us is intimate. We spend a lot of time getting to know your sartorial desires and then hone in to harmonize a look that will best suit (pun intended) your personality and build. ",
                                     "With the choice of over <b>11,000 fabrics</b> to choose from, we can understand how it may feel overwhelming. Our expert stylists and cutters will carefully guide you through our vast selection to discover fabrics that best suit you and its purpose.",
@@ -504,7 +504,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                             ),
                             array(
                                 "title" => "Constructing your garment ",
-                                "image" => base_url() . "assets/v2/homev3/image16.jpg",
+                                "image" => base_url() . "assets/v3/homev3/image16.jpg",
                                 "text" => [
                                     "Our head cutters take these detailed measurements and notations and use them to formulate a unique paper pattern using the ‘rock of eye’ method.",
                                     "Once complete, we craft the <b>basted fitting</b> for you on your fabric of choice, <b>sewing it loosely</b> together to give you the first impressions of your bespoke garment. "
@@ -512,7 +512,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                             ),
                             array(
                                 "title" => "Baste Fitting ",
-                                "image" => base_url() . "assets/v2/homev3/image18.jpg",
+                                "image" => base_url() . "assets/v3/homev3/image18.jpg",
                                 "text" => [
                                     "There are no shortcuts to the bespoke process.",
                                     "During this step, you will try on a <b>temporary version of your bespoke garment</b> (the basted fitting), that we will chalk & pin, guiding us on what needs to be modified for the final product. ",
@@ -521,7 +521,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                             ),
                             array(
                                 "title" => "Final Proof ",
-                                "image" => base_url() . "assets/v2/homev3/image20.jpg",
+                                "image" => base_url() . "assets/v3/homev3/image20.jpg",
                                 "text" => [
                                     "Wearing something that has been carefully assembled for you gives you that boost of confidence and power.",
                                     "During this final step, you proof each aspect of the garment to ensure that it is ready for you to enjoy at every special ocassion or important board meetings that populate your calendar. "

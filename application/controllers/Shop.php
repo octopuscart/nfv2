@@ -31,6 +31,22 @@ class Shop extends CI_Controller {
         $data['featuredProducts'] = $this->Product_model->featurProductTag();
         $this->load->view('home', $data);
     }
+     public function index3() {
+        $this->load->library('user_agent');
+
+        $checkmobile = $this->agent->is_mobile();
+        $query = $this->db->get('countries');
+        $countrylist = $query->result_array();
+        $data['country_list'] = $countrylist;
+
+
+        $query = $this->db->get('nfw_profession');
+        $professionlist = $query->result_array();
+        $data['professionlist'] = $professionlist;
+        $data['checkmobile'] = $checkmobile;
+        $data['featuredProducts'] = $this->Product_model->featurProductTag();
+        $this->load->view('homev3', $data);
+    }
 
     public function cart() {
         if (isset($_POST['submitAddress'])) {

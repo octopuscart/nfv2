@@ -1,28 +1,46 @@
 <?php
 $this->load->view('layout/header_v3');
 ?>
+<style>
+    .iosSlider {
 
-<!--iosslider slider-->
-<section class="relative iosslider w_full">
-    <!--slider-->
-    <div class="slider">
 
-        <div class="slide">
-            <img src="<?php echo base_url(); ?>assets/sliders/slide_06.jpg" alt="">
-            <div class="item_3 animate_ftr tr_all_medium d_xs_none">
-                <p class="slider_title_1 fw_ex_bold color_light tt_uppercase lh_ex_small">New</p>
-                <h1 class="fw_ex_light color_light slider_title_3 tt_uppercase m_bottom_8 m_sm_bottom_0">Arrivals</h1>
-                <p class="color_light m_bottom_20 m_sm_bottom_5">67 years of tailoring expertise, you can expect nothing short of spectacular from our <br/>head tailors and fashion stylists at Nita Fashions. </p>
-                <div class="clearfix d_xs_none">
-                    <a href="#" class="button_type_3 color_light transparent color_scheme_hover r_corners tr_all tt_uppercase fs_medium d_block f_left m_right_10">Shop Now</a>
-                </div>
-            </div>
-        </div>
+        height: 500px!important;
+    }
+
+</style>
+<?php
+$sliderlist = [
+    array("image" => base_url() . "assets/v3/slider/slider1.jpg", "direction"=>"right", "link"=>site_url("Product/productList?category=0&item_type=11")),
+    array("image" => base_url() . "assets/v3/slider/slider2.jpg", "direction"=>"center","link"=>site_url("Product/productList?category=0&item_type=11")),
+    array("image" => base_url() . "assets/v3/slider/slider3.jpg", "direction"=>"left","link"=>site_url("Product/productList?category=0&item_type=10"))
+];
+?>
+
+<section class="relative w_full ">
+    <div class="r_slider">
+        <ul>
+            <?php
+            foreach ($sliderlist as $key => $value) {
+                ?>
+                <li data-transition="fade" data-slotamount="10">
+                    <img src="<?php echo $value["image"]?>" alt="" data-bgfit="cover" data-bgposition="center center">
+                    <div class="caption sfl str" data-x="<?php echo $value["direction"]?>" data-y="170" data-speed="700"><h1 class="color_light fw_light" style="font-weight: 300"> New Arrivals</h1></div>
+                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"]?>" data-y="243" data-speed="700" data-start="1200" style="font-size: 19px;text-align: <?php echo $value["direction"]?>">67 years of tailoring expertise, <br/>you can expect nothing short of spectacular from our <br/>head tailors and fashion stylists at Nita Fashions. </div>
+                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"]?>" data-y="339" data-speed="700" data-start="1400">
+                        <a href="<?php echo $value["link"]?>" role="button" class="tt_uppercase button_type_3 transparent color_light r_corners fs_medium d_block tr_all">SHOP NOW</a>
+                    </div>
+                </li>
+                <?php
+            }
+            ?>
+
+        </ul>
     </div>
-    <!--nav-->
-    <button class="ios_nav_prev"></button>
-    <button class="ios_nav_next"></button>
 </section>
+
+
+
 
 <!--power statement-->
 <section class="section_offset bg_light_3 appear-animation fadeInUp appear-animation-visible powerstatement" data-appear-animation="fadeInUp">

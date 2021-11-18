@@ -907,7 +907,7 @@ section.header_bottom_part.bg_light.fixed .main_menu>li>a {
 .big_heading {
     position: absolute;
     z-index: 1000;
-    font-size: 113px;
+    font-size: 90px;
     font-weight: normal;
     font-family: serif;
     color: #b3b3b333;

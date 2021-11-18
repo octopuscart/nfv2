@@ -11,9 +11,9 @@ $this->load->view('layout/header_v3');
 </style>
 <?php
 $sliderlist = [
-    array("image" => base_url() . "assets/v3/slider/slider1.jpg", "direction"=>"right", "link"=>site_url("Product/productList?category=0&item_type=11")),
-    array("image" => base_url() . "assets/v3/slider/slider2.jpg", "direction"=>"center","link"=>site_url("Product/productList?category=0&item_type=11")),
-    array("image" => base_url() . "assets/v3/slider/slider3.jpg", "direction"=>"left","link"=>site_url("Product/productList?category=0&item_type=10"))
+    array("image" => base_url() . "assets/v3/slider/slider1_v2.jpg", "direction"=>"right", "link"=>site_url("Product/productList?category=0&item_type=11")),
+    array("image" => base_url() . "assets/v3/slider/slider2_v2.jpg", "direction"=>"center","link"=>site_url("Product/productList?category=0&item_type=11")),
+    array("image" => base_url() . "assets/v3/slider/slider3_v2.jpg", "direction"=>"left","link"=>site_url("Product/productList?category=0&item_type=10"))
 ];
 ?>
 
@@ -25,8 +25,8 @@ $sliderlist = [
                 ?>
                 <li data-transition="fade" data-slotamount="10">
                     <img src="<?php echo $value["image"]?>" alt="" data-bgfit="cover" data-bgposition="center center">
-                    <div class="caption sfl str" data-x="<?php echo $value["direction"]?>" data-y="170" data-speed="700"><h1 class="color_light fw_light" style="font-weight: 300"> New Arrivals</h1></div>
-                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"]?>" data-y="243" data-speed="700" data-start="1200" style="font-size: 19px;text-align: <?php echo $value["direction"]?>">67 years of tailoring expertise, <br/>you can expect nothing short of spectacular from our <br/>head tailors and fashion stylists at Nita Fashions. </div>
+                    <div class="caption sfl str" data-x="<?php echo $value["direction"]?>" data-y="170" data-speed="700"><h1 class="color_light fw_light" style="font-weight: 300;    text-shadow: 2px 2px 5px #000;"> New Arrivals</h1></div>
+                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"]?>" data-y="243" data-speed="700" data-start="1200" style="font-size: 19px;text-align: <?php echo $value["direction"]?>;    text-shadow: 2px 2px 5px #000;">Over 67 years of tailoring expertise, <br/>you can expect nothing short of spectacular from our <br/>head tailors and fashion stylists at Nita Fashions. </div>
                     <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"]?>" data-y="339" data-speed="700" data-start="1400">
                         <a href="<?php echo $value["link"]?>" role="button" class="tt_uppercase button_type_3 transparent color_light r_corners fs_medium d_block tr_all">SHOP NOW</a>
                     </div>
@@ -101,7 +101,7 @@ $sliderlist = [
                     "title" => "SHIRTS",
                     "text" => "
                     Our shirt fabrics are made of 100% Egyptian and Sea Island cotton, sourced from sustainable and renown fabric mills. 
-<br/>
+<br/><br/>
 These luxurious fabrics are  breathable and comfortable to wear all year round. 
 
                     ",
@@ -682,9 +682,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                             <!--quote-->
                             <blockquote class="r_corners relative type_2 fs_large color_dark m_bottom_20">
                                 <p class="m_bottom_15">
-                                    <i>
-                                        <?php echo $value["review"]; ?>    
-                                    </i>
+                                    <i style="word-break: break-word;"><?php echo $value["review"]; ?> </i>
                                 </p>
                             </blockquote>
                             <div class="d_table w_full">

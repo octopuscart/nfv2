@@ -6,18 +6,19 @@
         <hr class="m_bottom_45 divider_type_3 m_xs_bottom_30">
         <div class="container-fluid" style="padding: 0px 30px">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12 fw_light m_bottom_30">
-                    <a href="<?php echo site_url("/") ?>" class="d_inline_m m_xs_top_20 m_bottom_20" style="width: 100%;
-                       text-align: center;">
-                        <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" class="mainlogo" alt="" style="height: 100px;">
-                    </a>
-                    <p>Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide.</p>
-                </div>
-                <!--contact info--> 
-                <div class="col-lg-5 col-md-5 col-sm-12 m_bottom_30">
 
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-12 ">
+                <!--contact info--> 
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 fw_light m_bottom_30">
+                        <a href="<?php echo site_url("/") ?>" class="d_inline_m m_xs_top_20 m_bottom_20" style="width: 100%;
+                           text-align: center;">
+                            <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" class="mainlogo" alt="" style="height: 100px;">
+                        </a>
+                        <p>Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide.</p>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-12 row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 ">
                             <ul class="fw_light w_break m_xs_bottom_8 m_bottom_20">
                                 <h5 class="color_dark m_bottom_20 fw_light">Contact Us</h5>
                                 <li class="m_bottom_8">
@@ -71,7 +72,7 @@
 
                             </ul>
                         </div>
-                        <ul class="col-lg-7 col-md-7 col-sm-12 vr_list_type_5">
+                        <ul class="col-lg-6 col-md-6 col-sm-12 vr_list_type_5">
                             <h5 class="color_dark m_bottom_20 fw_light"> Our Locations:</h5>
                             <li class="color_dark d_inline_b m_bottom_20">
                                 <div class="icon_wrap_size_1 color_pink circle f_left">
@@ -92,61 +93,63 @@
                                 <span class="addressspan">Our Showroom</span><br/>
 
                                 <p class="fw_light " style="    font-size: 14px;"> 
-                                    Summit Building, 30 Man Yue Street,<br/> 7th Floor, Unit B, Hung Hom, Kowloon	
+                                    Summit Building,<br/> 30 Man Yue Street,<br/> 7th Floor, Unit B, <br/> Hung Hom, Kowloon	
                                 </p>
                             </li>
 
                         </ul>
                     </div>
-                </div>
-                <!--social buttons-->
-                <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
-                    <h5 class="color_dark fw_light m_bottom_20">Information</h5>
+                    <!--social buttons-->
+                    <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
+                        <h5 class="color_dark fw_light m_bottom_20">Information</h5>
 
 
-                    <ul class="vr_list_type_4 color_dark fw_light w_break">
-                        <?php
-                        $ourlinks = [
-                            array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
-                            array("title" => "FAQ's", "link" => site_url("Shop/faqs"), "submenu" => []),
-                            array("title" => "Terms of Service", "link" => site_url("term-of-service"), "submenu" => []),
-                            array("title" => "Privacy Policy", "link" => site_url("privacy-policy"), "submenu" => []),
-                            array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
-                            array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
-                        ];
-                        foreach ($ourlinks as $key => $value) {
-                            ?>
-                            <li class="m_bottom_12">
-                                <a href="<?php echo $value["link"]; ?>" class="color_dark d_inline_b">
-                                    <span class="icon_wrap_size_0 circle color_black d_block tr_inherit f_left">
-                                        <i class="icon-angle-right"></i>
-                                    </span>
-                                    <?php echo $value["title"]; ?>
-
-                                </a>
-                            </li>
+                        <ul class="vr_list_type_4 color_dark fw_light w_break">
                             <?php
-                        }
-                        ?>
-                    </ul>
-                </div>
+                            $ourlinks = [
+                                array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
+                                array("title" => "FAQ's", "link" => site_url("Shop/faqs"), "submenu" => []),
+                                array("title" => "Terms of Service", "link" => site_url("term-of-service"), "submenu" => []),
+                                array("title" => "Privacy Policy", "link" => site_url("privacy-policy"), "submenu" => []),
+                                array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
+                                array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
+                            ];
+                            foreach ($ourlinks as $key => $value) {
+                                ?>
+                                <li class="m_bottom_12">
+                                    <a href="<?php echo $value["link"]; ?>" class="color_dark d_inline_b">
+                                        <span class="icon_wrap_size_0 circle color_black d_block tr_inherit f_left">
+                                            <i class="icon-angle-right"></i>
+                                        </span>
+                                        <?php echo $value["title"]; ?>
 
-                <!--subscribe-->
-                <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
-                    <h5 class="color_dark fw_light m_bottom_20">Newsletter</h5>
-                    <p class="fw_light m_bottom_25">Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-                    <form class="subscribe_send_form">
-                        <ul>
-                            <li class="m_bottom_20">
-                                <input type="email" name="subscribe_email" placeholder="Your email address" class="r_corners bg_light w_full fw_light">
-                            </li>
-                            <li>
-                                <button class="fs_medium button_type_2 color_purple transparent r_corners tr_all">Subscribe</button>
-                            </li>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                            ?>
                         </ul>
-                    </form>
+                    </div>
+
+                    <!--subscribe-->
+                    <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
+                        <h5 class="color_dark fw_light m_bottom_20">Newsletter</h5>
+                        <p class="fw_light m_bottom_25">Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+                        <form class="subscribe_send_form">
+                            <ul>
+                                <li class="m_bottom_20">
+                                    <input type="email" name="subscribe_email" placeholder="Your email address" class="r_corners bg_light w_full fw_light">
+                                </li>
+                                <li>
+                                    <button class="fs_medium button_type_2 color_purple transparent r_corners tr_all">Subscribe</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
                 </div>
             </div>
+
+        </div>
         </div>
     </section>
 
@@ -169,7 +172,7 @@
 <!--Libs-->
 <!------------------------------old footer--------------------------------->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-		<script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.iosslider.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.iosslider.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.appear.js"></script>

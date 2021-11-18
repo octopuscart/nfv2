@@ -22,7 +22,7 @@ class Shop extends CI_Controller {
         $this->load->view('errors/error_404');
     }
 
-    public function index() {
+    public function index3() {
         $this->load->library('user_agent');
 
         $checkmobile = $this->agent->is_mobile();
@@ -31,7 +31,7 @@ class Shop extends CI_Controller {
         $data['featuredProducts'] = $this->Product_model->featurProductTag();
         $this->load->view('home', $data);
     }
-     public function index3() {
+     public function index() {
         $this->load->library('user_agent');
 
         $checkmobile = $this->agent->is_mobile();

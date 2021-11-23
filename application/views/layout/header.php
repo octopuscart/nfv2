@@ -650,7 +650,8 @@ if ($session_data) {
 
 
                             </div>
-
+                            <div class="col-lg-6 col-md-6 col-sm-6 d_table_cell d_xs_block f_none v_align_m logo t_xs_align_c" style="width:20px">
+                            </div>
                         </div>
 
                     </div>

@@ -1003,4 +1003,20 @@ table.steptable td{
     #AjaxCart {
         width: 127px;
     }
+    .big_heading {
+        position: absolute;
+        z-index: 1000;
+        font-size: 60px;
+        font-weight: normal;
+        font-family: serif;
+        color: #b3b3b333;
+        text-transform: uppercase;
+        margin-top: 0px;
+
+        width: 100%;
+        text-align: center;
+    }
+    .section_offset {
+        padding: 20px 0 20px;
+    }
 }

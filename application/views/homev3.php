@@ -52,18 +52,12 @@ $sliderlist = [
 <!--about block-->
 <section class="section_offset" >
     <div class="container t_align_c">
-
-
         <article id="tab-1" data-appear-animation="fadeInUp" data-appear-animation-delay="450">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
-
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m_xs_bottom_20">
                     <img src="<?php echo base_url(); ?>assets/v3/homev3/image3.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
-
-
-
                 </div>
-                <div class="col-lg-6 col-md-6 m_top_15 t_align_l aboutsetion" style='    font-size: 16px;
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m_top_15 t_align_l aboutsetion" style='    font-size: 16px;
                      color: black;'>
                     <h1 class="big_heading"> tailoring expertise</h1>
                     <h3 class="color_dark fw_light m_bottom_50 heading_1" data-appear-animation="bounceInRight" style='font-weight: 500;'>WHY NITA FASHIONS?</h3>
@@ -132,8 +126,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
             ];
             foreach ($featureproductblock as $key => $value) {
                 ?>
-
-                <div class="col-lg-4 col-md-4 col-sm-4  m_xs_bottom_30">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  m_bottom_30">
                     <!--post-->
                     <article>
                         <!--post content-->
@@ -147,8 +140,6 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                         <?php
                                     }
                                     ?>
-
-
                                 </ul>
                             </div>
                             <figcaption >
@@ -157,7 +148,6 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                     <p class="fw_light m_bottom_12"><?php echo $value["text"]; ?></p>
                                 </div>
                                 <a href="#" class="button_type_3 color_dark  color_scheme_hover r_corners tr_all tt_uppercase fs_medium d_block f_left m_right_10 darkbutton">Shop Now</a>
-
                             </figcaption>
                         </figure>
                     </article>
@@ -178,11 +168,11 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
     <div class="container t_align_c">
         <article id="tab-1" data-appear-animation="fadeInUp" data-appear-animation-delay="450">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m_xs_bottom_20">
 
                     <img src="<?php echo base_url(); ?>assets/v3/homev3/image8.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
                 </div>
-                <div class="col-lg-6 col-md-6 t_align_l aboutsetion" style='    font-size: 16px;
+                <div class="col-lg-6 col-md-6  col-sm-12 col-xs-12 t_align_l aboutsetion" style='    font-size: 16px;
                      color: black;'>
                     <h3 class="color_light fw_light m_bottom_20 heading_1" data-appear-animation="bounceInLeft" style='    font-weight: 500;
                         text-transform: uppercase;
@@ -414,14 +404,14 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
 
         <article id="tab-1" data-appear-animation="fadeInUp" data-appear-animation-delay="450">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
+                <div class="col-lg-6 col-md-6   col-sm-12 col-xs-12 m_bottom_20">
 
                     <img src="<?php echo base_url(); ?>assets/v3/homev3/image10.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
 
 
 
                 </div>
-                <div class="col-lg-6 col-md-6 t_align_l aboutsetion" style='    font-size: 16px;
+                <div class="col-lg-6 col-md-6  col-sm-12 col-xs-12 t_align_l aboutsetion" style='    font-size: 16px;
                      color: black;'>
                     <h1 class="big_heading"> Since 1953</h1>
                     <h3 class="color_dark fw_light m_bottom_35 heading_1" data-appear-animation="bounceInLeft" style='font-weight: 500;'> OUR HERITAGE</h3>
@@ -455,7 +445,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
 
         <article id="tab-1" data-appear-animation="fadeInUp" data-appear-animation-delay="450">
             <div class="row">
-                <div class="col-lg-6 col-md-6 t_align_l aboutsetion " style='    font-size: 16px;
+                <div class="col-lg-6 col-md-6  col-sm-12 col-xs-12 t_align_l aboutsetion " style='    font-size: 16px;
                      color: black;'>
                     <h1 class="big_heading rotatetext"> contemporary tailoring</h1>
                     <h3 class=" fw_light color_dark m_bottom_35 heading_1" data-appear-animation="bounceInLeft" style='font-weight: 500;text-transform: uppercase; line-height: 40px;'>
@@ -476,7 +466,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                         Together, Mr. Peter Daswani and Mr. Anil Daswani strike a great balance between traditional and <b>contemporary tailoring</b>. Nita Fashions is renowned worldwide for their exceptionally <b>tailored suits, shirts, tuxedos and coats</b> that you will love to wear for a lifetime.                    </p>
 
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 m_xs_bottom_20">
+                <div class="col-lg-6 col-md-6  col-sm-12 col-xs-12 m_bottom_20">
 
                     <img src="<?php echo base_url(); ?>assets/v3/homev3/image12.jpg" alt="Nita Fashions" style='border-radius: 10px;'>
 
@@ -557,15 +547,15 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                 <div class="stepoddborder">
                                     <div class="fw_light  color_dark row  ">
 
-                                        <div class="col-lg-4 col-md-4 col-sm-6 m_xs_bottom_20">
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  m_bottom_20">
                                             <img src="<?php echo $steps["image"]; ?>" alt="Nita Fashions" style='border-radius: 10px;'>
                                         </div>
-                                        <div class="col-lg-8  col-md-4 m_xs_bottom_20 t_align_l aboutsetion" style='    font-size: 16px;
+                                        <div class="col-lg-8  col-md-4 col-sm-12 col-xs-12  m_xs_bottom_20 t_align_l aboutsetion" style='    font-size: 16px;
                                              color: black;'>
                                             <h4 class="stepheadingcustome r_corners wrapper m_bottom_23 bg_light_3  color_dark" style="text-transform: uppercase;font-size: 17px;">  <?php echo $steps["title"]; ?></h4>
                                             <table class="steptable">
                                                 <tr>
-                                                    <td style="vertical-align: middle">
+                                                    <td style="vertical-align: middle"  >
                                                         <?php
                                                         foreach ($steps["text"] as $key1 => $value1) {
                                                             ?>
@@ -578,7 +568,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                                         }
                                                         ?>
                                                     </td>
-                                                    <td>
+                                                    <td class="hideonmobile">
                                                         <h2 class="stepheadingcustome-counter"><?php
                                                             echo $key + 1;
                                                             ?></h2>
@@ -591,12 +581,12 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                             <?php } else { ?>
                                 <div class="stepevenborder">
                                     <div class="fw_light color_dark row  ">
-                                        <div class="col-lg-8 col-md-6 m_xs_bottom_50 t_align_l aboutsetion" style='    font-size: 16px;
+                                        <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12  m_xs_bottom_50 t_align_l aboutsetion" style='    font-size: 16px;
                                              color: black;'>
                                             <h4 class="stepheadingcustome r_corners wrapper m_bottom_23 bg_light_3 color_dark"  style="text-transform: uppercase;font-size: 17px;">  <?php echo $steps["title"]; ?></h4>
                                             <table class="steptable">
                                                 <tr>
-                                                    <td>
+                                                    <td class="hideonmobile">
                                                         <h2 class="stepheadingcustome-counter">
                                                             <?php
                                                             echo $key + 1;
@@ -618,7 +608,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="col-lg-4 col-md-6 col-sm-6 m_xs_bottom_20">
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12  m_bottom_20">
                                             <img src="<?php echo $steps["image"]; ?>" alt="Nita Fashions" style='border-radius: 10px;'>
                                         </div>
                                     </div>
@@ -719,5 +709,5 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
 
 
 <?php
-$this->load->view('layout/footer_v2');
+$this->load->view('layout/footer');
 ?>

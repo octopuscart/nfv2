@@ -1,162 +1,5 @@
 <!--footer-->
-<footer role="contentinfo" class="bg_light_3" style="    padding: 0px;margin-top: -20px;">
-    <!--top part-->
-    <section class="footer_top_part">
 
-        <hr class="m_bottom_45 divider_type_3 m_xs_bottom_30">
-        <div class="container-fluid" style="padding: 0px 30px">
-            <div class="row">
-
-                <!--contact info--> 
-
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12 fw_light m_bottom_30">
-                        <a href="<?php echo site_url("/") ?>" class="d_inline_m m_xs_top_20 m_bottom_20" style="width: 100%;
-                           text-align: center;">
-                            <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" class="mainlogo" alt="" style="height: 100px;">
-                        </a>
-                        <p>Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide.</p>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-12 row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 ">
-                            <ul class="fw_light w_break m_xs_bottom_8 m_bottom_20">
-                                <h5 class="color_dark m_bottom_20 fw_light">Contact Us</h5>
-                                <li class="m_bottom_8">
-                                    <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
-                                        <i class="icon-phone-1"></i>
-                                    </div>
-                                    <a href="tel:+ (852) 2721-9990" class="color_black color_pink_hover">  + (852) 2721-9990 </a>
-                                </li>
-                                <li class="m_bottom_8">
-                                    <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
-                                        <i class="icon-mail-alt"></i>
-                                    </div>
-                                    <a href="mailto:sales@nitafashions.com" class="color_black color_pink_hover"> sales@nitafashions.com</a>
-                                </li>
-
-                            </ul>
-
-                            <span class="addressspan"></span><br/>
-                            <ul class="hr_list social_icons">
-                                <!--tooltip_container class is required-->
-                                <li class="m_right_15 m_bottom_15 tooltip_container">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
-                                    <a href="#" class="d_block facebook_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-facebook fs_small"></i>
-                                    </a>
-                                </li>
-                                <li class="m_right_15 m_bottom_15 tooltip_container">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
-                                    <a href="#" class="d_block twitter_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-twitter fs_small"></i>
-                                    </a>
-                                </li>
-                                <li class="m_right_15 m_bottom_15 tooltip_container m_sm_right_0 m_xs_right_15">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Instagram</span>
-                                    <a href="#" class="d_block instagram_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-instagramm fs_small"></i>
-                                    </a>
-                                </li>
-                                <li class="m_right_15 m_bottom_15 tooltip_container">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Youtube</span>
-                                    <a href="#" class="d_block youtube_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-youtube-play fs_small"></i>
-                                    </a>
-                                </li>
-
-
-
-                            </ul>
-                        </div>
-                        <ul class="col-lg-6 col-md-6 col-sm-12 vr_list_type_5">
-                            <h5 class="color_dark m_bottom_20 fw_light"> Our Locations:</h5>
-                            <li class="color_dark d_inline_b m_bottom_20">
-                                <div class="icon_wrap_size_1 color_pink circle f_left">
-                                    <i class="icon-location"></i>
-                                </div>
-                                <span class="addressspan">Our Retail Store</span><br/>
-
-                                <p class="fw_light " style="    font-size: 14px;"> 
-                                    16 Mody Road, G/F, T.S.T,</br>
-                                    Kowloon, Hong Kong</p>
-
-                            </li>
-
-                            <li class=" color_dark d_inline_b">
-                                <div class="icon_wrap_size_1 color_pink circle f_left">
-                                    <i class="icon-location"></i>
-                                </div>
-                                <span class="addressspan">Our Showroom</span><br/>
-
-                                <p class="fw_light " style="    font-size: 14px;"> 
-                                    Summit Building,<br/> 30 Man Yue Street,<br/> 7th Floor, Unit B, <br/> Hung Hom, Kowloon	
-                                </p>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <!--social buttons-->
-                    <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
-                        <h5 class="color_dark fw_light m_bottom_20">Information</h5>
-
-
-                        <ul class="vr_list_type_4 color_dark fw_light w_break">
-                            <?php
-                            $ourlinks = [
-                                array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
-                                array("title" => "FAQ's", "link" => site_url("Shop/faqs"), "submenu" => []),
-                                array("title" => "Terms of Service", "link" => site_url("term-of-service"), "submenu" => []),
-                                array("title" => "Privacy Policy", "link" => site_url("privacy-policy"), "submenu" => []),
-                                array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
-                                array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
-                            ];
-                            foreach ($ourlinks as $key => $value) {
-                                ?>
-                                <li class="m_bottom_12">
-                                    <a href="<?php echo $value["link"]; ?>" class="color_dark d_inline_b">
-                                        <span class="icon_wrap_size_0 circle color_black d_block tr_inherit f_left">
-                                            <i class="icon-angle-right"></i>
-                                        </span>
-                                        <?php echo $value["title"]; ?>
-
-                                    </a>
-                                </li>
-                                <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
-
-                    <!--subscribe-->
-                    <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
-                        <h5 class="color_dark fw_light m_bottom_20">Newsletter</h5>
-                        <p class="fw_light m_bottom_25">Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-                        <form class="subscribe_send_form">
-                            <ul>
-                                <li class="m_bottom_20">
-                                    <input type="email" name="subscribe_email" placeholder="Your email address" class="r_corners bg_light w_full fw_light">
-                                </li>
-                                <li>
-                                    <button class="fs_medium button_type_2 color_purple transparent r_corners tr_all">Subscribe</button>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        </div>
-    </section>
-
-    <section class="footer_bottom_part t_align_c color_grey bg_light_4 fw_light" style="padding: 5px;">
-        <p style="color:black">Copyright © <?php echo date("Y"); ?> nitafashions.com, All rights reserved.</p>
-    </section>
-</footer>
 <button type="button" aria-label="hiddenbutton" style="display: none" class="btn btn-primary btn-lg Login" data-toggle="modal" data-target="#myLogin">
 </button>
 <style>
@@ -172,7 +15,6 @@
 <!--Libs-->
 <!------------------------------old footer--------------------------------->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.iosslider.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/theme/plugins/jquery.appear.js"></script>
@@ -340,7 +182,7 @@
 
     .tt-suggestion {
         padding: 3px 20px;
-
+      
 
         line-height: 24px;
     }
@@ -489,44 +331,44 @@
         /////////////////// Search Customer type ahead ////////////////////////////////////
         $('#searchproduct').typeahead(
                 {highlight: true},
-                {
-                    name: 'search',
-                    displayKey: 'item_code',
-                    limit: 8,
-                    source: search.ttAdapter(),
-                    templates: {
-                        header: '<span class="typeaheadgroup"><i class="icon-search"></i> Searched Result</span>',
-                        suggestion: Handlebars.compile($("#result-template").html()),
-                    },
-                }
+        {
+            name: 'search',
+            displayKey: 'item_code',
+            limit: 8,
+            source: search.ttAdapter(),
+            templates: {
+                header: '<span class="typeaheadgroup"><i class="icon-search"></i> Searched Result</span>',
+                suggestion: Handlebars.compile($("#result-template").html()),
+            },
+        }
 
         ).bind('typeahead:selected', function (obj, select_data) {
             var tag_id = select_data.tag_id;
             var product_id = select_data.sid;
 //            $("input[name=searchtag]").val(checkd);
-            window.location = "<?php echo site_url("Product/productList?category=0&item_type="); ?>" + tag_id + "&product_id=" + product_id;
+            window.location = "<?php echo site_url("Product/productList?category=0&item_type=");?>"+tag_id+"&product_id="+product_id;
 
         });
-
-        $('#searchproduct2').typeahead(
+        
+         $('#searchproduct2').typeahead(
                 {highlight: true},
-                {
-                    name: 'search',
-                    displayKey: 'item_code',
-                    limit: 8,
-                    source: search.ttAdapter(),
-                    templates: {
-                        header: '<span class="typeaheadgroup"><i class="icon-search"></i> Searched Result</span>',
-                        suggestion: Handlebars.compile($("#result-template").html()),
-                    },
-                }
+        {
+            name: 'search',
+            displayKey: 'item_code',
+            limit: 8,
+            source: search.ttAdapter(),
+            templates: {
+                header: '<span class="typeaheadgroup"><i class="icon-search"></i> Searched Result</span>',
+                suggestion: Handlebars.compile($("#result-template").html()),
+            },
+        }
 
         ).bind('typeahead:selected', function (obj, select_data) {
             console.log("sdfsdfsd");
             var tag_id = select_data.tag_id;
             var product_id = select_data.sid;
 //            $("input[name=searchtag]").val(checkd);
-            window.location = "<?php echo site_url("Product/productList?category=0&item_type="); ?>" + tag_id + "&product_id=" + product_id;
+            window.location = "<?php echo site_url("Product/productList?category=0&item_type=");?>"+tag_id+"&product_id="+product_id;
 
         });
 
@@ -538,24 +380,43 @@
 
 </script> 
 <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-88337196-1', 'auto');
-    ga('send', 'pageview');
+  ga('create', 'UA-88337196-1', 'auto');
+  ga('send', 'pageview');
 
 </script>
+<hr class="divider_type_2" style="margin-bottom:0px;margin-top:0px; ">
+<footer role="contentinfo" class="bg_light_3" style="    padding: 0px;">
 
+    <section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="    padding: 8px 1px 8px 1px;">
+        <div class="footerlinks" style="    ">
 
+            <a href="<?php echo site_url("Shop/faqs");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">FAQ's</a>  |                             
+            <a href="<?php echo site_url("term-of-service");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Terms of Service</a>  |                          
+            <a href="<?php echo site_url("privacy-policy");?>" class="menu-link  color_dark relative main-menu-link footersociallisnktext">Privacy Policy</a>     
+            <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" rel="noopener" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle footersociallisnk ">
+                <i class="icon-youtube-play fs_small"></i>
+            </a>
+            <a href="https://www.instagram.com/Nita.fashions" target="_blank" rel="noopener" class="menu-link facebook active icon_wrap_size_1  circle  footersociallisnk">
+                <i class="icon-instagram fs_small"></i>
+            </a>
+            <a href="https://twitter.com/nitafashions" target="_blank" rel="noopener" class="menu-link twitter icon_wrap_size_1 circle footersociallisnk">
+                <i class="icon-twitter fs_small"></i>
+            </a>
+            <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" rel="noopener" target="_blank" class="menu-link facebook active icon_wrap_size_1  circle footersociallisnk">
+                <i class="icon-facebook fs_small"></i>
+            </a>
+
+        </div>
+    </section>
+    <section class="footer_bottom_part t_align_c color_grey bg_light_4 fw_light" style="padding: 5px;">
+        <p style="color:black">Copyright © <?php echo date("Y");?> NitaFashions.com, All rights reserved.</p>
+    </section>
+</footer>
 </div>
 </body>
 </html>

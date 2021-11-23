@@ -1,5 +1,5 @@
 <?php
-$this->load->view('layout/header_v3');
+$this->load->view('layout/header');
 ?>
 <style>
     .iosSlider {

@@ -1,6 +1,6 @@
 .appheaderpart .contact_info_list{
     float: right;
-    color: #000;
+    color: #000!important;
     padding-top: 6px;
 }
 
@@ -984,6 +984,20 @@ table.steptable td{
 .stepoddborder{
     border-right: 7px solid #ecf0f1;
     border-bottom: 7px solid #ecf0f1;
-   
+
     padding: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+    .header_bottom_part{
+        border-top: 0px solid #000;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: 0px solid #000;
+    }
+
+    .navbar-default {
+        background-color: #000;
+         border-color: #000; 
+    }
 }

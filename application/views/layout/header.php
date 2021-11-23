@@ -314,9 +314,9 @@ if ($session_data) {
                 </section>
                 <section class="header_bottom_part type_2 bg_light showonmobile  " style="padding: 0px">
                     <div class="container">
-                        <div class="d_table w_full d_xs_block">
+                        <div class="row ">
                             <!--logo-->
-                            <div class="col-lg-6 col-md-6 col-sm-6 d_table_cell d_xs_block f_none v_align_m logo t_xs_align_c" style="width:200px">
+                            <div class="col-lg-6 col-md-6 col-xs-8 ">
                                 <div class="container" >
                                     <div class="">
                                         <!--contact info-->
@@ -332,8 +332,8 @@ if ($session_data) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 t_align_r d_table_cell d_xs_block f_none" style="
-    padding: 0px!important;">
+                            <div class="col-lg-4 col-md-4 col-xs-4" style="
+                                 padding: 0px!important;">
 
                                 <div class="col-lg-12 col-md-12 col-sm-12"  id="loginCartWish">
 
@@ -650,8 +650,7 @@ if ($session_data) {
 
 
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 d_table_cell d_xs_block f_none v_align_m logo t_xs_align_c" style="width:20px">
-                            </div>
+
                         </div>
 
                     </div>

@@ -998,6 +998,9 @@ table.steptable td{
 
     .navbar-default {
         background-color: #000;
-         border-color: #000; 
+        border-color: #000; 
+    }
+    #AjaxCart {
+        width: 127px;
     }
 }

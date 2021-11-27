@@ -233,6 +233,10 @@ class Shop extends CI_Controller {
     public function aboutus() {
         $this->load->view('pages/aboutus');
     }
+    
+    public function bespokeTailoring() {
+        $this->load->view('pages/bespokeTailoring');
+    }
 
     public function schedule() {
         $query = $this->db->query("

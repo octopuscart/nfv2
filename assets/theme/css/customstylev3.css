@@ -988,7 +988,17 @@ table.steptable td{
     padding: 30px;
 }
 
+
 @media only screen and (max-width: 768px) {
+    .responsivetextheaderhome{
+        font-size: 13px!important;
+        font-weight: 200!important;
+        line-height: 23px!important;
+        /* text-transform: uppercase; */
+        letter-spacing: 1px!important;
+    }
+
+
     .header_bottom_part{
         border-top: 0px solid #000;
         padding-top: 5px;

@@ -11,9 +11,9 @@ $this->load->view('layout/header');
 </style>
 <?php
 $sliderlist = [
-    array("image" => base_url() . "assets/v3/slider/slider1_v2.jpg", "direction"=>"right", "link"=>site_url("Product/productList?category=0&item_type=11")),
-    array("image" => base_url() . "assets/v3/slider/slider2_v2.jpg", "direction"=>"center","link"=>site_url("Product/productList?category=0&item_type=11")),
-    array("image" => base_url() . "assets/v3/slider/slider3_v2.jpg", "direction"=>"left","link"=>site_url("Product/productList?category=0&item_type=10"))
+    array("image" => base_url() . "assets/v3/slider/slider1_v2.jpg", "direction" => "right", "link" => site_url("Product/productList?category=0&item_type=11")),
+    array("image" => base_url() . "assets/v3/slider/slider2_v2.jpg", "direction" => "center", "link" => site_url("Product/productList?category=0&item_type=11")),
+    array("image" => base_url() . "assets/v3/slider/slider3_v2.jpg", "direction" => "left", "link" => site_url("Product/productList?category=0&item_type=10"))
 ];
 ?>
 
@@ -24,11 +24,11 @@ $sliderlist = [
             foreach ($sliderlist as $key => $value) {
                 ?>
                 <li data-transition="fade" data-slotamount="10">
-                    <img src="<?php echo $value["image"]?>" alt="" data-bgfit="cover" data-bgposition="center center">
-                    <div class="caption sfl str" data-x="<?php echo $value["direction"]?>" data-y="170" data-speed="700"><h1 class="color_light fw_light" style="font-weight: 300;    text-shadow: 2px 2px 5px #000;"> New Arrivals</h1></div>
-                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"]?>" data-y="243" data-speed="700" data-start="1200" style="font-size: 19px;text-align: <?php echo $value["direction"]?>;    text-shadow: 2px 2px 5px #000;">Over 67 years of tailoring expertise, <br/>you can expect nothing short of spectacular from our <br/>head tailors and fashion stylists at Nita Fashions. </div>
-                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"]?>" data-y="339" data-speed="700" data-start="1400">
-                        <a href="<?php echo $value["link"]?>" role="button" class="tt_uppercase button_type_3 transparent color_light r_corners fs_medium d_block tr_all">SHOP NOW</a>
+                    <img src="<?php echo $value["image"] ?>" alt="" data-bgfit="cover" data-bgposition="center center">
+                    <div class="caption sfl str" data-x="<?php echo $value["direction"] ?>" data-y="170" data-speed="700"><h1 class="color_light fw_light" style="font-weight: 300;    text-shadow: 2px 2px 5px #000;"> New Arrivals</h1></div>
+                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"] ?>" data-y="243" data-speed="700" data-start="1200" style="font-size: 19px;text-align: <?php echo $value["direction"] ?>;    text-shadow: 2px 2px 5px #000;">Over 67 years of tailoring expertise, <br/>you can expect nothing short of spectacular from our <br/>head tailors and fashion stylists at Nita Fashions. </div>
+                    <div class="caption sfl stl color_light" data-x="<?php echo $value["direction"] ?>" data-y="339" data-speed="700" data-start="1400">
+                        <a href="<?php echo $value["link"] ?>" role="button" class="tt_uppercase button_type_3 transparent color_light r_corners fs_medium d_block tr_all">SHOP NOW</a>
                     </div>
                 </li>
                 <?php
@@ -45,7 +45,7 @@ $sliderlist = [
 <!--power statement-->
 <section class="section_offset bg_light_3 appear-animation fadeInUp appear-animation-visible powerstatement" data-appear-animation="fadeInUp">
     <div class="container t_align_c">
-        <h3 class="color_dark fw_light m_bottom_15">Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide.</h3>
+        <h3 class="color_dark fw_light m_bottom_15 responsivetextheaderhome">Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide.</h3>
     </div>
 </section>
 
@@ -102,7 +102,9 @@ These luxurious fabrics are  breathable and comfortable to wear all year round.
                     "imagelist" => [
                         base_url() . "assets/v3/homev3/image5a.jpg",
                         base_url() . "assets/v3/homev3/image5.jpg"
-                    ],),
+                    ],
+                    "link" => site_url("Product/productList?category=0&item_type=1"),
+                ),
                 array(
                     "title" => "SUITS",
                     "text" => "
@@ -112,7 +114,9 @@ Our suit fabrics are sourced from premier Italian and English mills that adhere 
                     ",
                     "imagelist" => [
                         base_url() . "assets/v3/homev3/image6.jpg",
-                    ],),
+                    ],
+                    "link" => site_url("Product/productList?category=0&item_type=11"),
+                ),
                 array(
                     "title" => "TUXEDOS",
                     "text" => "
@@ -122,7 +126,9 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                     ",
                     "imagelist" => [
                         base_url() . "assets/v3/homev3/image7.jpg",
-                    ],),
+                    ],
+                    "link" => site_url("Product/productList?category=0&item_type=10"),
+                ),
             ];
             foreach ($featureproductblock as $key => $value) {
                 ?>
@@ -147,7 +153,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                 <div class="featureblockcontent">
                                     <p class="fw_light m_bottom_12"><?php echo $value["text"]; ?></p>
                                 </div>
-                                <a href="#" class="button_type_3 color_dark  color_scheme_hover r_corners tr_all tt_uppercase fs_medium d_block f_left m_right_10 darkbutton">Shop Now</a>
+                                <a href="<?php echo $value["link"]; ?>" class="button_type_3 color_dark  color_scheme_hover r_corners tr_all tt_uppercase fs_medium d_block f_left m_right_10 darkbutton">Shop Now</a>
                             </figcaption>
                         </figure>
                     </article>
@@ -452,19 +458,17 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                         Our Bespoke<br/> Products & Services 
                     </h3>
 
-                    <p class="m_bottom_10 fw_light "  >
-                        Between 1950 - 1960, Hong Kong was being restructured from an entrepot to an industrial city. The British colony was particularly enchanted with British Fashion, which seemed like an opportune time for Mr. Murli Daswani to migrate there, after working as an apprentice pattern maker on Savile Row. In 1953, he established a small tailoring operation ‘Nita Fashions,’ who targeted local professionals. 
+                    <p class="m_bottom_10 fw_light "  >The Nita Fashions bespoke tailoring experience covers a large variety of products including but not limited to bespoke suits, sports jackets, shirts, waistcoats, overcoats, tuxedoes, jeans, dresses and skirts for both the discerning man and woman.
                     </p>
-                    <p class="m_bottom_10 fw_light " >
-                        Nita Fashions became a generational business in 1975, when Mr. Peter Daswani joined.  Peter’s pattern making style derives from his early exposure to British fashion, which features roped shoulders and a structured silhouette. Soon after, he decided to take his family operation global and criss crossed the world to serve his loyal clients that he had met at his atelier in Tsim Sha Tsui. As time went by, word of Nita Fashions started to circulate and Peter started to be the tailor for several high profile celebrities and entrepreneurs. 
+                    <p class="m_bottom_10 fw_light " >Our fabric library is updated every season and hand selected by our design team so that we have you always on trend and ready for any occasion that pops up on your calendar. 
                     </p>
-                    <p class="m_bottom_10  fw_light">
-                        Enamoured with the world of <b>bespoke tailoring</b> and excited to take the brand digital, Mr. Anil Daswani decided to join his father, Peter. In 2008, Anil’s paper pattern making style matched the emerging Italian sartorial fashion which leans towards a natural form and modern cut.      
+                    <p class="m_bottom_10  fw_light">The unique collection includes celebrated Italian and English brands & mills like Vitale Barberis Canonico, Reda, E. Thomas, Ermengildo Zegna, Loro Piana, Fratelli Tallia Delfino, Cacciopoli,Scabal, Holland & Sherry, Marzoni, Harrisons of Edinburgh, Fox Brothers, Alfred Brown, W. Bill, Thomas Mason, Tessitura Monti & more. 
                     </p>
 
-                    <p class="m_bottom_10  fw_light">
-                        Together, Mr. Peter Daswani and Mr. Anil Daswani strike a great balance between traditional and <b>contemporary tailoring</b>. Nita Fashions is renowned worldwide for their exceptionally <b>tailored suits, shirts, tuxedos and coats</b> that you will love to wear for a lifetime.                    </p>
-
+                    <p class="m_bottom_10  fw_light">With every garment that we tailor, we create an individual paper pattern based on 32 detailed body measurements and figuration details that we carefully transcribe, allowing us to create a paper pattern that is as unique as you.
+                    </p>
+                    <p class="m_bottom_10  fw_light">With more than 67 years of experience, you will not be surprised to learn that Nita Fashions is considered one of the best bespoke tailors in Hong Kong.
+                    </p>
                 </div>
                 <div class="col-lg-6 col-md-6  col-sm-12 col-xs-12 m_bottom_20">
 
@@ -638,7 +642,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                 <p class="heading_4">The concept of Bespoke Tailoring originated on Savile Row, London in the early 18th century, where royalty and aristocrats became increasingly obsessed by how clothing portrayed their wealth and status. </p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-4 appear-animation fadeInUp appear-animation-visible" data-appear-animation="fadeInUp" data-appear-animation-delay="150" style="animation-delay: 150ms;">
-                <a href="#" id="get_started" class="button_type_4 r_corners d_inline_b color_dark tt_uppercase fs_large m_top_5 m_sm_top_25 tr_all">Read More</a>
+                <a href="<?php echo site_url("bespoke-tailoring"); ?>" id="get_started" class="button_type_4 r_corners d_inline_b color_dark tt_uppercase fs_large m_top_5 m_sm_top_25 tr_all">Read More</a>
             </div>
         </div>
     </div>

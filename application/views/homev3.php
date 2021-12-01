@@ -667,6 +667,44 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                             I can’t recommend Anil and his team enough. Very professional from the initial fitting and his knowledge and advice on fabrics and fit makes the experience very easy. <br/>
                             The finishing product from one fitting was great, I had changed my mind on a couple of items of the suit and the team made the alterations without any fuss at all. Thanks Again!
                            "),
+                        array(
+                            "image" => "",
+                            "name" => "Patrick Bart ",
+                            "source" => "Google Review",
+                            "review" => "
+                           These guys do amazing work. I wanted to get a tuxedo for my wedding and they went above and beyond what I was expecting. Virtual tailor experience with Mr. Daswani was great,<bt/> 
+                           he took his time and walked me through all the details. Fit is perfect. I was so impressed that I ordered a suit and several other items soon after. Great job."),
+                        array(
+                            "image" => "",
+                            "name" => "Tony Chung ",
+                            "source" => "Google Review",
+                            "review" => "
+                           Excellent tailor! very professional, great attention to details. you won't regret choosing this wonderful tailor.<br/> definitely, strongly recommended!"
+                        ),
+                        array(
+                            "image" => "",
+                            "name" => "Drew Vinson ",
+                            "source" => "Google Review",
+                            "review" => "
+                           Anil met with us virtually and very patiently guided my fiancée through the measurement process. The suit looks great and fits perfectly. I will be wearing it for my wedding."
+                        ),
+                        array(
+                            "image" => "",
+                            "name" => "Drew Vinson ",
+                            "source" => "Google Review",
+                            "review" => "
+                          Needed an outfit for a wedding at the end of July. I reached out to Nita Fashions to ask if there was any way they could help. The new jacket, shirt and trousers fit perfect. When I first put them on it felt like I had on very nice comfortable pajamas. I appreciate how much quality and craftsmanship went into this entire experience.<br/>
+                          The fine detail of my jacket really make it stand out. Will most certainly be make more perches from Nita Fashions in the future.
+"
+                        ),
+                        array(
+                            "image" => "",
+                            "name" => "Drew Vinson ",
+                            "source" => "Google Review",
+                            "review" => "
+I was tired of wearing ill-fitting dress shirts to work. Now I can actually close my top button, and I look much more professional. It was surprisingly easy and affordable to get tailored shirts with Nita Fashions. <br/>Anil met with me virtually at my convenience, was very helpful in getting the perfect measurements from my wife, and gave me great recommendations for material and every aspect of the design. I will definitely be using their services again. Thanks!
+"
+                        ),
                     ];
                     foreach ($testimonial as $key => $value) {
                         ?>
@@ -683,7 +721,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                 <div class="d_table_cell">
                                     <!--author photo-->
                                     <div class="d_inline_m circle wrapper m_right_10">
-                                        <img src="<?php echo base_url() . "assets/theme/" ?>images/testimonial_img_1.jpg" alt="">
+                                        <img src="https://ui-avatars.com/api/?name=<?php echo $value["name"]; ?>" alt="">
                                     </div>
                                     <!--author name-->
                                     <div class="d_inline_m">

@@ -42,28 +42,28 @@
                                 <li class="m_right_15 m_bottom_15 tooltip_container">
                                     <!--tooltip-->
                                     <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
-                                    <a href="#" class="d_block facebook_static_color icon_wrap_size_4 circle color_light">
+                                    <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" class="d_block facebook_static_color icon_wrap_size_4 circle color_light">
                                         <i class="icon-facebook fs_small"></i>
                                     </a>
                                 </li>
                                 <li class="m_right_15 m_bottom_15 tooltip_container">
                                     <!--tooltip-->
                                     <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
-                                    <a href="#" class="d_block twitter_static_color icon_wrap_size_4 circle color_light">
+                                    <a href="https://twitter.com/nitafashions" class="d_block twitter_static_color icon_wrap_size_4 circle color_light">
                                         <i class="icon-twitter fs_small"></i>
                                     </a>
                                 </li>
                                 <li class="m_right_15 m_bottom_15 tooltip_container m_sm_right_0 m_xs_right_15">
                                     <!--tooltip-->
                                     <span class="d_block r_corners color_default tooltip fs_small tr_all">Instagram</span>
-                                    <a href="#" class="d_block instagram_static_color icon_wrap_size_4 circle color_light">
+                                    <a href="https://www.instagram.com/Nita.fashions" class="d_block instagram_static_color icon_wrap_size_4 circle color_light">
                                         <i class="icon-instagramm fs_small"></i>
                                     </a>
                                 </li>
                                 <li class="m_right_15 m_bottom_15 tooltip_container">
                                     <!--tooltip-->
                                     <span class="d_block r_corners color_default tooltip fs_small tr_all">Youtube</span>
-                                    <a href="#" class="d_block youtube_static_color icon_wrap_size_4 circle color_light">
+                                    <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" class="d_block youtube_static_color icon_wrap_size_4 circle color_light">
                                         <i class="icon-youtube-play fs_small"></i>
                                     </a>
                                 </li>

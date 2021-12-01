@@ -267,9 +267,9 @@ if ($session_data) {
 
 
                 </nav>
-
+                <section class="header_top_part m_xs_bottom_20 backgrounddark showonmobile"></section>
                 <!--top part-->
-                <section class="header_top_part m_xs_bottom_20 backgrounddark">
+                <section class="header_top_part m_xs_bottom_20 backgrounddark hideonmobile">
                     <div class="container">
                         <div class="row">
                             <!--contact info-->

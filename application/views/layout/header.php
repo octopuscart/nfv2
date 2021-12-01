@@ -267,7 +267,7 @@ if ($session_data) {
 
 
                 </nav>
-                <section class="header_top_part m_xs_bottom_20 backgrounddark showonmobile"></section>
+                <section class="header_top_part m_xs_bottom_20 backgrounddark showonmobile" style="    height: 40px;"></section>
                 <!--top part-->
                 <section class="header_top_part m_xs_bottom_20 backgrounddark hideonmobile">
                     <div class="container">

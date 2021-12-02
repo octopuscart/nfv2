@@ -31,7 +31,8 @@ class Shop extends CI_Controller {
         $data['featuredProducts'] = $this->Product_model->featurProductTag();
         $this->load->view('home', $data);
     }
-     public function index() {
+
+    public function index() {
         $this->load->library('user_agent');
 
         $checkmobile = $this->agent->is_mobile();
@@ -233,17 +234,21 @@ class Shop extends CI_Controller {
     public function aboutus() {
         $this->load->view('pages/aboutus');
     }
-    
+
     public function bespokeTailoring() {
         $this->load->view('pages/bespokeTailoring');
     }
 
     public function schedule() {
-        $query = $this->db->query("
+        $cdate = date("Y-m-d");
+        $rquery = "
                   SELECT sa.*,sed.start_date,sed.end_date,sed.id as main_id
                   FROM  `nfw_app_set_appointment` as sa 
-                  join nfw_app_start_end_date as sed 
-                  on sa.id = sed.nfw_set_appointment_id");
+                  join nfw_app_start_end_date as sed  
+                  on sa.id = sed.nfw_set_appointment_id
+                   where sed.end_date> '$cdate'    
+                   ";
+        $query = $this->db->query($rquery);
 
         $data = $query->result_array();
         if (isset($_POST['submit'])) {

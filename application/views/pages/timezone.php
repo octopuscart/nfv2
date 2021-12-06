@@ -123,7 +123,7 @@ $timezones = array(
                 <h4 class="modal-title" id="myModalLabel">Select Timezone</h4>
             </div>
             <div class="modal-body" style="overflow-x: auto;
-                 height: 400px;">
+                 max-height: 88vh;">
                 <ul class="list-group">
 
                     <?php

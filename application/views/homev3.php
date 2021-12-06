@@ -204,7 +204,7 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                 </li>
                                 <li class="m_bottom_10 m_xs_bottom_15 relative">
                                                                                    <!--<i class="icon-user login_icon fs_medium color_grey_light_2"></i>-->
-                                    <input type="date" name="select_date" placeholder="Select Date" class="r_corners bg_light w_full border_none text-left" value="<?php echo date("m-d-Y")?>" >
+                                    <input type="date" name="select_date" placeholder="Select Date" class="r_corners bg_light w_full border_none text-left" value="<?php echo date("Y-m-d");?>" >
                                 </li>
                                 <li class="m_bottom_20 m_xs_bottom_15 relative" style="margin-bottom: 10px;">
                                     <select name="profession_id" id="profession_select"  onchange="professionChange()" class="r_corners bg_light w_full border_none" style="width: 100%;height: 40px;padding: 5px;" required >

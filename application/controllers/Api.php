@@ -1032,7 +1032,7 @@ order by count(nfw_color_id) asc, colorbunch";
             "blue" => 0xFF & $int);
     }
 
-    function createCaptha_get() {
+    function createCaptha_get($captchatype = "") {
         //Settings: You can customize the captcha here
         $image_width = 120;
         $image_height = 40;
@@ -1084,7 +1084,7 @@ order by count(nfw_color_id) asc, colorbunch";
         $x = ($image_width - $textbox[4]) / 2;
         $y = ($image_height - $textbox[5]) / 2;
         imagettftext($image, $font_size, 0, $x, $y, $text_color, $font, $code);
-        $this->session->set_userdata('captchacode', $code);
+        $this->session->set_userdata("captchacode$captchatype", $code);
         /* Show captcha image in the page html page */
         header('Content-Type: image/jpeg'); // defining the image type to be shown in browser widow
         imagejpeg($image); //showing the image

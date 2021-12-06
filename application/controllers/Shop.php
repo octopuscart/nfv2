@@ -348,7 +348,59 @@ class Shop extends CI_Controller {
                 );
             }
         }
+        else{
+            redirect(site_url("/"));
+        }
         $this->load->view('pages/virtualAppointment', $returnarray);
+    }
+
+    public function newsLetters() {
+        $postdata = $this->input->post();
+        $returnarray = array(
+            "code" => "100",
+            "message" => ""
+        );
+        if (isset($_POST['subscribe'])) {
+            $captchaset = $this->input->post('captcha');
+            $captchacode = $this->session->userdata('captchacodens');
+
+            if ($captchaset == $captchacode) {
+                $web_enquiry = array(
+                    'subscribe_email' => $this->input->post('subscribe_email'),
+                );
+                $this->email->set_newline("\r\n");
+                $this->email->from("sales@nitafashions.com", "Nita Fashions");
+                $this->email->to(email_bcc);
+                $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
+
+                $subject = "Nita Fashions - Thank you for subscribing!";
+                $this->email->subject($subject);
+                $web_enquiry['web_enquiry'] = $web_enquiry;
+                $htmlsmessage = $this->load->view('Email/newsletters', $web_enquiry, true);
+                $this->email->message($htmlsmessage);
+                $send = $this->email->send();
+                if ($send) {
+                    $returnarray = array(
+                        "code" => "200",
+                        "message" => "Thank you for subscribing to our mailing list. Your will receive our newsletter for exclusive offers."
+                    );
+                } else {
+                    $returnarray = array(
+                        "code" => "400",
+                        "message" => "Unable to subscribe to our mailing list, please try again later or contact to us."
+                    );
+                }
+            } else {
+                $returnarray = array(
+                    "code" => "400",
+                    "message" => "You have entered wrong captcha, please try again."
+                );
+            }
+        }
+        else{
+            redirect(site_url("/"));
+        }
+        $this->load->view('pages/newsletters', $returnarray);
     }
 
     function testEmail() {

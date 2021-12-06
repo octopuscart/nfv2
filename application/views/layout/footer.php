@@ -135,13 +135,21 @@
                     <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
                         <h5 class="color_dark fw_light m_bottom_20">Newsletter</h5>
                         <p class="fw_light m_bottom_25">Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-                        <form class="subscribe_send_form">
+                        <form class="" method="post" action="<?php echo site_url("Shop/newsLetters")?>">
                             <ul>
-                                <li class="m_bottom_20">
+                                <li class="m_bottom_10">
                                     <input type="email" name="subscribe_email" placeholder="Your email address" class="r_corners bg_light w_full fw_light">
                                 </li>
+                                <li class="m_bottom_20 m_xs_bottom_15 relative">
+                                    <img src="<?php echo site_url("Api/createCaptha/ns") ?>" id='captchaimg' style="   height: 40px;;" class="col-md-6" /> 
+                                    <input name="captcha" id="captcha" type="text" placeholder="Type the text" class="con_pass r_corners bg_light border_none col-md-6"  required>
+                                    <small class='details color_dark'>Can't read the image? click <a href='javascript: refreshCaptcha();' class="color_dark">here</a> to refresh</small>
+
+                                </li>
+                                
+
                                 <li>
-                                    <button class="fs_medium button_type_2 color_purple transparent r_corners tr_all">Subscribe</button>
+                                    <button class="fs_medium button_type_2 color_purple transparent r_corners tr_all" name="subscribe" value="Subscribe" type="submit">Subscribe</button>
                                 </li>
                             </ul>
                         </form>

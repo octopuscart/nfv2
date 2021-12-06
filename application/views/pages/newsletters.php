@@ -9,7 +9,7 @@ $this->load->view('layout/header');
         <ul class="hr_list d_inline_m breadcrumbs" style="margin-top: 10px;">
             <li class="m_right_8 f_xs_none" style="margin-right:0px !important">
                 <a href="#" class="color_default d_inline_m m_right_10" style="margin-right:0px !important;color:white;">
-                    <i class="icon-mail-alt"></i> Virtual Appointment Request
+                    <i class="icon-mail-alt"></i> Newsletter Subscription
                 </a>
             </li>
 
@@ -30,15 +30,15 @@ $this->load->view('layout/header');
                     <?php
                     if ($code == "200") {
                         ?>
-                    <i class="fa fa-check-circle fa-2x"></i>
-                            <?php
+                        <i class="fa fa-check-circle fa-2x"></i>
+                        <?php
                     } else {
                         ?>
-                     <i class="fa fa-times-circle fa-2x"></i>
-                            <?php
+                        <i class="fa fa-times-circle fa-2x"></i>
+                        <?php
                     }
                     ?>
-                     <br/>
+                    <br/>
                     <?php
                     echo $message;
                     ?>   
@@ -118,13 +118,11 @@ $this->load->view('layout/header');
     </div>
 </section>
 <script>
-    $(document).ready(function(){
-         setTimeout(function () {
+    setTimeout(function () {
         window.location = "<?php echo site_url("/") ?>";
     }, 3000);
-    })
-   
 </script>
+
 
 <?php
 $this->load->view('layout/footer');

@@ -299,6 +299,58 @@ class Shop extends CI_Controller {
         $this->load->view('pages/catalogue');
     }
 
+    public function virtualAppointment() {
+        $postdata = $this->input->post();
+        $returnarray = array(
+            "code" => "100",
+            "message" => ""
+        );
+        if (isset($_POST['registration'])) {
+            $captchaset = $this->input->post('captcha');
+            $captchacode = $this->session->userdata('captchacode');
+
+            if ($captchaset == $captchacode) {
+                $web_enquiry = array(
+                    'first_name' => $this->input->post('first_name'),
+                    'last_name' => $this->input->post('last_name'),
+                    'select_date' => $this->input->post('select_date'),
+                    'select_time' => $this->input->post('select_time'),
+                    'timezone' => $this->input->post('timezone'),
+                    'country' => $this->input->post('country'),
+                    'contact_source' => $this->input->post('contact_source'),
+                );
+                $this->email->set_newline("\r\n");
+                $this->email->from("sales@nitafashions.com", "Nita Fashions");
+                $this->email->to(email_bcc);
+                $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
+
+                $subject = "Nita Fashions - Virtual Appointment Request";
+                $this->email->subject($subject);
+                $web_enquiry['web_enquiry'] = $web_enquiry;
+                $htmlsmessage = $this->load->view('Email/virtual_appointment', $web_enquiry, true);
+                $this->email->message($htmlsmessage);
+                $send = $this->email->send();
+                if ($send) {
+                    $returnarray = array(
+                        "code" => "200",
+                        "message" => "Thank you for reaching us for a Virtual Appointment"
+                    );
+                } else {
+                    $returnarray = array(
+                        "code" => "400",
+                        "message" => "Unable to create appointment, please try again later or contact to us."
+                    );
+                }
+            } else {
+                $returnarray = array(
+                    "code" => "400",
+                    "message" => "You have entered wrong captcha, please try again."
+                );
+            }
+        }
+        $this->load->view('pages/virtualAppointment', $returnarray);
+    }
+
     function testEmail() {
         $receiver = "octopuscartltd@gmail.com";
         $this->email->set_newline("\r\n");

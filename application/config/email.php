@@ -1,14 +1,13 @@
 <?php
- require("configdbconnect.php");
+require("configdbconnect.php");
 $configuration = $globleConnectDB;
 $config['useragent'] = 'CodeIgniter';
 $config['protocol'] = 'smtp';
 //$config['mailpath'] = '/usr/sbin/sendmail';
-$config['smtp_host'] ="server.costcokart.com";
-$config['smtp_user'] = "do-not-reply-nita-fashions-ssl-email-465@costcokart.com";
-$config['smtp_pass'] = "stljEdTPmYno";
-$config['smtp_port'] = "587";
-//$config['smtp_secure'] = "tls";
+$config['smtp_host'] =$configuration['email_host'];
+$config['smtp_user'] = $configuration['email_sender'];
+$config['smtp_pass'] = $configuration['email_password'];
+$config['smtp_port'] = $configuration['email_port'];
 $config['smtp_timeout'] = 5;
 $config['wordwrap'] = TRUE;
 $config['wrapchars'] = 76;

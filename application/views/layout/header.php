@@ -392,7 +392,7 @@ if ($session_data) {
                                                         if ($session_data) {
                                                             ?>
                                                         <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
-                                                            <a href="shop_product.php?product_id={{cartd.id}}&item_type={{cartd.tag_id}}" class="d_block f_left m_right_10">
+                                                            <a href="<?php echo site_url("Product/ProductDetails");?>/{{cartd.product_id}}/{{cartd.tag_id}}" class="d_block f_left m_right_10">
                                                                 <img src="{{cartd.item_image}}" alt="Item Image" class="imageData" style="height:66px;width: 66px">
                                                                 <div class="f_left  lh_ex_small" style="text-align: left;">
                                                                     <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">
@@ -803,7 +803,7 @@ if ($session_data) {
                                                         if ($session_data) {
                                                             ?>
                                                         <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
-                                                            <a href="shop_product.php?product_id={{cartd.id}}&item_type={{cartd.tag_id}}" class="d_block f_left m_right_10">
+                                                            <a href="<?php echo site_url("Product/ProductDetails");?>/{{cartd.product_id}}/{{cartd.tag_id}}" class="d_block f_left m_right_10">
                                                                 <img src="{{cartd.item_image}}" alt="Item Image" class="imageData" style="height:66px;width: 66px">
                                                                 <div class="f_left  lh_ex_small" style="text-align: left;">
                                                                     <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">

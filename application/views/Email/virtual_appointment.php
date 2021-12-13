@@ -13,7 +13,7 @@
     th{
         text-align: right;
     }
-    
+
     tr{
         border-bottom: 1px solid #000;
     }
@@ -47,7 +47,7 @@
         </table>
 
 
-     
+
 
         <table style="    width: 100%;" border="0" align="center" cellpadding="0" cellspacing="0" style="padding: 38px  30px  30px  30px; background-color: #fafafa;">
             <tbody>
@@ -79,15 +79,19 @@
                 <td><?php echo $web_enquiry['first_name']; ?></td>
             </tr>   
             <tr>
-                <th>Last Name</th>
+                <th>Surname</th>
                 <td><?php echo $web_enquiry['last_name']; ?></td>
             </tr>
             <tr>
-                <th>Time</th>
+                <th>Email</th>
+                <td><?php echo $web_enquiry['email']; ?></td>
+            </tr>
+            <tr>
+                <th> Date</th>
                 <td><?php echo $web_enquiry['select_date']; ?></td>
             </tr>   
             <tr>
-                <th>Date</th>
+                <th>Time</th>
                 <td><?php echo $web_enquiry['select_time']; ?></td>
             </tr>  
             <tr>
@@ -104,7 +108,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <h4 style="    color: #f7d47a;text-align: center;
+                    <h4 style="    color: #000;text-align: center;
                         font-family: initial;"> Thank You</h4>
                 </td>
             </tr>

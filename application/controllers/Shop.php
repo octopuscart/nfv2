@@ -310,6 +310,7 @@ class Shop extends CI_Controller {
             $captchacode = $this->session->userdata('captchacode');
 
             if ($captchaset == $captchacode) {
+                $receiver =  $this->input->post('email');
                 $web_enquiry = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
@@ -317,11 +318,11 @@ class Shop extends CI_Controller {
                     'select_time' => $this->input->post('select_time'),
                     'timezone' => $this->input->post('timezone'),
                     'country' => $this->input->post('country'),
-                    'contact_source' => $this->input->post('contact_source'),
+                    'email' => $receiver,
                 );
                 $this->email->set_newline("\r\n");
                 $this->email->from("sales@nitafashions.com", "Nita Fashions");
-                $this->email->to(email_bcc);
+                $this->email->to(email_bcc .", ".  $receiver);
                 $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
 
                 $subject = "Nita Fashions - Virtual Appointment Request";
@@ -365,12 +366,15 @@ class Shop extends CI_Controller {
             $captchacode = $this->session->userdata('captchacodens');
 
             if ($captchaset == $captchacode) {
+                $request_user =  $this->input->post('subscribe_email');
                 $web_enquiry = array(
-                    'subscribe_email' => $this->input->post('subscribe_email'),
+                    'subscribe_first' => $this->input->post('subscribe_first'),
+                    'subscribe_last' => $this->input->post('subscribe_last'),
+                    'subscribe_email' =>$request_user,
                 );
                 $this->email->set_newline("\r\n");
                 $this->email->from("sales@nitafashions.com", "Nita Fashions");
-                $this->email->to(email_bcc);
+                $this->email->to(email_bcc .", ". $request_user);
                 $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
 
                 $subject = "Nita Fashions - Thank you for subscribing!";

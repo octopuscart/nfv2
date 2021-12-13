@@ -198,10 +198,10 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                     <input type="text" name="last_name" placeholder="Last Name /Surname" class="r_corners bg_light w_full border_none" required>
                                 </li>
 
-<!--                                <li class="m_bottom_10 m_xs_bottom_15 relative">
+                                <li class="m_bottom_10 m_xs_bottom_15 relative">
                                   <i class="icon-user login_icon fs_medium color_grey_light_2"></i>
-                                    <input type="email" name="first_name" placeholder="Email" class="r_corners bg_light w_full border_none" required>
-                                </li>-->
+                                    <input type="email" name="email" placeholder="Email" class="r_corners bg_light w_full border_none" required>
+                                </li>
                                 <li class="m_bottom_10 m_xs_bottom_15 relative">
                                                                                    <!--<i class="icon-user login_icon fs_medium color_grey_light_2"></i>-->
                                     <input type="date" name="select_date" placeholder="Select Date" class="r_corners bg_light w_full border_none text-left" value="<?php echo date("Y-m-d");?>" >
@@ -233,14 +233,14 @@ Whether the tuxedo is being worn to a special event or on your wedding day, we w
                                     </select>
                                 </li>
 
-                                <li class="m_bottom_10 m_xs_bottom_15 relative">
-                                    <!--<i class="icon-mail-alt login_icon fs_medium color_grey_light_2"></i>-->
+<!--                                <li class="m_bottom_10 m_xs_bottom_15 relative">
+                                    <i class="icon-mail-alt login_icon fs_medium color_grey_light_2"></i>
                                     <input type="text" name="contact_source" placeholder="How did you connect with us?" class="r_corners bg_light w_full border_none" required>
-                                </li>
+                                </li>-->
 
                                 <li class="m_bottom_20 m_xs_bottom_15 relative">
-                                    <img src="<?php echo site_url("Api/createCaptha") ?>" id='captchaimg' style="width: 30%;    height: fit-content;" /> 
-                                    <input name="captcha" id="captcha" type="text" placeholder="Type the text" class="con_pass r_corners bg_light border_none" style="width: 65%" required>
+                                    <img src="<?php echo site_url("Api/createCaptha") ?>" id='captchaimg' style="width: 30%;  height: 40px;    border-radius: 5px;"" /> 
+                                    <input name="captcha" id="captcha" type="text" placeholder="Type the text" class="con_pass r_corners bg_light border_none" style="width: 65%;" required>
                                     <small class='details color_light'>Can't read the image? click <a href='javascript: refreshCaptcha();' class="color_light">here</a> to refresh</small>
 
                                 </li>

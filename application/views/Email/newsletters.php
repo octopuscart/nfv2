@@ -82,6 +82,14 @@
 
             </tr> 
             <tr>
+                <th style="background: lightgray;text-align: right;width:200px;padding-right: 10px;">First Name</th>
+                <td style="border: 1px solid #d3d3d3;"><?php echo $web_enquiry['subscribe_first']; ?></td>
+            </tr>
+            <tr>
+                <th style="background: lightgray;text-align: right;width:200px;padding-right: 10px;">Surname</th>
+                <td style="border: 1px solid #d3d3d3;"><?php echo $web_enquiry['subscribe_last']; ?></td>
+            </tr>
+            <tr>
                 <th style="background: lightgray;text-align: right;width:200px;padding-right: 10px;">Email</th>
                 <td style="border: 1px solid #d3d3d3;"><?php echo $web_enquiry['subscribe_email']; ?></td>
             </tr>

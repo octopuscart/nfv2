@@ -9,70 +9,70 @@
 
                 <!--contact info--> 
 
-                <div class="row">
+                <div class="">
                     <div class="col-lg-3 col-md-3 col-sm-12 fw_light m_bottom_30">
                         <a href="<?php echo site_url("/") ?>" class="d_inline_m m_xs_top_20 m_bottom_20" style="width: 100%;
                            text-align: center;">
                             <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" class="mainlogo" alt="" style="height: 100px;">
                         </a>
                         <p>Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide.</p>
+                        <hr/>
+                        <ul class="fw_light w_break m_xs_bottom_8 m_bottom_20">
+                            <h5 class="color_dark m_bottom_20 fw_light">Contact Us</h5>
+                            <li class="m_bottom_8">
+                                <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
+                                    <i class="icon-phone-1"></i>
+                                </div>
+                                <a href="tel:+ (852) 2721-9990" class="color_black color_pink_hover">  + (852) 2721-9990 </a>
+                            </li>
+                            <li class="m_bottom_8">
+                                <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
+                                    <i class="icon-mail-alt"></i>
+                                </div>
+                                <a href="mailto:sales@nitafashions.com" class="color_black color_pink_hover"> sales@nitafashions.com</a>
+                            </li>
+
+                        </ul>
+
+                        <span class="addressspan"></span><br/>
+                        <ul class="hr_list social_icons m_bottom_30 m_xs_bottom_30">
+                            <!--tooltip_container class is required-->
+                            <li class="m_right_15 m_bottom_15 tooltip_container">
+                                <!--tooltip-->
+                                <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
+                                <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" class="d_block facebook_static_color icon_wrap_size_4 circle color_light">
+                                    <i class="icon-facebook fs_small"></i>
+                                </a>
+                            </li>
+                            <li class="m_right_15 m_bottom_15 tooltip_container">
+                                <!--tooltip-->
+                                <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
+                                <a href="https://twitter.com/nitafashions" class="d_block twitter_static_color icon_wrap_size_4 circle color_light">
+                                    <i class="icon-twitter fs_small"></i>
+                                </a>
+                            </li>
+                            <li class="m_right_15 m_bottom_15 tooltip_container m_sm_right_0 m_xs_right_15">
+                                <!--tooltip-->
+                                <span class="d_block r_corners color_default tooltip fs_small tr_all">Instagram</span>
+                                <a href="https://www.instagram.com/Nita.fashions" class="d_block instagram_static_color icon_wrap_size_4 circle color_light">
+                                    <i class="icon-instagramm fs_small"></i>
+                                </a>
+                            </li>
+                            <li class="m_right_15 m_bottom_15 tooltip_container">
+                                <!--tooltip-->
+                                <span class="d_block r_corners color_default tooltip fs_small tr_all">Youtube</span>
+                                <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" class="d_block youtube_static_color icon_wrap_size_4 circle color_light">
+                                    <i class="icon-youtube-play fs_small"></i>
+                                </a>
+                            </li>
+
+
+
+                        </ul>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-12 row m_bottom_50 m_xs_bottom_30">
-                        <div class="col-lg-6 col-md-6 col-sm-12 ">
-                            <ul class="fw_light w_break m_xs_bottom_8 m_bottom_20">
-                                <h5 class="color_dark m_bottom_20 fw_light">Contact Us</h5>
-                                <li class="m_bottom_8">
-                                    <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
-                                        <i class="icon-phone-1"></i>
-                                    </div>
-                                    <a href="tel:+ (852) 2721-9990" class="color_black color_pink_hover">  + (852) 2721-9990 </a>
-                                </li>
-                                <li class="m_bottom_8">
-                                    <div class="d_inline_m icon_wrap_size_1 color_pink circle m_right_10">
-                                        <i class="icon-mail-alt"></i>
-                                    </div>
-                                    <a href="mailto:sales@nitafashions.com" class="color_black color_pink_hover"> sales@nitafashions.com</a>
-                                </li>
 
-                            </ul>
-
-                            <span class="addressspan"></span><br/>
-                            <ul class="hr_list social_icons m_bottom_30 m_xs_bottom_30">
-                                <!--tooltip_container class is required-->
-                                <li class="m_right_15 m_bottom_15 tooltip_container">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
-                                    <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" class="d_block facebook_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-facebook fs_small"></i>
-                                    </a>
-                                </li>
-                                <li class="m_right_15 m_bottom_15 tooltip_container">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
-                                    <a href="https://twitter.com/nitafashions" class="d_block twitter_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-twitter fs_small"></i>
-                                    </a>
-                                </li>
-                                <li class="m_right_15 m_bottom_15 tooltip_container m_sm_right_0 m_xs_right_15">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Instagram</span>
-                                    <a href="https://www.instagram.com/Nita.fashions" class="d_block instagram_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-instagramm fs_small"></i>
-                                    </a>
-                                </li>
-                                <li class="m_right_15 m_bottom_15 tooltip_container">
-                                    <!--tooltip-->
-                                    <span class="d_block r_corners color_default tooltip fs_small tr_all">Youtube</span>
-                                    <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" class="d_block youtube_static_color icon_wrap_size_4 circle color_light">
-                                        <i class="icon-youtube-play fs_small"></i>
-                                    </a>
-                                </li>
-
-
-
-                            </ul>
-                        </div>
-                        <ul class="col-lg-6 col-md-6 col-sm-12 vr_list_type_5">
+                        <ul class="col-lg-7 col-md-7 col-sm-12 vr_list_type_5">
                             <h5 class="color_dark m_bottom_20 fw_light"> Our Locations:</h5>
                             <li class="color_dark d_inline_b m_bottom_20">
                                 <div class="icon_wrap_size_1 color_pink circle f_left">
@@ -98,62 +98,83 @@
                             </li>
 
                         </ul>
+                        <div class="col-lg-5 col-md-5 col-sm-12 m_bottom_50 m_xs_bottom_30">
+                            <h5 class="color_dark fw_light m_bottom_20">Information</h5>
+
+
+                            <ul class="vr_list_type_4 color_dark fw_light w_break">
+                                <?php
+                                $ourlinks = [
+                                    array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
+                                    array("title" => "FAQ's", "link" => site_url("Shop/faqs"), "submenu" => []),
+                                    array("title" => "Terms of Service", "link" => site_url("term-of-service"), "submenu" => []),
+                                    array("title" => "Privacy Policy", "link" => site_url("privacy-policy"), "submenu" => []),
+                                    array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
+                                    array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
+                                ];
+                                foreach ($ourlinks as $key => $value) {
+                                    ?>
+                                    <li class="m_bottom_12">
+                                        <a href="<?php echo $value["link"]; ?>" class="color_dark d_inline_b">
+                                            <span class="icon_wrap_size_0 circle color_black d_block tr_inherit f_left">
+                                                <i class="icon-angle-right"></i>
+                                            </span>
+                                            <?php echo $value["title"]; ?>
+
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
                     </div>
                     <!--social buttons-->
-                    <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
-                        <h5 class="color_dark fw_light m_bottom_20">Information</h5>
 
-
-                        <ul class="vr_list_type_4 color_dark fw_light w_break">
-                            <?php
-                            $ourlinks = [
-                                array("title" => "About Us", "link" => site_url("Shop/aboutus"), "submenu" => []),
-                                array("title" => "FAQ's", "link" => site_url("Shop/faqs"), "submenu" => []),
-                                array("title" => "Terms of Service", "link" => site_url("term-of-service"), "submenu" => []),
-                                array("title" => "Privacy Policy", "link" => site_url("privacy-policy"), "submenu" => []),
-                                array("title" => "Schedule", "link" => site_url("Shop/schedule"), "submenu" => []),
-                                array("title" => "Contact Us", "link" => site_url("Shop/contactus"), "submenu" => []),
-                            ];
-                            foreach ($ourlinks as $key => $value) {
-                                ?>
-                                <li class="m_bottom_12">
-                                    <a href="<?php echo $value["link"]; ?>" class="color_dark d_inline_b">
-                                        <span class="icon_wrap_size_0 circle color_black d_block tr_inherit f_left">
-                                            <i class="icon-angle-right"></i>
-                                        </span>
-                                        <?php echo $value["title"]; ?>
-
-                                    </a>
-                                </li>
-                                <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
 
                     <!--subscribe-->
-                    <div class="col-lg-2 col-md-2 col-sm-12 m_bottom_50 m_xs_bottom_30">
+                    <div class="col-lg-4 col-md-4 col-sm-12 m_bottom_50 m_xs_bottom_30">
                         <h5 class="color_dark fw_light m_bottom_20">Newsletter</h5>
                         <p class="fw_light m_bottom_25">Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-                        <form class="" method="post" action="<?php echo site_url("Shop/newsLetters")?>">
+
+
+
+                        <form class="" method="post" action="<?php echo site_url("Shop/newsLetters") ?>">
                             <ul>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <li class="m_bottom_10">
+                                            <input type="text" name="subscribe_first" placeholder="First Name" class="r_corners bg_light w_full fw_light">
+                                        </li>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <li class="m_bottom_10">
+                                            <input type="text" name="subscribe_last" placeholder="Surname" class="r_corners bg_light w_full fw_light">
+                                        </li>
+                                    </div>
+                                </div>
                                 <li class="m_bottom_10">
-                                    <input type="email" name="subscribe_email" placeholder="Your email address" class="r_corners bg_light w_full fw_light">
+                                    <input type="email" name="subscribe_email" placeholder="Your email" class="r_corners bg_light w_full fw_light">
                                 </li>
-                                <li class="m_bottom_20 m_xs_bottom_15 relative">
-                                    <img src="<?php echo site_url("Api/createCaptha/ns") ?>" id='captchaimg' style="   height: 40px;;" class="col-md-6" /> 
-                                    <input name="captcha" id="captcha" type="text" placeholder="Type the text" class="con_pass r_corners bg_light border_none col-md-6"  required>
-                                    <small class='details color_dark'>Can't read the image? click <a href='javascript: refreshCaptcha();' class="color_dark">here</a> to refresh</small>
+                                <li class="m_bottom_10 row ">
+                                    <img src="<?php echo site_url("Api/createCaptha/ns") ?>" id='captchaimg' style="   height: 40px;height: 40px;
+                                         border-radius: 9px;" class="col-md-4" /> 
+                                    <input name="captcha" id="captcha" type="text" placeholder="Type the text" class="con_pass r_corners bg_light border_none col-md-6"  required/>
+
 
                                 </li>
-                                
-
+                                <li class="m_bottom_10  row">
+                                    <small class='details color_dark col-sm-12'>
+                                        Can't read the image? click <a href='javascript: refreshCaptcha();' class="color_dark">here</a> to refresh
+                                    </small>
+                                </li>
                                 <li>
                                     <button class="fs_medium button_type_2 color_purple transparent r_corners tr_all" name="subscribe" value="Subscribe" type="submit">Subscribe</button>
                                 </li>
                             </ul>
                         </form>
                     </div>
+
                 </div>
             </div>
 

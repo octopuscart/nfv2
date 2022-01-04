@@ -449,13 +449,15 @@
     $this->load->library('user_agent');
 
     $checkmobile = $this->agent->is_mobile();
-    if(!$checkmobile){
-    ?>
-    .tt-menu{
-        right: 200px!important;
-        left: auto!important;
-    }
-    <?php
+    if (!$checkmobile) {
+        ?>
+        @media only screen and (max-width: 768px) {
+            .tt-menu{
+                right: 200px!important;
+                left: auto!important;
+            }
+        }
+        <?php
     }
     ?>
 

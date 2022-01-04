@@ -445,6 +445,19 @@
         -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
         box-shadow: 0 5px 10px rgba(0,0,0,.2);
     }
+    <?php
+    $this->load->library('user_agent');
+
+    $checkmobile = $this->agent->is_mobile();
+    if(!$checkmobile){
+    ?>
+    .tt-menu{
+        right: 200px!important;
+        left: auto!important;
+    }
+    <?php
+    }
+    ?>
 
     .tt-suggestion {
         padding: 3px 20px;
@@ -515,29 +528,9 @@
 
 
 
-        /////////////////// Search Customer type ahead ////////////////////////////////////
-        $('#searchproduct').typeahead(
-                {highlight: true},
-                {
-                    name: 'search',
-                    displayKey: 'item_code',
-                    limit: 8,
-                    source: search.ttAdapter(),
-                    templates: {
-                        header: '<span class="typeaheadgroup"><i class="icon-search"></i> Searched Result</span>',
-                        suggestion: Handlebars.compile($("#result-template").html()),
-                    },
-                }
 
-        ).bind('typeahead:selected', function (obj, select_data) {
-            var tag_id = select_data.tag_id;
-            var product_id = select_data.sid;
-//            $("input[name=searchtag]").val(checkd);
-            window.location = "<?php echo site_url("Product/productList?category=0&item_type="); ?>" + tag_id + "&product_id=" + product_id;
 
-        });
-
-        $('#searchproduct2').typeahead(
+        $('.searchproduct2').typeahead(
                 {highlight: true},
                 {
                     name: 'search',

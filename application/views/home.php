@@ -1,5 +1,5 @@
 <?php
-$this->load->view('layout/header');
+$this->load->view('layout/header_org');
 ?>
 <section class="relative w_full m_bottom_15">
     <div class="r_slider">

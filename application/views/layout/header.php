@@ -655,7 +655,7 @@ if ($session_data) {
 
                     </div>
                     <div  role="search" class="m_right_10 relative type_2  type_3 f_xs_none t_xs_align_l m_xs_bottom_15 showonmobile mobileserach" style="">
-                        <input type="text" placeholder="Search" class="r_corners fw_light bg_light w_full " style="   width: 100%;border-radius: 0px;" id="searchproduct2" data-provide="typeahead">
+                        <input type="text" placeholder="Search" class="r_corners fw_light bg_light w_full searchproduct2" style="   width: 100%;border-radius: 0px;" id="searchproduct2" data-provide="typeahead">
                         <button class="color_grey_light color_purple_hover tr_all" style="color: #000000" aria-label="search">
                             <i class="icon-search"></i>
                         </button>
@@ -733,7 +733,7 @@ if ($session_data) {
                                 </nav>
                                 <!--searchform-->
                                 <form role="search" class="bg_light animate_ vc_child t_align_r fw_light tr_all trf_xs_none">
-                                    <input type="text" name="search" placeholder="Search" class="r_corners d_inline_m">
+                                    <input type="text" name="search" placeholder="Search" class="r_corners d_inline_m searchproduct2" id="searchproduct2" data-provide="typeahead">
                                 </form>
 
                             </div>

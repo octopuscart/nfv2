@@ -445,21 +445,17 @@
         -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
         box-shadow: 0 5px 10px rgba(0,0,0,.2);
     }
-    <?php
-    $this->load->library('user_agent');
-
-    $checkmobile = $this->agent->is_mobile();
-    if (!$checkmobile) {
-        ?>
-        @media only screen and (max-width: 768px) {
-            .tt-menu{
-                right: 200px!important;
-                left: auto!important;
-            }
-        }
-        <?php
+    .tt-menu{
+        right: 200px!important;
+        left: auto!important;
     }
-    ?>
+    @media only screen and (max-width: 768px) {
+        .tt-menu{
+            right: auto!important;
+            left: auto!important;
+        }
+    }
+
 
     .tt-suggestion {
         padding: 3px 20px;

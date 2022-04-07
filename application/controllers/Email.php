@@ -21,33 +21,26 @@ class Email extends CI_Controller {
         redirect('/');
     }
 
-    public function orderdetails($order_id) {
-        if ($this->user_id == 0) {
-            redirect('/');
-        }
-        $order_details = $this->Product_model->getOrderDetails($order_id, 0);
-        $order_details['amount_in_word'] = $this->Product_model->convert_num_word($order_details['order_data']->total_price);
-        if ($order_details) {
-            $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.googlemail.com',
-                'smtp_port' => 465,
-                'smtp_user' => 'noreplay2classapartstore@gmail.com',
-                'smtp_pass' => 'padhaivadhai',
-                'mailtype' => 'html',
-                'charset' => 'iso-8859-1'
-            );
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
-            $this->email->from('no_replay_classapartstore@gmail.com', 'Class Apart Store');
-            $this->email->to($order_details['order_data']->email);
-            $this->email->subject('Class Apart Sore Order No:' . $order_details['order_data']->order_no . " has been confirmed.");
-            $this->email->message($this->load->view('Email/order_mail', $order_details, true));
-            echo $this->load->view('Email/order_mail', $order_details, true);
-            echo $result = $this->email->send();
-        } else {
-            // redirect('/');
-        }
+    public function testmail() {
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'server.costcointernational.com',
+            'smtp_port' => 587,
+            'smtp_user' => 'no-reply-nitafashions@octopuscart.in',
+            'smtp_pass' => 'M5?$Ad%N{UTvfT&-',
+            'mailtype' => 'html',
+            'charset' => 'iso-8859-1'
+        );
+        $this->load->library('email', $config);
+        print_r($this->email);
+        $this->email->set_newline("\r\n");
+        $this->email->from('sales@nitafashions.com', 'Nita Fashions');
+        $this->email->to("octopuscartltd@gmail.com");
+   
+        $this->email->subject('Test mail from nita fashions');
+        $this->email->message("this is test mail from nit fashions.");
+        echo $result = $this->email->send();
     }
 
 }

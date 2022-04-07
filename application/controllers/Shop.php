@@ -241,7 +241,7 @@ class Shop extends CI_Controller {
 
     public function schedule() {
         $cdate = date("Y-m-d");
-        $rquery = "
+        echo $rquery = "
                   SELECT sa.*,sed.start_date,sed.end_date,sed.id as main_id
                   FROM  `nfw_app_set_appointment` as sa 
                   join nfw_app_start_end_date as sed  

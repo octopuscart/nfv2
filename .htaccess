@@ -15,10 +15,6 @@ RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 RewriteCond %{HTTPS} off 
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-</IfModule>
-
-
-
 # END WordPress
 
 
@@ -30,4 +26,12 @@ Header set Cache-Control "max-age=31536000, public"
 <filesMatch ".(css|js)$">
 Header set Cache-Control "max-age=2628000, public"
 </filesMatch>
+
+</IfModule>
+
+
+
+
+
+
 

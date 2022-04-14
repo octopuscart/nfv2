@@ -40,7 +40,6 @@ class Shop extends CI_Controller {
         $countrylist = $query->result_array();
         $data['country_list'] = $countrylist;
 
-
         $query = $this->db->get('nfw_profession');
         $professionlist = $query->result_array();
         $data['professionlist'] = $professionlist;
@@ -97,7 +96,6 @@ class Shop extends CI_Controller {
             $shipresult = $this->Product_model->resultAssociate($query);
             $shipdata = json_encode(end($shipresult));
 
-
             $query = "SELECT id,first_name,middle_name,last_name,email,telephone_no,fax_no,contact_no,registration_id FROM  `auth_user` where id = $this->user_id";
             $userinfo = $this->Product_model->resultAssociate($query);
             $userdata = json_encode(end($userinfo));
@@ -114,7 +112,6 @@ class Shop extends CI_Controller {
             $tm = date('H:i:s');
             $date_code = date('ym');
             $dte1 = date('Y-m-d H:i:s');
-
 
             $orderInsertData = array(
                 "user_id" => $this->user_id,
@@ -171,7 +168,6 @@ class Shop extends CI_Controller {
                 "status" => "1"
             );
             $this->db->insert("nfw_order_status", $nfw_order_status);
-
 
             $this->db->set('order_id', $last_id);
             $this->db->where('order_id', "0");
@@ -239,9 +235,14 @@ class Shop extends CI_Controller {
         $this->load->view('pages/bespokeTailoring');
     }
 
+    public function scheduleview($last_id) {
+        $data["last_id"] = $last_id;
+        $this->load->view('pages/appointmentview', $data);
+    }
+
     public function schedule() {
         $cdate = date("Y-m-d");
-         $rquery = "
+        $rquery = "
                   SELECT sa.*,sed.start_date,sed.end_date,sed.id as main_id
                   FROM  `nfw_app_set_appointment` as sa 
                   join nfw_app_start_end_date as sed  
@@ -266,14 +267,14 @@ class Shop extends CI_Controller {
             );
             $this->db->insert('nfw_app_userlist', $inputarray);
             $last_id = $this->db->insert_id();
-            $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?mail_type=4&last_id=$last_id";
+            $url = "http://email.nitafashions.com/nfemail/views/sendMail_app.php?mail_type=4&last_id=$last_id";
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_HEADER, false);
             $data = curl_exec($curl);
             curl_close($curl);
-            redirect(site_url("Shop/schedule"));
+            redirect(site_url("Shop/scheduleview/$last_id"));
         }
 
         $this->load->view('pages/appointment', array("data" => $data));
@@ -310,7 +311,7 @@ class Shop extends CI_Controller {
             $captchacode = $this->session->userdata('captchacode');
 
             if ($captchaset == $captchacode) {
-                $receiver =  $this->input->post('email');
+                $receiver = $this->input->post('email');
                 $web_enquiry = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
@@ -322,7 +323,7 @@ class Shop extends CI_Controller {
                 );
                 $this->email->set_newline("\r\n");
                 $this->email->from("sales@nitafashions.com", "Nita Fashions");
-                $this->email->to(email_bcc .", ".  $receiver);
+                $this->email->to(email_bcc . ", " . $receiver);
                 $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
 
                 $subject = "Nita Fashions - Virtual Appointment Request";
@@ -348,8 +349,7 @@ class Shop extends CI_Controller {
                     "message" => "You have entered wrong captcha, please try again."
                 );
             }
-        }
-        else{
+        } else {
             redirect(site_url("/"));
         }
         $this->load->view('pages/virtualAppointment', $returnarray);
@@ -366,15 +366,15 @@ class Shop extends CI_Controller {
             $captchacode = $this->session->userdata('captchacodens');
 
             if ($captchaset == $captchacode) {
-                $request_user =  $this->input->post('subscribe_email');
+                $request_user = $this->input->post('subscribe_email');
                 $web_enquiry = array(
                     'subscribe_first' => $this->input->post('subscribe_first'),
                     'subscribe_last' => $this->input->post('subscribe_last'),
-                    'subscribe_email' =>$request_user,
+                    'subscribe_email' => $request_user,
                 );
                 $this->email->set_newline("\r\n");
                 $this->email->from("sales@nitafashions.com", "Nita Fashions");
-                $this->email->to(email_bcc .", ". $request_user);
+                $this->email->to(email_bcc . ", " . $request_user);
                 $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
 
                 $subject = "Nita Fashions - Thank you for subscribing!";
@@ -400,8 +400,7 @@ class Shop extends CI_Controller {
                     "message" => "You have entered wrong captcha, please try again."
                 );
             }
-        }
-        else{
+        } else {
             redirect(site_url("/"));
         }
         $this->load->view('pages/newsletters', $returnarray);

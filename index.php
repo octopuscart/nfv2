@@ -55,7 +55,7 @@
  */
 //define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-$testmodcheck = 0;
+$testmodcheck = 1;
 
 if ($testmodcheck) {
     if ($_SERVER['SERVER_NAME'] == 'localhost') {

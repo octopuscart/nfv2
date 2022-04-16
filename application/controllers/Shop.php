@@ -323,8 +323,8 @@ class Shop extends CI_Controller {
                     'email' => $receiver,
                 );
 
-                $this->db->insert('virtual_appointments', $web_enquiry);
-                $appointment_id = $this->db->insert_id();
+//                $this->db->insert('virtual_appointments', $web_enquiry);
+//                $appointment_id = $this->db->insert_id();
 
                 $this->email->set_newline("\r\n");
                 $this->email->from("sales@nitafashions.com", "Nita Fashions");

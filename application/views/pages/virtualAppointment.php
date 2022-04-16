@@ -1,6 +1,8 @@
 <?php
 $this->load->view('layout/header');
-?><script src='https://www.google.com/recaptcha/api.js'></script>
+?>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <!--page title-->
 <section class="page_title_2 bg_light_2 t_align_c relative wrapper" style="    padding: 0px 1px 8px 1px;background: black;">
     <div class="">
@@ -18,7 +20,26 @@ $this->load->view('layout/header');
 </section>
 <!--content-->
 <section class="section_offset">
-    <div class="container clearfix">
+    <div class="container clearfix" id="DivIdToPrint">
+        <style>
+            @media print {
+                #DivIdToPrint{
+                    text-align: center;
+                }
+                h1 {
+                    font-size: 20px;
+                }
+                .btn{
+                    display:none;
+                }
+                th, td{
+                    text-align: left;
+                }
+                .hideonprint{
+                    display: none;
+                }
+            }
+        </style>
         <div class="row">
             <p class="fw_light m_bottom_23">
             </p>
@@ -30,19 +51,68 @@ $this->load->view('layout/header');
                     <?php
                     if ($code == "200") {
                         ?>
-                    <i class="fa fa-check-circle fa-2x"></i>
-                            <?php
+                        <i class="fa fa-check-circle fa-2x"></i>
+                        <?php
                     } else {
                         ?>
-                     <i class="fa fa-times-circle fa-2x"></i>
-                            <?php
+                        <i class="fa fa-times-circle fa-2x"></i>
+                        <?php
                     }
                     ?>
-                     <br/>
+                    <br/>
                     <?php
                     echo $message;
                     ?>   
+
                 </h1>
+                <?php
+                if ($code == "200") {
+                    ?>
+                    <table class="table table-borderd" width=""  >
+                        <tr>
+                            <th style="    width: 50%;">First Name</th>
+                            <td><?php echo $web_enquiry['first_name']; ?></td>
+                        </tr>   
+                        <tr>
+                            <th>Surname</th>
+                            <td><?php echo $web_enquiry['last_name']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><?php echo $web_enquiry['email']; ?></td>
+                        </tr>
+                        <tr>
+                            <th> Date</th>
+                            <td><?php echo $web_enquiry['select_date']; ?></td>
+                        </tr>   
+                        <tr>
+                            <th>Time</th>
+                            <td><?php echo $web_enquiry['select_time']; ?></td>
+                        </tr>  
+                        <tr>
+                            <th>Timezone</th>
+                            <td>
+                                <?php echo $web_enquiry['timezone']; ?> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td>
+                                <?php echo $web_enquiry['country']; ?> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                        </tr>
+
+                    </table>
+                    <div class="text-center">
+                        <button class="btn btn-default" onclick="printDiv()"><i class="fa fa-print"></i> Print</button>
+                        <a href="<?php echo site_url("/") ?>" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+                    </div>
+                    <?php
+                }
+                ?>
 
                 <hr/>
                 <h1 class="color_dark fw_light m_bottom_15 heading_1 t_align_c " style="font-size: 18px;">
@@ -75,42 +145,44 @@ $this->load->view('layout/header');
 
                     </ul>
                 </div>
-                <h5 class="color_dark m_bottom_20 fw_light">Stay Connected</h5>
-                <ul class="hr_list social_icons">
-                    <!--tooltip_container class is required-->
-                    <li class="m_right_15 m_bottom_15 tooltip_container">
-                        <!--tooltip-->
-                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
-                        <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" target="_blank" class="d_block facebook icon_wrap_size_2 circle color_grey_light_2">
-                            <i class="icon-facebook fs_small"></i>
-                        </a>
-                    </li>
-                    <li class="m_right_15 m_bottom_15 tooltip_container">
-                        <!--tooltip-->
-                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
-                        <a href="https://twitter.com/nitafashions" target="_blank" class="d_block twitter icon_wrap_size_2 circle color_grey_light_2">
-                            <i class="icon-twitter fs_small"></i>
-                        </a>
-                    </li>
-                    <li class="m_right_15 m_bottom_15 tooltip_container m_xs_right_15">
-                        <!--tooltip-->
-                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Instagram </span>
-                        <a href="https://www.instagram.com/Nita.fashions" target="_blank" class="d_block googleplus icon_wrap_size_2 circle color_grey_light_2">
-                            <i class="icon-instagram fs_small"></i>
-                        </a>
-                    </li>
+                <div class='hideonprint'>
+                    <h5 class="color_dark m_bottom_20 fw_light">Stay Connected</h5>
+                    <ul class="hr_list social_icons">
+                        <!--tooltip_container class is required-->
+                        <li class="m_right_15 m_bottom_15 tooltip_container">
+                            <!--tooltip-->
+                            <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Facebook</span>
+                            <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" target="_blank" class="d_block facebook icon_wrap_size_2 circle color_grey_light_2">
+                                <i class="icon-facebook fs_small"></i>
+                            </a>
+                        </li>
+                        <li class="m_right_15 m_bottom_15 tooltip_container">
+                            <!--tooltip-->
+                            <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Twitter</span>
+                            <a href="https://twitter.com/nitafashions" target="_blank" class="d_block twitter icon_wrap_size_2 circle color_grey_light_2">
+                                <i class="icon-twitter fs_small"></i>
+                            </a>
+                        </li>
+                        <li class="m_right_15 m_bottom_15 tooltip_container m_xs_right_15">
+                            <!--tooltip-->
+                            <span class="d_block r_corners color_default tooltip fs_small tr_all">Follow Us on Instagram </span>
+                            <a href="https://www.instagram.com/Nita.fashions" target="_blank" class="d_block googleplus icon_wrap_size_2 circle color_grey_light_2">
+                                <i class="icon-instagram fs_small"></i>
+                            </a>
+                        </li>
 
-                    <li class="m_right_15 m_bottom_15 tooltip_container">
-                        <!--tooltip-->
-                        <span class="d_block r_corners color_default tooltip fs_small tr_all">Youtube</span>
-                        <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" target="_blank" class="d_block youtube icon_wrap_size_2 circle color_grey_light_2">
-                            <i class="icon-youtube-play fs_small"></i>
-                        </a>
-                    </li>
+                        <li class="m_right_15 m_bottom_15 tooltip_container">
+                            <!--tooltip-->
+                            <span class="d_block r_corners color_default tooltip fs_small tr_all">Youtube</span>
+                            <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" target="_blank" class="d_block youtube icon_wrap_size_2 circle color_grey_light_2">
+                                <i class="icon-youtube-play fs_small"></i>
+                            </a>
+                        </li>
 
 
 
-                </ul>
+                    </ul>
+                </div>
             </div>
             <div class="col-md-3"></div>
 
@@ -118,12 +190,34 @@ $this->load->view('layout/header');
     </div>
 </section>
 <script>
-    $(document).ready(function(){
-         setTimeout(function () {
-        window.location = "<?php echo site_url("/") ?>";
-    }, 3000);
+    $(document).ready(function () {
+        setTimeout(function () {
+//        window.location = "<?php echo site_url("/") ?>";
+        }, 3000);
     })
-   
+
+</script>
+
+<script>
+
+    function printDiv()
+    {
+
+        var divToPrint = document.getElementById('DivIdToPrint');
+
+        var newWin = window.open('', 'Print-Window');
+
+        newWin.document.open();
+
+        newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+        newWin.document.close();
+
+        setTimeout(function () {
+            newWin.close();
+        }, 10);
+
+    }
 </script>
 
 <?php

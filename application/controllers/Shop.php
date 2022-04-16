@@ -306,6 +306,7 @@ class Shop extends CI_Controller {
             "code" => "100",
             "message" => ""
         );
+        $appointment_id = 0;
         if (isset($_POST['registration'])) {
             $captchaset = $this->input->post('captcha');
             $captchacode = $this->session->userdata('captchacode');
@@ -321,6 +322,10 @@ class Shop extends CI_Controller {
                     'country' => $this->input->post('country'),
                     'email' => $receiver,
                 );
+
+                $this->db->insert('virtual_appointments', $web_enquiry);
+                $appointment_id = $this->db->insert_id();
+
                 $this->email->set_newline("\r\n");
                 $this->email->from("sales@nitafashions.com", "Nita Fashions");
                 $this->email->to(email_bcc . ", " . $receiver);
@@ -335,7 +340,8 @@ class Shop extends CI_Controller {
                 if ($send) {
                     $returnarray = array(
                         "code" => "200",
-                        "message" => "Thank you for reaching us for a Virtual Appointment"
+                        "message" => "Thank you for reaching us for a Virtual Appointment",
+                        "web_enquiry" => $web_enquiry,
                     );
                 } else {
                     $returnarray = array(
@@ -352,6 +358,7 @@ class Shop extends CI_Controller {
         } else {
             redirect(site_url("/"));
         }
+
         $this->load->view('pages/virtualAppointment', $returnarray);
     }
 
@@ -386,6 +393,7 @@ class Shop extends CI_Controller {
                 if ($send) {
                     $returnarray = array(
                         "code" => "200",
+                        "web_enquiry" => $web_enquiry,
                         "message" => "Thank you for subscribing to our mailing list. Your will receive our newsletter for exclusive offers."
                     );
                 } else {

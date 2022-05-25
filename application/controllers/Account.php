@@ -200,10 +200,15 @@ class Account extends CI_Controller {
                     );
                     $this->db->insert('auth_user', $userarray);
                     $user_id = $this->db->insert_id();
+                    
+                    $this->db->where('id', $user_id);
+                    $this->db->set('registration_id', "CC".$user_id);
+                    $this->db->update('auth_user');
 
                     $this->db->where('id', $user_id);
                     $query = $this->db->get('auth_user');
                     $userdata = $query->result_array()[0];
+                    
                     $this->session->set_userdata('logged_in', $userdata);
                     $data1['msg'] = 'Verification Mail Sent, Check Your Inbox';
                     $data1["link"] = site_url("/");

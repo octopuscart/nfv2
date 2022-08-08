@@ -483,7 +483,7 @@ class Account extends CI_Controller {
                 $data["user_id"] = $userdata["id"];
                 $data["checkmail"] = "yes";
                 $data["password"] = $userdata["password"];
-                $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
+                $emailurl = "http://email.nitafashions.com/Shop/index";
 
                 $url = $emailurl . "?mail_type=3&passwordkey=" . $userdata["password"] . "&email=" . $userdata["email"] . "&id=" . $userdata["id"];
 

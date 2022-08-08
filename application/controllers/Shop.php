@@ -175,7 +175,7 @@ class Shop extends CI_Controller {
             $this->db->where('user_id', $this->user_id); //set column_name and value in which row need to update
             $this->db->update("nfw_product_cart");
 
-            $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?order_id=$last_id&user_id=$this->user_id&mail_type=1&mail_set=order";
+            $url = "http://email.nitafashions.com/Shop/index?order_id=$last_id&user_id=$this->user_id&mail_type=1&mail_set=order";
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -205,7 +205,8 @@ class Shop extends CI_Controller {
                 );
                 $email_bcc = "do-not-reply-nita-fashions-ssl-email-465@costcokart.com";
                 $this->email->set_newline("\r\n");
-                $this->email->from("sales@nitafashions.com", "Nita Fashions");
+                $this->email->from(email_sender, email_sender_name);
+                $this->email->reply_to(email_bcc);
                 $this->email->to($this->input->post('email'));
                 $this->email->bcc(email_bcc);
                 $subjectt = $this->input->post('subject');
@@ -327,7 +328,8 @@ class Shop extends CI_Controller {
 //                $appointment_id = $this->db->insert_id();
 
                 $this->email->set_newline("\r\n");
-                $this->email->from("sales@nitafashions.com", "Nita Fashions");
+                $this->email->from(email_sender, email_sender_name);
+                $this->email->reply_to(email_bcc);
                 $this->email->to(email_bcc . ", " . $receiver);
                 $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
 
@@ -380,7 +382,8 @@ class Shop extends CI_Controller {
                     'subscribe_email' => $request_user,
                 );
                 $this->email->set_newline("\r\n");
-                $this->email->from("sales@nitafashions.com", "Nita Fashions");
+                $this->email->from(email_sender, email_sender_name);
+                $this->email->reply_to(email_bcc);
                 $this->email->to(email_bcc . ", " . $request_user);
                 $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
 

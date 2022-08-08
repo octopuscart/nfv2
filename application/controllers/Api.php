@@ -1132,8 +1132,8 @@ order by count(nfw_color_id) asc, colorbunch";
     }
 
     function sendRegistrationEmail_get($user_id) {
-        $emailurl = "http://email.nitafashions.com/nfemail/views/sendMail.php";
-//                    $emailurl = "http://192.168.1.3/nitafashions/nfemail/views/sendMail.php";
+        $emailurl = "http://email.nitafashions.com/Shop/index";
+//                    $emailurl = "http://192.168.1.3/nitafashions/Shop/index";
 
         echo $url = $emailurl . "?user_id=" . $user_id . "&mail_type=2";
         $curl = curl_init();
@@ -1145,7 +1145,7 @@ order by count(nfw_color_id) asc, colorbunch";
     }
 
     function orderEmailApi_get($order_id) {
-        $url = "http://email.nitafashions.com/nfemail/views/sendMail.php?order_id=$order_id&user_id=$this->user_id&mail_type=1&mail_set=order";
+        $url = "http://email.nitafashions.com/Shop/index?order_id=$order_id&user_id=$this->user_id&mail_type=1&mail_set=order";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

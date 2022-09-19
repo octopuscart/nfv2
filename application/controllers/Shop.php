@@ -243,13 +243,13 @@ class Shop extends CI_Controller {
 
     public function schedule() {
         $cdate = date("Y-m-d");
-        $cdate = date('Y-m-d', strtotime($cdate .' -1 day'));
+        $cdate = date('Y-m-d', strtotime($cdate . ' -1 day'));
         $rquery = "
                   SELECT sa.*,sed.start_date,sed.end_date,sed.id as main_id
                   FROM  `nfw_app_set_appointment` as sa 
                   join nfw_app_start_end_date as sed  
                   on sa.id = sed.nfw_set_appointment_id
-                   where sed.end_date> date('$cdate')    
+                   where sed.end_date>= date('$cdate')    
                    ";
         $query = $this->db->query($rquery);
 

@@ -224,6 +224,17 @@ class Product_model extends CI_Model {
         }
         return $cartdataid;
     }
+  function stringCategories($category_id) {
+        $this->db->where('parent', $category_id);
+        $query = $this->db->get('nfw_category');
+        $category = $query->result_array();
+        $container = "";
+        foreach ($category as $ckey => $cvalue) {
+            $container .= $this->stringCategories($cvalue['id']);
+            $container .= ", " . $cvalue['id'];
+        }
+        return $container;
+    }
 
     function phpjsonstyle($data, $data_type) {
 
@@ -657,7 +668,8 @@ class Product_model extends CI_Model {
             '3208', '3217', '3229', '3239', '3249', '3257', '3268', '3276', '3286', '3297', '3306', '3316', '3384'];
         sort($febricbanbemberg);
         $febricfancy = array(
-            'K1' => 'K1', 'K2' => 'K2', 'K3' => 'K3', 'K4' => 'K4', 'K5' => 'K5', 'K6' => 'K6', 'K7' => 'K7', 'K8' => 'K8', 'K9' => 'K9', 'K10' => 'K10', 'K11' => 'K11', 'K12' => 'K12', 'K13' => 'K13', 'K14' => 'K14', 'K15' => 'K15', 'K16' => 'K16', 'K17' => 'K17',
+//            'K1' => 'K1',
+            'K2' => 'K2', 'K3' => 'K3', 'K4' => 'K4', 'K5' => 'K5', 'K6' => 'K6', 'K7' => 'K7', 'K8' => 'K8', 'K9' => 'K9', 'K10' => 'K10', 'K11' => 'K11', 'K12' => 'K12', 'K13' => 'K13', 'K14' => 'K14', 'K15' => 'K15', 'K16' => 'K16', 'K17' => 'K17',
             'K18' => 'K18', 'K19' => 'K19', 'K20' => 'K20', 'K21' => 'K21', 'K22' => 'K22', 'K23' => 'K23', 'K24' => 'K24', 'K25' => 'K25', 'K26' => 'K26', 'K27' => 'K27', 'K28' => 'K28', 'K29' => 'K29', 'K30' => 'K30', 'K31' => 'K31', 'K32' => 'K32', 'K33' => 'K33',
             'K34' => 'K34', 'K35' => 'K35', 'K36' => 'K36', 'K37' => 'K37', 'K38' => 'K38', 'K39' => 'K39', 'K40' => 'K40', 'K41' => 'K41', 'K42' => 'K42', 'K43' => 'K43', 'K44' => 'K44', 'K45' => 'K45', 'K46' => 'K46', 'K48' => 'K48', 'K49' => 'K49', 'K52' => 'K52', 'K54' => 'K54', 'K55' => 'K55',
             'K56' => 'K56', 'K57' => 'K57', 'K58' => 'K58', 'K59' => 'K59', 'K60' => 'K60', 'K61' => 'K61', 'K62' => 'K62', 'K64' => 'K64', 'K65' => 'K65', 'K66' => 'K66', 'K67' => 'K67', 'K68' => 'K68', 'K69' => 'K69', 'K70' => 'K70', 'K71' => 'K71', 'K72' => 'K72',

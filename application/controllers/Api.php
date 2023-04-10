@@ -10,7 +10,7 @@ class Api extends REST_Controller {
         $this->load->model('Product_model');
         $this->load->library('session');
         $this->checklogin = $this->session->userdata('logged_in');
-        $this->user_id = $this->session->userdata('logged_in')['id'];
+        $this->user_id = $this->checklogin ? $this->session->userdata('logged_in')['id'] : 0;
     }
 
     public function index() {
@@ -156,123 +156,34 @@ class Api extends REST_Controller {
     }
 
     //ProductList APi
-    public function productListApi_get($category_id, $custom_id) {
+    public function productListPriceUpdateApi_get($category_id, $custom_id) {
         $attrdatak = $this->get();
-        $products = [];
-        $countpr = 0;
-        $pricequery = "";
-        $psearch = "";
-        if (($attrdatak["search"])) {
-            $searchdata = $attrdatak["search"];
-            unset($attrdatak["search"]);
-            if ($searchdata) {
-                $psearch = " and title like '%$searchdata%' ";
-            }
-        }
-
-        if (($attrdatak["minprice"])) {
-            $mnpricr = $attrdatak["minprice"] - 1;
-            $mxpricr = $attrdatak["maxprice"] + 1;
-            unset($attrdatak["minprice"]);
-            unset($attrdatak["maxprice"]);
-            $pricequery = " and (price between '$mnpricr' and '$mxpricr') ";
-        }
-
-        foreach ($attrdatak as $key => $atv) {
-            if ($atv) {
-                $countpr += 1;
-                $key = str_replace("a47", "", $key);
-                $val = str_replace("-", ", ", $atv);
-                $query_attr = "SELECT product_id FROM product_attribute
-                           where  attribute_id in (47) and attribute_value_id in ($val)
-                           group by product_id";
-                $queryat = $this->db->query($query_attr);
-                $productslist = $queryat->result();
-                foreach ($productslist as $key => $value) {
-                    array_push($products, $value->product_id);
-                }
-            }
-        }
-        //print_r($products);
-
-        $productdict = [];
-
-        $productcheck = array_count_values($products);
-
-
-        //print_r($productcheck);
-
-        foreach ($productcheck as $key => $value) {
-            if ($value == 1) {
-                array_push($productdict, $key);
-            }
-        }
-
-        $proquery = "";
-        if (count($productdict)) {
-            $proquerylist = implode(",", $productdict);
-            $proquery = " and pt.id in ($proquerylist) ";
-        }
 
         $categoriesString = $this->Product_model->stringCategories($category_id) . ", " . $category_id;
         $categoriesString = ltrim($categoriesString, ", ");
 
-        $product_query = "select pt.id as product_id, pt.*
-            from products as pt where pt.category_id in ($categoriesString) $psearch $pricequery $proquery order by display_index desc";
+        $product_query = "select pt.id as product_id, pt.title
+            from nfw_product as pt where pt.product_category in ($categoriesString)   and publishing=1 ";
         $product_result = $this->Product_model->query_exe($product_query);
-
-        $productListSt = [];
-
-        $productListFinal = [];
-
-        $pricecount = [];
-
         foreach ($product_result as $key => $value) {
-            $value['attr'] = $this->Product_model->singleProductAttrs($value['product_id']);
-            $item_price = $this->Product_model->category_items_prices_id($value['category_items_id'], $custom_id);
-
-            $value['price'] = $item_price ? $item_price->price : 0;
-            array_push($productListSt, $value['product_id']);
-            array_push($pricecount, $value['price']);
-            array_push($productListFinal, $value);
-        }
-
-        $attr_filter = array();
-        $pricelist = array();
-        if (count($productListSt)) {
-            $pricelist = array('maxprice' => max($pricecount), 'minprice' => min($pricecount));
-
-
-            $productString = implode(",", $productListSt);
-
-
-            $attr_query = "select count(cav.id) product_count, '' as checked, cvv.widget, cav.attribute_value, cav.additional_value, cav.id, pa.attribute, pa.attribute_id from product_attribute as pa
-        join category_attribute_value as cav on cav.id = pa.attribute_value_id
-        join category_attribute as cvv on cvv.id = cav.attribute_id
-        where pa.product_id in ($productString)
-        group by cav.id";
-            $attr_result = $this->Product_model->query_exe($attr_query);
-
-
-            foreach ($attr_result as $key => $value) {
-                $filter = $value['attribute_id'];
-                $attitle = $value['attribute'];
-                $widget = $value['widget'];
-                if (isset($attr_filter[$filter])) {
-                    array_push($attr_filter[$filter], $value);
-                } else {
-                    $attr_filter[$filter] = array("title" => $attitle, "attrs" => [], "widget" => $widget);
-                    array_push($attr_filter[$filter], $value);
+            print_r($value);
+            $this->db->where(array("product_id" => $value["product_id"], "tag_id" => $custom_id));
+            $queryat = $this->db->get("nfw_product_tag_connection");
+            $pprice = $queryat->result();
+            print_r($pprice);
+            $isreal = 0;
+            if ($pprice) {
+                if ($isreal) {
+                    $this->db->set(array("price" => 480));
+                    $this->db->where(array("product_id" => $value["product_id"], "tag_id" => $custom_id));
+                    $this->db->update("nfw_product_tag_connection");
                 }
             }
+            echo "<br/>";
         }
 
-        $this->output->set_header('Content-type: application/json');
-        $productArray = array('attributes' => $attr_filter,
-            'products' => $productListFinal,
-            'product_count' => count($product_result),
-            'price' => $pricelist);
-        $this->response($productArray);
+
+        $this->response(array("totalProduct" => count($product_result)));
     }
 
     //ProductList APi
@@ -310,7 +221,6 @@ class Api extends REST_Controller {
         $productdict = [];
 
         $productcheck = array_count_values($products);
-
 
         //print_r($productcheck);
 
@@ -359,16 +269,13 @@ class Api extends REST_Controller {
         if (count($productListSt)) {
             $pricelist = array('maxprice' => max($pricecount), 'minprice' => min($pricecount));
 
-
             $productString = implode(",", $productListSt);
-
 
             $attr_query = "select count(cav.id) product_count, '' as checked, cav.attribute_value, cav.id, pa.attribute, pa.attribute_id from product_attribute as pa
         join category_attribute_value as cav on cav.id = pa.attribute_value_id
         where pa.product_id in ($productString)
         group by cav.id";
             $attr_result = $this->Product_model->query_exe($attr_query);
-
 
             foreach ($attr_result as $key => $value) {
                 $filter = $value['attribute'];
@@ -439,7 +346,6 @@ class Api extends REST_Controller {
 
             $tempss[$key] = $value;
             $tempss[$key]['folder'] = $value['folder'];
-
 
             $prodct_details = $this->Product_model->productDetails($value['product_id']);
             $tempss[$key]['file_name2'] = $prodct_details['file_name2'];
@@ -625,7 +531,6 @@ class Api extends REST_Controller {
 
         $cartdataall['grand_total'] = $cartdataall['total_price'] + $cartdataall['shipping_price'];
 
-
         $this->response(array(
             "cartdata" => $cartdataall,
         ));
@@ -680,7 +585,7 @@ class Api extends REST_Controller {
         $query = "select id from nfw_category where parent = $parentId";
         $res = $this->Product_model->resultAssociate($query);
         global $arrayChild;
-        if (count($arrayChild)) {
+        if ($arrayChild && count($arrayChild)) {
             
         } else {
             $arrayChild = [];
@@ -726,7 +631,6 @@ class Api extends REST_Controller {
 
         $colorquery = implode(",", $colorlist);
 
-
         if ($colorcount > 0) {
             $orderquerycolor = " , FIELD(nc.id, $colorquery )";
             $colorquerycc = " and nc.id in ($colorquery)";
@@ -736,8 +640,6 @@ class Api extends REST_Controller {
         $fromprice = $this->get('from_price');
 
         $toprice = $this->get('to_price');
-
-
 
         if (isset($fromprice)) {
             $price = "and if(ntc.sale_price, ntc.sale_price, ntc.price) between '" . $fromprice . "' and '" . $toprice . "'";
@@ -857,10 +759,6 @@ class Api extends REST_Controller {
                     join nfw_color as nc on npc.nfw_color_id = nc.id
                     where ntc.tag_id = $item_type and publishing = 1 $searchqury $sortt $colorquerycc $category $price group by np.id order by np.id $orderquerycolor ";
 
-
-
-
-
         $result = $this->Product_model->resultAssociate($query);
 
 
@@ -928,10 +826,6 @@ class Api extends REST_Controller {
                 $checkcolorsort = ", color ";
             }
             $colorproductmainlist = [];
-
-
-
-
 
             if ($colorcount > 0) {
                 if ($colorcount > 0) {
@@ -1049,7 +943,6 @@ order by count(nfw_color_id) asc, colorbunch";
 
         $code = '';
 
-
         $i = 0;
         while ($i < $characters_on_image) {
             $code .= substr($possible_letters, mt_rand(0, strlen($possible_letters) - 1), 1);
@@ -1058,7 +951,6 @@ order by count(nfw_color_id) asc, colorbunch";
 
         $font_size = $image_height * 0.75;
         $image = @imagecreate($image_width, $image_height);
-
 
 //        /* setting the background, text and noise colours here */
         $background_color = imagecolorallocate($image, 255, 255, 255);
@@ -1125,7 +1017,6 @@ order by count(nfw_color_id) asc, colorbunch";
 
         $cartdataall['grand_total'] = $cartdataall['total_price'] + $cartdataall['shipping_price'];
 
-
         $this->response(array(
             "cartdata" => $cartdataall,
         ));
@@ -1170,7 +1061,6 @@ order by count(nfw_color_id) asc, colorbunch";
             $userid = $this->user_id;
             $feq = $this->post('frequency');
             $subscribe = json_decode($this->post('subscribe'));
-
 
             $queryf = "select frequency from nfw_news_letters_frequency where user_id = " . $userid;
             $data = $this->Product_model->resultAssociate($queryf);

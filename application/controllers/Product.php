@@ -8,7 +8,7 @@ class Product extends CI_Controller {
         parent::__construct();
         $this->load->model('Product_model');
         $this->load->library('session');
-        $this->user_id = $this->session->userdata('logged_in')['id'];
+        $this->user_id = $this->session->userdata('logged_in') ? $this->session->userdata('logged_in')['id']:0;
     }
 
     public function index() {

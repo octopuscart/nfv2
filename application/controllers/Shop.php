@@ -401,6 +401,8 @@ class Shop extends CI_Controller {
                         "message" => "Thank you for subscribing to our mailing list. Your will receive our newsletter for exclusive offers."
                     );
                 } else {
+                      $error = $this->email->print_debugger(array('headers'));
+            echo json_encode($error);
                     $returnarray = array(
                         "code" => "400",
                         "message" => "Unable to subscribe to our mailing list, please try again later or contact to us."
@@ -421,8 +423,10 @@ class Shop extends CI_Controller {
     function testEmail() {
         $receiver = "octopuscartltd@gmail.com";
         $this->email->set_newline("\r\n");
-        $this->email->from($receiver, "Test");
+        $this->email->from("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com", email_sender);
+//        $this->email->from($receiver, "Test");
         $this->email->to($receiver);
+        $this->email->reply_to(email_sender);
 //                $this->email->bcc(email_bcc);
         $subjectt = "Test Email";
 

@@ -287,10 +287,20 @@ if ($session_data) {
                             <!--social icons-->
                             <div class="col-lg-6 col-md-6 col-sm-6 t_align_r t_xs_align_c">
                                 <ul class="hr_list d_inline_b social_icons">
-                                    <li class="m_right_8"><a href="#" class="color_grey_light facebook circle icon_wrap_size_1 d_block"><i class="icon-facebook-1"></i></a></li>
-                                    <li class="m_right_8"><a href="#" class="color_grey_light twitter circle icon_wrap_size_1 d_block"><i class="icon-twitter-1"></i></a></li>
-                                    <li class="m_right_8"><a href="#" class="color_grey_light instagram circle icon_wrap_size_1 d_block"><i class="icon-instagramm"></i></a></li>
-                                    <li class="m_right_8"><a href="#" class="color_grey_light youtube circle icon_wrap_size_1 d_block"><i class="icon-youtube-play"></i></a></li>
+                                    <li class="m_right_8">
+                                        <a href="https://www.facebook.com/Nita-Fashions-224017321015214/" class="color_grey_light facebook circle icon_wrap_size_1 d_block">
+                                            <i class="icon-facebook-1"></i>
+                                        </a>
+                                    </li>
+                                    <li class="m_right_8">
+                                        <a href="https://twitter.com/nitafashions" class="color_grey_light twitter circle icon_wrap_size_1 d_block">
+                                            <i class="icon-twitter-1"></i></a></li>
+                                    <li class="m_right_8">
+                                        <a href="https://www.instagram.com/Nita.fashions" class="color_grey_light instagram circle icon_wrap_size_1 d_block">
+                                            <i class="icon-instagramm"></i></a></li>
+                                    <li class="m_right_8">
+                                        <a href="https://www.youtube.com/channel/UC5inme9JgQVjEBJJj_7VfHA" class="color_grey_light youtube circle icon_wrap_size_1 d_block">
+                                            <i class="icon-youtube-play"></i></a></li>
                                 </ul>
                             </div>
                         </div>

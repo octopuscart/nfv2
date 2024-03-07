@@ -204,24 +204,24 @@ class Shop extends CI_Controller {
                     'message' => $this->input->post('message'),
                 );
                 $email_bcc = "do-not-reply-nita-fashions-ssl-email-465@costcokart.com";
-                $this->email->set_newline("\r\n");
-                $this->email->from(email_sender, email_sender_name);
-                $this->email->reply_to(email_bcc);
-                $this->email->to($this->input->post('email'));
-                $this->email->bcc(email_bcc);
-                $subjectt = $this->input->post('subject');
-                $subject = "Enquiry from website - " . $this->input->post('subject');
-                $this->email->subject($subject);
-                $web_enquiry['web_enquiry'] = $web_enquiry;
-                $htmlsmessage = $this->load->view('Email/web_enquiry', $web_enquiry, true);
-                $this->email->message($htmlsmessage);
-                $send = $this->email->send();
-                if ($send) {
-//                    echo json_encode("send");
-                } else {
-                    $error = $this->email->print_debugger(array('headers'));
-                    //  echo json_encode($error);
-                }
+//                $this->email->set_newline("\r\n");
+//                $this->email->from(email_sender, email_sender_name);
+//                $this->email->reply_to(email_bcc);
+//                $this->email->to($this->input->post('email'));
+//                $this->email->bcc(email_bcc);
+//                $subjectt = $this->input->post('subject');
+//                $subject = "Enquiry from website - " . $this->input->post('subject');
+//                $this->email->subject($subject);
+//                $web_enquiry['web_enquiry'] = $web_enquiry;
+//                $htmlsmessage = $this->load->view('Email/web_enquiry', $web_enquiry, true);
+//                $this->email->message($htmlsmessage);
+//                $send = $this->email->send();
+//                if ($send) {
+////                    echo json_encode("send");
+//                } else {
+//                    $error = $this->email->print_debugger(array('headers'));
+//                    //  echo json_encode($error);
+//                }
                 redirect('Shop/contactus');
             }
         }

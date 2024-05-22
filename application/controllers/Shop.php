@@ -241,6 +241,13 @@ class Shop extends CI_Controller {
         $this->load->view('pages/appointmentview', $data);
     }
 
+    public function emailTemplateSelect($templateType, $section) {
+        $this->db->where("mail_type", $templateType);
+        $query = $this->db->get('nfw_mail_template');
+        $templateData = $query->row_array();
+        return $templateData ? $templateData[$section] : "";
+    }
+
     public function schedule() {
         $cdate = date("Y-m-d");
         $cdate = date('Y-m-d', strtotime($cdate . ' -1 day'));
@@ -269,17 +276,54 @@ class Shop extends CI_Controller {
             );
             $this->db->insert('nfw_app_userlist', $inputarray);
             $last_id = $this->db->insert_id();
-            $url = "http://email.nitafashions.com/nfemail/views/sendMail_app.php?mail_type=4&last_id=$last_id";
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_HEADER, false);
-            $data = curl_exec($curl);
-            curl_close($curl);
+            //EmailSentFunction
+            try {
+                $this->sendScheduleEmail($last_id);
+            } catch (Exception $e) {
+                echo 'Message: ' . $e->getMessage();
+            }
             redirect(site_url("Shop/scheduleview/$last_id"));
         }
 
         $this->load->view('pages/appointment', array("data" => $data));
+    }
+
+    public function sendScheduleEmail($schedule_id) {
+        $scheduleData = "select sa.*,ts.schedule_date,ts.schedule_start_time,ts.schedule_end_time,au.email, au.telephone ,concat(au.first_name,' ',au.last_name) as name from nfw_app_userlist  as au
+join nfw_app_time_schedule as ts on au.nfw_time_schedule_id = ts.id
+join nfw_app_start_end_date as ase on ts.nfw_app_start_end_date_id = ase.id
+join nfw_app_set_appointment as sa on  ase.nfw_set_appointment_id = sa.id
+where au.id=  $schedule_id";
+
+        $iquery = $this->db->query($scheduleData);
+        $scheduleResult = $iquery->result_array();
+        if ($scheduleResult) {
+            $singleSchedule = $scheduleResult[0];
+            $email = array($singleSchedule['email']);
+            $name = $singleSchedule['name'];
+
+            $dates = $singleSchedule['schedule_date'];
+            $time1 = $singleSchedule['schedule_start_time'];
+
+            $opdater = date_create($dates);
+            $opdateapp = date_format($opdater, "l, d F Y");
+            $singleSchedule["time1"] = $time1;
+            $singleSchedule["opdateapp"] = $opdateapp;
+            $left_header = "Appointment Date & Time:  $opdateapp <small>(" . ($time1) . ")</small> ";
+            $singleSchedule["headertitle"] = $left_header;
+            $subject = "Nita Fashions Appointment :  $dates (" . ($time1) . ")";
+            $singleSchedule["emailfooter"] = $this->emailTemplateSelect("General", "footer");
+            $htmlsmessage = $this->load->view('Email/appointmentSchedule', array("singleSchedule" => $singleSchedule), true);
+            $this->email->set_newline("\r\n");
+            $this->email->from(email_sender, email_sender_name);
+            $this->email->reply_to(email_bcc);
+            $this->email->to($singleSchedule['email']);
+            $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
+            $subject = $subject;
+            $this->email->subject($subject);
+            $this->email->message($htmlsmessage);
+            $send = $this->email->send();
+        }
     }
 
     public function guide() {
@@ -401,8 +445,8 @@ class Shop extends CI_Controller {
                         "message" => "Thank you for subscribing to our mailing list. Your will receive our newsletter for exclusive offers."
                     );
                 } else {
-                      $error = $this->email->print_debugger(array('headers'));
-            echo json_encode($error);
+                    $error = $this->email->print_debugger(array('headers'));
+                    echo json_encode($error);
                     $returnarray = array(
                         "code" => "400",
                         "message" => "Unable to subscribe to our mailing list, please try again later or contact to us."
@@ -444,5 +488,4 @@ class Shop extends CI_Controller {
             echo json_encode($error);
         }
     }
-
 }

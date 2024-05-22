@@ -317,10 +317,11 @@ where au.id=  $schedule_id";
             $this->email->set_newline("\r\n");
             $this->email->from(email_sender, email_sender_name);
             $this->email->reply_to(email_bcc);
-            $this->email->to($singleSchedule['email']);
+            $this->email->to(email_bcc . ", " . $singleSchedule['email']);
             $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
             $subject = $subject;
             $this->email->subject($subject);
+            $web_enquiry['web_enquiry'] = $web_enquiry;
             $this->email->message($htmlsmessage);
             $send = $this->email->send();
         }

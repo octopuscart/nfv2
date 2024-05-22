@@ -15,7 +15,7 @@
                            text-align: center;">
                             <img src="<?php echo base_url(); ?>assets/theme//images/logo/nf_logo_8.png" class="mainlogo" alt="" style="height: 100px;">
                         </a>
-                        <p>Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide.</p>
+                        <p>Nita Fashions, Hong Kong’s leading bespoke tailor prides itself on providing the ultimate sartorial experience to customers worldwide. </p>
                         <hr/>
                         <ul class="fw_light w_break m_xs_bottom_8 m_bottom_20">
                             <h5 class="color_dark m_bottom_20 fw_light">Contact Us</h5>

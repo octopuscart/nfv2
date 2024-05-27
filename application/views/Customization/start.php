@@ -94,7 +94,7 @@ $this->load->view('layout/header');
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="" style="min-height:450px;height:100%;background: url(<?php echo base_url(); ?>assets/custom_form_view/background_new_custom/1.jpg);   background-position-y: center;
+                    <div class="" style="min-height:450px;height:100%;background: url(<?php echo base_url(); ?>assets/custom_form_view/background_new_custom/<?php echo $item_id;?>.jpg);   background-position-y: center;
                          background-size: contain;    background-repeat: no-repeat;" ng-if="customFabricsArrayDone.length == 0">
                     </div>
                     <?php

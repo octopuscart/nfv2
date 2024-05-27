@@ -716,8 +716,8 @@ class CustomApi extends REST_Controller {
         $return_data = array(
             "formItems" => $shirtCustomization,
             "navigation" => $mainnavigation,
-            "title" => "Pant Customization",
-            "item" => "Pant",
+            "title" => "Waistcoat Customization",
+            "item" => "Waistcoat",
             "selection" => $selectelements,
             "validation" => array(),
         );
@@ -1130,8 +1130,8 @@ class CustomApi extends REST_Controller {
         $return_data = array(
             "formItems" => $shirtCustomization,
             "navigation" => $mainnavigation,
-            "title" => "Shirt Customization",
-            "item" => "Shirt",
+            "title" => "Tuxedo Shirt Customization",
+            "item" => "Tuxedo Shirt",
             "validation" => $validation,
             "selection" => $selectelements,
         );

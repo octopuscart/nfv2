@@ -4,16 +4,40 @@
     <head>
 
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="author" content="SemiColonWeb" />
+        <meta name="author" content="Costco International Ltd." />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Stylesheets
         ============================================= -->
-        <?php
-        meta_tags();
-        ?>
+        <!-- Primary Meta Tags -->
+        <title>Nita Fashions Estd 1953| Custom Made Suits, Shirts, Tuxedos Etc</title>
+        <meta name="title" content="Nita Fashions Estd 1953| Custom Made Suits, Shirts, Tuxedos Etc" />
+        <meta name="description" content="Nita Fashions is the leading Bespoke Tailor in Hong Kong. Chief Tailor, Mr. Peter Daswani and Mr. Anil Daswani travel to service their client worldwide." />
+        <meta name="keywords" content="<?php echo $configuration['seo_keywords'];?>"/>
+        <meta name="robots" content="index,follow"/>
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://https://www.nitafashions.com/" />
+        <meta property="og:title" content="Nita Fashions Estd 1953| Custom Made Suits, Shirts, Tuxedos Etc" />
+        <meta property="og:description" content="Nita Fashions is the leading Bespoke Tailor in Hong Kong. Chief Tailor, Mr. Peter Daswani and Mr. Anil Daswani travel to service their client worldwide." />
+        <meta property="og:image" content="<?php echo base_url(); ?>assets/images/logocard.png" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://www.nitafashions.com/" />
+        <meta property="twitter:title" content="Nita Fashions Estd 1953| Custom Made Suits, Shirts, Tuxedos Etc" />
+        <meta property="twitter:description" content="Nita Fashions is the leading Bespoke Tailor in Hong Kong. Chief Tailor, Mr. Peter Daswani and Mr. Anil Daswani travel to service their client worldwide." />
+        <meta property="twitter:image" content="<?php echo base_url(); ?>assets/images/logocard.png" />
 
 
+        <link rel="canonical" href="https://www.nitafashions.com/" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url(); ?>assets/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url(); ?>assets/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url(); ?>assets/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
 
         <!--web fonts-->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -91,7 +115,9 @@ if ($session_data) {
                 top: 0px;
             }
 
-            .v2 #loading { display: none; }
+            .v2 #loading {
+                display: none;
+            }
 
 
             #loader {
@@ -402,7 +428,7 @@ if ($session_data) {
                                                         if ($session_data) {
                                                             ?>
                                                         <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
-                                                            <a href="<?php echo site_url("Product/ProductDetails");?>/{{cartd.product_id}}/{{cartd.tag_id}}" class="d_block f_left m_right_10">
+                                                            <a href="<?php echo site_url("Product/ProductDetails"); ?>/{{cartd.product_id}}/{{cartd.tag_id}}" class="d_block f_left m_right_10">
                                                                 <img src="{{cartd.item_image}}" alt="Item Image" class="imageData" style="height:66px;width: 66px">
                                                                 <div class="f_left  lh_ex_small" style="text-align: left;">
                                                                     <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">
@@ -813,7 +839,7 @@ if ($session_data) {
                                                         if ($session_data) {
                                                             ?>
                                                         <li class="clearfix lh_large animated flipInX {{cartd.animate}} m_bottom_20 relative" ng-repeat="cartd in initApp.maincart.products" ng-model="cartd.animate" ng-init="cartd.animate = ''">
-                                                            <a href="<?php echo site_url("Product/ProductDetails");?>/{{cartd.product_id}}/{{cartd.tag_id}}" class="d_block f_left m_right_10">
+                                                            <a href="<?php echo site_url("Product/ProductDetails"); ?>/{{cartd.product_id}}/{{cartd.tag_id}}" class="d_block f_left m_right_10">
                                                                 <img src="{{cartd.item_image}}" alt="Item Image" class="imageData" style="height:66px;width: 66px">
                                                                 <div class="f_left  lh_ex_small" style="text-align: left;">
                                                                     <a href="#" class="color_dark fs_medium d_inline_b m_bottom_3 titleData" style="float: left;width:205px">

@@ -13,7 +13,7 @@
         <title>Nita Fashions Estd 1953| Custom Made Suits, Shirts, Tuxedos Etc</title>
         <meta name="title" content="Nita Fashions Estd 1953| Custom Made Suits, Shirts, Tuxedos Etc" />
         <meta name="description" content="Nita Fashions is the leading Bespoke Tailor in Hong Kong. Chief Tailor, Mr. Peter Daswani and Mr. Anil Daswani travel to service their client worldwide." />
-        <meta name="keywords" content="<?php echo $configuration['seo_keywords'];?>"/>
+        <meta name="keywords" content="<?php echo $configuration['seo_keywords']; ?>"/>
         <meta name="robots" content="index,follow"/>
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
@@ -29,7 +29,7 @@
         <meta property="twitter:description" content="Nita Fashions is the leading Bespoke Tailor in Hong Kong. Chief Tailor, Mr. Peter Daswani and Mr. Anil Daswani travel to service their client worldwide." />
         <meta property="twitter:image" content="<?php echo base_url(); ?>assets/images/logocard.png" />
 
-
+        <meta name="google-site-verification" content="Ouqglror_IDDqxZwFrDPxLYexsIl0n965HIO3wnjoKM" />
         <link rel="canonical" href="https://www.nitafashions.com/" />
 
         <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url(); ?>assets/apple-touch-icon.png">

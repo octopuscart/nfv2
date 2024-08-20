@@ -604,8 +604,7 @@ I was tired of wearing ill-fitting dress shirts to work. Now I can actually clos
                                     <div class="d_table_cell">
                                         <!--author photo-->
                                         <div class="d_inline_m circle wrapper m_right_10">
-                                            <img src="https://ui-avatars.com/api/?name=<?php echo $value["name"]; ?>" alt="">
-                                        </div>
+s                                        </div>
                                         <!--author name-->
                                         <div class="d_inline_m">
                                             <b class="fs_large d_block color_light"><?php echo $value["name"]; ?></b>

@@ -57,15 +57,16 @@
 
 $testmodcheck = 1;
 
-if ($testmodcheck) {
-    if ($_SERVER['SERVER_NAME'] == 'localhost') {
-        define('ENVIRONMENT', 'development');
-    } else {
-        define('ENVIRONMENT', 'production');
-    }
-} else {
-    define('ENVIRONMENT', 'development');
-}
+//if ($testmodcheck) {
+//    if ($_SERVER['SERVER_NAME'] == 'localhost') {
+//        define('ENVIRONMENT', 'development');
+//    } else {
+//        define('ENVIRONMENT', 'production');
+//    }
+//} else {
+//    define('ENVIRONMENT', 'development');
+//}
+ define('ENVIRONMENT', 'production');
 /*
  * ---------------------------------------------------------------
  * ERROR REPORTING

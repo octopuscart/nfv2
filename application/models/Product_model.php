@@ -820,6 +820,11 @@ class Product_model extends CI_Model {
 
 
         $allbutton = array(
+            'Blue_Horn_Button'=>"Blue Horn Button",
+            'Black_Lip_Shell_With_Burgundy_Rim'=>"Black Lip Shell With Burgundy Rim",
+            'Black_Lip_Shell_With_Navy_Rim'=>"Black Lip Shell With Navy Rim",
+            'Green_Horn_Button'=>'Green Horn Button',
+            'Navy_Blue_Lip_Shell'=>'Navy Blue Lip Shell',
             'bll' => 'Black Lipshell', 'bul' => 'Blue Lipshell', 'bwl' => 'Brown Liphell', 'eml' => 'Emerald Liphell',
             'rs' => 'River Shell', 'mp' => 'MOP', 'blcn' => 'Blue Corozo Nut', 'ccn' => 'Cream Corozo Nut',
             'horn' => 'Horn', 'lbh' => 'Light Brown Horn',

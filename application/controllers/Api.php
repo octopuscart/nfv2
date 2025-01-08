@@ -752,16 +752,10 @@ class Api extends REST_Controller {
                    left join nfw_product_images as nfimg on nfimg.nfw_product_id = np.id 
                    join nfw_product_tag_connection as ntc on ntc.product_id = np.id 
                    join nfw_product_color as npc on np.id =  npc.nfw_product_id
-                   
-
-                   
-
-                    join nfw_color as nc on npc.nfw_color_id = nc.id
+                   join nfw_color as nc on npc.nfw_color_id = nc.id
                     where ntc.tag_id = $item_type and publishing = 1 $searchqury $sortt $colorquerycc $category $price group by np.id order by np.id $orderquerycolor ";
 
         $result = $this->Product_model->resultAssociate($query);
-
-
 
         $pricelist = [];
         for ($i = 0; $i < count($result); $i++) {
@@ -1162,7 +1156,6 @@ order by count(nfw_color_id) asc, colorbunch";
         );
         $this->response($faq);
     }
-
 }
 
 ?>

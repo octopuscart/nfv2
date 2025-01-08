@@ -452,7 +452,7 @@ class CustomApi extends REST_Controller {
             'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 1),
             'Lining Type' => array("choice" => "", "col" => "4", "prenext" => 1),
             "Lining Style" => array("choice" => "multi", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Button" => array("choice" => "multi", "col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
+            "Button" => array("choice" => "multi", "col" => "3", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
             "Contrast Button Thread" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
             "Contrast Button Hole On Lapel" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
             "Contrast First Sleeve Button Hole" => array("choice" => "multi", "col" => "4", "prenext" => 2, "view" => "selection",),
@@ -650,7 +650,7 @@ class CustomApi extends REST_Controller {
             'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 1),
             'Lining Type' => array("choice" => "", "col" => "4", "prenext" => 1),
             "Lining Style" => array("choice" => "multi", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Button" => array("choice" => "multi", "col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
+            "Button" => array("choice" => "multi", "col" => "3", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
             "Contrast Button Thread" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
             "Contrast Button Hole On Lapel" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
             "Contrast First Sleeve Button Hole" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
@@ -814,7 +814,7 @@ class CustomApi extends REST_Controller {
             'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 1),
             'Lining Type' => array("choice" => "", "col" => "4", "prenext" => 1),
             "Lining Style" => array("choice" => "multi", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Button" => array("choice" => "multi", "col" => "2", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
+            "Button" => array("choice" => "multi", "col" => "3", "lablestyle" => "height:40px", "view" => "buttonview", "prenext" => 1),
             "Contrast Button Thread" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
             "Contrast Button Hole On Lapel" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
             "Contrast First Sleeve Button Hole" => array("choice" => "multi", "col" => "4", "prenext" => 1, "view" => "selection",),
@@ -1020,7 +1020,7 @@ class CustomApi extends REST_Controller {
             'Lower Pocket' => array("choice" => "", "col" => "4", "prenext" => 1),
             'Ticket Pocket' => array("choice" => "", "col" => "4", "prenext" => 1),
             "Lining Style" => array("choice" => "multi", "col" => "4", "lablestyle" => "", "view" => "multi", "prenext" => 1),
-            "Button" => array("choice" => "multi", "col" => "2", "lablestyle" => "height:40px", "view" => "", "prenext" => 2),
+            "Button" => array("choice" => "multi", "col" => "3", "lablestyle" => "height:40px", "view" => "", "prenext" => 2),
         );
 
         $return_data = array(

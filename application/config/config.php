@@ -59,8 +59,8 @@ $config['rest_enable_keys'] = FALSE;
   | variable so that it is blank.
   |
  */
-$config['index_page'] = strpos($baselink, '192.168') ? 'index.php/' : '';
-$config['index_page'] = '';
+// $config['index_page'] = strpos($baselink, '192.168') ? 'index.php/' : '';
+$config['index_page'] = 'index.php/';
 /*
   |--------------------------------------------------------------------------
   | URI PROTOCOL

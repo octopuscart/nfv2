@@ -57,3 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['term-of-service'] = 'Shop/term_of_service';
 $route['privacy-policy'] = 'Shop/privacy_policy';
 $route['bespoke-tailoring'] = 'Shop/bespokeTailoring';
+$route['contactus'] = 'Shop/contactus';
+
+$route['contactus'] = 'Shop/guide';
+$route['sitemap_index\.xml'] = "Sitemap/index";

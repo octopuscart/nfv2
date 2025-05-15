@@ -377,7 +377,7 @@ where au.id=  $schedule_id";
                 $this->email->from(email_sender, email_sender_name);
                 $this->email->reply_to(email_bcc);
                 $this->email->to(email_bcc . ", " . $receiver);
-                $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com");
+                $this->email->bcc("do-not-reply-nita-fashions-ssl-email-465@costcointernational.com, nitafashions@netvigator.com");
 
                 $subject = "Nita Fashions - Virtual Appointment Request";
                 $this->email->subject($subject);

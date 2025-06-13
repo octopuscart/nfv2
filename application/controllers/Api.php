@@ -166,7 +166,7 @@ class Api extends REST_Controller {
             from nfw_product as pt where pt.product_category in ($categoriesString)   and publishing=1 ";
         $product_result = $this->Product_model->query_exe($product_query);
         foreach ($product_result as $key => $value) {
-            print_r($value);
+            // print_r($value);
             $this->db->where(array("product_id" => $value["product_id"], "tag_id" => $custom_id));
             $queryat = $this->db->get("nfw_product_tag_connection");
             $pprice = $queryat->result();
